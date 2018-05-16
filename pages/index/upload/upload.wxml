@@ -1,0 +1,101 @@
+<!--pages/index/upload/upload.wxml-->
+<view class='container'>
+  <!-- 导航 -->
+  <view class='section-nav-upload'>
+    <view class='btn {{nav==0?"active":""}}' data-nav='0' bindtap='bind_nav'>
+      动态
+    </view>
+    <view class='btn {{nav==1?"active":""}}' data-nav='1' bindtap='bind_nav'>
+      话题
+    </view>
+  </view>
+
+  <!-- 动态---选择 -->
+  <view class='section-news section-cells {{nav==0?"active":""}}'>
+    <view class='zan-cell pet'>
+      <view class='zan-cell__hd'>
+        选择爱宠
+      </view>
+      <view class='zan-cell__bd'>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{pet}}">
+          <view class="picker">
+            {{pet_kind}}
+          </view>
+        </picker>
+      </view>
+      <image src='/images/icon/index-upload-down.png' mode='widthFix'></image>
+    </view>
+    <view class='zan-cell switch'>
+      <view class='zan-cell__hd'>
+        是否允许他人编辑
+      </view>
+      <view class='zan-cell__bd'>
+      </view>
+      <view class='zan-cell__ft'>
+        <switch checked bindchange="switch1Change" color="#fee632" />
+      </view>
+    </view>
+
+    <view class='zan-cell upload-wrap'>
+      <view class='zan-cell__hd'>
+        上传
+      </view>
+      <view class='zan-cell__bd'>
+        <block wx:for-items="{{files_news}}" wx:key="{{index}}">
+          <view class="upload__file" id="{{item}}">
+            <image class="upload__img" src="{{item}}" mode="aspectFill" />
+          </view>
+        </block>
+        <view class="upload__file">
+          <image class="upload__img" src="{{test_img_hsq}}" mode="aspectFill" />
+        </view>
+        <view class="upload__input-box">
+          <image src='/images/icon/index-upload-add.png' bindtap="chooseImage_news"></image>
+          <!-- <view class="upload__input" bindtap="chooseImage"></view>  -->
+        </view>
+      </view>
+    </view>
+
+    <view class='footer-btn'>
+      <view class='btn-100'>
+        上传
+      </view>
+    </view>
+  </view>
+
+  <!-- 话题 -->
+  <view class='section-gambit {{nav==1?"active":""}}'>
+    <view class='textarea-wrap'>
+      <textarea placeholder-class='placeholder' placeholder='说点什么呢~'></textarea>
+    </view>
+
+    <view class='zan-cell upload-wrap'>
+      <view class='zan-cell__hd'>
+        上传
+      </view>
+      <view class='zan-cell__bd'>
+        <block wx:for-items="{{files_news}}" wx:key="{{index}}">
+          <view class="upload__file" id="{{item}}">
+            <image class="upload__img" src="{{item}}" mode="aspectFill" />
+          </view>
+        </block>
+        <view class="upload__file">
+          <image class="upload__img" src="{{test_img_hsq1}}" mode="aspectFill" />
+        </view>
+        <view class="upload__input-box">
+          <image src='/images/icon/index-upload-add.png' bindtap="chooseImage_news"></image>
+          <!-- <view class="upload__input" bindtap="chooseImage"></view>  -->
+        </view>
+      </view>
+
+    </view>
+
+    <view class='footer-btn'>
+      <view class='btn-100'>
+        上传
+      </view>
+    </view>
+  </view>
+
+
+</view>

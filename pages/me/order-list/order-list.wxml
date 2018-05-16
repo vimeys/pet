@@ -1,0 +1,164 @@
+<!--pages/me/order-lsit/order-lsit.wxml-->
+<import src="../../../template/list.wxml" />
+<view class='container'>
+  <!-- 导航 -->
+  <view class='section-nav'>
+    <view class='item active'>
+      全部
+    </view>
+    <view class='item'>
+      待发货
+    </view>
+    <view class='item'>
+      已收货
+    </view>
+    <view class='item'>
+      已完成
+    </view>
+  </view>
+
+  <!-- 列表 -->
+  <view class='section-cells'>
+
+    <!-- 订单 -->
+    <view class='cells'>
+      <!-- 订单头部 -->
+      <view class='cells-header'>
+        <view class='zan-cell'>
+          <view class='zan-cell__bd'>
+            订单号：416516135516161
+          </view>
+          <view class='zan-cell__ft'>
+            待收货
+          </view>
+        </view>
+      </view>
+      <!-- 订单主体 -->
+      <template is='template-pet-order'></template>
+      <!-- 订单信息 -->
+      <view class='info'>
+        <view class='zan-cell'>
+          <view class='zan-cell__bd'>
+            数量
+          </view>
+          <view class='zan-cell__ft'>
+            ｘ4
+          </view>
+        </view>
+        <view class='zan-cell'>
+          <view class='zan-cell__bd'>
+            合计
+          </view>
+          <view class='zan-cell__ft'>
+            200爪币
+          </view>
+        </view>
+      </view>
+      <!-- 尾部 -->
+      <view class='cell-footer'>
+        <view class='time'>
+          下单时间2018.3.24 40:40:12
+        </view>
+        <view class='btn-wrap'>
+          <view class='btn'>
+            确认收货
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <view class='cells'>
+      <!-- 订单头部 -->
+      <view class='cells-header'>
+        <view class='zan-cell'>
+          <view class='zan-cell__bd'>
+            订单号：416516135516161
+          </view>
+          <view class='zan-cell__ft'>
+            待收货
+          </view>
+        </view>
+      </view>
+      <!-- 订单主体 -->
+      <template is='template-pet-order'></template>
+      <!-- 订单信息 -->
+      <view class='info'>
+        <view class='zan-cell'>
+          <view class='zan-cell__bd'>
+            数量
+          </view>
+          <view class='zan-cell__ft'>
+            ｘ4
+          </view>
+        </view>
+        <view class='zan-cell'>
+          <view class='zan-cell__bd'>
+            合计
+          </view>
+          <view class='zan-cell__ft'>
+            200爪币
+          </view>
+        </view>
+      </view>
+      <!-- 尾部 -->
+      <view class='cell-footer'>
+        <view class='time'>
+          下单时间2018.3.24 40:40:12
+        </view>
+        <view class='btn-wrap'>
+          <view class='btn'>
+            确认收货
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='cells'>
+      <!-- 订单头部 -->
+      <view class='cells-header'>
+        <view class='zan-cell'>
+          <view class='zan-cell__bd'>
+            订单号：416516135516161
+          </view>
+          <view class='zan-cell__ft'>
+            待收货
+          </view>
+        </view>
+      </view>
+      <!-- 订单主体 -->
+      <template is='template-pet-order'></template>
+      <!-- 订单信息 -->
+      <view class='info'>
+        <view class='zan-cell'>
+          <view class='zan-cell__bd'>
+            数量
+          </view>
+          <view class='zan-cell__ft'>
+            ｘ4
+          </view>
+        </view>
+        <view class='zan-cell'>
+          <view class='zan-cell__bd'>
+            合计
+          </view>
+          <view class='zan-cell__ft'>
+            200爪币
+          </view>
+        </view>
+      </view>
+      <!-- 尾部 -->
+      <view class='cell-footer'>
+        <view class='time'>
+          下单时间2018.3.24 40:40:12
+        </view>
+        <view class='btn-wrap'>
+          <view class='btn'>
+            确认收货
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <template is="template-list-more"></template>
+  </view>
+</view>

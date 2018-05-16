@@ -1,0 +1,178 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.98",
+	"appid": "wx96eb4d1593762eba",
+	"projectname": "%E5%AE%A0%E7%89%A9-%E4%B8%AA%E4%BA%BAAPPID",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 22,
+			"list": [
+				{
+					"id": 0,
+					"name": "首页",
+					"pathName": "pages/index/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "活动页",
+					"pathName": "pages/activity/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/me/index/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "订单管理",
+					"pathName": "pages/me/order-lsit/order-lsit",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "宠物卡",
+					"pathName": "pages/me/pet-card/pet-card",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "测试-页面导航",
+					"pathName": "pages/test-nav/test-nav",
+					"query": ""
+				},
+				{
+					"id": 6,
+					"name": "涂鸦记录",
+					"pathName": "pages/index/history/history",
+					"query": ""
+				},
+				{
+					"id": 7,
+					"name": "话题",
+					"pathName": "pages/index/gambit-list/gambit-list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "话题详情",
+					"pathName": "pages/index/gambit-content/gambit-content",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "发布管理",
+					"pathName": "pages/me/publish/publish",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "发布管理",
+					"pathName": "pages/me/publish/publish",
+					"query": ""
+				},
+				{
+					"id": 11,
+					"name": "订单确认",
+					"pathName": "pages/store/order-sure/order-sure",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "上传",
+					"pathName": "pages/index/upload/upload",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "瀑布流",
+					"pathName": "pages/test-column/test-column",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "地址管理",
+					"pathName": "pages/me/address-list/address-list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "canvas",
+					"pathName": "pages/test-canvas/test-canvas",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "canvas1",
+					"pathName": "pages/test-canvas1/test-canvas1",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "爪币管理",
+					"pathName": "pages/me/money/money",
+					"query": ""
+				},
+				{
+					"id": 18,
+					"name": "首页-热榜",
+					"pathName": "pages/index/index-hot/index-hot",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "首页-关注",
+					"pathName": "pages/index/index-attention/index-attention",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "商品详情",
+					"pathName": "pages/store/goods-content/goods-content",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "生成宠物卡",
+					"pathName": "pages/me/pet-card-add/pet-card-add",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "话题详情",
+					"pathName": "pages/index/upload/upload",
+					"query": ""
+				}
+			]
+		}
+	}
+}

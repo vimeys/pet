@@ -1,0 +1,279 @@
+/****************************加载更多*******************************/
+
+/* 加载更多 */
+
+.template-list-more {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 24rpx;
+  color: #888;
+  text-align: center;
+}
+
+.template-list-more:active {
+  opacity: 0.7;
+}
+
+.template-list-more image {
+  display: inline-block;
+  vertical-align: middle;
+  width: 26rpx;
+  margin-right: 10rpx;
+  position: relative;
+  top: -3rpx;
+}
+
+/* *****************************评论*************************** */
+
+.template-comment-cells {
+  border-bottom: 1rpx solid #eaeaea;
+}
+
+.template-comment-cells .text-wrap {
+  font-size: 30rpx;
+  line-height: 50rpx;
+  margin-top: -5rpx;
+  margin-bottom: -5rpx;
+}
+
+.template-comment-cells .text-wrap {
+  box-sizing: border-box;
+}
+
+.template-comment-cells .img-wrap-2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.template-comment-cells .img-wrap-2 image {
+  width: 346rpx;
+  height: 310rpx;
+  border-radius: 20rpx;
+}
+
+.template-comment-cells .video-wrap, .template-comment-cells .img-wrap-1,
+.template-comment-cells .img-wrap-2 {
+  margin: 30rpx 0;
+}
+
+.template-comment-cells .img-wrap-1 image,
+.template-comment-cells .video-wrap video {
+  width: 100%;
+  height: 310rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+/* ********************************动态****************************** */
+
+
+.template-news-item .item-content {
+  position: relative;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.template-news-item .item-content>image {
+  width: 100%;
+  height: 710rpx;
+}
+
+.template-news-item .btn-scrawl {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  width: 120rpx;
+  height: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1rpx solid #fff;
+  border-radius: 10rpx;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.template-news-item .btn-scrawl text {
+  display: block;
+  font-size: 24rpx;
+}
+
+.template-news-item .btn-scrawl image {
+  width: 20rpx;
+  margin-right: 10rpx;
+}
+
+.template-news-item swiper{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.2)
+}
+.template-news-item  swiper .wx-swiper-dot{
+  display: none;
+}
+
+.template-news-item .img-list {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 130rpx;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row nowrap;
+  overflow-x: scroll;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0 0 20rpx 20rpx;
+  z-index: 5
+}
+
+.template-news-item .img-list view {
+  border: 1rpx solid #fff;
+  margin: 5rpx;
+}
+
+.template-news-item .img-list view.active {
+  border: 4rpx solid #fee331;
+}
+
+.template-news-item .img-list image {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.template-news-item .item-footer {
+  display: flex;
+  justify-content: space-between;
+  height: 90rpx;
+  border-bottom: 1rpx solid #eaeaea;
+}
+
+.template-news-item .item-footer image {
+  display: inline-block;
+  vertical-align: middle;
+  width: 32rpx;
+  margin-right: 10rpx;
+}
+
+.template-news-item .item-footer text {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 24rpx;
+  color: #888;
+  line-height: 90rpx;
+}
+
+/* 视频 */
+
+.template-news-item .video-wrap {
+  display: block;
+}
+
+.template-news-item .video-wrap video {
+  display: block;
+  width: 100%;
+  height: 420rpx;
+  /* border-radius: 20rpx; */
+  overflow: hidden;
+}
+
+/* ***************************宠物订单主体  page：订单管理页，订单确认页************************* */
+
+.template-pet-order {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx 0;
+  border-top: 1rpx dashed #eaeaea;
+  border-bottom: 1rpx dashed #eaeaea;
+}
+
+.template-pet-order image {
+  width: 245rpx;
+  height: 210rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.template-pet-order .body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.template-pet-order .body .name {
+  font-size: 28rpx;
+  color: #000;
+}
+
+.template-pet-order .body .size {
+  font-size: 24rpx;
+  color: #888;
+}
+
+.template-pet-order .body .zan-cell .zan-cell__bd {
+  font-size: 30rpx;
+  color: #fd2c2c;
+}
+
+.template-pet-order .body .zan-cell .zan-cell__ft {
+  font-size: 28rpx;
+  color: #fd2c2c;
+}
+
+
+/* ************************************收货地址*************************** */
+
+/* 地址 */
+
+
+.template-address-list .address-content{
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eaeaea;
+  font-size: 28rpx;
+  position: relative
+}
+.template-address-list .user-info {
+  box-sizing: border-box;
+  padding-left: 40rpx;
+  display: flex;
+  align-items: center;
+}
+
+.template-address-list .user-info text {
+  display: block;
+  font-size: 30rpx;
+}
+
+.template-address-list .user-info image {
+  width: 18rpx;
+  margin-left: 40rpx;
+  margin-right: 10rpx;
+}
+
+.template-address-list .user-address {
+  display: flex;
+  margin-top: 20rpx;
+  align-items: baseline;
+  margin-bottom: -10rpx;
+}
+
+.template-address-list .user-address image {
+  width: 25rpx;
+  margin-right: 20rpx;
+}
+
+.template-address-list .user-address text {
+  font-size: 26rpx;
+  color: #888;
+  line-height: 40rpx;
+}

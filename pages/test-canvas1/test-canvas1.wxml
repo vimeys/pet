@@ -1,0 +1,21 @@
+<view class="">
+<view class="canvasStyle">
+  <canvas canvas-id="myCanvas" bindtouchstart="start"
+  bindtouchmove="move"/>
+  <!-- <view class="Canvas_Text"><image src="{{imageUrl}}"></image></view>  -->
+</view>
+<view class="chooseImage">
+  <view class="Btn BtnImg_select" bindtap="chooseImageFun">先选择图片</view>
+  <view class="Input_text">
+    <input placeholder="请输入装逼内容" bindinput="InputFuns" />
+  </view>
+  <view wx:if="{{showst}}" class="Btn generateBtn" bindtap="Okgenerate">
+    生成，并保存
+    <view>(当你点击生成的那一刻，恭喜你装逼生涯就此开始了)</view>
+  </view>
+  <view wx:if="{{!showst}}" class="Btn generateBtn grayBtn">
+    生成，并保存
+    <view>(当你点击生成的那一刻，恭喜你装逼生涯就此开始了)</view>
+  </view>
+</view>
+</view>

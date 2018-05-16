@@ -1,0 +1,114 @@
+<!--pages/me/pet-card-add/pet-card-add.wxml-->
+<view class='container page-padding-bottom'>
+  <view class='section-color'></view>
+  <form>
+    <view class='zan-cells'>
+      <!-- 头像 -->
+      <view class='zan-cell header-wrap'>
+        <view class='img-wrap-000'>
+          <view class='img-wrap-255'>
+            <image src='{{header_img}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
+          </view>
+        </view>
+      </view>
+
+      <view class='zan-cell classify-wrap'>
+        <view class='zan-cell__hd'>
+          爱宠分类
+        </view>
+        <view class='zan-cell__bd'>
+          <view class='active'>猫咪</view>
+          <view>狗狗</view>
+        </view>
+      </view>
+      <view class='zan-cell name-wrap'>
+        <view class='zan-cell__hd'>
+          宠物名称
+        </view>
+        <view class='zan-cell__bd'>
+          <input class='' placeholder='请输入宠物名称' placeholder-class='placeholder'></input>
+        </view>
+      </view>
+      <view class='zan-cell sex-wrap'>
+        <view class='zan-cell__hd'>
+          性别
+        </view>
+        <view class='zan-cell__bd'>
+          <radio-group>
+            <label class="radio">
+              <radio value="" checked='checked' color='#FEE632' />
+              <image src='/images/icon/me-index-petinfo-sex1.png' mode='widthFix'></image>
+              <text>男</text>
+            </label>
+            <label class="radio">
+              <radio value="" color='#FEE632' />
+              <image src='/images/icon/me-index-petinfo-sex2.png' mode='widthFix'></image>
+              <text>女</text>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class='zan-cell picker-wrap'>
+        <view class='zan-cell__hd'>
+          生日
+        </view>
+        <view class='zan-cell__bd'>
+          <picker mode="date" value="{{date}}" end="{{end_date}}" bindchange="bind_birthday">
+            {{birthday_date}}
+          </picker>
+        </view>
+        <image class='icon' src='/images/icon/index-upload-down.png' mode='widthFix'></image>
+      </view>
+      <view class='zan-cell picker-wrap'>
+        <view class='zan-cell__hd'>
+          回家日期
+        </view>
+        <view class='zan-cell__bd'>
+          <picker mode="date" value="{{date}}" bindchange="bind_gohome">
+            {{gohome_date}}
+          </picker>
+        </view>
+        <image class='icon' src='/images/icon/index-upload-down.png' mode='widthFix'></image>
+      </view>
+      <view class='zan-cell'>
+        <view class='zan-cell__hd'>
+          体重
+        </view>
+        <view class='zan-cell__bd'>
+          <input class='' placeholder='请输入宠物体重' placeholder-class='placeholder'></input>
+        </view>
+      </view>
+      <view class='zan-cell sex-wrap'>
+        <view class='zan-cell__hd'>
+          是否绝育
+        </view>
+        <view class='zan-cell__bd'>
+          <radio-group>
+            <label class="radio">
+              <radio value="" checked='checked' color='#FEE632' />
+              <text>已绝育</text>
+            </label>
+            <label class="radio">
+              <radio value="" color='#FEE632' />
+              <text>未绝育</text>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view class='zan-cell textarea-wrap'>
+        <view class='zan-cell__hd'>
+          爱宠概述
+        </view>
+        <view class='zan-cell__bd'>
+          <textarea placeholder='请用一句话概述爱宠' placeholder-class='placeholder'></textarea>
+        </view>
+      </view>
+    </view>
+
+    <view class='section-footer'>
+      <view class='btn-100'>
+        生成我的宠物卡
+      </view>
+    </view>
+  </form>
+</view>

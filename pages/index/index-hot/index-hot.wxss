@@ -1,0 +1,49 @@
+/*大层*/
+
+.container {
+  /* width: 80%; */
+  /* margin: 0 auto; */
+}
+
+/*瀑布流层*/
+.waterfall-box{
+  margin-left: -10rpx;
+  margin-right: -10rpx;
+}
+/* 单个图片容器的样式 */
+.waterfall-box .item{
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+
+}
+.waterfall-box .item .img-wrap{
+  box-sizing: border-box;
+  padding: 10rpx;
+  position: relative;
+}
+
+.waterfall-box .item .img-wrap .love{
+  position: absolute;
+  bottom: 30rpx;
+  right: 10rpx;
+  padding: 0 25rpx;
+  height: 48rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 24rpx 0 0 24rpx
+}
+.waterfall-box .item .img-wrap .love image{
+  width: 27rpx;
+  /* margin-right: 10rpx; */
+}
+.waterfall-box .item .img-wrap .love text{
+   display: block; 
+  font-size: 24rpx;
+  color: #fee632
+}
+.waterfall-box .item .img-wrap .love text:first-of-type{
+  padding: 0 10rpx
+}

@@ -1,0 +1,29 @@
+/* pages/me/pet-card/pet-card.wxss */
+.container::before {
+   background-color: #eaeaea; 
+}
+.section-content{
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%,-50%)
+}
+.section-content>image{
+  margin: auto;
+  width: 210rpx;
+}
+.section-content view{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 45rpx;
+}
+.section-content view text{
+  display: block;
+  font-size: 30rpx;
+  color: #222
+}
+.section-content view image{
+  width: 23rpx;
+  margin-left: 15rpx;
+}

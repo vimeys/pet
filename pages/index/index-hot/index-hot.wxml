@@ -1,0 +1,42 @@
+<!--pages/test-column/test-column.wxml-->
+<view class='container'>
+  <!-- 导航 -->
+  <viem class='section-nav'>
+    <navigator url='' class='item '>
+      推荐
+    </navigator>
+    <navigator url='../me/index/index' class='item active'>
+      热门
+    </navigator>
+    <navigator url='../activity/index/index' class='item'>
+      关注
+    </navigator>
+  </viem>
+
+  <scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="loadImages">
+    <view class='waterfall-box'>
+      <view class="item">
+        <view class='img-wrap' wx:for="{{col1}}" wx:key="id">
+          <image src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
+          <view class='love'>
+            <image src='/images/icon/index-news-footer3-1.png' mode='widthFix'></image>
+            <text>{{item.love}}</text><text>赞</text>
+          </view>
+        </view>
+      </view>
+      <view class="item">
+        <view class='img-wrap' wx:for="{{col2}}" wx:key="id">
+          <image src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
+          <view class='love'>
+            <image src='/images/icon/index-news-footer3-1.png' mode='widthFix'></image>
+            <text>{{item.love}}</text><text>赞</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view style="display:none">
+    <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.pic}}" bindload="onImageLoad"></image>
+  </view>
+
+</view>

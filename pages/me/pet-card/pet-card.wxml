@@ -1,0 +1,9 @@
+<!--pages/me/pet-card/pet-card.wxml-->
+<view class='container'>
+  <view class='section-content'>
+    <image src='/images/me-pat-card.png' mode='widthFix'></image>
+    <view>
+      <text>注册我的宠物卡</text><image src='/images/icon/me-pat-card-right.png' mode='widthFix'></image>
+    </view>
+  </view>
+</view>

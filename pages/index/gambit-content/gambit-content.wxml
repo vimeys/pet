@@ -1,0 +1,63 @@
+<!--pages/index/gambit-content/gambit-content.wxml-->
+<import src="/template/list.wxml"/>
+<view class='container'>
+  <!-- 话题详情 -->
+  <view class='section-content'>
+    <!-- 发布信息-->
+    <view class='publish-info zan-cell'>
+      <view class='zan-cell__hd'>
+        <image src='{{test_img_hsq}}' mode='aspectFill'></image>
+      </view>
+      <view class='zan-cell__bd'>
+        <view class='name'>这里是宠物名字</view>
+        <view class='time'>2018-04-28 99：66：66</view>
+      </view>
+    </view>
+    <!-- 话题文字 -->
+    <view class='text-wrap'>
+      <text>购买狗狗需要注意什么问题到手机法拉盛肯德基疯狂打卡时间反馈了解到附近开了拉升的减肥？</text>
+    </view>
+    <!-- 话题图片 -->
+    <view class='img-wrap'>
+      <image src='{{item}}' mode='widthFix' wx:for="{{img_url}}" wx:key="item"></image>
+    </view>
+
+    <!-- 关注、评论 -->
+    <view class='footer-icon-2'>
+      <view>
+        <image src='/images/icon/index-gambit-content-attention.png' mode='widthFix'></image>
+        <text>54645关注</text>
+      </view>
+      <view>
+        <image src='/images/icon/index-gambit-content-message_1.png' mode='widthFix'></image>
+        <text>54645评论</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分割线 -->
+  <view class='hr-20'></view>
+
+  <!-- 评论 -->
+  <view class='section-comment'>
+
+    <!-- 评论-标题 -->
+    <view class='title'>
+      评论
+    </view>
+
+    <!-- 评论-列表 -->
+    <view class='comment'>
+      <template is="template-comment-cells" data='{{media:""}}'></template>
+      <template is="template-comment-cells" data='{{media:""}}'></template>
+      <template is="template-comment-cells" data='{{media:""}}'></template>
+    </view>
+
+  </view>
+
+  <!-- 回复 -->
+  <view class='section-reply {{input?"active":""}}'>
+    <input placeholder='请说点什么吧~' adjust-position='ture' placeholder-class='placeholder'></input>
+    <view class='btn'>回复</view>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+<!--pages/me/publish/publish.wxml-->
+<import src='/template/list.wxml' />
+<view class='container'>
+  <template is='template-comment-cells' data='{{media:"img-wrap-1",del_edit:"ture"}}'></template>
+  <template is='template-comment-cells' data='{{media:"img-wrap-2",del_edit:"ture"}}'></template>
+  <template is='template-comment-cells' data='{{media:"video-wrap",del_edit:"ture"}}'></template>
+  <template is='template-news-item' data='{{media:"img",news:news,news_img:news_img,news_active:news_active,love:love,del_edit:"ture",news_chartlet:news_chartlet}}'></template>
+  <template is='template-news-item' data='{{media:"video",del_edit:"ture"}}'></template>
+</view>

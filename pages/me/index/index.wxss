@@ -1,0 +1,180 @@
+/* pages/me/index/index.wxss */
+
+/* banner */
+
+.section-banner {
+  margin-left: -20rpx;
+  margin-right: -20rpx;
+  position: relative;
+}
+
+.section-banner>view {
+  position: absolute;
+  top: 30rpx;
+  width: 130rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.section-banner>view image {
+  width: 32rpx;
+  margin-right: 10rpx;
+}
+
+.section-banner>view text {
+  display: block;
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.section-banner .left {
+  border-radius: 0 24rpx 24rpx 0;
+  left: 0;
+}
+
+.section-banner .right {
+  border-radius: 24rpx 0 0 24rpx;
+  right: 0;
+}
+
+.contact_wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 2;
+}
+
+/* 宠物信息面板 */
+
+.section-petinfo {
+  padding-bottom: 30rpx;
+}
+
+.section-petinfo .img-wrap-000 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.15);
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  margin: -80rpx auto 20rpx auto;
+}
+
+.section-petinfo .img-wrap-255 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: 50%;
+}
+
+.section-petinfo .img-wrap-255 .header-img {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.section-petinfo .img-wrap-255 .sex-img {
+  position: absolute;
+  bottom: -8rpx;
+  right: -8rpx;
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.section-petinfo .name {
+  text-align: center;
+  margin: 20rpx 0 30rpx 0;
+}
+
+.section-petinfo .name text {
+  padding: 0 14rpx;
+}
+
+.section-petinfo .name text:first-of-type {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.section-petinfo .name text:nth-of-type(2) {
+  font-size: 26rpx;
+}
+
+.section-petinfo .info {
+  display: flex;
+  margin: 30rpx 0 25rpx 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-petinfo .info>view {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.section-petinfo .info image {
+  width: 28rpx;
+  margin-right: 10rpx;
+}
+
+.section-petinfo .info text {
+  display: block;
+  font-size: 26rpx;
+}
+
+.section-petinfo .text {
+  width: 100%;
+  font-size: 26rpx;
+}
+
+.section-cells .zan-cell {
+  padding: 30rpx 0;
+}
+.section-cells .zan-cell:last-of-type::after{
+  display: block;
+}
+.section-cells .zan-cell::after{
+  left: 0
+}
+.section-cells .zan-cell__hd {
+  width: 35rpx;
+  margin-right: 40rpx;
+}
+
+.section-cells .zan-cell.money .zan-cell__hd {
+   width: 38rpx; 
+
+}
+.section-cells .zan-cell.money .zan-cell__bd {
+   font-size: 32rpx ;
+     font-weight: bold; 
+  color: #fe4e4e;
+
+}
+.section-cells .zan-cell.money::after{
+  display: none
+}
+.section-cells .zan-cell__bd {
+  font-size: 28rpx;
+}
+
+.section-cells .zan-cell__ft {
+  font-size: 24rpx;
+  color: #888;
+}

@@ -1,0 +1,130 @@
+/* pages/me/pet-card-add/pet-card-add.wxss */
+
+.section-color {
+  height: 110rpx;
+  background: #fedc6f;
+  margin-left: -20rpx;
+  margin-right: -20rpx;
+}
+
+.header-wrap .img-wrap-000 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.15);
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  margin: -80rpx auto 20rpx auto;
+}
+
+.header-wrap .img-wrap-255 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: 50%;
+}
+
+.header-wrap .img-wrap-255 .header-img {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.zan-cells .zan-cell {
+  padding: 0;
+  height: 110rpx;
+  line-height: 110rpx;
+}
+
+.zan-cells .zan-cell::after {
+  left: 0;
+}
+
+.zan-cells .header-wrap::after {
+   display: none; 
+}
+.zan-cells .name-wrap::after{
+   border-bottom: 4rpx solid #FEE632 
+}
+.placeholder,
+.zan-cell .zan-cell__hd{
+    font-size: 28rpx;
+  color: #888
+}
+.zan-cell .zan-cell__hd {
+  width: 195rpx;
+}
+
+.zan-cell__bd {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 30rpx;
+}
+
+/* 类型 */
+.classify-wrap .zan-cell__bd view{
+  width: 140rpx;
+  height: 55rpx;
+  line-height: 55rpx;
+  border-radius: 27rpx;
+  text-align: center;
+  background: #F0F0F0;
+  margin-right: 50rpx;
+}
+.classify-wrap .zan-cell__bd view.active{
+  background: #FEE632;
+}
+
+/* 性别 */
+.sex-wrap radio-group{
+  display: flex;
+  align-items: center;
+}
+.sex-wrap radio-group label{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 55rpx
+}
+.sex-wrap radio-group label image{
+  width: 36rpx;
+  margin: 0 15rpx 0 10rpx
+}
+.sex-wrap radio-group label radio,
+.sex-wrap radio-group label text{
+  display: block;
+}
+
+/* 日期 */
+picker{
+  width: 100%;
+  height: 110rpx;
+  line-height: 110rpx;
+}
+
+/* 一句话该诉 */
+.zan-cells .textarea-wrap{
+  display: block;
+  height: auto;
+  margin: 35rpx 0
+}
+.textarea-wrap .zan-cell__hd{
+  margin: 20rpx 0;
+  width: 100%
+}
+
+.section-footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+}

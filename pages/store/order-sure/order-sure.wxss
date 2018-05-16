@@ -1,0 +1,83 @@
+/* pages/store/order-sure/order-sure.wxss */
+
+.container {
+  padding-bottom: 120rpx;
+}
+
+.container::before {
+  background: #eaeaea;
+}
+
+
+/* 订单列表 */
+
+.section-order .template-pet-order {
+  border: none;
+  border-bottom: 1rpx solid #eaeaea;
+}
+
+.section-order .template-pet-order:last-of-type {
+  border: none;
+}
+
+/* 买家备注 */
+
+.section-textarea {
+  margin: 30rpx 0;
+}
+
+
+/* 底部 */
+
+.section-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0;
+  width: 100%;
+   font-size: 28rpx;
+   background: #fff;
+}
+
+.section-footer .text {
+  height: 100rpx;
+  box-sizing: border-box;
+  border-top: 1rpx solid #eaeaea;
+  flex: 1;
+  padding: 0 20rpx;
+}
+
+.section-footer .text view {
+  display: inline-block;
+  margin-right: 30rpx;
+  line-height: 100rpx;
+ 
+}
+
+.section-footer .text text {
+  color: #ff3a38;
+}
+
+.section-footer .btn {
+  width: 240rpx;
+  height: 100rpx;
+  background: #fee632;
+  text-align: center;
+    line-height: 100rpx;
+}
+
+/*地址*/
+.section-address .address {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eaeaea;
+  margin-left: -20rpx;
+  margin-right: -20rpx;
+  font-size: 28rpx;
+  position: relative
+}
+.template-address-list .address-content{
+  margin-left: -20rpx;
+  margin-right: -20rpx;
+}

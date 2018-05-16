@@ -1,0 +1,34 @@
+/* pages/activity/index/index.wxss */
+/* banner */
+.section-banner{
+  margin-left: -20rpx;
+  margin-right: -20rpx;
+}
+.section-banner image{
+  height: 320rpx;
+}
+
+/* 活动 */
+.section-activity{
+  margin-top: 30rpx;
+}
+.section-activity .activity .item{
+  padding: 30rpx 0 20rpx 0;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #eaeaea
+}
+.section-activity .activity .item image{
+  height: 330rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.section-activity .activity .item .title{
+  font-size: 28rpx;
+  margin: 30rpx 0 10rpx 0;
+  font-weight: 600
+}
+.section-activity .activity .item .text{
+  font-size: 26rpx;
+  color: #888;
+  line-height: 42rpx;
+}

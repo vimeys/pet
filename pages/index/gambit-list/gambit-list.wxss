@@ -1,0 +1,13 @@
+/* pages/index/gambit/gambit.wxss */
+/* banner */
+.section-banner{
+  margin-left: -20rpx;
+  margin-right: -20rpx;
+}
+.section-list{
+  padding: 30rpx 0 0 0
+}
+.section-banner image{
+  width: 100%;
+  height: 320rpx;
+}

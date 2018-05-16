@@ -1,0 +1,63 @@
+/* pages/me/order-lsit/order-lsit.wxss */
+
+/* 导航 */
+
+.section-nav .item {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+}
+
+/* 列表 */
+
+.section-cells .zan-cell {
+  padding: 0;
+}
+.section-cells .cells{
+  border-bottom: 20rpx solid #f8f8f8
+}
+.section-cells .cells-header view {
+  height: 75rpx;
+  line-height: 75rpx;
+  font-size: 26rpx;
+}
+
+.section-cells .cells-header .zan-cell__ft {
+  color: #fe4e4e;
+}
+
+
+
+.section-cells .info{
+  border-bottom: 1rpx solid #eaeaea;
+}
+.section-cells .info .zan-cell{
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+}
+.section-cells .info .zan-cell::after{
+  display: none
+}
+.section-cells .cell-footer .time{
+  height: 65rpx;
+  line-height: 65rpx;
+  font-size: 26rpx;
+  color: #888;
+  text-align: right;
+}
+.section-cells .cell-footer .btn-wrap{
+  text-align: right;
+  padding-bottom: 20rpx;
+}
+.section-cells .cell-footer .btn{
+  display: inline-block;
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #222;
+  font-size: 27rpx;
+  border: 1rpx solid #222;
+  border-radius: 25rpx;
+}

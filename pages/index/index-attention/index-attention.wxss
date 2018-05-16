@@ -1,0 +1,16 @@
+/* pages/index/index-love/index-love.wxss */
+
+.container::before {
+  background: #eaeaea;
+}
+
+.template-comment-cells, .template-news-item {
+  border-bottom: 20rpx solid #f8f8f8;
+}
+
+.template-comment-cells .footer-icon-2:last-of-type {
+  margin: 0;
+  padding: 30rpx 0;
+  box-sizing: border-box;
+  border-top: 1rpx solid #eaeaea;
+}

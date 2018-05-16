@@ -1,0 +1,121 @@
+/* pages/index/upload/upload.wxss */
+.container{
+  padding-bottom: 120rpx
+}
+.section-nav-upload {
+  margin: 30rpx auto;
+  display: flex;
+  width: 420rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #fee632;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.section-nav-upload .btn {
+  border-radius: 10rpx;
+  background: #fff;
+  font-size: 26rpx;
+  width: 210rpx;
+  height: 65rpx;
+  line-height: 65rpx;
+  text-align: center;
+}
+
+.section-nav-upload .btn.active {
+  background: #fee632;
+}
+
+.section-news,
+.section-gambit{
+  display: none;
+}
+.section-news.active,
+.section-gambit.active{
+  display: block;
+}
+/* 动态 */
+
+/* 选择-爱宠 */
+
+.section-cells .zan-cell {
+  padding: 0;
+}
+
+.section-cells .zan-cell::after {
+  display: none;
+}
+
+.section-cells .pet, .section-cells .switch {
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #fee632;
+  position: relative;
+}
+
+.zan-cell__hd {
+  font-size: 28rpx;
+  color: #888;
+  margin-right: 65rpx;
+  line-height: 100rpx;
+  height: 100rpx;
+}
+
+.section-cells .pet .picker {
+  line-height: 100rpx;
+  height: 100rpx;
+}
+
+.section-cells .pet image {
+  width: 20rpx;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 20rpx;
+}
+
+/* 编辑 */
+
+.section-cells .switch {
+  border-color: #eaeaea;
+}
+
+/* 上传 */
+
+
+.upload-wrap {
+  display: block;
+  padding: 0
+}
+
+.upload-wrap .zan-cell__bd {
+  display: flex;
+  flex-wrap: wrap;
+}
+.upload-wrap .zan-cell__bd{
+  margin: -10rpx;
+}
+.upload-wrap .zan-cell__bd>view{
+  width: 33.33%;
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+.upload-wrap .zan-cell__bd image {
+  height: 223rpx;
+}
+
+
+/* 文本框 */
+.textarea-wrap {
+  margin: 30rpx 0;
+}
+
+
+
+
+/* 底部按钮 */
+.footer-btn{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

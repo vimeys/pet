@@ -1,0 +1,11 @@
+/* pages/me/address-list/address-list.wxss */
+
+.template-address-list{
+    border-bottom: 20rpx solid #F8F8F8;
+}
+.btn-100{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}

@@ -1,0 +1,296 @@
+/**app.wxss**/
+
+/*引入zan-ui css*/
+@import "utils/zan.wxss";
+
+/* 引入组件样式 */
+@import 'template/list.wxss';
+
+.container {
+  background: #fff;
+  overflow: hidden;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  position: relative;
+  color: #222;
+  width: 100%;
+}
+
+.container::before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  content: ' ';
+  width: 100%;
+  height: 1rpx;
+  /* background-color: #eaeaea; */
+  z-index: 5;
+}
+
+.doc-title {
+  position: relative;
+  padding: 15px 0;
+  margin: 10px 15px;
+  line-height: 25px;
+  font-size: 25px;
+  color: #666;
+}
+
+.doc-description {
+  margin: 14px 0;
+  padding: 0 15px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #666;
+}
+
+/* 修改小程序默认样式 star */
+
+image {
+  display: block;
+  width: 100%;
+}
+
+.navigator-hover {
+  background: inherit;
+  opacity: 0.7;
+}
+
+view, text, navigator {
+  line-height: 1;
+}
+
+/* 修改小程序默认样式 end */
+
+/*其它一些自定义的基础样式*/
+
+/* 分割线 */
+
+.hr-20 {
+  height: 20rpx;
+  background: #f8f8f8;
+}
+
+/* 大板块标题 */
+
+.section--title {
+  position: relative;
+  font-size: 30rpx;
+  padding-left: 28rpx;
+  font-weight: bold;
+}
+
+.section--title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 8rpx;
+  height: 28rpx;
+  background: #fe4e4e;
+}
+
+/* 导航（类似选项卡） */
+
+/* 导航 */
+
+.section-nav {
+  display: flex;
+  border: 1rpx solid #eaeaea;
+  border-left: none;
+  border-right: none;
+  margin-left: -20rpx;
+  margin-right: -20rpx;
+}
+
+.section-nav .item {
+  flex: 1;
+  display: block;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 32rpx;
+  color: #888;
+  text-align: center;
+  position: relative;
+}
+
+.section-nav .item::after {
+  content: "";
+  display: block;
+  width: 35rpx;
+  height: 4rpx;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.section-nav .item.active {
+  color: #222;
+  font-weight: 400;
+}
+
+.section-nav .item.active::after {
+  background: #222;
+}
+
+/* 关注、评论-----底部有2个图标 */
+
+.footer-icon-2 {
+  display: flex;
+  margin: 30rpx 0;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.footer-icon-2>view {
+  padding: 0 25rpx;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.footer-icon-2 .radio-wrap{
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  justify-content: flex-start;
+  font-size: 26rpx;
+}
+.footer-icon-2 .radio-wrap label{
+  display: flex;
+  align-items: center;
+}
+.footer-icon-2 .radio-wrap label text{
+  margin-left: 10rpx;
+}
+.footer-icon-2 .radio-wrap label.active text{
+  color: #F33F3F
+}
+.footer-icon-2>view:last-of-type {
+  padding-right: 0rpx;
+}
+
+.footer-icon-2 image {
+  width: 30rpx;
+  margin: 0 10rpx;
+}
+
+.footer-icon-2 text {
+  display: block;
+  font-size: 28rpx;
+  margin: 0 5rpx;
+  color: #888;
+}
+
+.footer-icon-2 text.num {
+  font-size: 24rpx;
+}
+
+/* 个人发布基本信息-头像、名字、时间*/
+
+.publish-info {
+  margin: 30rpx 0;
+  padding: 0;
+}
+
+.publish-info::after {
+  display: none;
+}
+
+.publish-info .zan-cell__hd {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.publish-info .zan-cell__hd image {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.publish-info .zan-cell__bd .name {
+  font-size: 28rpx;
+  color: #222;
+}
+
+.publish-info .zan-cell__bd .time {
+  font-size: 24rpx;
+  color: #888;
+  margin-top: 18rpx;
+}
+
+.publish-info .zan-cell__ft .btn {
+  display: block;
+  width: 115rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border: 1rpx solid #fe4e4e;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  color: #fe4e4e;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.publish-info .zan-cell__ft .btn.active{
+  color: #888;
+  border-color: #888
+}
+.publish-info .zan-cell__ft .btn.active text:first-of-type,
+.publish-info .zan-cell__ft .btn text:nth-of-type(2){
+  display: inline-block;
+}
+.publish-info .zan-cell__ft .btn text:first-of-type,
+.publish-info .zan-cell__ft .btn.active text:nth-of-type(2){
+  display: none;
+}
+/* 按钮-100高度 */
+
+.btn-100 {
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 100%;
+  font-size: 28rpx;
+  color: #222;
+  background: #fee632;
+  text-align: center;
+}
+
+/* 如果有底部定位的按钮 */
+.page-padding-bottom{
+  padding-bottom: 120rpx;
+}
+
+
+/* 文本框 */
+.textarea-wrap textarea {
+  display: block;
+  width: 100%;
+  height: 200rpx;
+  box-sizing: border-box;
+  padding: 20rpx;
+  border: 1rpx solid #eaeaea;
+  font-size: 26rpx;
+  line-height: 1.5;
+}
+
+.textarea-wrap .placeholder {
+  font-size: 26rpx;
+  color: #888;
+}
+
+/* 下拉框的箭头 */
+.picker-wrap{
+  position: relative
+}
+.picker-wrap image {
+  width: 20rpx;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 20rpx;
+}

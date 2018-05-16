@@ -1,0 +1,2 @@
+<!--pages/index/plus/plus.wxml-->
+<view><image src="../../../images/me-index-banner.png" bindtap="chooseImage"></image></view>

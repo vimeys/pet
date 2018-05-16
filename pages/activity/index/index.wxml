@@ -1,0 +1,34 @@
+<!--pages/activity/index/index.wxml-->
+<import src="/template/list.wxml"/>
+<view class='container'>
+  <!-- banner -->
+  <view class='section-banner'>
+    <image src='{{test_img_url}}' mode='aspectFill'></image>
+  </view>
+
+  <!-- 活动列表 -->
+  <view class='section-activity'>
+    <!-- 标题 -->
+    <view class='section--title'>
+      活动
+    </view>
+    <!-- 活动列表 -->
+    <view class='activity'>
+      <block wx:for="{{activity}}" wx:key="item">
+        <navigator url='{{item.a_url}}' class='item'>
+          <!-- 图片 -->
+          <image src='{{item.img_url}}' mode='aspectFill'></image>
+          <!-- 标题 -->
+          <view class='title zan-ellipsis'>
+            {{item.title}}
+          </view>
+          <!-- 文字 -->
+          <view class='text zan-ellipsis--l2'>
+            {{item.text}}
+          </view>
+        </navigator>
+      </block>
+      <template is="template-list-more"></template>
+    </view>
+  </view>
+</view>

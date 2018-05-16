@@ -1,0 +1,172 @@
+/* pages/index/index.wxss */
+
+/* 隐藏滚动条 */
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* 轮播 */
+
+.section-swiper swiper {
+  height: 300rpx;
+  padding: 20rpx 0rpx;
+  margin-left: -20rpx;
+  margin-right: -20rpx;
+}
+
+.section-swiper swiper::before {
+  display: none;
+}
+
+.section-swiper swiper-item {
+  height: 320rpx;
+  box-sizing: border-box;
+  padding: 0 10rpx 0 10rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.section-swiper swiper-item .slide-image {
+  border-radius: 20rpx;
+  overflow: hidden;
+  width: 100%;
+  height: 300rpx;
+}
+
+/* 轮播分页器样式 */
+
+.section-swiper .swiper-dots {
+  display: flex;
+  justify-content: center;
+}
+
+.section-swiper .swiper-dots .swiper-dot {
+  width: 18rpx;
+  height: 4rpx;
+  margin-left: 15rpx;
+  background: #d7d2d2;
+  border-radius: 2rpx;
+  transition: all 0.5s;
+}
+
+.section-swiper .swiper-dots .swiper-dot.active {
+  background: #222;
+}
+
+/* 热门话题 */
+
+.section-hot {
+  padding: 30rpx 0;
+}
+
+.section-hot .scroll {
+  display: flex;
+  width: 100%;
+  margin: 30rpx 0;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+
+.section-hot .scroll>view {
+  margin-right: 20rpx;
+}
+
+.section-hot .scroll>view, .scroll view image {
+  width: 260rpx;
+  height: 180rpx;
+  position: relative;
+  border-radius: 20rpx;
+}
+
+.section-hot .scroll view text {
+  height: 35rpx;
+  line-height: 35rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 0 0 20rpx 20rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  text-align: center;
+  font-size: 24rpx;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.section-hot .word {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -20rpx;
+}
+
+.section-hot .word text {
+  display: block;
+  padding: 0 20rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  background: #fef2f7;
+  border-radius: 25rpx;
+  font-size: 24rpx;
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+}
+
+/* 萌宠榜 */
+
+.section-ranking {
+  padding: 30rpx 0;
+}
+
+.section-ranking .ranking {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-left: -20rpx;
+  margin-right: -20rpx;
+}
+
+.section-ranking .item {
+  width: 112rpx;
+}
+
+.section-ranking .item image:first-of-type {
+  width: 54rpx;
+  margin: 30rpx auto 0 auto;
+}
+
+.section-ranking .item image:nth-of-type(2) {
+  margin-bottom: 25rpx;
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.section-ranking .item text {
+  display: block;
+  width: 120rpx;
+  font-size: 24rpx;
+  color: #222;
+  text-align: center;
+  margin: auto;
+}
+
+/* 宠物动态 */
+
+.section-news {
+  padding-top: 30rpx;
+}
+
+/*固定上传按钮*/
+.up-pet-image{
+  width:100rpx;
+  height: 100rpx;
+  position: fixed;
+  right: 30rpx;
+  bottom: 50rpx;
+}
+.up-pet-image image{
+  width: 100rpx;
+  height: 100rpx;
+}

@@ -1,0 +1,143 @@
+<!--pages/me/money/money.wxml-->
+<view class='container'>
+  <view class='section-banner'>
+    <view class='banner'>
+      <!-- money -->
+      <view class='money-wrap'>
+        <view class='money'>
+          <text class='num'>55454</text>
+          <view class='hr'></view>
+          <text class='title'>当前爪币</text>
+        </view>
+        <image class='water1' src='/images/test/water1.png' mode='widthFix'></image>
+        <image class='water2' src='/images/test/water2.png' mode='widthFix'></image>
+      </view>
+      <!-- 评论 -->
+      <view class='dot pl'>
+        评论
+      </view>
+      <!-- 点赞 -->
+      <view class='dot dz'>
+        点赞
+      </view>
+      <!-- 签到 -->
+      <view class='dot qd'>
+        签到
+      </view>
+      <image class='hr-img' src='/images/icon/me-money-banner-hr.png' mode='widthFix'></image>
+    </view>
+    <view class='btn'>
+      兑换商品
+    </view>
+  </view>
+
+  <!-- 分割线 -->
+  <view class='hr-20'></view>
+
+  <!-- tab -->
+  <view class='section-tab'>
+    <viem class='section-nav tab-hd'>
+      <viem class='item {{tab==0?"active":""}}' data-tab='0' bindtap='bind_tab'>
+        爪币任务
+      </viem>
+      <viem class='item {{tab==1?"active":""}}' data-tab='1' bindtap='bind_tab'>
+        爪币流水
+      </viem>
+    </viem>
+    <view class='tab-bd'>
+      <!-- 爪币任务 -->
+      <view class='tab-bd-task {{tab==0?"active":""}}' data-tab='0'>
+        <view class='zan-cell'>
+          <view class='zan-cell__hd'>
+            <image src='/images/icon/me-money-tab-friend.png' mode='widthFix'></image>
+          </view>
+          <view class='zan-cell__bd'>
+            <view class='time'>邀请好友</view>
+          </view>
+          <view class='zan-cell__ft'>
+            <image src='/images/icon/money.png' mode='widthFix'></image>
+            <text class='num minus'>50</text>
+          </view>
+        </view>
+        <view class='zan-cell'>
+          <view class='zan-cell__hd'>
+            <image src='/images/icon/me-money-tab-pl.png' mode='widthFix'></image>
+          </view>
+          <view class='zan-cell__bd'>
+            <view class='time'>评论</view>
+          </view>
+          <view class='zan-cell__ft'>
+            <image src='/images/icon/money.png' mode='widthFix'></image>
+            <text class='num minus'>50</text>
+          </view>
+        </view>
+        <view class='zan-cell'>
+          <view class='zan-cell__hd'>
+            <image src='/images/icon/me-money-tab-love.png' mode='widthFix'></image>
+          </view>
+          <view class='zan-cell__bd'>
+            <view class='time'>点赞</view>
+          </view>
+          <view class='zan-cell__ft'>
+            <image src='/images/icon/money.png' mode='widthFix'></image>
+            <text class='num minus'>50</text>
+          </view>
+        </view>
+        <view class='zan-cell'>
+          <view class='zan-cell__hd'>
+            <image src='/images/icon/me-money-tab-qd.png' mode='widthFix'></image>
+          </view>
+          <view class='zan-cell__bd'>
+            <view class='time'>签到</view>
+          </view>
+          <view class='zan-cell__ft'>
+            <image src='/images/icon/money.png' mode='widthFix'></image>
+            <text class='num minus'>50</text>
+          </view>
+        </view>
+        <view class='zan-cell'>
+          <view class='zan-cell__hd'>
+            <image src='/images/icon/me-money-tab-share.png' mode='widthFix'></image>
+          </view>
+          <view class='zan-cell__bd'>
+            <view class='time'>分享奖励</view>
+          </view>
+          <view class='zan-cell__ft'>
+            <image src='/images/icon/money.png' mode='widthFix'></image>
+            <text class='num minus'>50</text>
+          </view>
+        </view>
+
+      </view>
+      <!-- 爪币流水 -->
+      <view class='tab-bd-details {{tab==1?"active":""}}' data-tab='1'>
+        <view class='zan-cell'>
+          <view class='zan-cell__hd'>
+            <view>商品兑换</view>
+          </view>
+          <view class='zan-cell__bd'>
+            <view class='time'>2018-04-30 15:25:30</view>
+          </view>
+          <view class='zan-cell__ft'>
+            <text class='num minus'>-50</text>
+            <image src='/images/icon/money.png' mode='widthFix'></image>
+          </view>
+        </view>
+        <view class='zan-cell'>
+          <view class='zan-cell__hd'>
+            <view>商品兑换</view>
+          </view>
+          <view class='zan-cell__bd'>
+            <view class='time'>2018-04-30 15:25:30</view>
+          </view>
+          <view class='zan-cell__ft'>
+            <text class='num add'>+50</text>
+            <image src='/images/icon/money.png' mode='widthFix'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+  </view>
+</view>

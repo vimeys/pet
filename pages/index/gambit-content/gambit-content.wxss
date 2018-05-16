@@ -1,0 +1,116 @@
+/* pages/index/gambit-content/gambit-content.wxss */
+
+.container {
+  padding-bottom: 100rpx;
+}
+
+.container::before {
+  background-color: #eaeaea;
+}
+
+/* 话题详情 */
+
+.section-content .publish-info .zan-cell__hd {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.section-content .publish-info .zan-cell__hd image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+/* 话题文字 */
+
+.section-content .text-wrap {
+  font-size: 30rpx;
+  line-height: 50rpx;
+  margin-top: -5rpx;
+  margin-bottom: -5rpx;
+}
+
+.section-content .img-wrap {
+  margin: 30rpx 0;
+}
+
+.section-content .img-wrap image {
+  width: 100%;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
+}
+
+.section-content .footer-icon-2 {
+  justify-content: center;
+}
+
+.section-content .footer-icon-2>view {
+  padding: 0 30rpx;
+}
+
+.section-content .footer-icon-2 view:first-of-type text {
+  color: #fe4e4e;
+}
+
+.section-content .footer-icon-2 view:nth-of-type(2) text {
+  color: #222;
+}
+
+/* 评论 */
+
+.section-comment .title {
+  padding: 30rpx 0;
+  font-size: 30rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #eaeaea;
+}
+
+.section-comment .comment {
+  padding-bottom: 30rpx;
+}
+.template-comment-cells .text-wrap {
+  padding-left: 90rpx;
+}
+/* 回复 */
+
+.section-reply {
+  padding: 0 20rpx;
+  border-top: 1rpx solid #eaeaea;
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  background: #fff;
+  line-height: 70rpx;
+  font-size: 28rpx;
+}
+.section-reply.active{
+  position: relative;
+}
+.section-reply input {
+  width: 580rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  border: 1rpx solid #eaeaea;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.section-reply .placeholder {
+  color: #888;
+}
+
+.section-reply .btn {
+  width: 120rpx;
+  height: 70rpx;
+  text-align: center;
+  line-height: 70rpx;
+  background: #fee632;
+  border-radius: 35rpx;
+}

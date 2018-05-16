@@ -1,0 +1,5 @@
+/* pages/index/plus/plus.wxss */
+image{
+    width: 300rpx;
+    height: 300rpx;
+}

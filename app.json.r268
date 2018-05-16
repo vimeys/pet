@@ -1,0 +1,35 @@
+{
+  "pages": [
+        
+    "pages/test-nav/test-nav",
+    "pages/test-transform1/test-transform1",
+    "pages/test-canvas/test-canvas",
+    "pages/test-column/test-column",
+    "pages/test-canvas1/test-canvas1",
+    "pages/me/pet-card-add/pet-card-add",
+    "pages/store/goods-content/goods-content",
+    "pages/index/index-hot/index-hot",
+    "pages/index/index-attention/index-attention",
+    "pages/me/money/money",
+    "pages/me/address-list/address-list",
+
+    
+    "pages/index/upload/upload",
+    "pages/store/order-sure/order-sure",
+    "pages/me/publish/publish",
+    "pages/index/gambit-list/gambit-list",
+    "pages/index/gambit-content/gambit-content", 
+    "pages/index/history/history",
+    "pages/me/pet-card/pet-card",
+    "pages/me/order-list/order-list",
+    "pages/me/index/index",
+    "pages/activity/index/index",
+    "pages/index/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "宠物贴图",
+    "navigationBarTextStyle": "black"
+  }
+}
