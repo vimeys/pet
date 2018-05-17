@@ -18,7 +18,7 @@
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" previous-margin="30rpx" next-margin="30rpx" circular="{{circular}}" bindchange='bind_current'>
       <block wx:for="{{imgUrls}}">
         <swiper-item>
-          <image src="{{item}}" class="slide-image" mode='aspectFill' />
+          <image src="{{filePath+item.img_url}}" class="slide-image" mode='aspectFill' />
         </swiper-item>
       </block>
     </swiper>
@@ -39,8 +39,9 @@
 
     <view class='scroll'>
       <block wx:for="{{scroll}}" wx:key="{{item}}">
+        <navigtaor url=""></navigtaor>
         <view>
-          <image src='{{item.url}}' mode='aspectFill'></image>
+          <image src='{{filePath+item.url}}' mode='aspectFill'></image>
           <text class='zan-ellipsis'>{{item.title}}</text>
         </view>
       </block>
@@ -58,6 +59,7 @@
   <!-- 分割线 -->
   <view class='hr-20'></view>
 
+  <!-- 明星萌宠榜 -->
   <view class='section-ranking'>
     <view class='section--title'>
       明星萌宠榜
@@ -95,15 +97,17 @@
       动态
     </view>
     <view class='news'>
-       <template is='template-news-item' data='{{media:"img",news:news,news_img:news_img,news_active:news_active,love:love,news_chartlet:news_chartlet}}'></template> 
-       <template is='template-news-item' data='{{media:"video"}}'></template> 
-       <template is='template-list-more'></template>
+      <!--<template is='template-news-item' data='{{filePath:filePath,media:"img",news:news,news_img:news_img,news_active:news_active,love:love,news_chartlet:news_chartlet}}'></template>-->
+      <template is='template-news-item' data='{{filePath:filePath,petData:petData}}'></template>
+      <template is='template-news-item' data='{{media:"video"}}'></template>
+      <template is='template-list-more'></template>
     </view>
   </view>
-</view>
-<view class="up-pet-image">
-    <navigator url="../upload/upload">
-        <image src="../../../images/icon/index-upload-add.png"></image>
-    </navigator>
-</view>
 
+  <!-- 上传 -->
+
+  <cover-view class="up-pet" url="../upload/upload" bindtap='nav_up_pet'>
+    <cover-image src="/images/icon/up-pet.png" mode='widthFix'></cover-image>
+  </cover-view>
+
+</view>

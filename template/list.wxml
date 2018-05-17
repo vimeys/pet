@@ -65,68 +65,72 @@
 <!-- *********************************动态********************************** -->
 <template name="template-news-item">
   <view class='template-news-item'>
-
-    <!-- 发布信息 -->
-    <view class='publish-info zan-cell'>
-      <view class='zan-cell__hd'>
-        <image src='/images/test/hsq-header.jpg' mode='aspectFill'></image>
-      </view>
-      <view class='zan-cell__bd'>
-        <view class='name'>这里是宠物名字</view>
-        <view class='time'>2018-04-28 99：66：66</view>
-      </view>
-      <view class='zan-cell__ft'>
-        <view class='btn {{btn_attention?"active":""}}' bindtap='bind_attention'><text>√ 已关注</text><text>+ 关注</text></view>
-      </view>
-    </view>
-
-
-    <!-- 图片 -->
-    <view class='item-content' wx:if='{{media=="img"}}'>
-      <image src='{{news_img}}' mode='aspectFill'></image>
-      <!-- 贴图 -->
-      <swiper indicator-dots="false" autoplay="true" interval="2000  " duration="500" circular="true">
-        <block wx:for="{{news_chartlet}}">
-          <swiper-item>
-            <image src="{{item}}" class="slide-image" mode='widthFix' />
-          </swiper-item>
-        </block>
-      </swiper>
-      <view class='img-list'>
-        <view class='img-list-item {{news_active==index?"active":""}}' wx:for="{{news}}" wx:key="item" bindtap='bind_news' data-index='{{index}}'>
-          <image src='{{item}}' mode='aspectFill'></image>
+    <block wx:for="{{petData}}">
+      <!-- 发布信息 -->
+      <view class='publish-info zan-cell'>
+        <view class='zan-cell__hd'>
+          <!--<image src='/images/test/hsq-header.jpg' mode='aspectFill'></image>-->
+          <image src='{{item.pet_info.pet_img}}' mode='aspectFill'></image>
+        </view>
+        <view class='zan-cell__bd'>
+          <view class='name'>{{item.pet_info.name}}</view>
+          <view class='time'>{{item.create_time}}</view>
+        </view>
+        <view class='zan-cell__ft'>
+          <view class='btn {{btn_attention?"active":""}}' bindtap='bind_attention'><text>√ 已关注</text><text>+ 关注</text></view>
         </view>
       </view>
-      <!-- 涂鸦 -->
-      <view class='btn-scrawl'>
-        <image src='/images/icon/index-news-scrawl.png' mode='widthFix'></image>
-        <text>涂鸦</text>
+
+
+      <!-- 图片 -->
+      <view class='item-content' wx:if='{{item.bg}}'>
+        <image src='{{item.bg[item.index].img_url}}' mode='aspectFill'></image>
+        <text></text>
+        <!-- 贴图 -->
+        <swiper indicator-dots="false" autoplay="true" interval="2000  " duration="500" circular="true">
+          <block wx:for="{{news_chartlet}}">
+            <swiper-item>
+              <image src="{{item}}" class="slide-image" mode='widthFix' />
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class='img-list'>
+          <view class='img-list-item {{news_active==index?"active":""}}' wx:for="{{item.bg}}"  wx:for-index='idx' wx:for-item="item2" bindtap='bind_news' data-indext='{{idx}}' data-index="{{index}}">
+            <image src='{{item2.img_url}}' mode='aspectFill'></image>
+          </view>
+        </view>
+        <!-- 涂鸦 -->
+        <view class='btn-scrawl'>
+          <image src='/images/icon/index-news-scrawl.png' mode='widthFix'></image>
+          <text>涂鸦</text>
+        </view>
       </view>
-    </view>
-    <!-- 视频 -->
-    <view class='item-content' wx:if='{{media=="video"}}'>
-      <view class='video-wrap'>
-        <video controls src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"></video>
+      <!-- 视频 -->
+      <view class='item-content' wx:else>
+        <view class='video-wrap'>
+          <video controls src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"></video>
+        </view>
       </view>
-    </view>
-    <view class='item-footer'>
-      <view wx:if='{{media=="img"}}'>
-        <image class='item-footer-icon' src='/images/icon/index-news-footer1.png' mode='widthFix'></image>
-        <text>166涂鸦</text>
+      <view class='item-footer'>
+        <view wx:if='{{media=="img"}}'>
+          <image class='item-footer-icon' src='/images/icon/index-news-footer1.png' mode='widthFix'></image>
+          <text>166涂鸦</text>
+        </view>
+        <view>
+          <image class='item-footer-icon' src='/images/icon/index-news-footer2.png' mode='widthFix'></image>
+          <text>156评论</text>
+        </view>
+        <view bindtap='bind_love'>
+          <image src='{{love?"/images/icon/index-news-footer3-1.png":"/images/icon/index-news-footer3-0.png"}}' mode='widthFix'></image>
+          <text>1566赞</text>
+        </view>
+        <view>
+          <image class='item-footer-icon' src='/images/icon/index-news-footer4.png' mode='widthFix'></image>
+          <text>分享</text>
+        </view>
       </view>
-      <view>
-        <image class='item-footer-icon' src='/images/icon/index-news-footer2.png' mode='widthFix'></image>
-        <text>156评论</text>
-      </view>
-      <view bindtap='bind_love'>
-        <image src='{{love?"/images/icon/index-news-footer3-1.png":"/images/icon/index-news-footer3-0.png"}}' mode='widthFix'></image>
-        <text>1566赞</text>
-      </view>
-      <view>
-        <image class='item-footer-icon' src='/images/icon/index-news-footer4.png' mode='widthFix'></image>
-        <text>分享</text>
-      </view>
-    </view>
+    </block>
+
     <!-- 删除、编辑 -->
     <!-- <view class='footer-icon-2' wx:if='{{del_edit=="ture"}}'>
       <view>

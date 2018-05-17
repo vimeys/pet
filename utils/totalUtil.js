@@ -91,7 +91,30 @@ const pushHttp=(arr,httpStr,attr,imgName)=>{
 }
 
 
-// ajax请求封装
+// ajax请求封装同步
+function promiseSync(url,data) {
+    return new Promise(function (resolve,reject) {
+
+        wx.request({
+            url:url,
+            data:data,
+            method:'POST',
+            success:function(res){// 请求链接成功后执行过程
+                var json=res.data;
+                if(res.statusCode==200){
+                    resolve(json)
+                }else{
+                    console.log("总请求失败,请检查接口信息");
+                }
+            },
+            fail:function(res){  // 请求链接失败后执行
+                console.log(res);
+                reject(res.data)
+            }
+        })
+    })
+}
+// 异步感觉
 function promise(url,data) {
     return new Promise(function (resolve,reject) {
         wx.showLoading({
@@ -163,6 +186,7 @@ module.exports = {
     showLoading,
     pushHttp,
     promise,
+    promiseSync,
     storage,
     repeatArr,
     url

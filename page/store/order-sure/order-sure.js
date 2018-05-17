@@ -1,43 +1,20 @@
-// pages/store/goods-content/goods-content.js
-const util = require("../../../utils/util.js");
-const app=getApp()
+// page/store/order-sure/order-sure.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      hideShopPopup:true,
-      buyNumber:1,
-      store_num:1,
-    swiper_img: app.text_img_list,
-      cover:'../../../images/1.png',
-
-      Data:{
-          goodsName:'这个狗粮可以换哦喜不喜欢拉时间段法拉盛',
-          shop_price:'123',
-          spec_goods_price:{'规格':['大份','中份','小份']}
-      },
-
+  
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(this.data.swiper_img)
+  
   },
-    showPop(){
-        this.setData({
-            hideShopPopup:!this.data.hideShopPopup
-        })
-    },
-    // 关闭规格选择
-    close(){
-      this.setData({
-          hideShopPopup:!this.data.hideShopPopup
-      })
-    },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

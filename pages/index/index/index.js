@@ -1,8 +1,10 @@
 // pages/index/index.js
-const util = require("../../../utils/util.js");
+const util = require("../../../utils/totalUtil.js");
 var app = getApp();
 Page({
   data: {
+      filePath:'',//图片前缀,
+      petData:[],//宠物动态列表
     // 轮播
     imgUrls: [
       '/images/test/index-banner.png',
@@ -80,21 +82,73 @@ Page({
   bind_love: util.bind_love,
 
   // 动态
-  bind_news: util.bind_news,
-
+  // bind_news: util.bind_news,
+  bind_news(e){
+      console.log(e);
+      let index=e.currentTarget.dataset.index
+    let index2=e.currentTarget.dataset.indext
+      console.log(index, index2);
+      let petData=this.data.petData
+      petData[index].index=index2
+      this.setData({
+          petData
+      })
+  },
+  // 跳转
+  nav_up_pet:function(){
+    wx.navigateTo({
+      url: "../upload/upload"
+   })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      console.log(app.filePath);
+      let userInfo=util.storage('userInfo');
+      this.setData({
+        filePath:app.filePath
+    })
     var that = this
-    console.log(this.data)
     // 初始化加载写真集
     that.setData({
       news_img: that.data.news[0],
       news_chartlet: that.data.news_chartlet_list[0]
     })
+
+
+      this.banner();
+      this.hotTalk();
+      this.petList(userInfo.id)
   },
 
+    // 轮播
+    banner(){
+      util.promiseSync(util.url.url.indexBanner,{}).then((json)=>{
+          this.setData({
+              imgUrls:json.data
+          })
+      })
+    },
+    // 获取话题
+    hotTalk(){
+      util.promiseSync(util.url.url.hotTalk,{}).then((json)=>{
+          this.setData({
+
+          })
+      })
+    },
+    petList(id){
+      util.promiseSync(util.url.url.petList,{user_id:id}).then((json)=>{
+          json.data.forEach(function (item) {
+              item.index=0
+          })
+          console.log(json.data);
+          this.setData({
+              petData:json.data
+          })
+      })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

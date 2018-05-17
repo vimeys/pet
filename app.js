@@ -38,8 +38,8 @@ App({
   ],
     filePath:'',//图片视频的路径前缀
   onLaunch: function () {
-    util.promise(util.url.url.filePath,{}).then((json)=>{
-          this.filePath=json.data
+    util.promiseSync(util.url.url.filePath,{}).then((json)=>{
+          this.filePath=json.data  //固定图片路径
     })
     wx.setStorageSync('user',{uid:7,petId:1});
     // 展示本地存储能力
@@ -51,6 +51,17 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          util.promiseSync(util.url.url.login,{code:res.code}).then((json)=>{
+              console.log(json);
+              if(json.status==1){
+                wx.setStorageSync('userInfo', json.data);
+              }else{
+                util.showLoading(json.status)
+                  setTimeout(()=>{
+                    wx.hideLoading()
+                  },2000)
+              }
+          })
       }
     })
     // 获取用户信息

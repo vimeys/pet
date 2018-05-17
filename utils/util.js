@@ -65,3 +65,4 @@ module.exports = {
   bind_news,
   bind_attention,
 }
+

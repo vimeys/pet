@@ -2,58 +2,65 @@
 <import src="/template/list.wxml" />
 <view class='container'>
   <view class='section-banner'>
-    <image src='/images/me-index-banner.png' mode='widthFix'></image>
-    <view class='left'>
-      <image src='/images/icon/me-index-banner-left.png' mode='widthFix'></image>
-      <text>客服</text>
-      <view class='contact_wrap'>
-        <contact-button type="default-dark" size="28" session-from="weapp">
-        </contact-button>
-        <contact-button type="default-dark" size="28" session-from="weapp">
-        </contact-button>
-        <contact-button type="default-dark" size="28" session-from="weapp">
-        </contact-button>
-        <contact-button type="default-dark" size="28" session-from="weapp">
-        </contact-button>
+    <view class='banner-content'>
+      <view class='left'>
+        <image src='/images/icon/me-index-banner-left.png' mode='widthFix'></image>
+        <text>客服</text>
+        <view class='contact_wrap'>
+          <contact-button type="default-dark" size="28" session-from="weapp">
+          </contact-button>
+          <contact-button type="default-dark" size="28" session-from="weapp">
+          </contact-button>
+          <contact-button type="default-dark" size="28" session-from="weapp">
+          </contact-button>
+          <contact-button type="default-dark" size="28" session-from="weapp">
+          </contact-button>
+        </view>
       </view>
-    </view>
-    <view class='right'>
-      <image src='/images/icon/me-index-banner-right.png' mode='widthFix'></image>
-      <text>消息</text>
+      <view class='right'>
+        <image src='/images/icon/me-index-banner-right.png' mode='widthFix'></image>
+        <text>消息</text>
+      </view>
     </view>
   </view>
 
   <!-- 宠物信息面板 -->
   <view class='section-petinfo'>
     <!-- 头像，用户名 -->
-    <view>
-      <view class='img-wrap-000'>
-        <view class='img-wrap-255'>
-          <image src='{{test_img_url}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
-          <image src='/images/icon/me-index-petinfo-sex1.png' class='sex-img' mode='widthFix'></image>
-        </view>
-      </view>
-      <view class='name'>
-        <text>狗蛋儿</text>
-        <text>0.5kg</text>
+    <view class='img-wrap-000'>
+      <view class='img-wrap-255'>
+        <image src='{{test_img_url}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
+        <image src='/images/icon/me-index-petinfo-sex1.png' class='sex-img' mode='widthFix'></image>
       </view>
     </view>
+    <view class='name'>
+      <text>狗蛋儿</text>
+      <text>1235天陪伴</text>
+    </view>
+
     <view class='info'>
       <view>
-        <image src='/images/icon/me-index-petinfo-sterilization2.png' mode='widthFix'></image>
-        <text>已绝育</text>
+        <image src='/images/icon/me-index-petinfo-money.png' mode='widthFix'></image>
+        <text>身价：213爪币</text>
+      </view>
+      <view>
+        <image src='/images/icon/me-index-petinfo-weight.png' mode='widthFix'></image>
+        <text>体重：0.5kg</text>
       </view>
       <view>
         <image src='/images/icon/me-index-petinfo-birthday.png' mode='widthFix'></image>
         <text>生日：2018-02-31</text>
       </view>
       <view>
-        <image src='/images/icon/me-index-petinfo-money.png' mode='widthFix'></image>
-        <text>身价：213爪币</text>
+        <image src='/images/icon/me-index-petinfo-sterilization2.png' mode='widthFix'></image>
+        <text>已绝育</text>
       </view>
+
     </view>
-    <view class='text zan-ellipsis--l2'>
-      啊，我是一个宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物
+    <view class='text'>
+      <view class='zan-ellipsis--l2'>
+        啊，我是一个宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物
+      </view>
     </view>
   </view>
 
@@ -105,4 +112,6 @@
       <view class="zan-cell__ft"></view>
     </navigator>
   </view>
+
+  <input class='test-input'></input>
 </view>

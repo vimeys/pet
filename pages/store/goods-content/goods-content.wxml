@@ -40,8 +40,53 @@
 
   <!-- 页脚 -->
   <view class='section-footer'>
-    <view class='btn-100'>
+    <view class='btn-100' bindtap="showPop">
       立即购买
+    </view>
+  </view>
+</view>
+
+
+<!--选择规格-->
+<!--选择规格页面-->
+<view class="show-popup" hidden="{{hideShopPopup}}">
+  <view class="popup-mask" bindtap="close"></view>
+  <view class="popup-contents">
+    <view class="pop-goods-info">
+      <view class="pop-img-box">
+        <image src="{{cover}}" class="goods-thumbnail"/>
+      </view>
+      <view class="pop-goods-des">
+        <view class="pop-goods-title">{{Data.goodsName}}</view>
+        <view class="pop-goods-price">积分：{{Data.shop_price}}</view>
+      </view>
+      <view class="pop-goods-close" bindtap="close"></view>
+    </view>
+    <view class="size-label-box">
+      <block wx:for="{{Data.spec_goods_price}}" wx:for-item="item" wx:for-index="key">
+        <view class="label">{{key}}</view>
+        <view class="label-item-box">
+          <view class="label-item {{active==item2.item_id? 'active' : '' }}" wx:for="{{item}}" wx:for-index="idx"  wx:for-item="item2" wx:key="id" data-id="{{item2.item_id}}" data-spec="{{item2}}" data-spec_key="{{key}}" bindtap="specTap"  data-level="{{item2.level}}" data-levelq="{{item2.level2}}"  data-levelw="{{item3.level3}}">
+            {{item2}}
+          </view>
+        </view>
+      </block>
+
+    </view>
+    <view class="buy-num-box">
+
+      <view class="num-label">购买数量</view>
+      <view class="num-box">
+        <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+        <view class="num-input">
+          <input  type="number" value="{{buyNumber}}" bindblur="inputBuy" disabled/>
+        </view>
+        <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+      </view>
+    </view>
+    <view class="num-label residue"> 库存剩余：{{store_num}}</view>
+    <view class="popup-join-btn" bindtap="joinCart">
+      加入购物车
     </view>
   </view>
 </view>

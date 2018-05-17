@@ -67,3 +67,179 @@
   background-color: #FE4E4E;
   color: #fff
 }
+
+
+
+/*购物车规格*/
+.show-popup{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  z-index: 4;
+}
+.popup-mask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+.popup-contents{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width:100%;
+  background-color: #fff;
+  z-index: 6;
+}
+.pop-goods-info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+  padding: 30rpx 0;
+  border-bottom: 1px solid #eee;
+}
+.pop-img-box{
+  width: 120rpx;
+  height: 120rpx;
+  overflow: hidden;
+  margin-right: 26rpx;
+}
+.pop-img-box .goods-thumbnail{
+  width: 120rpx;
+  height: 120rpx;
+}
+.pop-goods-title{
+  width: 484rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size:36rpx;
+  color:#000000;
+}
+.pop-goods-price{
+  font-size:26rpx;
+  color:#FE4E4E;
+  margin-top:20rpx;
+}
+.pop-goods-close{
+  width: 36rpx;
+  height: 36rpx;
+  flex: 1;
+  background:url("https://cdn.it120.cc/images/weappshop/popup-close.png") no-repeat center center;
+  background-size: 36rpx auto;
+  align-self: flex-start;
+  margin-top: -10rpx;
+}
+.size-label-box  .label{
+  font-size:26rpx;
+  color:#000;
+  padding: 30rpx 0 20rpx 30rpx;
+}
+.size-label-box .label-item-box{
+  display: flex;
+  margin-left: 30rpx;
+  flex-direction: row;
+  flex-wrap:wrap;
+}
+.size-label-box .label-item{
+  font-size:26rpx;
+  color:#000;
+  padding: 14rpx 20rpx;
+  border: 1px solid #ddd;
+  border-radius: 66rpx;
+  margin: 0 20rpx 20rpx 0;
+
+}
+.size-label-box .label-item.active{
+  color: #FE4E4E;
+  border: 1px solid #FE4E4E;
+}
+.buy-num-box{
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 30rpx 28rpx 0;
+  margin-left: 30rpx;
+  border-top: 1px solid #eee;
+  margin-top: 30rpx;
+  align-items: center;
+}
+.num-label{
+  font-size:26rpx;
+  color:#000000;
+}
+.buy-num-box .num-box{
+  display: flex;
+}
+.buy-num-box .num-box .num-jian,
+.buy-num-box .num-box .num-input,
+.buy-num-box .num-box .num-jia{
+  width: 80rpx;
+  height: 64rpx;
+  line-height: 62rpx;
+  text-align: center;
+  border: 1px solid #eee;
+}
+.buy-num-box .num-box .num-input{
+  font-size: 28rpx;
+}
+.buy-num-box .num-box .num-input input{
+  height: 100%;
+}
+.popup-join-btn{
+  width: 100%;
+  height: 96rpx;
+  text-align: center;
+  line-height: 96rpx;
+  font-size:28rpx;
+  color:#ffffff;
+  background-color: #FE4E4E;
+}
+.buy-num-box .num-box .hui{
+  background-color: #f5f5f9;
+}
+
+
+
+.chang-name{
+  display: inline-block;
+  padding: 2rpx 10rpx 2rpx 10rpx;
+  border: 2rpx #FE4E4E solid;
+  color: #FE4E4E;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  margin-left: 20rpx;
+}
+.one-all{
+  margin-bottom: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.one{
+  color: #1a1a1a;
+  font-size: 30rpx;
+  font-weight: bold;
+  border-radius: 20rpx;
+  border: 2rpx #1a1a1a solid;
+  padding: 0 10rpx 0 10rpx;
+}
+.index{
+  z-index: 1000;
+  color: #1a1a1a;
+  background: #cccccc;
+}
+
+/*剩余库存*/
+.residue{
+  margin-top: -10rpx;
+  margin-left: 30rpx;
+  margin-bottom: 20rpx;
+  color:#ccc;
+
+}
