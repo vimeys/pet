@@ -1,5 +1,5 @@
 <!--pages/activity/index/index.wxml-->
-<import src="/template/list.wxml"/>
+<import src="/template/list.wxml" />
 <view class='container'>
   <!-- banner -->
   <view class='section-banner'>
@@ -15,16 +15,23 @@
     <!-- 活动列表 -->
     <view class='activity'>
       <block wx:for="{{activity}}" wx:key="item">
-        <navigator url='{{item.a_url}}' class='item'>
+        <navigator url='{{item.a_url}}' class='item {{item.activity_new?"new":""}}'>
           <!-- 图片 -->
           <image src='{{item.img_url}}' mode='aspectFill'></image>
-          <!-- 标题 -->
-          <view class='title zan-ellipsis'>
-            {{item.title}}
-          </view>
-          <!-- 文字 -->
-          <view class='text zan-ellipsis--l2'>
-            {{item.text}}
+          <view class='text'>
+            <!-- 标题 -->
+            <view class='title zan-ellipsis'>
+              {{item.title}}
+            </view>
+            <!-- 文字 -->
+            <view class='time zan-cell'>
+              <view class='new zan-cell__hd'>
+                NEW
+              </view>
+              <view class='zan-cell__bd'>
+                活动日期：<text>{{item.star_time}}</text>至<text>{{item.end_time}}</text>
+              </view>
+            </view>
           </view>
         </navigator>
       </block>

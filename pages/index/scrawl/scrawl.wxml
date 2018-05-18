@@ -1,0 +1,63 @@
+<!--涂鸦-->
+<view  wx:if="{{!combine}}" >
+    <view class="container1"
+          id="container"
+          catch:touchstart="touchStart"
+          catch:touchend="touchEnd"
+          catch:touchmove="touchMove"
+           style="height:{{height}}rpx" >
+        <image class="bg" src="{{bgPic}}" mode="widthFix" style="height:{{height}}rpx"></image>
+        <icon type="cancel" class="cancel" id="cancel"
+              style="top:{{cancelCenterY-10+'px'}};left:{{cancelCenterX-10+'px'}}" wx:if="{{chartlet}}"></icon>
+        <icon type="waiting" class="handle" id="handle" color="green"
+              style="top:{{handleCenterY-10+'px'}};left:{{handleCenterX-10+'px'}}" wx:if="{{chartlet}}"></icon>
+        <image class="hat" id='hat' src="../../../images/{{currentHatId}}.png"
+               style="top:{{hatCenterY-hatSize/2-2+'px'}};left:{{hatCenterX-hatSize/2-2+'px'}};transform:rotate({{rotate+'deg'}}) scale({{scale}})"
+               wx:if="{{chartlet}}"></image>
+    </view>
+    <view class="hr-1"></view>
+    <view class="gather-list">
+        <view class="gather-li active">
+            <image src="../../../images/2.png"></image>
+            <text>桃心贴图</text>
+        </view>
+        <view class="gather-li">
+            <image src="../../../images/2.png"></image>
+            <text>桃心贴图</text>
+        </view>
+        <view class="gather-li">
+            <image src="../../../images/2.png"></image>
+            <text>桃心贴图</text>
+        </view>
+        <view class="gather-li">
+            <image src="../../../images/2.png"></image>
+            <text>桃心贴图</text>
+        </view>
+        <view class="gather-li">
+            <image src="../../../images/2.png"></image>
+            <text>桃心贴图</text>
+        </view>
+
+        <view class="prev-btn" bind:tap="prevPic"><image src="../../../images/1.png" class="prev-btn-image"></image>预览</view>
+    </view>
+    <scroll-view class="scrollView1" scroll-x="true" >
+        <image class="imgList"
+               wx:for="...imgList" wx:key="{{index+1}}"
+               src="../../../images/{{index+1}}.png"
+               data-hat-id="{{index+1}}"
+               bind:tap="chooseImg"></image>
+    </scroll-view>
+
+    <!--<button bind:tap="prevPic">预览</button>-->
+    <!--<button bind:tap="goCopper">剪切</button>-->
+    <!--<button bind:tap="combinePic">确定</button>-->
+    <!--<button bind:tap="save">保存</button>-->
+    <!--<button bind:tap="updata">提交</button>-->
+    <!--<button bind:tap="showImageList">选择贴图</button>-->
+    <view class="footer">
+        <view class="footer-log" bindtap="hrefLog">查看涂鸦记录</view>
+        <view class="footer-updata" bindtap="upload">发布</view>
+        <view class="footer-save" bind:tap="save" >保存</view>
+    </view>
+    <canvas  class="myCanvas" bindtap="prevPicHide" canvas-id="myCanvas" style="height:{{height}}rpx; width:{{width}}rpx; position: fixed;top:{{top}}px;left:{{left}}px"/>
+</view>

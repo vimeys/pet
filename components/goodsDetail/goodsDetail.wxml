@@ -1,0 +1,42 @@
+<!--components/goodsDetail/goodsDetail.wxml-->
+<view class="goods-list">
+    <view class="goods-li">
+        <image class="goods-image" src="../../images/1.png"></image>
+        <view class="goods-card">
+            <view class="goods-title">尽快回复可见阿里斯顿发...</view>
+            <view class="goods-nums">
+                <view class="goods-num">200</view>
+                <!--<view class="goods-num-image" src="../../../images/1.png"></view>-->
+                <image class="goods-num-image" src="../../images/1.png"></image>
+                <view class="goods-num-people">已兑10件</view>
+            </view>
+            <view class="goods-btn {{disable?'disable':''}}">立即兑换</view>
+        </view>
+    </view>
+    <view class="goods-li">
+        <image class="goods-image" src="../../images/1.png"></image>
+        <view class="goods-card">
+            <view class="goods-title">尽快回复可见阿里斯顿发...</view>
+            <view class="goods-nums">
+                <view class="goods-num">200</view>
+                <!--<view class="goods-num-image" src="../../../images/1.png"></view>-->
+                <image class="goods-num-image" src="../../images/1.png"></image>
+                <view class="goods-num-people">已兑10件</view>
+            </view>
+            <view class="goods-btn {{disable?'disable':''}}">立即兑换</view>
+        </view>
+    </view>
+    <view class="goods-li">
+        <image class="goods-image" src="../../images/1.png"></image>
+        <view class="goods-card">
+            <view class="goods-title">尽快回复可见阿里斯顿发...</view>
+            <view class="goods-nums">
+                <view class="goods-num">200</view>
+                <!--<view class="goods-num-image" src="../../../images/1.png"></view>-->
+                <image class="goods-num-image" src="../../images/1.png"></image>
+                <view class="goods-num-people">已兑10件</view>
+            </view>
+            <view class="goods-btn {{disable?'disable':''}}">立即兑换</view>
+        </view>
+    </view>
+</view>

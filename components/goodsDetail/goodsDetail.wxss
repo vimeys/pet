@@ -1,0 +1,72 @@
+/* components/goodsDetail/goodsDetail.wxss */
+.goods-list{
+    width: 100%;
+    padding: 20rpx 20rpx 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.goods-li{
+    width: 345rpx;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-bottom: 30rpx;
+    margin-top: 30rpx;
+}
+.goods-li:nth-child(odd){
+    margin-right: 20rpx;
+}
+
+.goods-image{
+    width:100%;
+    height: 300rpx;
+    border: 1px solid #EAEAEA;
+    border-radius: 20rpx;
+    margin-bottom: 20rpx;
+    box-sizing: border-box;
+}
+.goods-card{
+    display: flex;
+    flex-direction: column;
+}
+.goods-title{
+    font-size: 28rpx;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: normal;
+    width: 345rpx;
+    margin-bottom: 20rpx;
+}
+.goods-nums{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20rpx;
+}
+.goods-num{
+    font-size: 28rpx;
+    color:#FE2121
+}
+.goods-num-image{
+    width:26rpx;
+    height: 26rpx;
+}
+.goods-num-people{
+    font-size: 24rpx;
+    color:#888;
+}
+.goods-btn{
+    width: 345rpx;
+    height: 66rpx;
+    color:#222;
+    background: #FEE632;
+    border-radius: 10rpx;
+    font-size: 26rpx;
+    line-height: 66rpx;
+    text-align: center;
+}
+.disable{
+    background: #f0f0f0;
+}

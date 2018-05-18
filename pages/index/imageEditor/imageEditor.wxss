@@ -14,13 +14,12 @@
 
 
 .container1{
-    height:300px;
+    min-height:300px;
     width:100%;
 }
 .bg{
     position: absolute;
     z-index:0;
-    height: 300px;
     width:100%;
 }
 button{
@@ -44,6 +43,7 @@ button{
     position: absolute;
     bottom: 5px;
     white-space: nowrap;
+    background: #fff;
 }
 .imgList{
     height: 70px;

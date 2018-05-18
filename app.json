@@ -1,7 +1,10 @@
 {
   "pages": [
-        "pages/index/index/index",
+    "pages/index/upload/upload",
+      "pages/index/scrawl/scrawl",
     "pages/index/imageEditor/imageEditor",
+        "pages/index/index/index",
+    "pages/store/goodsList/goodsList",
     "pages/index/imageCut/imageCut",
     "pages/test-nav/test-nav",
     "pages/test-transform1/test-transform1",
@@ -15,7 +18,6 @@
     "pages/me/money/money",
     "pages/me/address-list/address-list",
     "pages/index/plus/plus",
-    "pages/index/upload/upload",
     "pages/store/order-sure/order-sure",
     "pages/me/publish/publish",
     "pages/index/gambit-list/gambit-list",

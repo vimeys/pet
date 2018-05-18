@@ -25,7 +25,7 @@ Page({
         height:1000,//canvas的高
         imageId:0,//第几张图片的id
         drawArray:[{
-            hasChartlet:true,//是否有贴图
+            hasChartlet:false,//是否有贴图
             chartletSrc:1,//贴图的链接
             XYZ:{
                 scale:1,//比例
@@ -40,11 +40,9 @@ Page({
         showImgList:false,
     },
     onLoad(){
-        console.log(1)
         this.bg=[];
         this.ttBg=[];
         this.kBg=[];
-
         this.user=utils.storage('user');
         this.setData({
             bgPics: app.globalData.bgPic,
@@ -86,7 +84,6 @@ Page({
     getImgInfo(){
         let array=this.data.drawArray;
         let length=array.length;
-        // let i=
         for(var i=0;i<length;i++){
             getImage(this,i)
         }
@@ -100,13 +97,8 @@ Page({
                     let scale;
                     // if(width>height){
                     scale=width/750;
-                    console.log(array);
-                    console.log(res);
-                    console.log(i);
-                    app.globalData.width=Math.trunc(res.width/scale);
-                    app.globalData.height=Math.trunc(res.height/scale);
-                    console.log(Math.trunc(res.width / scale));
-                    console.log(Math.trunc(res.height / scale));
+                    // app.globalData.width=Math.trunc(res.width/scale);
+                    // app.globalData.height=Math.trunc(res.height/scale);
                     array[i].XYZ.width=Math.trunc(res.width/scale);
                     array[i].XYZ.height=Math.trunc(res.height/scale);
                     that.setData({
@@ -150,9 +142,7 @@ Page({
         obj.touch_target="";
         obj.start_x=0;
         obj.start_y=0;
-        console.log(obj);
         this.starObj=obj
-        console.log(this);
     },
     touchStart(e){
         console.log(e.target.id);
@@ -401,7 +391,7 @@ Page({
         pc.drawImage("../../../images/" + currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
         pc.draw();
 
-        let top=windowHeight-app.globalData.height
+        let top=windowHeight-this.data.imageId/2
         if(top>0){
             this.setData({
                 width:app.globalData.width,

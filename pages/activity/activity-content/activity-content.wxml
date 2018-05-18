@@ -1,0 +1,31 @@
+<!--pages/activity/activity-content/activity-content.wxml-->
+<view class='container page-padding-bottom' >
+  <!-- 活动基本信息 -->
+  <view class='section-info'>
+    <view class='title'>
+      购买狗狗需要注意什么问题到手机法拉盛肯德基疯狂来打卡时间反馈了解到附近开了拉升的减肥？
+    </view>
+    <view class='time'>
+      <text>几分就款到发货</text>
+      <text>2018-05-02</text>
+    </view>
+    <view class='btn-wrap'>
+      <!-- <view class='btn'>
+        点击进入
+      </view> -->
+      <view class='text'>
+        活动日期：<text>{{star_time}}</text>至<text>{{end_time}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 活动详情内容 -->
+  <view class='section-content'>
+    
+  </view>
+
+  <!-- 签到 -->
+  <view class='section-footer'>
+    <view class='btn-100'>签到打卡</view>
+  </view>
+</view>

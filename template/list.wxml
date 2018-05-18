@@ -80,8 +80,6 @@
           <view class='btn {{btn_attention?"active":""}}' bindtap='bind_attention'><text>√ 已关注</text><text>+ 关注</text></view>
         </view>
       </view>
-
-
       <!-- 图片 -->
       <view class='item-content' wx:if='{{item.bg}}'>
         <image src='{{item.bg[item.index].img_url}}' mode='aspectFill'></image>
@@ -100,10 +98,10 @@
           </view>
         </view>
         <!-- 涂鸦 -->
-        <view class='btn-scrawl'>
-          <image src='/images/icon/index-news-scrawl.png' mode='widthFix'></image>
-          <text>涂鸦</text>
-        </view>
+        <cover-view class='btn-scrawl' catchtap="editHref">
+          <cover-image class="c-image" src='/images/icon/index-news-scrawl.png' mode='widthFix'></cover-image>
+          <cover-view class="c-text">涂鸦</cover-view>
+        </cover-view>
       </view>
       <!-- 视频 -->
       <view class='item-content' wx:else>

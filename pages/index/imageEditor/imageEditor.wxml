@@ -36,7 +36,7 @@
                bind:tap="chooseImg"></image>
     </scroll-view>
 </view>
-
-<!--<cover-view class="prev"><cover-image src="{{prev-image}}" mode="widthFix"></cover-image></cover-view>-->
 <canvas  class="myCanvas" bindtap="prevPicHide" canvas-id="myCanvas" style="height:{{height}}rpx; width:{{width}}rpx; position: fixed;top:{{top}}px;left:{{left}}px"/>
+<!--<cover-view class="prev"><cover-image src="{{prev-image}}" mode="widthFix"></cover-image></cover-view>-->
+
 

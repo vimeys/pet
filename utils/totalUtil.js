@@ -94,12 +94,13 @@ const pushHttp=(arr,httpStr,attr,imgName)=>{
 // ajax请求封装同步
 function promiseSync(url,data) {
     return new Promise(function (resolve,reject) {
-
         wx.request({
             url:url,
             data:data,
+            dataType:'json',
             method:'POST',
             success:function(res){// 请求链接成功后执行过程
+                console.log(res);
                 var json=res.data;
                 if(res.statusCode==200){
                     resolve(json)

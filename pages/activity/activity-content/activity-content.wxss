@@ -1,0 +1,43 @@
+/* pages/activity/activity-content/activity-content.wxss */
+.container::before{
+  background: #eaeaea
+}
+
+/* 活动信息摘要 */
+.section-info{
+  border-bottom: 1rpx solid #eaeaea;
+}
+.section-info .title{
+  font-size: 32rpx;
+  margin: 25rpx 0;
+  line-height: 1.5
+}
+.section-info .time{
+  font-size: 26rpx;
+  color: #888;
+  margin: 25rpx 0
+}
+.section-info .time text{
+  margin-right: 20rpx;
+}
+.section-info .text{
+  margin: 30rpx 0;
+  font-size: 22rpx;
+color: #fff;
+background: #FE4E4E;
+height: 50rpx;
+line-height: 50rpx;
+text-align: center
+}
+
+.section-info .text text{
+  padding: 0 10rpx
+}
+
+/* 底部按钮 */
+.section-footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

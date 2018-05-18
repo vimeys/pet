@@ -1,0 +1,2 @@
+<!--pages/store/goodsList/goodsList.wxml-->
+<goodsCard disable="{{disable}}"></goodsCard>

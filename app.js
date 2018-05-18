@@ -1,6 +1,7 @@
 //app.js
 import util from 'utils/totalUtil'
 App({
+    globalData:{bgPic:'../../../images/1.png'},
   // 测试图片
   test_img_url: '/images/test/index-banner.png',
   test_img_url2: '/images/test/img.png',
@@ -38,8 +39,10 @@ App({
   ],
     filePath:'',//图片视频的路径前缀
   onLaunch: function () {
+
     util.promiseSync(util.url.url.filePath,{}).then((json)=>{
           this.filePath=json.data  //固定图片路径
+        this.globalData={bgPic:'../../../images/1.png'}
     })
     wx.setStorageSync('user',{uid:7,petId:1});
     // 展示本地存储能力
