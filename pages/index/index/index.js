@@ -3,8 +3,10 @@ const util = require("../../../utils/totalUtil.js");
 var app = getApp();
 Page({
   data: {
-      filePath:'',//图片前缀,
-      petData:[],//宠物动态列表
+    filePath: '',//图片前缀,
+    petData: [],//宠物动态列表
+      index:0,
+      indextt:0,
     // 轮播
     imgUrls: [
       '/images/test/index-banner.png',
@@ -66,10 +68,10 @@ Page({
     // 点赞
     love: false,
 
+    UserInfo: [],
     news_chartlet_list: app.news_chartlet_list,
-
-
-    test_img_url: app.test_img_url
+    test_img_url: app.test_img_url,
+      page:1
   },
 
   // 轮播分页器
@@ -79,82 +81,220 @@ Page({
     })
   },
   // 点赞
-  bind_love: util.bind_love,
+  bind_love(e){
+    // this.setData({
+    //     love:!this.data.love
+    // })
+      let index = e.currentTarget.dataset.index;
+      let id = e.currentTarget.dataset.id;
+      let petData=this.data.petData
+      util.promiseSync(util.url.url.follow,{user_id:app.userInfo.id,list_sort_id:id}).then(json=>{
+          if(petData[index].like==1){
+              petData[index].like=0
+              petData[index].likes--
+              this.setData({
+                  petData
+              })
+          }else{
+              petData[index].like=1
+              petData[index].likes++
+              this.setData({
+                  petData
+              })
+          }
+      })
+  },
 
   // 动态
   // bind_news: util.bind_news,
-  bind_news(e){
-      console.log(e);
-      let index=e.currentTarget.dataset.index
-    let index2=e.currentTarget.dataset.indext
-      console.log(index, index2);
-      let petData=this.data.petData
-      petData[index].index=index2
-      this.setData({
-          petData
-      })
+  //   选择地图
+  bind_news(e) {
+    console.log(e);
+    let index = e.currentTarget.dataset.index;
+    let index2 = e.currentTarget.dataset.indext;
+    console.log(index, index2);
+    let petData = this.data.petData
+    petData[index].index = index2
+    this.setData({
+      petData,
+        index,
+        indextt:index2
+    })
   },
   // 跳转
-  nav_up_pet:function(){
+  nav_up_pet: function () {
     wx.navigateTo({
       url: "../upload/upload"
-   })
+    })
+  },
+//关注事件
+    bind_attention(e){
+      let id=e.currentTarget.dataset.id;
+      let index=e.currentTarget.dataset.index;
+      let petData=this.data.petData
+      util.promiseSync(util.url.url.follow,{user_id:app.userInfo.id,list_sort_id:id}).then(json=>{
+         if(petData[index].follow==1){
+            petData[index].follow=0
+            this.setData({
+                petData
+            })
+         }else{
+             petData[index].follow=1
+             this.setData({
+                 petData
+             })
+         }
+      })
+    },
+
+
+
+  // 登录
+  bindGetUserInfo: function (e) {
+    this.setData({
+      popup_userinfo: false,
+    })
+    var UserInfo=e.detail.userInfo
+    util.promiseSync(util.url.url.saveUserInfo, {
+      nickname: UserInfo.nickName,
+      avatar_url: UserInfo.avatarUrl,
+      gender: UserInfo.gender,
+      city: UserInfo.city,
+      province: UserInfo.province,
+      country: UserInfo.country,
+      languange: UserInfo.languange
+    })
+    console.log(this.data.UserInfo)
+  },
+  // 取消
+  bind_close_userinfo: function (e) {
+    this.setData({
+      popup_userinfo: false
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      console.log(app.filePath);
-      let userInfo=util.storage('userInfo');
-      this.setData({
-        filePath:app.filePath
+    
+
+    console.log(app.filePath);
+    let userInfo = util.storage('userInfo');
+    app.userInfo=userInfo
+    this.setData({
+      filePath: app.filePath,
+
     })
+
     var that = this
     // 初始化加载写真集
     that.setData({
       news_img: that.data.news[0],
-      news_chartlet: that.data.news_chartlet_list[0]
+      news_chartlet: that.data.news_chartlet_list[0],
     })
 
+    // 查看是否授权
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success: function (res) {
+              console.log(res.userInfo)
+              that.setData({
+                popup_userinfo: false
+              })
+            }
+          })
+        }else{
+          that.setData({
+            popup_userinfo: true
+          })
+        }
+      },
 
-      this.banner();
-      this.hotTalk();
-      this.petList(userInfo.id)
+    })
+    // 将个人信息传递给后台
+
+    this.banner();
+    this.hotTalk();
+    this.petList(userInfo.id)
   },
 
-    // 轮播
-    banner(){
-      util.promiseSync(util.url.url.indexBanner,{}).then((json)=>{
-          this.setData({
-              imgUrls:json.data
-          })
+  // 轮播
+  banner() {
+    util.promiseSync(util.url.url.indexBanner, {}).then((json) => {
+      this.setData({
+        imgUrls: json.data
       })
-    },
-    // 获取话题
-    hotTalk(){
-      util.promiseSync(util.url.url.hotTalk,{}).then((json)=>{
-          this.setData({
+    })
+  },
+  // 获取话题
+  hotTalk() {
+    util.promiseSync(util.url.url.hotTalk, {}).then((json) => {
+      this.setData({
 
-          })
       })
-    },
-    petList(id){
-      util.promiseSync(util.url.url.petList,{user_id:id}).then((json)=>{
-          json.data.forEach(function (item) {
-              item.index=0
-          })
-          console.log(json.data);
-          this.setData({
-              petData:json.data
-          })
+    })
+  },
+
+    // 宠物动态列表
+  petList(id,page) {
+    let that=this
+    util.promiseSync(util.url.url.petList, { user_id: id ,page:page}).then((json) => {
+      json.data.forEach(function (item,index) {
+        item.index = 0
       })
-    },
-    editHref(){
-        console.log(1);
-        wx.navigateTo({
-          url: '../upload/upload'
+        that.setData({
+            petData: json.data
         })
+        this.bannerList()
+    })
+  },
+
+    // 获取轮播图片
+    bannerList(){
+    let that=this
+      let petData=this.data.petData
+        petData.forEach(function (item,index) {
+            bannerList(item,index,that)
+        })
+        function bannerList(item,index,self){
+            let arr=[]
+            // let that1=that
+            //死数据
+            util.promiseSync(util.url.url.petBannerList,{bg_id:1}).then(json1=>{
+                let petData=self.data.petData
+                json1.data.forEach((item1,index)=>{
+                    arr.push({image:item1.graffiti.img_url,id:item1.graffiti.id})
+                })
+                item.bannerList=arr
+                petData[index]=item
+                that.setData({
+                    petData
+                })
+            })
+
+        }
     },
+
+
+
+  editHref() {
+      // console.log(this.data.petData[this.data.index].bg[this.data.indextt].img_url);
+      wx.navigateTo({
+      url: `../scrawl/scrawl?id=${this.data.petData[this.data.index].id}`
+    })
+      app.globalData.edit=this.data.petData[this.data.index].bg[this.data.indextt].img_url
+  },
+
+  // 获取更多
+  getMore(){
+    let user=util.storage('userInfo')
+      let page=this.data.page;
+      page++
+      this.petList(user.id,page++)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -200,8 +340,12 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (e) {
+      console.log(e);
+      return {
+        title:'转发',
+          path:'/pages/index/comment/comment'
+      }
   }
 
 

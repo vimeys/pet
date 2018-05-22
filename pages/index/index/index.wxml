@@ -8,7 +8,7 @@
     <navigator url='../me/index/index' class='item'>
       热门
     </navigator>
-    <navigator url='../activity/index/index' class='item'>
+    <navigator url='../index-attention/index-attention' class='item'>
       关注
     </navigator>
   </viem>
@@ -109,5 +109,7 @@
   <cover-view class="up-pet" url="../upload/upload" bindtap='nav_up_pet'>
     <cover-image src="/images/icon/up-pet.png" mode='widthFix'></cover-image>
   </cover-view>
+
+  <template is='template-popup-userinfo' data='{{popup_userinfo:popup_userinfo}}'></template>
 
 </view>

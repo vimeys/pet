@@ -75,6 +75,8 @@ page{
     font-size: 28rpx;
     line-height: 100rpx;
     color: #222;
+    padding-left: 30rpx;
+    box-sizing: border-box;
 }
 .footer-updata,.footer-save{
     font-size: 28rpx;

@@ -114,3 +114,9 @@
   background: #fee632;
   border-radius: 35rpx;
 }
+
+
+/* 去掉关注 */
+.publish-info .zan-cell__ft .btn{
+  display: none;
+}

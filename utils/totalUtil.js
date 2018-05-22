@@ -100,7 +100,7 @@ function promiseSync(url,data) {
             dataType:'json',
             method:'POST',
             success:function(res){// 请求链接成功后执行过程
-                console.log(res);
+                // console.log(res);
                 var json=res.data;
                 if(res.statusCode==200){
                     resolve(json)
@@ -115,7 +115,9 @@ function promiseSync(url,data) {
         })
     })
 }
-// 异步感觉
+
+// 异步加载
+
 function promise(url,data) {
     return new Promise(function (resolve,reject) {
         wx.showLoading({

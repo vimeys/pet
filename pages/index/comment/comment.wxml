@@ -1,0 +1,29 @@
+<!--pages/index/gambit-content/gambit-content.wxml-->
+<import src="/template/list.wxml"/>
+<view class='container page-padding-bottom'>
+  <!-- 话题详情 -->
+  <view class='section-content'>
+    <template is="template-comment-cells" data='{{media:""}}'></template>
+  </view>
+
+  <!-- 分割线 -->
+  <view class='hr-20'></view>
+
+  <!-- 评论 -->
+  <view class='section-comment'>
+
+    <!-- 评论-列表 -->
+    <view class='comment'>
+      <template is="template-comment-cells" data='{{media:"",reply:"1"}}'></template>
+      <template is="template-comment-cells" data='{{media:"",reply:"1"}}'></template>
+      <template is="template-comment-cells" data='{{media:"",reply:"1"}}'></template>
+    </view>
+
+  </view>
+
+  <!-- 回复 -->
+  <view class='section-reply {{input?"active":""}}'>
+    <input placeholder='请说点什么吧~' adjust-position='ture' placeholder-class='placeholder'></input>
+    <view class='btn'>回复</view>
+  </view>
+</view>

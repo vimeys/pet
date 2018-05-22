@@ -17,9 +17,9 @@
         选择爱宠
       </view>
       <view class='zan-cell__bd'>
-        <picker bindchange="bindPickerChange" value="{{index}}" range="{{pet}}">
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{pet}}" range-key="name">
           <view class="picker">
-            {{pet_kind}}
+            {{pet[index].name}}
           </view>
         </picker>
       </view>
@@ -32,7 +32,7 @@
       <view class='zan-cell__bd'>
       </view>
       <view class='zan-cell__ft'>
-        <switch checked bindchange="switch1Change" color="#fee632" />
+        <switch checked bindchange="switch1Change" color="#fee632" bindchange="switchChange"/>
       </view>
     </view>
 
@@ -66,7 +66,7 @@
   <!-- 话题 -->
   <view class='section-gambit {{nav==1?"active":""}}'>
     <view class='textarea-wrap'>
-      <textarea placeholder-class='placeholder' placeholder='说点什么呢~'></textarea>
+      <textarea placeholder-class='placeholder' placeholder='说点什么呢~' bindblur="getText"></textarea>
     </view>
 
     <view class='zan-cell upload-wrap'>
@@ -74,23 +74,28 @@
         上传
       </view>
       <view class='zan-cell__bd'>
-        <block wx:for-items="{{files_news}}" wx:key="{{index}}">
+        <block wx:for-items="{{hotTalkImage}}" wx:key="{{index}}">
           <view class="upload__file" id="{{item}}">
             <image class="upload__img" src="{{item}}" mode="aspectFill" />
           </view>
         </block>
-        <view class="upload__file">
-          <image class="upload__img" src="{{test_img_hsq1}}" mode="aspectFill" />
-        </view>
+        <!--<view class="upload__file">-->
+          <!--<image class="upload__img" src="{{test_img_hsq1}}" mode="aspectFill" />-->
+        <!--</view>-->
         <view class="upload__input-box">
-          <image src='/images/icon/index-upload-add.png' bindtap="chooseImage_news"></image>
+          <image src='/images/icon/index-upload-add.png' bindtap="chooseUpload"></image>
           <!-- <view class="upload__input" bindtap="chooseImage"></view>  -->
         </view>
       </view>
 
     </view>
 
-    <view class='footer-btn'>
+    <view class='footer-btn' wx:if="{{nav==0}}" bindtap="uploadPic">
+      <view class='btn-100'>
+        上传
+      </view>
+    </view>
+    <view class='footer-btn' wx:else bindtap="uploadHot">
       <view class='btn-100'>
         上传
       </view>

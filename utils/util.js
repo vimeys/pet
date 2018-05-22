@@ -21,16 +21,20 @@ const formatNumber = n => {
 }
 /*搜索框聚焦时，搜索logo动画效果*/
 /*param:传入的动画效果*/
-const listenFocus = (that) => {
+
+function listenFocus(that){
   that.setData({
     animate: "animate"
   })
 }
-const listenBlur = (that) => {
+
+
+function listenBlur(that) {
   that.setData({
     animate: "animate1"
   })
 }
+
 
 //动态-点击显示图片
 function bind_news(e) {
@@ -64,5 +68,7 @@ module.exports = {
   bind_love,
   bind_news,
   bind_attention,
+  listenFocus,
+  listenBlur
 }
 

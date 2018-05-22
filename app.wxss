@@ -46,6 +46,11 @@
 }
 
 /* 修改小程序默认样式 star */
+/* 隐藏滚动条 */
+
+::-webkit-scrollbar {
+  display: none;
+}
 
 image {
   display: block;

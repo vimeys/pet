@@ -39,10 +39,10 @@ Page({
       this.arr=[]
       this.sun=1
       this.setData({
-          bgPic: app.globalData.bgPic
+          bgPic: app.globalData.edit
       })
        wx.getImageInfo({
-           src:app.globalData.bgPic,
+           src:app.globalData.edit,
            success:(res)=>{
              let width,height;
              width=res.width;
@@ -158,7 +158,28 @@ Page({
 
 
         pc.clearRect(0, 0, windowWidth, 300);
-        pc.drawImage(this.data.bgPic, 0, 0, this.data.width/2, this.data.height/2);
+        pc.drawImage(this.data.bgPic, 0, 0, this.data.width/2-15, this.data.height/2-15);
+        pc.translate(hat_center_x,hat_center_y);
+        pc.rotate(rotate * Math.PI / 180);
+        pc.drawImage("../../../images/" + currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
+        pc.draw();
+
+
+    },
+    draw1() {
+        let scale = this.scale;
+        let rotate = this.rotate;
+        let hat_center_x = this.hat_center_x;
+        let hat_center_y = this.hat_center_y;
+        let currentHatId = this.data.currentHatId;
+        const pc = wx.createCanvasContext('myCanvas');
+        const windowWidth = wx.getSystemInfoSync().windowWidth;
+
+        const hat_size = 100 * scale;
+
+
+        pc.clearRect(0, 0, windowWidth, 300);
+        pc.drawImage(this.data.bgPic, 0, 0, this.data.width/2-15, this.data.height/2-15);
         pc.translate(hat_center_x,hat_center_y);
         pc.rotate(rotate * Math.PI / 180);
         pc.drawImage("../../../images/" + currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
@@ -274,7 +295,7 @@ Page({
     },
     //保存
     save(){
-        this.draw()
+        this.draw1()
         const windowWidth = wx.getSystemInfoSync().windowWidth;
         wx.canvasToTempFilePath({
             // x: windowWidth / 2 - 150,
@@ -309,7 +330,7 @@ Page({
     up(sun,arr){
 
       if(this.sun==1){
-          this.draw()
+          this.draw1()
           // let windowWidth = wx.getSystemInfoSync().windowWidth;
       }else{
           this.draw2()

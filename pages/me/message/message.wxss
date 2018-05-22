@@ -1,0 +1,40 @@
+/* pages/me/message/message.wxss */
+.container::before{
+  background: #eaeaea
+}
+.section-content .zan-cell{
+  padding: 25rpx 0;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+.section-content .zan-cell::after{
+  left: 90rpx;
+}
+.section-content .zan-cell:last-of-type:after{
+  display: block
+}
+.section-content .zan-cell .zan-cell__hd{
+  width:70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+.section-content .zan-cell .zan-cell__bd{
+font-size: 26rpx;
+/* border-bottom: 1rpx solid #eaeaea */
+  
+}
+.section-content .zan-cell  .info{
+  margin-top: 5rpx;
+  margin-bottom: 20rpx;
+}
+.section-content .zan-cell  .text{
+  line-height: 1.7
+}
+.section-content .zan-cell .time,
+.section-content .zan-cell .text{
+color: #888;
+margin-left: 10rpx
+}

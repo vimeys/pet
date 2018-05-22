@@ -281,7 +281,7 @@ Component({
           width: cutW * 2,
           height: cutW * 2,
           destWidth: cutW * 2,
-          destHeight: 195 * 2,
+          destHeight: cutW * 2,
           canvasId: 'originCanvas',
           fileType: 'jpg',
           quality: 1,

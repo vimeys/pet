@@ -17,26 +17,29 @@
     </view>
     <view class="hr-1"></view>
     <view class="gather-list">
-        <view class="gather-li active">
-            <image src="../../../images/2.png"></image>
-            <text>桃心贴图</text>
-        </view>
-        <view class="gather-li">
-            <image src="../../../images/2.png"></image>
-            <text>桃心贴图</text>
-        </view>
-        <view class="gather-li">
-            <image src="../../../images/2.png"></image>
-            <text>桃心贴图</text>
-        </view>
-        <view class="gather-li">
-            <image src="../../../images/2.png"></image>
-            <text>桃心贴图</text>
-        </view>
-        <view class="gather-li">
-            <image src="../../../images/2.png"></image>
-            <text>桃心贴图</text>
-        </view>
+        <scroll-view scroll-x="true">
+            <view class="gather-li active">
+                <image src="../../../images/2.png"></image>
+                <text>桃心贴图</text>
+            </view>
+            <view class="gather-li">
+                <image src="../../../images/2.png"></image>
+                <text>桃心贴图</text>
+            </view>
+            <view class="gather-li">
+                <image src="../../../images/2.png"></image>
+                <text>桃心贴图</text>
+            </view>
+            <view class="gather-li">
+                <image src="../../../images/2.png"></image>
+                <text>桃心贴图</text>
+            </view>
+            <view class="gather-li">
+                <image src="../../../images/2.png"></image>
+                <text>桃心贴图</text>
+            </view>
+        </scroll-view>
+
 
         <view class="prev-btn" bind:tap="prevPic"><image src="../../../images/1.png" class="prev-btn-image"></image>预览</view>
     </view>
@@ -59,5 +62,5 @@
         <view class="footer-updata" bindtap="upload">发布</view>
         <view class="footer-save" bind:tap="save" >保存</view>
     </view>
-    <canvas  class="myCanvas" bindtap="prevPicHide" canvas-id="myCanvas" style="height:{{height}}rpx; width:{{width}}rpx; position: fixed;top:{{top}}px;left:{{left}}px"/>
+    <canvas  class="myCanvas" bindtap="prevPicHide" canvas-id="myCanvas" style="height:{{height+30}}rpx; width:{{width+30}}rpx; position: fixed;top:{{top}}px;left:{{left}}px"/>
 </view>

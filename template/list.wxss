@@ -27,17 +27,39 @@
 
 .template-comment-cells {
   border-bottom: 1rpx solid #eaeaea;
+  position: relative;
 }
 
 .template-comment-cells .text-wrap {
   font-size: 30rpx;
-  line-height: 50rpx;
   margin-top: -5rpx;
   margin-bottom: -5rpx;
+  box-sizing: border-box;
 }
 
-.template-comment-cells .text-wrap {
+.template-comment-cells .text-wrap view {
+  line-height: 50rpx;
+}
+
+/* 回复评论 */
+
+.template-comment-cells .text-wrap .reply {
+  font-size: 26rpx;
+  color: #888;
+  margin-top: 20rpx;
+  padding: 15rpx;
   box-sizing: border-box;
+  background: #f7f9fb;
+  line-height: 1.6;
+}
+
+.template-comment-cells .text-wrap .reply text {
+  color: #476eff;
+  margin: 0 10rpx;
+}
+
+.template-comment-cells .text-wrap .reply text:first-of-type {
+  margin-left: 0;
 }
 
 .template-comment-cells .img-wrap-2 {
@@ -66,7 +88,6 @@
 }
 
 /* ********************************动态****************************** */
-
 
 .template-news-item .item-content {
   position: relative;
@@ -105,16 +126,17 @@
   margin-right: 10rpx;
 }
 
-.template-news-item swiper{
+.template-news-item swiper {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 3;
-  background: rgba(0, 0, 0, 0.2)
+  background: rgba(0, 0, 0, 0.2);
 }
-.template-news-item  swiper .wx-swiper-dot{
+
+.template-news-item  swiper .wx-swiper-dot {
   display: none;
 }
 
@@ -133,7 +155,7 @@
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 0 0 20rpx 20rpx;
-  z-index: 5
+  z-index: 5;
 }
 
 .template-news-item .img-list view {
@@ -155,6 +177,19 @@
   justify-content: space-between;
   height: 90rpx;
   border-bottom: 1rpx solid #eaeaea;
+}
+.template-news-item .item-footer-relative{
+  position: relative;
+}
+.template-news-item .item-footer-relative button{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 80rpx;
+  /*background:;*/
+  opacity: 0;
+  background: red;
 }
 
 .template-news-item .item-footer image {
@@ -231,18 +266,17 @@
   color: #fd2c2c;
 }
 
-
 /* ************************************收货地址*************************** */
 
 /* 地址 */
 
-
-.template-address-list .address-content{
+.template-address-list .address-content {
   padding: 30rpx;
   border-bottom: 1rpx solid #eaeaea;
   font-size: 28rpx;
-  position: relative
+  position: relative;
 }
+
 .template-address-list .user-info {
   box-sizing: border-box;
   padding-left: 40rpx;
@@ -277,4 +311,150 @@
   font-size: 26rpx;
   color: #888;
   line-height: 40rpx;
+}
+
+/****************************搜索框样式*******************************/
+
+.template-search-wrap {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  margin-top: 30rpx;
+}
+
+.template-search-wrap .search-input-wrapper {
+  width: 100%;
+  height: 56rpx;
+  border-radius: 56rpx;
+  position: relative;
+  border: 1rpx solid #eaeaea;
+}
+
+.template-search-wrap .search-input-wrapper  image {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  left: 200rpx;
+  width: 24rpx;
+}
+
+.animate {
+  animation: moveLeft 0.4s linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes moveLeft {
+  0% {
+    left: 200rpx;
+  }
+
+  100% {
+    left: 20rpx;
+  }
+}
+
+.animate1 {
+  animation: moveLeft1 0.4s linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes moveLeft1 {
+  0% {
+    left: 10rpx;
+  }
+
+  100% {
+    left: 200rpx;
+  }
+}
+
+.template-search-wrap .search-input-wrapper input {
+  text-align: center;
+  color: #222;
+  font-size: 24rpx;
+}
+
+.template-search-wrap .search-placeholder {
+  font-size: 24rpx;
+  text-align: center;
+  color: #aeaeae;
+  line-height: 56rpx;
+}
+
+/* **********************************************登录****************************** */
+
+.template-popup-userinfo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+}
+
+.template-popup-userinfo .popup-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 888;
+}
+
+.template-popup-userinfo .popup-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 580rpx;
+   padding: 0 30rpx; 
+  background: #fff;
+  z-index: 900;
+  box-sizing: border-box;
+  font-size: 32rpx;
+}
+
+.template-popup-userinfo .popup-container .text-wrap {
+    padding: 30rpx 0;
+  text-align: center;
+  border-bottom: 1rpx solid #eaeaea;
+}
+
+.template-popup-userinfo .popup-container text {
+  line-height: 1.6;
+
+}
+
+.template-popup-userinfo .popup-container .btn-wrap{
+  display: flex;
+  padding: 30rpx 0;
+  justify-content:space-between;
+  align-items: center;
+}
+.template-popup-userinfo .popup-container .btn{
+  text-align: center;
+  font-size: 32rpx;
+  border: 1rpx solid transparent;
+  width: 250rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 5rpx;
+  box-sizing: border-box;
+}
+.template-popup-userinfo .popup-container .btn::after{
+  display: none;
+}
+.template-popup-userinfo .popup-container .btn-close{
+  border-color: #888;
+  color: #888;
+}
+.template-popup-userinfo .popup-container .btn-login{
+  font-size: 32rpx;
+  border-color: #F33F3F;
+  color: #fff;
+  background: #F33F3F;
+  margin: 0;
+  padding: 0;
 }

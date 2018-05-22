@@ -11,7 +11,8 @@
     </view>
     <view class='btn-wrap'>
       <!-- <view class='btn'>
-        点击进入
+        点击进入      
+        
       </view> -->
       <view class='text'>
         活动日期：<text>{{star_time}}</text>至<text>{{end_time}}</text>
