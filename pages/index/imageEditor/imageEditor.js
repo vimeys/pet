@@ -40,7 +40,6 @@ Page({
         showImgList:false,
     },
     onLoad(){
-        console.log(app.globalData);
         this.bg=[];
         this.ttBg=[];
         this.kBg=[];
@@ -94,29 +93,17 @@ Page({
                 success:(res)=>{
                     let width,height;
                     width=res.width;
-                    // height=res.height
                     let scale;
-                    // if(width>height){
                     scale=width/750;
-                    // app.globalData.width=Math.trunc(res.width/scale);
-                    // app.globalData.height=Math.trunc(res.height/scale);
                     array[i].XYZ.width=Math.trunc(res.width/scale);
                     array[i].XYZ.height=Math.trunc(res.height/scale);
                     that.setData({
                         drawArray:array
                     })
-                    // }else{
-                    //    scale=height/750;
-                    //       app.globalData.width=Math.trunc(res.width/scale)
-                    //       app.globalData.height=Math.trunc(res.height/scale);
-                    //   }
-
                 }
             });
         }
     },
-
-
     onReady(){
         this.hat_center_x=this.data.hatCenterX;
         this.hat_center_y=this.data.hatCenterY;
@@ -145,40 +132,23 @@ Page({
         obj.start_y=0;
         this.starObj=obj
     },
+
     touchStart(e){
-        console.log(e.target.id);
         if(e.target.id=="hat"){
             this.touch_target="hat";
         }else if(e.target.id=="handle"){
             this.touch_target="handle"
         }else{
-            this.touch_target="23"
+            this.touch_target=""
         };
-
         if(this.touch_target!=""){
             this.start_x=e.touches[0].clientX;
             this.start_y=e.touches[0].clientY;
         }
     },
-    touchEnd(e){
-        // this.hat_center_x=this.data.hatCenterX;
-        // this.hat_center_y=this.data.hatCenterY;
-        // this.cancel_center_x=this.data.cancelCenterX;
-        // this.cancel_center_y=this.data.cancelCenterY;
-        // this.handle_center_x=this.data.handleCenterX;
-        // this.handle_center_y=this.data.handleCenterY;
-        // }
-        this.touch_target="";
-        // this.scale=this.data.scale;
-        // this.rotate=this.data.rotate;
-    },
     touchMove(e){
-
-        console.log(e);
         var current_x=e.touches[0].clientX;
-        // var current_x=e.touches[0].pageX;
         var current_y=e.touches[0].clientY;
-        // var current_y=e.touches[0].pageY;
         var moved_x=current_x-this.start_x;
         var moved_y=current_y-this.start_y;
         if(this.touch_target=="hat"){
@@ -190,15 +160,12 @@ Page({
                 handleCenterX:this.data.handleCenterX+moved_x,
                 handleCenterY:this.data.handleCenterY+moved_y
             })
-
             this.hat_center_x=this.data.hatCenterX;
             this.hat_center_y=this.data.hatCenterY;
             this.cancel_center_x=this.data.cancelCenterX;
             this.cancel_center_y=this.data.cancelCenterY;
             this.handle_center_x=this.data.handleCenterX;
             this.handle_center_y=this.data.handleCenterY;
-            // }
-            // this.touch_target="";
             this.scale=this.data.scale;
             this.rotate=this.data.rotate;
             let arr=this.data.drawArray;
@@ -236,8 +203,6 @@ Page({
             this.cancel_center_y=this.data.cancelCenterY;
             this.handle_center_x=this.data.handleCenterX;
             this.handle_center_y=this.data.handleCenterY;
-            // }
-            // this.touch_target="";
             this.scale=this.data.scale;
             this.rotate=this.data.rotate;
             let arr=this.data.drawArray;
@@ -251,19 +216,16 @@ Page({
         }
         this.start_x=current_x;
         this.start_y=current_y;
-
-
+    },
+    touchEnd(e){
+        this.touch_target="";
     },
 
-
     chooseImg(e){
-        console.log(e);
         this.setData({
             currentHatId:e.target.dataset.hatId,
             chartlet:true,
             showImageList:!this.data.showImageList,
-
-
         })
     },
     // 弹出选择贴图
@@ -277,21 +239,20 @@ Page({
         })
     },
     // 去确认页面
-    combinePic(){
-        app.globalData.scale=this.scale;
-        app.globalData.rotate = this.rotate;
-        app.globalData.hat_center_x = this.hat_center_x;
-        app.globalData.hat_center_y = this.hat_center_y-150;
-        app.globalData.hat_center_z = this.hat_center_y;
-        app.globalData.currentHatId = this.data.currentHatId;
-        wx.navigateTo({
-            url: '../combine/combine',
-        })
-    },
+    // combinePic(){
+    //     app.globalData.scale=this.scale;
+    //     app.globalData.rotate = this.rotate;
+    //     app.globalData.hat_center_x = this.hat_center_x;
+    //     app.globalData.hat_center_y = this.hat_center_y-150;
+    //     app.globalData.hat_center_z = this.hat_center_y;
+    //     app.globalData.currentHatId = this.data.currentHatId;
+    //     wx.navigateTo({
+    //         url: '../combine/combine',
+    //     })
+    // },
 
     // 选择编辑图片
     chooseImage(e){
-        console.log(e);
         let id=e.currentTarget.dataset.id;
         let height=this.data.drawArray[id].XYZ.height
         this.setData({
@@ -300,20 +261,12 @@ Page({
             chartlet:false,
             height:height
         });
-        // this.hat_center_x=this.starObj.hatCenterX;
-        // this.hat_center_y=this.starObj.hatCenterY;
-        // this.cancel_center_x=this.starObj.cancelCenterX;
-        // this.cancel_center_y=this.starObj.cancelCenterY;
-        // this.handle_center_x=this.starObj.handleCenterX;
         this.scale=this.starObj.scale;
-
         this.rotate=this.starObj.rotate;
         this.touch_target="";
-
         this.start_x=0;
         this.start_y=0;
         // this.handle_center_y=this.starObj.handleCenterY;
-        console.log(this.starObj);
         this.setData({
             hatCenterX:this.starObj.hat_center_x,
             hatCenterY:this.starObj.hat_center_y,
@@ -346,36 +299,28 @@ Page({
         })
     },
     // 保存到手机世界
-    save(){
-        // this.setData({
-        //     top:0,
-        //     left:0
-        // })
-        this.draw()
-        wx.canvasToTempFilePath({
-            canvasId:'myCanvas',
-            success:(res)=>{
-                console.log(res.tempFilePath);
-                wx.saveImageToPhotosAlbum({
-                    filePath:res.tempFilePath,
-                    success:()=>{
-
-                    }
-                })
-            }
-        })
-    },
+    // save(){
+    //     this.draw()
+    //     wx.canvasToTempFilePath({
+    //         canvasId:'myCanvas',
+    //         success:(res)=>{
+    //             wx.saveImageToPhotosAlbum({
+    //                 filePath:res.tempFilePath,
+    //                 success:()=>{
+    //
+    //                 }
+    //             })
+    //         }
+    //     })
+    // },
     // 绘制贴图
     draw() {
         let array=this.data.drawArray
-        let user=util.storage('user')
         app.globalData.scale=this.scale;
         app.globalData.rotate = this.rotate;
         app.globalData.hat_center_x = this.hat_center_x;
-        app.globalData.hat_center_y = this.hat_center_y-72;
-        // app.globalData.hat_center_z = this.hat_center_y;
+        app.globalData.hat_center_y = this.hat_center_y;
         app.globalData.currentHatId = this.data.currentHatId;
-
         let scale = app.globalData.scale;
         let rotate = app.globalData.rotate;
         let hat_center_x = app.globalData.hat_center_x;
@@ -385,10 +330,8 @@ Page({
         const windowWidth = wx.getSystemInfoSync().windowWidth;
         const windowHeight =wx.getSystemInfoSync().windowHeight;
         const hat_size = 100 * scale;
-
-
         pc.clearRect(0, 0, windowWidth, 300);
-        pc.drawImage(this.data.bgPic,0,0,array[this.data.imageId].XYZ.width/2,array[this.data.imageId].XYZ.height/2);
+        pc.drawImage(this.data.bgPic,0,0,array[this.data.imageId].XYZ.width/2-15,array[this.data.imageId].XYZ.height/2-15);
         pc.translate(hat_center_x,hat_center_y);
         pc.rotate(rotate * Math.PI / 180);
         if(array[this.data.imageId].hasChartlet){
@@ -413,108 +356,84 @@ Page({
 
     },
     // 带背景贴图绘制及上传
-    drawUp(drawArray,drawsuccess) {
-        let that=this;
-        let drawArray1=drawArray;
-        let length=drawArray.length;
-        let data=drawsuccess;
-        let i=data.i?data.i:0,//当前上传的哪张图片
-            success=data.success?data.success:0,//上传成功的个数
-            fail=data.fail?data.fail:0;
+    drawUp(drawArray, drawsuccess) {
+        let that = this;
+        let drawArray1 = drawArray;
+        let length = drawArray.length;
+        let data = drawsuccess;
+        let i = data.i ? data.i : 0,//当前上传的哪张图片
+            success = data.success ? data.success : 0,//上传成功的个数
+            fail = data.fail ? data.fail : 0;
         let scale = drawArray1[i].XYZ.scale;
         let rotate = drawArray1[i].XYZ.rotate;
         let hat_center_x = drawArray1[i].XYZ.hat_center_x;
         let hat_center_y = drawArray1[i].XYZ.hat_center_y;
-        // let currentHatId = app.globalData.currentHatId;
         let currentHatId = drawArray1[i].chartletSrc;
         const pc = wx.createCanvasContext('myCanvas');
         const windowWidth = wx.getSystemInfoSync().windowWidth;
         const hat_size = 100 * scale;
-        // this.setData({
-        //     width:app.globalData.width,
-        //     height:app.globalData.height,
-        // })
         pc.clearRect(0, 0, windowWidth, 300);
-        // pc.drawImage(this.data.bgPics[i],0,0,app.globalData.width/2,app.globalData.height/2);
-        pc.drawImage(this.data.bgPics[i],0,0,drawArray1[i].XYZ.width/2,drawArray1[i].XYZ.height/2);
-        // if(drawArray1[i].hasChartlet){
-            pc.translate(hat_center_x,hat_center_y);
-            pc.rotate(rotate * Math.PI / 180);
-            pc.drawImage("../../../images/" + currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
-            // pc.draw()
-        // }
-        // console.log(i);
-        // console.log(drawArray1[i].hasChartlet);
-        // debugger
-        drawArray1[i].hasChartlet?pc.draw(false,()=>{
-            console.log(123);
+        pc.drawImage(this.data.bgPics[i], 0, 0, drawArray1[i].XYZ.width / 2, drawArray1[i].XYZ.height / 2);
+        pc.translate(hat_center_x, hat_center_y);
+        pc.rotate(rotate * Math.PI / 180);
+        pc.drawImage("../../../images/" + currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
+        drawArray1[i].hasChartlet ? pc.draw(false, () => {
             wx.canvasToTempFilePath({
-                canvasId:'myCanvas',
-                success:(res)=>{
-                    console.log(res.tempFilePath);
+                canvasId: 'myCanvas',
+                success: (res) => {
                     wx.uploadFile({
                         url: util.url.url.upfile,
                         filePath: res.tempFilePath,
-                        formData:{
-                            user_id:this.user.uid,
-                            app:123,
-                            filetype:'image'
+                        formData: {
+                            user_id: this.user.uid,
+                            app: 123,
+                            filetype: 'image'
                         },
                         name: 'file',
-                        success:resBg=>{
-                            console.log(resBg);
+                        success: resBg => {
                             this.ttBg.push(resBg.data)
-                            // console.log(upUrl+JSON.parse(resA.data).data.img_url);
                             success++;
-                            // console.log(res.tempFilePath);
                         },
-                        fail(res){
+                        fail(res) {
                             fail++
                         },
-                        complete(){
+                        complete() {
                             i++;
-                            // console.log(res.tempFilePath);
-                            if(i==length){
-                                console.log(that.ttBg,'ttbg');
+                            if (i == length) {
                                 that.setData({
-                                    drawsuccess:{}
+                                    drawsuccess: {}
                                 })
-                                that.drawUpK(that.data.drawArray,that.data.drawsuccess)
-                            }else{
-                                data.i=i;
-                                data.success=success;
-                                data.fail=fail;
-                                that.drawUp(drawArray1,data)
+                                that.drawUpK(that.data.drawArray, that.data.drawsuccess)
+                            } else {
+                                data.i = i;
+                                data.success = success;
+                                data.fail = fail;
+                                that.drawUp(drawArray1, data)
                             }
                         }
                     })
                 },
 
             })
-        }):test1(that);
+        }) : test1(that);
+
         // 没有背景添加空值接口
-            function test1 (that) {
-                console.log(234);
-                success++
-                i++
-                if(i==length){
-                    that.setData({
-                        drawsuccess:{}
-                    })
-                    console.log(that.ttBg,'ttbg');
-                    that.drawUpK(that.data.drawArray,that.data.drawsuccess)
-                    // that.drawUpK(that.data.drawArray,that.data.drawsuccess)
-                }else{
-                    that.ttBg.push('');
-                    data.i=i;
-                    data.success=success;
-                    data.fail=fail;
-                    that.drawUp(drawArray1,data)
-                }
-            };
-        // function log(){
-        //     console.log();
-        // }
+        function test1(that) {
+            success++
+            i++
+            if (i == length) {
+                that.setData({
+                    drawsuccess: {}
+                })
+                that.drawUpK(that.data.drawArray, that.data.drawsuccess)
+            } else {
+                that.ttBg.push('');
+                data.i = i;
+                data.success = success;
+                data.fail = fail;
+                that.drawUp(drawArray1, data)
+            }
+        }
 
     },
     //空贴图
@@ -523,7 +442,6 @@ Page({
         let drawArray1=drawArray;
         let length=drawArray.length;
         let data=drawsuccess;
-        console.log(data);
         let i=data.i?data.i:0,//当前上传的哪张图片
             success=data.success?data.success:0,//上传成功的个数
             fail=data.fail?data.fail:0;
@@ -550,13 +468,10 @@ Page({
             pc.drawImage("../../../images/" + currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
             // pc.draw()
         }
-        console.log(i);
-        console.log(!drawArray1[i].hasChartlet);
         drawArray1[i].hasChartlet?pc.draw(false,()=>{
             wx.canvasToTempFilePath({
                 canvasId:'myCanvas',
                 success:(res)=>{
-                    console.log(res.tempFilePath);
                     wx.uploadFile({
                         url: util.url.url.upfile,
                         filePath: res.tempFilePath,
@@ -567,21 +482,15 @@ Page({
                         },
                         name: 'file',
                         success:resBg=>{
-                            // console.log(resBg);
                             this.kBg.push(resBg.data)
-                            // console.log(upUrl+JSON.parse(resA.data).data.img_url);
                             success++;
-                            // console.log(res.tempFilePath);
                         },
                         fail(res){
                             fail++
                         },
                         complete(){
-                            console.log(i, length);
                             i++;
-                            // console.log(res.tempFilePath);
                             if(i==length){
-                                console.log(that.kBg,'kbg');
                                 that.setData({
                                     drawsuccess:{}
                                 })
@@ -607,12 +516,10 @@ Page({
             success++
             i++
             if(i==length){
-                console.log(that.kBg,'kbg');
                 that.setData({
                     drawsuccess:{}
                 })
                 that.addttBg()
-                // that.drawUpK(that.data.drawArray,that.data.drawsuccess)
             }else{
                 that.kBg.push('')
                 data.i=i;
@@ -644,20 +551,15 @@ Page({
                 filetype:'image'
             },
             success:res=>{
-                // console.log(res);
                 this.bg.push(JSON.parse(res.data).data.id);
-                // console.log('http://172.200.1.14:1080'+JSON.parse(res.data).data.url);
                 success++;
-                // console.log(res.tempFilePath);
             },
             fail(res){
                 fail++
             },
             complete(){
                 i++;
-                // console.log(res.tempFilePath);
                 if(i==length){
-                    console.log(that.bg,'bg');
                     that.setData({
                             drawsuccess:{}
                         })
@@ -671,7 +573,6 @@ Page({
                 }
             }
         })
-        // ajax.promise(url.url.)
     },
 
     // 上传背景集合
@@ -681,10 +582,7 @@ Page({
             obj.user_id=7
             obj.is_edit=1
             obj.img_id=this.bg
-            // obj.img_id=[{},'2','3']
-        console.log(obj);
         util.promiseSync(util.url.url.addBg,obj).then((json)=>{
-            console.log(json);
         })
     },
     //上传合成图片
@@ -712,8 +610,6 @@ Page({
             }
         })
     },
-
-
     // 提交
     updata(e){
         let a=this.data.bgPics,

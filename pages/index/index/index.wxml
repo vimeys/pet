@@ -28,7 +28,6 @@
         <view class="swiper-dot {{index == swiperCurrent ? ' active' : ''}}"></view>
       </block>
     </view>
-
   </view>
 
   <!-- 热门话题 -->
@@ -96,12 +95,12 @@
     <view class='section--title'>
       动态
     </view>
-    <view class='news'>
-      <!--<template is='template-news-item' data='{{filePath:filePath,media:"img",news:news,news_img:news_img,news_active:news_active,love:love,news_chartlet:news_chartlet}}'></template>-->
-      <template is='template-news-item' data='{{filePath:filePath,petData:petData}}'></template>
-      <template is='template-news-item' data='{{media:"video"}}'></template>
-      <template is='template-list-more'></template>
-    </view>
+    <status petData="{{petData}}"></status>
+    <!--<view class='news'>-->
+      <!--<template is='template-news-item' data='{{filePath:filePath,petData:petData}}'></template>-->
+      <!--<template is='template-news-item' data='{{media:"video"}}'></template>-->
+      <!--<template is='template-list-more'></template>-->
+    <!--</view>-->
   </view>
 
   <!-- 上传 -->

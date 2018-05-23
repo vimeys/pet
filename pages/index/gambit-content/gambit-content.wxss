@@ -69,9 +69,11 @@
 .section-comment .comment {
   padding-bottom: 30rpx;
 }
+
 .template-comment-cells .text-wrap {
   padding-left: 90rpx;
 }
+
 /* 回复 */
 
 .section-reply {
@@ -90,9 +92,11 @@
   line-height: 70rpx;
   font-size: 28rpx;
 }
-.section-reply.active{
+
+.section-reply.active {
   position: relative;
 }
+
 .section-reply input {
   width: 580rpx;
   height: 70rpx;
@@ -115,8 +119,48 @@
   border-radius: 35rpx;
 }
 
-
 /* 去掉关注 */
-.publish-info .zan-cell__ft .btn{
+
+.publish-info .zan-cell__ft .btn {
   display: none;
+}
+
+.section-reply input {
+  width: 580rpx;
+  height: 90rpx;
+  min-height: 0;
+  border-radius: 45rpx;
+  border: 1rpx solid #eaeaea;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.section-reply {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  padding: 15rpx 20rpx;
+  border-top: 1rpx solid #eaeaea;
+  box-sizing: border-box;
+  height: 120rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  line-height: 70rpx;
+  font-size: 28rpx;
+}
+.section-reply .placeholder {
+  color: #888;
+}
+
+.section-reply .btn {
+  width: 120rpx;
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  background: #fee632;
+  border-radius: 45rpx;
 }

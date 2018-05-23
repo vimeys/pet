@@ -183,6 +183,12 @@
 					"name": "商品详情",
 					"pathName": "pages/index/upload/upload",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/index/gambit-list/gambit-list",
+					"query": ""
 				}
 			]
 		}

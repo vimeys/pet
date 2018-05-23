@@ -1,5 +1,5 @@
 <!--pages/index/gambit-content/gambit-content.wxml-->
-<import src="/template/list.wxml"/>
+<import src="/template/list.wxml" />
 <view class='container'>
   <!-- 话题详情 -->
   <view class='section-content'>
@@ -56,8 +56,9 @@
   </view>
 
   <!-- 回复 -->
-  <view class='section-reply {{input?"active":""}}'>
-    <input placeholder='请说点什么吧~' adjust-position='ture' placeholder-class='placeholder'></input>
+  <view class='section-reply'>
+    <input placeholder='请说点什么吧~' cursor-spacing='60' adjust-position='ture' placeholder-class='placeholder'></input>
     <view class='btn'>回复</view>
   </view>
+
 </view>

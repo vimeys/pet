@@ -7,11 +7,11 @@ const formatTime = (date, date_type) => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
   if(date_type=="date"){
-    return [year, month, day].map(formatNumber).join('/')
+    return [year, month, day].map(formatNumber).join('-')
   }else if(date_type=="time"){
     return [hour, minute, second].map(formatNumber).join(':')
   }else{
-    return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
   }
 }
 

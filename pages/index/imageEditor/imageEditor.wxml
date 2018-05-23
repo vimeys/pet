@@ -22,12 +22,37 @@
             <image src="{{item}}" class="thumbnail" data-id="{{index}}" bindtap="chooseImage" ></image>
         </block>
     </view>
-    <button bind:tap="prevPic">预览</button>
-    <button bind:tap="goCopper">剪切</button>
-    <button bind:tap="combinePic">确定</button>
-    <button bind:tap="save">保存</button>
-    <button bind:tap="updata">提交</button>
-    <button bind:tap="showImageList">选择贴图</button>
+    <view class="gather-list">
+        <!--<scroll-view scroll-x="true" class="scrollView">-->
+            <view class="gather-li active" bind:tap="showImageList">
+                <image src="../../../images/2.png"></image>
+                <text>桃心贴图</text>
+            </view>
+            <view class="gather-li">
+                <image src="../../../images/2.png"></image>
+                <text>桃心贴图</text>
+            </view>
+            <view class="gather-li">
+                <image src="../../../images/2.png"></image>
+                <text>桃心贴图</text>
+            </view>
+            <view class="gather-li">
+                <image src="../../../images/2.png"></image>
+                <text>桃心贴图</text>
+            </view>
+            <view class="gather-li">
+                <image src="../../../images/2.png"></image>
+                <text>桃心贴图</text>
+            </view>
+        <!--</scroll-view>-->
+        <view class="prev-btn" bind:tap="prevPic"><image src="../../../images/1.png" class="prev-btn-image"></image>预览</view>
+    </view>
+    <!--<button bind:tap="prevPic">预览</button>-->
+    <!--<button bind:tap="goCopper">剪切</button>-->
+    <!--<button bind:tap="combinePic">确定</button>-->
+    <!--<button bind:tap="save">保存</button>-->
+    <view bind:tap="updata" class="upLoad">发布</view>
+    <!--<button bind:tap="showImageList">选择贴图</button>-->
 
 
     <scroll-view class="scrollView" scroll-x="true"  wx:if="{{showImageList}}">

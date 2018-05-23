@@ -20,14 +20,14 @@ url.followList    =Url+'index/getFollowPetDynamic';//用户的关注列表
 
 //上传页面
 url.petNameList   =Url+'pet_info/getUserPetLIst';//宠物列表
-
+url.upHotTalk     =Url+'Graffiti/addTopic';//上传话题详情
 
 
 //涂鸦
 url.chartletList  =Url+'graffiti/getChartletList';//获取涂鸦列表
 
 // 话题
-url.hotTalk       =Url+'index/topicList';//热门话题
+url.hotTalk       =Url+'index/topicList';//热门话题列表
 
 
 
@@ -36,9 +36,8 @@ url.hotTalk       =Url+'index/topicList';//热门话题
 
 //邓琪睿
 url.saveUserInfo = Url + 'user/saveUserInfo';//保存用户信息
-
-
-
+url.pet_classify = Url + 'graffiti/getPetCatList';//获取宠物分类
+url.add_comment = Url + 'comment/add';//增加评论
 //end
 
 

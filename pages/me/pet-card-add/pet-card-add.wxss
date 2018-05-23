@@ -138,3 +138,9 @@ picker {
   width: 100%;
   z-index: 2;
 }
+button{
+  border-radius: 0;
+}
+button::after{
+  display: none;
+}

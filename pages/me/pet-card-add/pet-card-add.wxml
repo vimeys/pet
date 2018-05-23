@@ -1,32 +1,34 @@
 <!--pages/me/pet-card-add/pet-card-add.wxml-->
 <view class='container page-padding-bottom'>
   <view class='section-color'></view>
-  <form>
+  <form bindsubmit='add_pet_card'>
     <view class='zan-cells'>
       <!-- 头像 -->
       <view class='zan-cell header-wrap'>
         <view class='img-wrap-000'>
           <view class='img-wrap-255'>
-            <image src='{{header_img}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
+            <image name='pet_img' src='{{header_img}}' mode='aspectFill' class='header-img' mode='aspectFill' bindtap='chooseImage_header'></image>
           </view>
         </view>
       </view>
 
-      <view class='zan-cell classify-wrap'>
+      <view class='zan-cell picker-wrap'>
         <view class='zan-cell__hd'>
           爱宠分类
         </view>
         <view class='zan-cell__bd'>
-          <view class='active'>猫咪</view>
-          <view>狗狗</view>
+          <picker name='cat_id' mode="selector" value='{{index}}' range='{{pet_classify}}' range-key='cat_name' bindchange="bind_pet_classify">
+            {{pet_classify[index].cat_name}}
+          </picker>
         </view>
+        <image class='icon' src='/images/icon/index-upload-down.png' mode='widthFix'></image>
       </view>
       <view class='zan-cell name-wrap'>
         <view class='zan-cell__hd'>
           宠物名称
         </view>
         <view class='zan-cell__bd'>
-          <input class='' placeholder='请输入宠物名称' placeholder-class='placeholder'></input>
+          <input name='name' class='' placeholder='请输入宠物名称' placeholder-class='placeholder'></input>
         </view>
       </view>
       <view class='zan-cell sex-wrap'>
@@ -34,14 +36,14 @@
           性别
         </view>
         <view class='zan-cell__bd'>
-          <radio-group>
+          <radio-group name='sex'>
             <label class="radio">
-              <radio value="" checked='checked' color='#FEE632' />
+              <radio value="0" checked='checked' color='#FEE632' />
               <image src='/images/icon/me-index-petinfo-sex1.png' mode='widthFix'></image>
               <text>男</text>
             </label>
             <label class="radio">
-              <radio value="" color='#FEE632' />
+              <radio value="1" color='#FEE632' />
               <image src='/images/icon/me-index-petinfo-sex2.png' mode='widthFix'></image>
               <text>女</text>
             </label>
@@ -53,7 +55,7 @@
           生日
         </view>
         <view class='zan-cell__bd'>
-          <picker mode="date" value="{{date}}" end="{{end_date}}" bindchange="bind_birthday">
+          <picker name='birthday' mode="date" value="{{date}}" end="{{end_date}}" bindchange="bind_birthday">
             {{birthday_date}}
           </picker>
         </view>
@@ -64,7 +66,7 @@
           回家日期
         </view>
         <view class='zan-cell__bd'>
-          <picker mode="date" value="{{date}}" bindchange="bind_gohome">
+          <picker name='buy_time' mode="date" value="{{date}}" bindchange="bind_gohome">
             {{gohome_date}}
           </picker>
         </view>
@@ -75,7 +77,7 @@
           体重
         </view>
         <view class='zan-cell__bd'>
-          <input class='' placeholder='请输入宠物体重' placeholder-class='placeholder'></input>
+          <input name='weight' class='' placeholder='请输入宠物体重' placeholder-class='placeholder'></input>
         </view>
       </view>
       <view class='zan-cell sex-wrap'>
@@ -83,13 +85,13 @@
           是否绝育
         </view>
         <view class='zan-cell__bd'>
-          <radio-group>
+          <radio-group name='is_sterilization'>
             <label class="radio">
-              <radio value="" checked='checked' color='#FEE632' />
+              <radio value="0" checked='checked' color='#FEE632' />
               <text>已绝育</text>
             </label>
             <label class="radio">
-              <radio value="" color='#FEE632' />
+              <radio value="1" color='#FEE632' />
               <text>未绝育</text>
             </label>
           </radio-group>
@@ -100,15 +102,15 @@
           爱宠概述
         </view>
         <view class='zan-cell__bd'>
-          <textarea placeholder='请用一句话概述爱宠' placeholder-class='placeholder'></textarea>
+          <textarea name='describe' placeholder='请用一句话概述爱宠' placeholder-class='placeholder'></textarea>
         </view>
       </view>
     </view>
 
     <view class='section-footer'>
-      <view class='btn-100'>
+      <button formType='submit' class='btn-100'>
         生成我的宠物卡
-      </view>
+      </button>
     </view>
   </form>
 </view>

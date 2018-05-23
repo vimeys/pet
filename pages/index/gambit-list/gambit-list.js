@@ -1,5 +1,6 @@
 // pages/index/gambit/gambit.js
-const util = require("../../../utils/util.js");
+const util = require("../../../utils/totalUtil.js");
+const utils = require("../../../utils/util.js");
 var app = getApp()
 Page({
 
@@ -44,16 +45,17 @@ Page({
   //   listenBlur: util.listenBlur,
   // },
   listenFocus: function () {
-    util.listenFocus(this)
+    utils.listenFocus(this)
   },
   listenBlur: function () {
-    util.listenBlur(this)
+    utils.listenBlur(this)
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getHotTalkList(1)
     // this.listenFocus = util.listenFocus(this);
     // this.listenBlur = util.listenBlur(this);
     // console.log(app.filePath);
@@ -63,6 +65,15 @@ Page({
     // })
   },
 
+
+
+    getHotTalkList(size){
+      util.promiseSync(util.url.url.hotTalk,{page:size}).then(json=>{
+        if(json.status==1){
+
+        }
+      })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

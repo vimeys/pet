@@ -22,6 +22,7 @@ Page({
         index: 0,//宠物列表的下标
         is_edit: true,//是否允许编辑
         hotTalkImage: [],
+        obj:{}
     },
     // 获取上午列表
     //TODO
@@ -127,6 +128,7 @@ Page({
         // console.log(util.url);
         console.log(util.storage('user'));
         this.getPetList()
+        this.filePath=[]
     },
 
     // 获取话题内容
@@ -154,12 +156,73 @@ Page({
     },
     // 上传话题图片
     uploadHot() {
-        if(this.value){
 
-        }else{
-
+        if (this.value) {
+            util.showLoading('上传中...')
+            this.upfile(this.data.hotTalkImage,this.data.obj)
+        } else {
+            console.log("请输入文字");
         }
+
+
+    }
+    ,
+    // 上传图片
+    upfile(arr,obj){
+        let that=this
+        let user=util.storage('userInfo')
+        let length=arr.length
+        let filePath=[]
+        let i=obj.i=obj.i||0,
+            succ=obj.success=obj.success||0,
+            fail=obj.fail=obj.fail||0
+        wx.uploadFile({
+            url: util.url.url.upfile,
+            filePath: this.data.hotTalkImage[i],
+            name: 'file',
+            formData:{
+              user:  user.id,
+                app:'petapi',
+                filetype:'image'
+            },
+            success:res=>{
+                // i++
+                succ++
+                let obj={}
+                obj.url=JSON.parse(res.data).data.img_url
+                obj.name=JSON.parse(res.data).data.name
+                this.filePath.push(obj)
+
+            },
+            fail:res=>{
+                fail++
+            },
+            complete:res=>{
+                i++
+                if(i==length){
+                    that.up()
+                }else{
+                    obj.i=i;
+                    obj.success=succ;
+                    obj.fail=fail;
+                    that.upfile(arr,obj)
+                }
+            }
+        })
     },
+    // 上传话题接口
+   up(){
+        console.log(this);
+        let user=util.storage('userInfo')
+        util.promiseSync(util.url.url.upHotTalk,{user_id:user.id,title:'',content:this.value,img:this.filePath}).then((json)=>{
+            if(json.status==1){
+                wx.hideLoading();
+                util.success('上传成功')
+            }
+        })
+
+    },
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

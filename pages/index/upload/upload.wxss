@@ -24,6 +24,8 @@
 
 .section-nav-upload .btn.active {
   background: #fee632;
+  /*background: #3c763d;*/
+
 }
 
 .section-news,

@@ -66,3 +66,61 @@ button{
     width: 100%;
     /*height: 100%;*/
 }
+
+/*贴图集*/
+.gather-list{
+    width: 100%;
+    height: 100rpx;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+}
+.gather-li{
+    width: 125rpx;
+    height: 100%;
+    color:#888888;
+    font-size: 22rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.gather-li image{
+    opacity: .8;
+    width: 40rpx;
+    height: 40rpx;
+}
+.active{
+    color:#222;
+    background: #f2f2f2;
+
+}
+.active image{
+    opacity: 1;
+}
+.prev-btn{
+    width: 125rpx;
+    height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    color:#222;
+    justify-content: center;
+    align-items: center;
+    font-size: 26rpx;
+}
+.prev-btn image{
+    width: 26rpx;
+    height: 26rpx;
+}
+
+
+/*发布按钮*/
+.upLoad {
+    height: 98 rpx;
+    width: 100%;
+    line-height: 98rpx;
+    font-size: 28rpx;
+    color: #222;
+    text-align: center;
+    background: #FEE632;
+}
