@@ -1,0 +1,189 @@
+/* components/address/index.wxss */
+.hr{
+  width:100%;
+  height:20rpx;
+  background:#f5f5f5;
+}
+.flield {
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  padding-left: 40rpx;
+  padding-right: 30rpx;
+}
+.oper-left .zan-icon-checked{
+  color:#fd2c2c;
+}
+.margin-top {
+  margin-top: 10rpx;
+}
+
+.margin-top2 {
+  margin-top: 20rpx;
+}
+
+.flield label {
+  color: #333;
+  font-size: 30rpx;
+  min-width: 117rpx;
+  margin-right: 30rpx;
+}
+
+.flield input {
+  font-size: 30rpx;
+  height: 100%;
+  width: 499rpx;
+}
+
+.zan-btn {
+  background-color: #f56511;
+  border-radius: 10rpx;
+  width: 710rpx;
+  margin: 0 auto;
+  margin-top: 160rpx;
+  color: #fff;
+}
+
+.zan-btn::after {
+  content: "";
+  border-color: #f56511;
+}
+
+.region text {
+  color: #000;
+  font-size: 30rpx;
+}
+
+.region text:nth-last-child(1) {
+  margin-left: 12rpx;
+}
+.address-list-wrapper{
+  padding-bottom: 130rpx;
+}
+/*     list       */
+.address-lists {
+  /* margin-top: 10rpx; */
+  background-color: #fff;
+  padding: 0 40rpx;
+  padding-top: 20rpx;
+}
+
+.name {
+  font-size: 36rpx;
+  margin-right: 36rpx;
+  line-height: normal;
+}
+
+.phone {
+  font-size: 36rpx;
+}
+
+.address-area {
+  font-size: 30rpx;
+  color: #333;
+  line-height: 44rpx;
+  margin-top: 20rpx;
+  margin-bottom: 0rpx;
+}
+
+.address-area text {
+  margin-right: 15rpx;
+}
+
+.address-oper {
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.address-oper view {
+  color: #ccc;
+}
+
+.address-oper text {
+  color: #999;
+  font-size: 30rpx;
+  margin-left: 10rpx;
+}
+
+.address-oper .oper-left text {
+  margin-left: 20rpx;
+}
+
+.oper-right {
+  display: flex;
+}
+
+.oper-right .del {
+  margin-right: 40rpx;
+}
+.add-wrapper{
+  height:120rpx;
+  width:100%;
+  background:#fff;
+  position: fixed;
+  right: 0rpx;
+  bottom:0rpx;
+  padding:20rpx 20rpx 0 20rpx;
+  box-sizing: border-box;
+}
+.add-address {
+  width:100%;
+  height: 90rpx;
+  background-color: #fd2c2c;
+  color: #fff;
+  font-size: 36rpx;
+  box-shadow: 6rpx 20rpx 18rpx rgba(128, 47, 0, 0.3);
+  border-radius: 45rpx;
+  text-align: center;
+  line-height: 90rpx;
+}
+.btn-save{
+  background:#fd2c2c;
+}
+
+@font-face {
+  font-family: zanui-weapp-icon;
+  src: url(https://b.yzcdn.cn/zanui-weapp/zanui-weapp-icon-4381aded05.eot);
+  src: url(https://b.yzcdn.cn/zanui-weapp/zanui-weapp-icon-4381aded05.eot?#iefix) format('embedded-opentype'),
+         url(https://b.yzcdn.cn/zanui-weapp/zanui-weapp-icon-4381aded05.woff2) format('woff2'),
+         url(https://b.yzcdn.cn/zanui-weapp/zanui-weapp-icon-4381aded05.woff) format('woff'),
+         url(https://b.yzcdn.cn/zanui-weapp/zanui-weapp-icon-4381aded05.ttf) format('truetype');
+}
+
+.zan-icon {
+  display: inline-block;
+}
+
+.zan-icon::before {
+  font-family: zanui-weapp-icon !important;
+  font-style: normal;
+  font-weight: 400;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.zan-icon-check:before {
+  content: '\e806';
+}
+
+.zan-icon-checked:before {
+  content: '\e807';
+}
+
+.zan-icon-delete:before {
+  content: '\e843';
+}
+
+.zan-icon-edit:before {
+  content: '\e811';
+}

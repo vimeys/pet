@@ -1,5 +1,5 @@
-// const Url='http://39.108.177.168:1201/api/';
-const Url = 'http://172.200.1.14:1080/public/petapi/';
+const Url ='http://106.15.184.105/public/petapi';
+// const Url = 'http://172.200.1.14:1080/public/petapi/';
 const url={};
 
 
@@ -24,11 +24,12 @@ url.upHotTalk     =Url+'Graffiti/addTopic';//上传话题详情
 
 
 //涂鸦
-url.chartletList  =Url+'graffiti/getChartletList';//获取涂鸦列表
-
+url.chartletList  =Url+'graffiti/getChartletList';//获取贴图集
+url.chartletItem  =Url+'graffiti/getGraffitiList';//获取单个贴图列表
 // 话题
 url.hotTalk       =Url+'index/topicList';//热门话题列表
-
+url.topicDetail   =Url+'index/topicInfo';//话题详情
+url.topicComment  =Url+'index/topicComments';
 
 
 //end
@@ -38,6 +39,12 @@ url.hotTalk       =Url+'index/topicList';//热门话题列表
 url.saveUserInfo = Url + 'user/saveUserInfo';//保存用户信息
 url.pet_classify = Url + 'graffiti/getPetCatList';//获取宠物分类
 url.add_comment = Url + 'comment/add';//增加评论
+url.index_hot = Url + 'index/getHot';//获取热门
+url.getRegion = Url + 'user/getRegion';//获取地址编码列表
+url.add_address = Url + 'user/insertAddress';//新增地址
+url.get_address_list = Url + 'user/getAddressList';//获取用户地址列表
+url.edit_address_list = Url + 'user/updateAddress';//编辑地址
+url.delete_address_list = Url + 'user/deleteAddress';//删除地址
 //end
 
 

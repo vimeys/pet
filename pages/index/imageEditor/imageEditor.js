@@ -594,7 +594,7 @@ Page({
         obj.pet_id=1
         obj.graffiti_id=[]
         obj.hyaline_id=[]
-        obj.bg_id=[]
+        obj.bg_id=[];
         for(let i=0;i<this.bg.length;i++){
            obj.bg_id=this.bg[i];
             obj.img_id=this.ttBg[i];

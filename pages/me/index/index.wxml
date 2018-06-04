@@ -180,7 +180,9 @@
   <view class='section-cells'>
     <navigator url='' class="zan-cell money zan-cell--access">
       <view class="zan-cell__hd">
-        <image src='/images/icon/me-index-cells-money.png' mode='widthFix'></image>
+        <image src='/images/icon/me-index-cells-money.png'
+               mode='widthFix'>
+        </image>
       </view>
       <view class="zan-cell__bd ">213爪币</view>
       <view class="zan-cell__ft">爪币管理</view>
@@ -193,10 +195,11 @@
   <!-- 其他列表 -->
   <view class='section-cells'>
     <navigator url='' class="zan-cell zan-cell--access">
-      <view class="zan-cell__hd">
-        <image src='/images/icon/me-index-cells-order.png' mode='widthFix'></image>
+      <view class="zan-cell__hd" bindtap="hrefOrder">
+        <image src='/images/icon/me-index-cells-order.png'
+               mode='widthFix'></image>
       </view>
-      <view class="zan-cell__bd">兑换订单</view>
+      <view class="zan-cell__bd" >兑换订单</view>
       <view class="zan-cell__ft"></view>
     </navigator>
     <navigator url='' class="zan-cell zan-cell--access">

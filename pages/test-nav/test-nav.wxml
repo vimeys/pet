@@ -1,13 +1,13 @@
 <view class="zan-panel">
-  <navigator url='../index/index/index' class="zan-cell zan-cell--access">
+  <navigator url='../index/index/index' open-type='switchTab' class="zan-cell zan-cell--access">
     <view class="zan-cell__bd">首页</view>
     <view class="zan-cell__ft"></view>
   </navigator>
-  <navigator url='../activity/index/index' class="zan-cell zan-cell--access">
+  <navigator url='../activity/index/index' open-type='switchTab' class="zan-cell zan-cell--access">
     <view class="zan-cell__bd">活动列表</view>
     <view class="zan-cell__ft"></view>
   </navigator>
-  <navigator url='../me/index/index' class="zan-cell zan-cell--access">
+  <navigator url='../me/index/index' open-type='switchTab' class="zan-cell zan-cell--access">
     <view class="zan-cell__bd">我的</view>
     <view class="zan-cell__ft"></view>
   </navigator>
@@ -23,7 +23,7 @@
     <view class="zan-cell__bd">涂鸦记录</view>
     <view class="zan-cell__ft"></view>
   </navigator>
-  <navigator url='../index/gambit-list/gambit-list' class="zan-cell zan-cell--access">
+  <navigator url='../index/gambit-list/gambit-list'  open-type='switchTab' class="zan-cell zan-cell--access">
     <view class="zan-cell__bd">话题</view>
     <view class="zan-cell__ft"></view>
   </navigator>

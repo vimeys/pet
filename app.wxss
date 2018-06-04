@@ -150,7 +150,7 @@ view, text, navigator {
   justify-content: flex-end;
   align-items: center;
 }
-
+.footer-icon-2>navigator,
 .footer-icon-2>view {
   padding: 0 25rpx;
   display: flex;
@@ -263,8 +263,11 @@ view, text, navigator {
   color: #222;
   background: #fee632;
   text-align: center;
+  border-radius: 0;
 }
-
+.btn-100::after{
+  display: none
+}
 /* 如果有底部定位的按钮 */
 .page-padding-bottom{
   padding-bottom: 120rpx;

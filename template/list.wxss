@@ -1,7 +1,9 @@
 /****************************加载更多*******************************/
 
 /* 加载更多 */
-
+.template-list-more.disabled{
+  pointer-events: none;
+}
 .template-list-more {
   height: 80rpx;
   line-height: 80rpx;

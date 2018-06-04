@@ -1,8 +1,8 @@
 <!-- ****************************加载更多***************************** -->
 <template name="template-list-more">
-  <view class='template-list-more' bindtap="getMore">
+  <view class='template-list-more {{disabled?"disabled":""}}' bindtap="getMore">
     <image src='/images/icon/list-more.png' mode='widthFix'></image>
-    <text>查看更多...</text>
+    <text>{{more_text}}</text>
   </view>
 </template>
 
@@ -20,7 +20,7 @@
           <view class='time'>{{item.create_time}}</view>
         </view>
         <view class='zan-cell__ft'>
-          <view class='btn {{item.follow==1?"active":""?"active":""}}' bindtap='bind_attention'>
+          <view class='btn {{item.follow==1?"active":""?"active":""}}' bindtap='bind_attention' bindtap='bind_attention' data-id="{{item.id}}" data-index="{{index}}">
             <text>√ 已关注</text>
             <text>+ 关注</text>
           </view>
@@ -33,29 +33,33 @@
         <!-- 回复 -->
         <view class='reply' wx:if='{{reply==1}}'>
           <text>微信昵称1</text>回复
-          <text>微信昵称4</text>我觉得这条狗很优秀，了不得。我觉得这条狗很优秀，了不得。我觉得这条狗很优秀，了不得。我觉得这条狗很优秀，了不得。
+          <text>微信昵称4</text>
+          我觉得这条狗很优秀，了不得。我觉得这条狗很优秀，了不得。我觉得这条狗很优秀，了不得。我觉得这条狗很优秀，了不得。
         </view>
       </view>
 
-      <view class='img-wrap-1' wx:if='{{media=="img-wrap-1"}}'>
+      <view class='img-wrap-1' wx:if='{{item.more.photos.lenght==1}}' bindtap="topicDetail" data-id="{{item.id}}">
+        <image src='/images/test/hsq.jpeg' mode='aspectFill'></image>
+        <image src='{{item.more.photos[0].url}}' mode='aspectFill'></image>
+      </view>
+      <view class='img-wrap-2' wx:if='{{item.more.photos.lenght>=2}}' bindtap="topicDetail">
+        <image src='{{item.more.photos[0].url}}' mode='aspectFill'></image>
+        <image src='{{item.more.photos[1].url}}' mode='aspectFill'></image>
+        <image src='/images/test/hsq.jpeg' mode='aspectFill'></image>
         <image src='/images/test/hsq.jpeg' mode='aspectFill'></image>
       </view>
-      <view class='img-wrap-2' wx:if='{{media=="img-wrap-2"}}'>
-        <image src='/images/test/hsq1.jpg' mode='aspectFill'></image>
-        <image src='/images/test/hsq.jpeg' mode='aspectFill'></image>
-      </view>
-      <view class='video-wrap' wx:if='{{media=="video-wrap"}}'>
-        <video src='http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400'></video>
-      </view>
+      <!--<view class='video-wrap' wx:if='{{media=="video-wrap"}}'>-->
+        <!--<video src='http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400'></video>-->
+      <!--</view>-->
       <!-- 点赞、回复 -->
       <view class='footer-icon-2'>
-        <view>
+        <view bindtap='bind_love' data-index="{{index}}" data-id="{{item.id}}">
           <image src='/images/icon/index-gambit-content-love.png' mode='widthFix'></image>
-          <text class='num'>5464</text>
+          <text class='num'>5464{{item.like_num}}</text>
         </view>
-        <view>
+        <view bindtap="hrefComment" data-id="{{item.id}}">
           <image src='/images/icon/index-gambit-content-message_0.png' mode='widthFix'></image>
-          <text class='num'>546</text>
+          <text class='num'>546{{item.comment_num}}</text>
         </view>
       </view>
       <!-- 删除、编辑 -->
@@ -78,6 +82,7 @@
   <view class='template-news-item'>
     <block wx:for="{{petData}}">
       <!-- 发布信息 -->
+
       <view class='publish-info zan-cell'>
         <view class='zan-cell__hd'>
           <!--<image src='/images/test/hsq-header.jpg' mode='aspectFill'></image>-->
@@ -102,7 +107,7 @@
         <swiper indicator-dots="false" autoplay="true" interval="5000  " duration="2500" circular="true">
           <block wx:for="{{item.bannerList}}" wx:for-item="bItem">
             <swiper-item>
-              <image src="{{bItem.image}}" class="slide-image" mode='widthFix' />
+              <image src="{{filePath}}{{bItem.image}}" class="slide-image" mode='widthFix' />
             </swiper-item>
           </block>
         </swiper>
@@ -219,29 +224,29 @@
     <view class='template-address-list'>
       <view class='address-content'>
         <view class='user-info'>
-          <text class='name'>收货人：狗蛋儿</text>
+          <text class='name'>收货人：{{item.consignee}}</text>
           <image src='/images/icon/store-order-sure-phone.png' mode='widthFix'></image>
-          <text class='phone'>13812341234</text>
+          <text class='phone'>{{item.mobile}}</text>
         </view>
         <view class='user-address'>
           <image src='/images/icon/store-order-sure-address.png' mode='widthFix'></image>
-          <text>成都市金牛区卡拉胶都来看打卡了家居大饭店附近我是多久佛教对方</text>
+          <text>{{item.province.name}}-{{item.city.name}}-{{item.area.name}}\n{{item.address}}</text>
         </view>
       </view>
 
       <!-- 底部  -->
       <view class='address-footer footer-icon-2' wx:if='{{footer=="show"}}'>
         <view class='radio-wrap'>
-          <label class='{{label_active==index?"active":""}}' data-index='{{index}}' bindtap='bind_label'>
-            <radio color='#F33F3F' />
+          <label class='{{item.selected==1?"active":""}}' data-index='{{index}}' bindtap='bind_label'>
+            <radio color='#F33F3F' checked='{{item.selected==1?true:false}}'/>
             <text>设置为默认地址</text>
           </label>
         </view>
-        <view>
+        <view bindtap='bind_delete' data-index='{{index}}'>
           <image src='/images/icon/index-news-del.png' mode='widthFix'></image>
           <text>删除</text>
         </view>
-        <view>
+        <view bindtap='bind_go' data-index='{{index}}'>
           <image src='/images/icon/index-news-edit.png' mode='widthFix'></image>
           <text>编辑</text>
         </view>
@@ -276,5 +281,26 @@
       </view>
     </view>
     <view class='popup-mask'></view>
+  </view>
+</template>
+
+
+
+<!--评论详情页面列表-->
+<template name="comment-list">
+  <view class='reply'>
+    <!--<text>微信昵称1</text>回复-->
+    <!--<text>微信昵称4</text>-->
+    我觉得这条狗很优秀，{{item.content}}
+  </view>
+  <view class='footer-icon-2'>
+    <view bindtap='bind_love' data-index="{{index}}" data-id="{{item.id}}">
+      <image src='/images/icon/index-gambit-content-love.png' mode='widthFix'></image>
+      <text class='num'>5464{{item.like_num}}</text>
+    </view>
+    <view bindtap="hrefComment" data-id="{{item.id}}">
+      <image src='/images/icon/index-gambit-content-message_0.png' mode='widthFix'></image>
+      <text class='num'>546{{item.comment_num}}</text>
+    </view>
   </view>
 </template>

@@ -65,7 +65,8 @@
     </view>
     <view class='ranking'>
       <view class='item'>
-        <image src='/images/icon/index-ranking1.png' mode='widthFix'></image>
+        <image src='/images/icon/index-ranking1.png'
+               mode='widthFix'></image>
         <image src='{{test_img_url}}' mode='aspectFill'></image>
         <text class='zan-ellipsis'>宠物名字宠物名字</text>
       </view>
@@ -95,12 +96,12 @@
     <view class='section--title'>
       动态
     </view>
-    <status petData="{{petData}}"></status>
-    <!--<view class='news'>-->
-      <!--<template is='template-news-item' data='{{filePath:filePath,petData:petData}}'></template>-->
+    <!--<status petData="{{petData}}"></status>-->
+    <view class='news'>
+      <template is='template-news-item' data='{{filePath:filePath,petData:petData}}'></template>
       <!--<template is='template-news-item' data='{{media:"video"}}'></template>-->
-      <!--<template is='template-list-more'></template>-->
-    <!--</view>-->
+      <template is='template-list-more'></template>
+    </view>
   </view>
 
   <!-- 上传 -->

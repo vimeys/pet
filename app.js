@@ -1,7 +1,10 @@
 //app.js
 import util from 'utils/totalUtil'
 App({
-    globalData:{bgPic:'../../../images/1.png'},
+  // 加载更多
+  more_star_text:'查看更多...',
+  more_end_text:'已全部加载',
+  globalData: { bgPic: '../../../images/1.png' },
   // 测试图片
   test_img_url: '/images/test/index-banner.png',
   test_img_url2: '/images/test/img.png',
@@ -37,14 +40,14 @@ App({
       '/images/test/news-chartlet3.png'
     ]
   ],
-    filePath:'',//图片视频的路径前缀
+  filePath: '',//图片视频的路径前缀
   onLaunch: function () {
 
-    util.promiseSync(util.url.url.filePath,{}).then((json)=>{
-          this.filePath=json.data  //固定图片路径
-        this.globalData={bgPic:'../../../images/1.png'}
+    util.promiseSync(util.url.url.filePath, {}).then((json) => {
+      this.filePath = json.data  //固定图片路径
+      this.globalData = { bgPic: '../../../images/1.png' }
     })
-    wx.setStorageSync('user',{uid:7,petId:1});
+    wx.setStorageSync('user', { uid: 7, petId: 1 });
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -55,17 +58,17 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          util.promiseSync(util.url.url.login,{code:res.code}).then((json)=>{
-              console.log(json);
-              if(json.status==1){
-                wx.setStorageSync('userInfo', json.data);
-              }else{
-                util.showLoading(json.status)
-                  setTimeout(()=>{
-                    wx.hideLoading()
-                  },2000)
-              }
-          })
+        util.promiseSync(util.url.url.login, { code: res.code }).then((json) => {
+          console.log(json);
+          if (json.status == 1) {
+            wx.setStorageSync('userInfo', json.data);
+          } else {
+            util.showLoading(json.status)
+            setTimeout(() => {
+              wx.hideLoading()
+            }, 2000)
+          }
+        })
       }
     })
     // 获取用户信息

@@ -1,0 +1,38 @@
+/* pages/me/dizhi/dizhi.wxss */
+.container::before{
+  background: #eaeaea
+}
+.zan-cell{
+  padding: 0;
+  margin: 0;
+  height: 100rpx;
+  line-height: 100rxp;
+  font-size: 30rpx;
+}
+.zan-cell::after{
+  left: 0;
+}
+.placeholder{
+ font-size: 28rpx;
+ color: #888 
+}
+.zan-cell__hd{
+  width: 150rpx;
+  margin-right: 20rpx;
+}
+.zan-cell__bd{
+  display: flex;
+}
+.zan-cell__bd picker{
+  margin-right: 50rpx;
+}
+.zan-cell__bd picker:last-of-type{
+  margin-right: 0;
+}
+
+.footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

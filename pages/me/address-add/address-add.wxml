@@ -1,0 +1,60 @@
+<!--pages/me/dizhi/dizhi.wxml-->
+<view class="container">
+
+  <form bindsubmit='add_address' class='zan-cells'>
+    <view class='zan-cell'>
+      <view class='zan-cell__hd'>
+        收货人：
+      </view>
+      <view class='zan-cell__bd'>
+        <input name='consignee' placeholder='请输入收货人姓名' placeholder-class='placeholder' value='{{data_address.consignee}}'></input>
+      </view>
+    </view>
+
+    <view class='zan-cell'>
+      <view class='zan-cell__hd'>
+        手机号码：
+      </view>
+      <view class='zan-cell__bd'>
+        <input name='mobile' placeholder='请输入收货人电话' placeholder-class='placeholder' value='{{data_address.mobile}}'></input>
+      </view>
+    </view>
+
+    <view class='zan-cell'>
+      <view class='zan-cell__hd'>
+        地址填写：
+      </view>
+      <view class='zan-cell__bd'>
+        <picker name='province_id' bindchange="bind_address_province" value="{{province_index}}"  range="{{province}}" range-key='name' >
+          <view class="picker">
+            {{province[province_index].name}}
+          </view>
+        </picker>
+        <picker name='city_id' bindchange="bind_address_city" value="{{city_index}}"  range="{{city}}" range-key='name'>
+          <view class="picker">
+            {{city[city_index].name}}
+          </view>
+        </picker>
+        <picker name='area_id' bindchange="bind_address_area" value="{{area_index}}" range="{{area}}" range-key='name'>
+          <view class="picker">
+            {{area[area_index].name}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+
+    <view class='zan-cell'>
+      <view class='zan-cell__hd'>
+      </view>
+      <view class='zan-cell__bd'>
+        <input name='address_info' placeholder='请填写详细地址' placeholder-class='placeholder' value='{{data_address.address}}'></input>
+      </view>
+    </view>
+
+    <view class='footer'>
+      <button class='btn-100' formType='submit'>提交</button>
+      <!-- <button class='btn-100' formType='submit'>编辑提交</button> -->
+    </view>
+  </form>
+</view>

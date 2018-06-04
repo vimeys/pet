@@ -1,5 +1,5 @@
 // pages/index/gambit-content/gambit-content.js
-const totalUtil = require("../../../utils/totalUtil.js");
+const util = require("../../../utils/totalUtil.js");
 var app=getApp()
 Page({
 
@@ -15,24 +15,28 @@ Page({
       '/images/test/hsq1.jpg',
       '/images/test/hsq.jpeg',
       '/images/test/hsq1.jpg',
-    ]
+    ],
+      commentData:[]
   },
 
   bind_input_val:function(e){
+    console.log(e.detail.value)
     this.setData({
       comment_val:e.detail.value
     })
   },
   form_submit:function(){
     var that=this
-    totalUtil.promiseSync(totalUtil.url.url.add_comment, {
+      util.promiseSync(util.url.url.add_comment, {
       user_id: that.data.userInfo.id,
       parent_id: 0,
       to_user_id: 1,//暂无，死数据 
       content: that.data.comment_val,
-      list_sort_id: 26,//暂无，死数据 
+      list_sort_id: this.data.Data.list_sort_id,//暂无，死数据
     }).then((json) => {
-      console.log('提交成功')
+      if(json.status==1){
+          this.getData(this.id)
+      }
     })
   },
   /**
@@ -40,6 +44,7 @@ Page({
    */
   onLoad: function (options) {
     var that=this
+      this.id=options.id
     wx.getStorage({
       key: 'userInfo',
       success: function (res) {
@@ -48,6 +53,7 @@ Page({
         })
       }
     })
+      this.getData(options.id)
   },
 
   /**
@@ -55,6 +61,27 @@ Page({
    */
   onReady: function () {
     
+  },
+  getData(id){
+      util.promiseSync(util.url.url.topicDetail,{topic_id:id}).then(json=>{
+          if(json.status==1){
+              let image_url=this.data.img_url;
+              image_url=[...image_url,...json.data.more],
+                  this.setData({
+                      image_url:image_url,
+                      Data:json.data
+                  })
+          }
+      })
+      //TODO
+      // 死数据
+      util.promiseSync(util.url.url.topicComment,{topic_id:6}).then(json=>{
+        if(json.status==1){
+            this.setData({
+                commmentData:json.data
+            })
+        }
+      })
   },
 
   /**

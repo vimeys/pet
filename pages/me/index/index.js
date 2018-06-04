@@ -9,6 +9,24 @@ Page({
     test_img_url:app.test_img_url
   },
 
+    //去订单详情页面
+    hrefOrder(){
+      wx.navigateTo({
+        url: '../order-list/order-list'
+      })
+    },
+    //去地址列表页面
+    hrefAddressList(){
+        wx.navigateTo({
+            url: '../address-list/address-list'
+        })
+    },
+    //去宠物列表
+    petList(){
+      wx.navigateTo({
+        url: '../'
+      })
+    },
   /**
    * 生命周期函数--监听页面加载
    */

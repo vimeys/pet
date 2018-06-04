@@ -2,13 +2,10 @@
 <import src='/template/list.wxml'/>
 <view class='container page-padding-bottom'>
     <radio-group bindchange="radioChange">
-        <!--<block wx:for='{{address_list}}' wx:key='item'>-->
-            <!--<template is='template-address-list' data='{{item:item,footer:"show",index:index,label_active:label_active}}'></template>-->
-        <!--</block>-->
         <template is='template-address-list' data='{{address_list:address_list,footer:footer,label_active}}'></template>
     </radio-group>
     <!-- 底部按钮 -->
-    <view class='btn-100'>
+    <view class='btn-100' bindtap='bind_add'>
       添加地址
     </view>
 </view>

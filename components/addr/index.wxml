@@ -1,0 +1,76 @@
+<!--components/address/index.wxml-->
+<wxs module="filter" src="index.wxs"></wxs>
+<view class='info' hidden="{{showlist == 'change' || showlist == 'add'}}">
+  <view class="address-list-wrapper">
+  <block wx:for="{{ addressList }}" wx:key="{{ index }}">
+  
+    <view class="address-lists">
+      <view class="address-info">
+        <view>
+          <text class="name">{{item.consignee}}</text>
+          <text class="phone">{{filter.hidtel(item.mobile)}}</text>
+        </view>
+        <view class="address-area">
+          <!-- <text>{{item.address}}</text> -->
+          <!-- <text>{{item.region[1]}}</text>
+          <text>{{item.region[2]}}</text> -->
+          <view class="address-detail">
+            {{item.allPath}}{{ item.address }}
+          </view>
+        </view>
+      </view>
+      <view class="address-oper">
+        <view class="oper-left" bindtap='checkAddress' data-index='{{index}}'>
+          <view class="zan-icon zan-icon-check{{item.is_default == 1 ?'ed':''}}"></view>
+          <text>设为默认地址</text>
+        </view>
+        <view class="oper-right">
+          <view class="del" bindtap='deleteAddress' data-index='{{index}}'>
+            <view class="zan-icon zan-icon-delete"></view>
+            <text>删除</text>
+          </view>
+          <view bindtap='editAddress' data-index='{{index}}' data-index='{{index}}'>
+            <view class="zan-icon zan-icon-edit"></view>
+            <text>编辑</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="hr"></view>
+  </block>
+  </view>
+  <view class="add-wrapper">
+     <view class="add-address" bindtap="addAddress">添加新地址</view>
+  </view>  
+</view>
+
+<view class='add' wx:if="{{showlist == 'change' || showlist == 'add'}}">
+  <view class="flield margin-top">
+    <label>收货人</label>
+    <input type="text" placeholder="请输入收货人姓名" id='info.consignee' bindchange="bindDataChange" value="{{info.consignee}}"></input>
+  </view>
+  <view class="flield">
+    <label>联系电话</label>
+    <input type="number" placeholder="请输入联系方式" id='info.mobile' bindchange="bindDataChange" maxlength='11' value='{{info.mobile}}'></input>
+  </view>
+  <view class="flield margin-top2 region">
+    <label>地区选择</label>
+    <picker wx:if="{{ pickerShow }}" mode="multiSelector" bindcolumnchange="bindRegionChange" id='info.province' range="{{ provinceData }}" range-key="name" value="{{ [info.province,info.city,info.district] }}" data-type="0">
+      <text>{{ provinceData[0][info.province].name +" "+ provinceData[1][info.city].name +" "+ provinceData[2][info.district].name }}</text>
+    </picker>
+    <picker wx:else>
+      <text>{{ info.allPath }}</text>
+    </picker>
+    <!-- <picker bindchange="bindRegionChange" id='info.city' range="{{ cityData }}" range-key="name" value="0" data-type="1">
+      <text>{{ cityData[info.city].name || "市" }}</text>
+    </picker>
+    <picker bindchange="bindRegionChange" id='info.area' range="{{ areaData }}" range-key="name" value="0" data-type="2">
+      <text>{{ areaData[info.area].name || "区" }}</text>
+    </picker> -->
+  </view>
+  <view class="flield">
+    <label>详细地址</label>
+    <input type="text" placeholder="请输入详细地址" id='info.address' bindchange="bindDataChange" value='{{info.address}}'></input>
+  </view>
+  <button class="zan-btn zan-btn--primary btn-save" bindtap='bindBtn'>保存</button>
+</view>

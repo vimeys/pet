@@ -7,4 +7,8 @@
   <view class='img-wrap'>
     <image src='{{canvas_img}}' mode='widthFix'></image>
   </view>
+
+  <view class='test'>
+    心爱的小饱饱
+  </view>
 </view>

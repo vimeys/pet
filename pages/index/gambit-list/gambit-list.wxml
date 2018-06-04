@@ -41,9 +41,9 @@
   <!-- 话题-列表-->
   <view class='section-list'>
     <view class='section--title'>全部话题</view>
-    <template is='template-comment-cells'  data='{{media:"img-wrap-1"}}'></template>
-    <template is='template-comment-cells' data='{{media:"img-wrap-2"}}'></template>
-    <template is='template-comment-cells' data='{{media:"video-wrap"}}'></template>
+    <template is='template-comment-cells'  data='{{talkList:talkList,filePath:filePath}}'></template>
+    <!--<template is='template-comment-cells' data='{{media:"img-wrap-2"}}'></template>-->
+    <!--<template is='template-comment-cells' data='{{media:"video-wrap"}}'></template>-->
     <template is='template-list-more'></template>
   </view>
 </view>

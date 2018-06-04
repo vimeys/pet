@@ -55,7 +55,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getHotTalkList(1)
+    this.setData({
+        filePath:app.filePath
+    })
+    let user=util.storage('userInfo')
+    this.getHotTalkList(user.id,1)
     // this.listenFocus = util.listenFocus(this);
     // this.listenBlur = util.listenBlur(this);
     // console.log(app.filePath);
@@ -67,12 +71,72 @@ Page({
 
 
 
-    getHotTalkList(size){
-      util.promiseSync(util.url.url.hotTalk,{page:size}).then(json=>{
+    getHotTalkList(id,size){
+      util.promiseSync(util.url.url.hotTalk,{user:id,page:size}).then(json=>{
         if(json.status==1){
-
+          this.setData({
+              talkList:json.data
+          })
         }
       })
+    },
+
+    // 获取话题详情
+    topicDetail(e){
+      let id=e.currentTarget.detail.id;
+      wx.navigateTo({
+        url: '../gambit-content/gambit-content?id='+id
+      })
+    },
+
+    //关注
+    bind_attention(e){
+        let id=e.currentTarget.dataset.id;
+        let index=e.currentTarget.dataset.index;
+        let talkList=this.data.talkList
+        util.promiseSync(util.url.url.follow,{user_id:app.userInfo.id,list_sort_id:id}).then(json=>{
+            if(talkList[index].follow==1){
+                talkList[index].follow=0
+                this.setData({
+                    talkList
+                })
+            }else{
+                talkList[index].follow=1
+                this.setData({
+                    talkList
+                })
+            }
+        })
+    },
+
+    //点赞
+    bind_love(e){
+
+        let index = e.currentTarget.dataset.index;
+        let id = e.currentTarget.dataset.id;
+        let talkList=this.data.talkList
+        util.promiseSync(util.url.url.follow,{user_id:app.userInfo.id,list_sort_id:id}).then(json=>{
+            if(talkList[index].like==1){
+                talkList[index].like=0
+                talkList[index].likes--
+                this.setData({
+                    talkList
+                })
+            }else{
+                talkList[index].like=1
+                talkList[index].likes++
+                this.setData({
+                    talkList
+                })
+            }
+        })
+    },
+    //跳转
+    hrefComment(e){
+      let id=e.currentTarget.dataset.id;
+        wx.navigateTo({
+          url: '../gambit-content/gambit-content?id='+id
+        })
     },
   /**
    * 生命周期函数--监听页面初次渲染完成
