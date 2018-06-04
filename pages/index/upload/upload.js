@@ -69,7 +69,7 @@ Page({
                         success: function (res) {
                             // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
                             app.globalData.bgPic = res.tempFilePaths;//设置全局值
-                            app.globalData.petId = that.data.pet[that.data.index].cat_id;//c宠物id
+                            // app.globalData.petId = that.data.pet[that.data.index].cat_id;//c宠物id
                             app.globalData.is_edit = that.data.is_edit ? '1' : '0';//是否可以编辑
                             wx.navigateTo({
                                 url: '../imageEditor/imageEditor',
