@@ -111,30 +111,34 @@
       </view>
       <!-- 爪币流水 -->
       <view class='tab-bd-details {{tab==1?"active":""}}' data-tab='1'>
-        <view class='zan-cell'>
-          <view class='zan-cell__hd'>
-            <view>商品兑换</view>
+        <block wx:for="{{Data}}">
+          <view class='zan-cell'>
+            <view class='zan-cell__hd'>
+              <view class="zan-ellipsis">{{item.remark}}</view>
+            </view>
+            <view class='zan-cell__bd'>
+              <!--<view class='time'>2018-04-30 15:25:30</view>-->
+              <view class='time'>{{item.time}}</view>
+            </view>
+            <view class='zan-cell__ft'>
+              <text class='num minus'>{{item.money}}</text>
+              <image src='/images/icon/money.png' mode='widthFix'></image>
+            </view>
           </view>
-          <view class='zan-cell__bd'>
-            <view class='time'>2018-04-30 15:25:30</view>
-          </view>
-          <view class='zan-cell__ft'>
-            <text class='num minus'>-50</text>
-            <image src='/images/icon/money.png' mode='widthFix'></image>
-          </view>
-        </view>
-        <view class='zan-cell'>
-          <view class='zan-cell__hd'>
-            <view>商品兑换</view>
-          </view>
-          <view class='zan-cell__bd'>
-            <view class='time'>2018-04-30 15:25:30</view>
-          </view>
-          <view class='zan-cell__ft'>
-            <text class='num add'>+50</text>
-            <image src='/images/icon/money.png' mode='widthFix'></image>
-          </view>
-        </view>
+        </block>
+
+        <!--<view class='zan-cell'>-->
+          <!--<view class='zan-cell__hd'>-->
+            <!--<view>商品兑换</view>-->
+          <!--</view>-->
+          <!--<view class='zan-cell__bd'>-->
+            <!--<view class='time'>2018-04-30 15:25:30</view>-->
+          <!--</view>-->
+          <!--<view class='zan-cell__ft'>-->
+            <!--<text class='num add'>+50</text>-->
+            <!--<image src='/images/icon/money.png' mode='widthFix'></image>-->
+          <!--</view>-->
+        <!--</view>-->
       </view>
     </view>
 

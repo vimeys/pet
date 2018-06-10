@@ -167,7 +167,7 @@
       <!-- </block> -->
     </swiper>
 
-    <view class='btn'>
+    <view class='btn' bindtap="hrefAddPet">
       <text class='icon'>+</text>
       <text>添加宠物</text>
     </view>
@@ -178,7 +178,7 @@
 
   <!-- 爪币 -->
   <view class='section-cells'>
-    <navigator url='' class="zan-cell money zan-cell--access">
+    <navigator url='../money/money' class="zan-cell money zan-cell--access">
       <view class="zan-cell__hd">
         <image src='/images/icon/me-index-cells-money.png'
                mode='widthFix'>
@@ -194,7 +194,7 @@
 
   <!-- 其他列表 -->
   <view class='section-cells'>
-    <navigator url='' class="zan-cell zan-cell--access">
+    <navigator url='../order-list/order-list' class="zan-cell zan-cell--access">
       <view class="zan-cell__hd" bindtap="hrefOrder">
         <image src='/images/icon/me-index-cells-order.png'
                mode='widthFix'></image>
@@ -202,7 +202,7 @@
       <view class="zan-cell__bd" >兑换订单</view>
       <view class="zan-cell__ft"></view>
     </navigator>
-    <navigator url='' class="zan-cell zan-cell--access">
+    <navigator url='../address-list/address-list' class="zan-cell zan-cell--access">
       <view class="zan-cell__hd">
         <image src='/images/icon/me-index-cells-address.png' mode='widthFix'></image>
       </view>

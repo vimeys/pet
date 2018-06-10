@@ -1,5 +1,0 @@
-<!--page/store/order-sure/order-sure.wxml-->
-<import src='/template/list.wxml'/>
-<view class='container'>
-
-</view>

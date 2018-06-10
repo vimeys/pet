@@ -27,6 +27,13 @@ Page({
         url: '../'
       })
     },
+    // 宠物添加列表
+    hrefAddPet(){
+        wx.navigateTo({
+          // url: '../pet-card-add/pet-card-add '
+          url: '../pet-card-add/pet-card-add'
+        })
+    },
   /**
    * 生命周期函数--监听页面加载
    */

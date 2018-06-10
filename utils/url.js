@@ -1,4 +1,4 @@
-const Url ='http://106.15.184.105/public/petapi';
+const Url ='http://106.15.184.105/public/petapi/';
 // const Url = 'http://172.200.1.14:1080/public/petapi/';
 const url={};
 
@@ -31,6 +31,12 @@ url.hotTalk       =Url+'index/topicList';//热门话题列表
 url.topicDetail   =Url+'index/topicInfo';//话题详情
 url.topicComment  =Url+'index/topicComments';
 
+
+//生成宠物卡
+url.addPetId      =Url+'pet_info/add';//添加宠物卡
+
+//我的
+url.goldList      =Url+"user/getBill";//宠物金币流水列表
 
 //end
 

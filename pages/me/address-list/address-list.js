@@ -100,10 +100,12 @@ Page({
    */
   onShow: function () {
     var that = this
-    that.setData({
-      userInfo: wx.getStorageSync('userInfo')
-    })
-    that.address_list_show(that,that.data.userInfo.id)
+    // that.setData({
+    //   userInfo: wx.getStorageSync('userInfo')
+    // })
+    // that.address_list_show(that,that.data.userInfo.id)
+      //TODO id死数据
+    that.address_list_show(that,9)
   },
 
   /**

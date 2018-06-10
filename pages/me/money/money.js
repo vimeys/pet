@@ -1,11 +1,13 @@
 // pages/me/money/money.js
+import  util from '../../../utils/totalUtil'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  tab:0
+  tab:0,
+      Data:''
   },
 // 选项卡
   bind_tab:function(e){
@@ -18,9 +20,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.getGoldList()
   },
 
+//TODO  死数据
+   getGoldList(){
+       util.promiseSync(util.url.url.goldList,{user_id:1}).then((json)=>{
+          if(json.status==1){
+            json.data.forEach((item)=>{
+                item.time=util.formatTime2(item.create_time)
+            })
+             this.setData({
+                 Data:json.data
+             })
+          }else{
+
+          }
+       })
+   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

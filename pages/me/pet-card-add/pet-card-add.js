@@ -73,7 +73,7 @@ Page({
     }
     console.log(that.data.userInfo.id)
     if (form_submit == true) {
-      totalUtil.promiseSync(totalUtil.url.url.pet_classify, {
+      totalUtil.promiseSync(totalUtil.url.url.addPetId, {
         user_id: that.data.userInfo.id,
         cat_id: form_data.cat_id,
         name: form_data.name,
@@ -85,7 +85,10 @@ Page({
         describe: form_data.describe,
         buy_time: form_data.buy_time
       }).then((json) => {
-        console.log('提交成功')
+        if(json.status==1){
+            console.log('提交成功')
+        }
+
       })
     }
 
