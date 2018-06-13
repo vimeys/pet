@@ -1,4 +1,5 @@
 /* pages/activity/activity-content/activity-content.wxss */
+@import '../../../utils/wxParse/wxParse.wxss';
 .container::before{
   background: #eaeaea
 }

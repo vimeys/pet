@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    test_img_url:app.test_img_url
+    test_img_url:app.test_img_url,
+      petList:[] //宠物列表
   },
 
     //去订单详情页面
@@ -34,13 +35,30 @@ Page({
           url: '../pet-card-add/pet-card-add'
         })
     },
+    // 去消息列表
+    hrefMessage(e){
+      wx.navigateTo({
+        url: '../message/message'
+      })
+    },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
   },
-
+    //获取宠物列表
+  getPetList(){
+    //TODO 死数据
+      util.promiseSync(util.url.petList,{user_id:1}).then(json=>{
+        if(json.status==1){
+            this.setData({
+                petList:json.data
+            })
+        }
+      })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

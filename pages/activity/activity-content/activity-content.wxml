@@ -1,4 +1,6 @@
 <!--pages/activity/activity-content/activity-content.wxml-->
+<import src="../../../utils/wxParse/wxParse.wxml"/>
+
 <view class='container page-padding-bottom' >
   <!-- 活动基本信息 -->
   <view class='section-info'>
@@ -12,8 +14,9 @@
     <view class='btn-wrap'>
       <!-- <view class='btn'>
         点击进入      
-        
+
       </view> -->
+
       <view class='text'>
         活动日期：<text>{{star_time}}</text>至<text>{{end_time}}</text>
       </view>
@@ -22,7 +25,7 @@
   
   <!-- 活动详情内容 -->
   <view class='section-content'>
-    
+    <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
   </view>
 
   <!-- 签到 -->

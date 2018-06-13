@@ -125,6 +125,7 @@
 
 .template-news-item .btn-scrawl .c-image {
   width: 20rpx;
+  height: 22rpx;
   margin-right: 10rpx;
 }
 

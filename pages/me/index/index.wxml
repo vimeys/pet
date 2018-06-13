@@ -17,7 +17,7 @@
         </contact-button>
       </view>
     </view>
-    <view class='right'>
+    <view class='right' bindtap="hrefMessage">
       <image class='img' src='/images/icon/me-index-banner-right.png' mode='widthFix'></image>
       <text class='text'>消息</text>
     </view>
@@ -27,144 +27,96 @@
   <!-- 宠物信息面板 -->
   <view class='section-petinfo'>
 
-
-
-
     <swiper class='swiper' duration="100" previous-margin="20rpx" next-margin="20rpx" circular="true">
-      <!-- <block wx:for="{{imgUrls}}"> -->
 
-      <swiper-item class='swiper-item man'>
+       <block wx:for="{{imgUrls}}">
+        <swiper-item  wx:if="{{item.sex==1}}" class='swiper-item man'>
+          <view class='swiper-content'>
+            <image class='bg-img' src='/images/me-index-swiper-bg.png' mode='widthFix'></image>
+            <view class='swiper-content-in'>
+              <view class='img-wrap-000'>
+                <view class='img-wrap-255'>
+                  <image src='{{test_img_url}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
+                  <image src='/images/icon/me-index-petinfo-sex1.png' class='sex-img' mode='widthFix'></image>
+                </view>
+              </view>
+              <!-- 头像，用户名 -->
+              <view class='name'>
+                <text>狗蛋儿</text>
+                <text>1235天陪伴</text>
+              </view>
+              <view class='info'>
+                <view>
+                  <image src='/images/icon/me-index-petinfo-money.png' mode='widthFix'></image>
+                  <text>身价：213爪币</text>
+                </view>
+                <view>
+                  <image src='/images/icon/me-index-petinfo-weight.png' mode='widthFix'></image>
+                  <text>体重：0.5kg</text>
+                </view>
+                <view>
+                  <image src='/images/icon/me-index-petinfo-birthday.png' mode='widthFix'></image>
+                  <text>生日：2018-02-31</text>
+                </view>
+                <view>
+                  <image src='/images/icon/me-index-petinfo-sterilization2.png' mode='widthFix'></image>
+                  <text>已绝育</text>
+                </view>
 
-        <view class='swiper-content'>
-          <image class='bg-img' src='/images/me-index-swiper-bg.png' mode='widthFix'></image>
-          <view class='swiper-content-in'>
-            <view class='img-wrap-000'>
-              <view class='img-wrap-255'>
-                <image src='{{test_img_url}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
-                <image src='/images/icon/me-index-petinfo-sex1.png' class='sex-img' mode='widthFix'></image>
               </view>
+              <view class='text'>
+                <view class='zan-ellipsis--l2'>
+                  啊，我是一个宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物
+                </view>
+              </view>
+              <!-- 背景图 -->
             </view>
-            <!-- 头像，用户名 -->
-            <view class='name'>
-              <text>狗蛋儿</text>
-              <text>1235天陪伴</text>
-            </view>
-            <view class='info'>
-              <view>
-                <image src='/images/icon/me-index-petinfo-money.png' mode='widthFix'></image>
-                <text>身价：213爪币</text>
-              </view>
-              <view>
-                <image src='/images/icon/me-index-petinfo-weight.png' mode='widthFix'></image>
-                <text>体重：0.5kg</text>
-              </view>
-              <view>
-                <image src='/images/icon/me-index-petinfo-birthday.png' mode='widthFix'></image>
-                <text>生日：2018-02-31</text>
-              </view>
-              <view>
-                <image src='/images/icon/me-index-petinfo-sterilization2.png' mode='widthFix'></image>
-                <text>已绝育</text>
-              </view>
-
-            </view>
-            <view class='text'>
-              <view class='zan-ellipsis--l2'>
-                啊，我是一个宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物
-              </view>
-            </view>
-            <!-- 背景图 -->
-
           </view>
-        </view>
-      </swiper-item>
-      <swiper-item class='swiper-item woman'>
+        </swiper-item>
+        <swiper-item  wx:else class='swiper-item woman'>
+          <view class='swiper-content'>
+            <image class='bg-img' src='/images/me-index-swiper-bg.png' mode='widthFix'></image>
+            <view class='swiper-content-in'>
+              <view class='img-wrap-000'>
+                <view class='img-wrap-255'>
+                  <image src='{{test_img_url}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
+                  <image src='/images/icon/me-index-petinfo-sex1.png' class='sex-img' mode='widthFix'></image>
+                </view>
+              </view>
+              <!-- 头像，用户名 -->
+              <view class='name'>
+                <text>狗蛋儿</text>
+                <text>1235天陪伴</text>
+              </view>
+              <view class='info'>
+                <view>
+                  <image src='/images/icon/me-index-petinfo-money.png' mode='widthFix'></image>
+                  <text>身价：213爪币</text>
+                </view>
+                <view>
+                  <image src='/images/icon/me-index-petinfo-weight.png' mode='widthFix'></image>
+                  <text>体重：0.5kg</text>
+                </view>
+                <view>
+                  <image src='/images/icon/me-index-petinfo-birthday.png' mode='widthFix'></image>
+                  <text>生日：2018-02-31</text>
+                </view>
+                <view>
+                  <image src='/images/icon/me-index-petinfo-sterilization2.png' mode='widthFix'></image>
+                  <text>已绝育</text>
+                </view>
 
-        <view class='swiper-content'>
-          <image class='bg-img' src='/images/me-index-swiper-bg.png' mode='widthFix'></image>
-          <view class='swiper-content-in'>
-            <view class='img-wrap-000'>
-              <view class='img-wrap-255'>
-                <image src='{{test_img_url}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
-                <image src='/images/icon/me-index-petinfo-sex1.png' class='sex-img' mode='widthFix'></image>
               </view>
-            </view>
-            <!-- 头像，用户名 -->
-            <view class='name'>
-              <text>狗蛋儿</text>
-              <text>1235天陪伴</text>
-            </view>
-            <view class='info'>
-              <view>
-                <image src='/images/icon/me-index-petinfo-money.png' mode='widthFix'></image>
-                <text>身价：213爪币</text>
-              </view>
-              <view>
-                <image src='/images/icon/me-index-petinfo-weight.png' mode='widthFix'></image>
-                <text>体重：0.5kg</text>
-              </view>
-              <view>
-                <image src='/images/icon/me-index-petinfo-birthday.png' mode='widthFix'></image>
-                <text>生日：2018-02-31</text>
-              </view>
-              <view>
-                <image src='/images/icon/me-index-petinfo-sterilization2.png' mode='widthFix'></image>
-                <text>已绝育</text>
-              </view>
-
-            </view>
-            <view class='text'>
-              <view class='zan-ellipsis--l2'>
-                啊，我是一个宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物
+              <view class='text'>
+                <view class='zan-ellipsis--l2'>
+                  啊，我是一个宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物
+                </view>
               </view>
             </view>
           </view>
-        </view>
-      </swiper-item>
-      <swiper-item class='swiper-item woman'>
+        </swiper-item>
 
-        <view class='swiper-content'>
-          <image class='bg-img' src='/images/me-index-swiper-bg.png' mode='widthFix'></image>
-          <view class='swiper-content-in'>
-            <view class='img-wrap-000'>
-              <view class='img-wrap-255'>
-                <image src='{{test_img_url}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
-                <image src='/images/icon/me-index-petinfo-sex1.png' class='sex-img' mode='widthFix'></image>
-              </view>
-            </view>
-            <!-- 头像，用户名 -->
-            <view class='name'>
-              <text>狗蛋儿</text>
-              <text>1235天陪伴</text>
-            </view>
-            <view class='info'>
-              <view>
-                <image src='/images/icon/me-index-petinfo-money.png' mode='widthFix'></image>
-                <text>身价：213爪币</text>
-              </view>
-              <view>
-                <image src='/images/icon/me-index-petinfo-weight.png' mode='widthFix'></image>
-                <text>体重：0.5kg</text>
-              </view>
-              <view>
-                <image src='/images/icon/me-index-petinfo-birthday.png' mode='widthFix'></image>
-                <text>生日：2018-02-31</text>
-              </view>
-              <view>
-                <image src='/images/icon/me-index-petinfo-sterilization2.png' mode='widthFix'></image>
-                <text>已绝育</text>
-              </view>
-
-            </view>
-            <view class='text'>
-              <view class='zan-ellipsis--l2'>
-                啊，我是一个宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物宠物
-              </view>
-            </view>
-          </view>
-        </view>
-      </swiper-item>
-      <!-- </block> -->
+       </block>
     </swiper>
 
     <view class='btn' bindtap="hrefAddPet">

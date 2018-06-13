@@ -5,7 +5,7 @@
     <navigator url='' class='item active'>
       推荐
     </navigator>
-    <navigator url='../me/index/index' class='item'>
+    <navigator url='../index-hot/index-hot' class='item'>
       热门
     </navigator>
     <navigator url='../index-attention/index-attention' class='item'>

@@ -189,6 +189,12 @@
 					"name": "首页",
 					"pathName": "pages/index/gambit-list/gambit-list",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "发布页面",
+					"pathName": "pages/index/upload/upload",
+					"query": ""
 				}
 			]
 		}

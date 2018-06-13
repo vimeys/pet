@@ -1,12 +1,14 @@
 // pages/me/message/message.js
-const app=getApp()
+const app=getApp();
+import  util from '../../../utils/totalUtil'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    test_img_hsq1: app.test_img_hsq1
+    test_img_hsq1: app.test_img_hsq1,
+      Data:""
   },
 
   /**
@@ -22,7 +24,14 @@ Page({
   onReady: function () {
   
   },
-
+    getList(){
+      util.promiseSync(url.url.getMessageList,{user_id:1}).then(json=>{
+        if(json.status==1){}
+          this.setData({
+              Data:json.data
+          })
+      })
+    },
   /**
    * 生命周期函数--监听页面显示
    */

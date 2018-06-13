@@ -37,7 +37,8 @@ url.addPetId      =Url+'pet_info/add';//添加宠物卡
 
 //我的
 url.goldList      =Url+"user/getBill";//宠物金币流水列表
-
+url.getMessageList=Url+"user/getMessageList";//消息列表
+url.petList       =Url+'user/getPetList';//宠物列表
 //end
 
 

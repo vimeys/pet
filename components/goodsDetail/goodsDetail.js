@@ -6,7 +6,7 @@ Component({
   properties: {
       disable:{
         type:Boolean,
-          value:false
+          value:true
       }
   },
 
