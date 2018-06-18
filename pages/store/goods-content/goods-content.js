@@ -1,6 +1,8 @@
 // pages/store/goods-content/goods-content.js
 const util = require("../../../utils/util.js");
-const app=getApp()
+import  utils from '../../../utils/totalUtil';
+import wxParse from "../../../utils/wxParse/wxParse";
+const app=getApp();
 Page({
 
   /**
@@ -12,7 +14,7 @@ Page({
       store_num:1,
     swiper_img: app.text_img_list,
       cover:'../../../images/1.png',
-
+        detail:'',//商品详细
       Data:{
           goodsName:'这个狗粮可以换哦喜不喜欢拉时间段法拉盛',
           shop_price:'123',
@@ -25,19 +27,48 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(this.data.swiper_img)
-  },
-    showPop(){
-        this.setData({
-            hideShopPopup:!this.data.hideShopPopup
-        })
-    },
-    // 关闭规格选择
-    close(){
-      this.setData({
-          hideShopPopup:!this.data.hideShopPopup
+    // console.log(this.data.swiper_img)
+      this.id=options.id;
+      //TODO 死数据
+      utils.promiseSync(utils.url.url.goodsDetail,{goods_id:5}).then(json=>{
+          console.log(json);
+          if(json.status==1){
+              wxParse.wxParse('content','html',json.data.details,this,5)
+              this.setData({
+                  detail:json.data
+              })
+          }
       })
+  },
+
+    confirm(){
+
+      //TODO 加大了数据
+      let money=app.user.money+2222;
+        console.log(this.id);
+        if(money<this.data.detail.price){
+            wx.showToast({
+              title: '爪币不足',
+                icon:"none"
+            })
+      }else{
+          wx.navigateTo({
+            url: '../order-sure/order-sure?id='+this.id
+          })
+      }
     },
+
+    // showPop(){
+    //     this.setData({
+    //         hideShopPopup:!this.data.hideShopPopup
+    //     })
+    // },
+    // // 关闭规格选择
+    // close(){
+    //   this.setData({
+    //       hideShopPopup:!this.data.hideShopPopup
+    //   })
+    // },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

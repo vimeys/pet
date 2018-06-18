@@ -1,2 +1,16 @@
 <!--pages/store/goodsList/goodsList.wxml-->
-<goodsCard disable="{{disable}}"></goodsCard>
+<viem class='section-nav'>
+    <view data-id="1" bindtap="chooseNav" class="item {{active==1?'active':''}}">限时商品</view>
+    <view data-id="2" bindtap="chooseNav" class="item {{active==2?'active':''}}">普通商品</view>
+</viem>
+<image src="/images/test/hsq.jpeg" class="goods-banner" mode="widthFix"></image>
+
+<!--<input type="text" placeholder="请输入您想要的商品" class="goods-search"/>-->
+<view class="begin-time">
+    <text>12月25日</text>
+    <text>  24  :  12  :  45   开始抢兑</text>
+
+</view>
+<goodsCard disable="{{disable}}" active="{{active}}"  goodsList="{{goodsList}}" bindgoDetail="goDetail">
+
+</goodsCard>

@@ -1,4 +1,5 @@
 // pages/me/index/index.js
+import util from "../../../utils/totalUtil"
 var app=getApp()
 Page({
 
@@ -46,13 +47,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      console.log(app.globalData);
+      this.setData({
+          imageFile:app.filePath
+      })
   },
     //获取宠物列表
   getPetList(){
-    //TODO 死数据
-      util.promiseSync(util.url.petList,{user_id:1}).then(json=>{
+      console.log("执行我的页面");
+
+      let user=util.storage("userInfo");
+      //TODO 死数据
+      util.promiseSync(util.url.url.userPetList,{user_id:user.id}).then(json=>{
         if(json.status==1){
+          let date=Date.parse(new Date())
+          json.data.forEach(function (item,index) {
+              item.numDay=Math.floor(Math.abs((new Date(item.buy_time.replace(/-/g, '/')).getTime()-Date.parse(new Date())))/86400000)
+              console.log(item.numDay);
+          })
             this.setData({
                 petList:json.data
             })
@@ -70,7 +82,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+      this.getPetList()
   },
 
   /**

@@ -1,6 +1,7 @@
 /* pages/index/index.wxss */
 
 /* 隐藏滚动条 */
+@import "../index-hot/index-hot.wxss";
 
 ::-webkit-scrollbar {
   display: none;

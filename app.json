@@ -30,7 +30,7 @@
     "pages/me/order-list/order-list",
     "pages/me/index/index",
 
-
+    "pages/activity/activity-content/activity-content",
     "pages/activity/index/index"
   ],
   "window": {

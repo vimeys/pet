@@ -1,1 +1,29 @@
 /* pages/store/goodsList/goodsList.wxss */
+.goods-banner{
+    width:100%;
+}
+.goods-search{
+    width: 710rpx;
+    height: 56rpx;
+    border-radius: 28rpx;
+    font-size: 26rpx;
+    text-align: center;
+    border: 1px solid #EAEAEA;
+    margin: 20px auto;
+}
+.begin-time{
+    width: 710rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    font-size: 26rpx;
+    background:#FEE632;
+    text-align: center;
+    letter-spacing: 8rpx;
+    margin: 30rpx auto 0;
+}
+.begin-time text:first-child{
+    color:red;
+}
+.begin-time text:last-child{
+    letter-spacing: 4rpx;
+}

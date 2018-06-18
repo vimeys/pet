@@ -1,4 +1,5 @@
 <!--pages/store/goods-content/goods-content.wxml-->
+<import src="../../../utils/wxParse/wxParse.wxml"/>
 <view class='container page-padding-bottom'>
   <!-- banner -->
   <view class='section-banner'>
@@ -19,28 +20,26 @@
       <text class='time'>24:12:45</text>开始抢兑
     </view>
     <view class='name'>
-      啊色块大家爱上拉克丝几点啦看似简单拉克的减肥啦开始来看大家是否收到了复健科打算尽快了解
+      {{detail.name}}啊色块大家爱上拉克丝几点啦看似简单拉克的减肥啦开始来看大家是否收到了复健科打算尽快了解
     </view>
     <view class='zan-cell'>
-      <view class='zan-cell__bd'>300爪币</view>
+      <view class='zan-cell__bd'>{{detail.price}}300爪币</view>
       <view class='zan-cell__ft'>已兑200件</view>
     </view>
   </view>
-
   <!-- 分割线 -->
   <view class='hr-20'></view>
-
   <!-- 内容部分 -->
-
   <view class='section-content'>
-    <block wx:for='{{swiper_img}}' wx:key='{{item}}'>
-      <image src='{{item}}' mode='widthFix'></image>
-    </block>
+    <template is="wxParse" data="{{wxParseData:content.nodes}}"></template>
+    <!--<block wx:for='{{swiper_img}}' wx:key='{{item}}'>-->
+      <!---->
+      <!--<image src='{{item}}' mode='widthFix'></image>-->
+    <!--</block>-->
   </view>
-
   <!-- 页脚 -->
   <view class='section-footer'>
-    <view class='btn-100' bindtap="showPop">
+    <view class='btn-100' bindtap="confirm">
       立即购买
     </view>
   </view>
@@ -49,44 +48,44 @@
 
 <!--选择规格-->
 <!--选择规格页面-->
-<view class="show-popup" hidden="{{hideShopPopup}}">
-  <view class="popup-mask" bindtap="close"></view>
-  <view class="popup-contents">
-    <view class="pop-goods-info">
-      <view class="pop-img-box">
-        <image src="{{cover}}" class="goods-thumbnail"/>
-      </view>
-      <view class="pop-goods-des">
-        <view class="pop-goods-title">{{Data.goodsName}}</view>
-        <view class="pop-goods-price">积分：{{Data.shop_price}}</view>
-      </view>
-      <view class="pop-goods-close" bindtap="close"></view>
-    </view>
-    <view class="size-label-box">
-      <block wx:for="{{Data.spec_goods_price}}" wx:for-item="item" wx:for-index="key">
-        <view class="label">{{key}}</view>
-        <view class="label-item-box">
-          <view class="label-item {{active==item2.item_id? 'active' : '' }}" wx:for="{{item}}" wx:for-index="idx"  wx:for-item="item2" wx:key="id" data-id="{{item2.item_id}}" data-spec="{{item2}}" data-spec_key="{{key}}" bindtap="specTap"  data-level="{{item2.level}}" data-levelq="{{item2.level2}}"  data-levelw="{{item3.level3}}">
-            {{item2}}
-          </view>
-        </view>
-      </block>
+<!--<view class="show-popup" hidden="{{hideShopPopup}}">-->
+  <!--<view class="popup-mask" bindtap="close"></view>-->
+  <!--<view class="popup-contents">-->
+    <!--<view class="pop-goods-info">-->
+      <!--<view class="pop-img-box">-->
+        <!--<image src="{{cover}}" class="goods-thumbnail"/>-->
+      <!--</view>-->
+      <!--<view class="pop-goods-des">-->
+        <!--<view class="pop-goods-title">{{Data.goodsName}}</view>-->
+        <!--<view class="pop-goods-price">积分：{{Data.shop_price}}</view>-->
+      <!--</view>-->
+      <!--<view class="pop-goods-close" bindtap="close"></view>-->
+    <!--</view>-->
+    <!--<view class="size-label-box">-->
+      <!--<block wx:for="{{Data.spec_goods_price}}" wx:for-item="item" wx:for-index="key">-->
+        <!--<view class="label">{{key}}</view>-->
+        <!--<view class="label-item-box">-->
+          <!--<view class="label-item {{active==item2.item_id? 'active' : '' }}" wx:for="{{item}}" wx:for-index="idx"  wx:for-item="item2" wx:key="id" data-id="{{item2.item_id}}" data-spec="{{item2}}" data-spec_key="{{key}}" bindtap="specTap"  data-level="{{item2.level}}" data-levelq="{{item2.level2}}"  data-levelw="{{item3.level3}}">-->
+            <!--{{item2}}-->
+          <!--</view>-->
+        <!--</view>-->
+      <!--</block>-->
 
-    </view>
-    <view class="buy-num-box">
+    <!--</view>-->
+    <!--<view class="buy-num-box">-->
 
-      <view class="num-label">购买数量</view>
-      <view class="num-box">
-        <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
-        <view class="num-input">
-          <input  type="number" value="{{buyNumber}}" bindblur="inputBuy" disabled/>
-        </view>
-        <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
-      </view>
-    </view>
-    <view class="num-label residue"> 库存剩余：{{store_num}}</view>
-    <view class="popup-join-btn" bindtap="joinCart">
-      加入购物车
-    </view>
-  </view>
-</view>
+      <!--<view class="num-label">购买数量</view>-->
+      <!--<view class="num-box">-->
+        <!--<view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>-->
+        <!--<view class="num-input">-->
+          <!--<input  type="number" value="{{buyNumber}}" bindblur="inputBuy" disabled/>-->
+        <!--</view>-->
+        <!--<view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>-->
+      <!--</view>-->
+    <!--</view>-->
+    <!--<view class="num-label residue"> 库存剩余：{{store_num}}</view>-->
+    <!--<view class="popup-join-btn" bindtap="joinCart">-->
+      <!--加入购物车-->
+    <!--</view>-->
+  <!--</view>-->
+<!--</view>-->

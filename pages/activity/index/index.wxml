@@ -14,10 +14,10 @@
     </view>
     <!-- 活动列表 -->
     <view class='activity'>
-      <block wx:for="{{activity}}" wx:key="item">
+      <block wx:for="{{data}}" wx:key="item123" >
         <navigator url='{{item.a_url}}' class='item {{item.activity_new?"new":""}}'>
           <!-- 图片 -->
-          <image src='{{item.img_url}}' mode='aspectFill'></image>
+          <image src='{{filePath}}{{item.img.url}}' mode='aspectFill'></image>
           <view class='text'>
             <!-- 标题 -->
             <view class='title zan-ellipsis'>

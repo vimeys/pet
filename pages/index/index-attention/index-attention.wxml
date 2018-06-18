@@ -14,13 +14,5 @@
       关注
     </navigator>
   </viem>
-  <view class='section-list'>
-    <template is='template-comment-cells' data='{{media:"img-wrap-1",btn_attention:btn_attention}}'></template>
-    <template is='template-comment-cells' data='{{media:"img-wrap-2"}}'></template>
-    <template is='template-comment-cells' data='{{media:"video-wrap"}}'></template>
-    <template is='template-news-item' data='{{media:"img",news:news,news_img:news_img,news_active:news_active,love:love,news_chartlet:news_chartlet}}'></template>
-    <template is='template-news-item' data='{{media:"video",del_edit:"ture"}}'>
 
-    </template>
-  </view>
 </view>

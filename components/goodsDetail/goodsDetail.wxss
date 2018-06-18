@@ -4,14 +4,22 @@
     padding: 20rpx 20rpx 0;
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 30px;
+
 }
 .goods-li{
     width: 345rpx;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    margin-bottom: 30rpx;
+    /*margin-bottom: 30rpx;*/
     margin-top: 30rpx;
+
+}
+.position-image{
+    width:345rpx;
+    height: 300rpx;
+    position: absolute;
 }
 .goods-li:nth-child(odd){
     margin-right: 20rpx;
@@ -25,9 +33,17 @@
     margin-bottom: 20rpx;
     box-sizing: border-box;
 }
+.limit-image{
+    width: 80rpx;
+    height: 80rpx;
+    position: absolute;
+    top:10rpx;
+    right: 10rpx;
+}
 .goods-card{
     display: flex;
     flex-direction: column;
+    margin-top: 320rpx;
 }
 .goods-title{
     font-size: 28rpx;
@@ -52,9 +68,11 @@
 .goods-num-image{
     width:26rpx;
     height: 26rpx;
+    margin-left: 10rpx;
 }
 .goods-num-people{
     font-size: 24rpx;
+    margin-left: 16rpx;
     color:#888;
 }
 .goods-btn{

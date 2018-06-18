@@ -5,8 +5,16 @@ Component({
    */
   properties: {
       disable:{
-        type:Boolean,
+          type:Boolean,
           value:true
+      },
+      active:{
+          type:Number,
+          value:1
+      },
+      goodsList:{
+          type:Array,
+          value:[1,2,3]
       }
   },
 
@@ -21,6 +29,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+      goDetail(e){
+            let id=e.currentTarget.dataset.id
+          this.triggerEvent('goDetail',{id:id})
+      }
   }
 })

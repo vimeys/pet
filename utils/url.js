@@ -31,6 +31,15 @@ url.hotTalk       =Url+'index/topicList';//热门话题列表
 url.topicDetail   =Url+'index/topicInfo';//话题详情
 url.topicComment  =Url+'index/topicComments';
 
+//商品列表页面
+url.goodsList     =Url+'goods/getGoodsList';//获取商品列表
+url.goodsDetail   =Url+'goods/getGoodsDetails';//获取商品详情
+url.goodsConfirm  =Url+"goods/addOrder";//订单提交
+
+
+
+// 活动
+url.activeList    =Url+'Activity/getActivityList';//活动列表
 
 //生成宠物卡
 url.addPetId      =Url+'pet_info/add';//添加宠物卡
@@ -38,7 +47,7 @@ url.addPetId      =Url+'pet_info/add';//添加宠物卡
 //我的
 url.goldList      =Url+"user/getBill";//宠物金币流水列表
 url.getMessageList=Url+"user/getMessageList";//消息列表
-url.petList       =Url+'user/getPetList';//宠物列表
+url.userPetList       =Url+'user/getPetList';//宠物列表
 //end
 
 

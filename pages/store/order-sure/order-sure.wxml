@@ -4,9 +4,9 @@
   <!-- 地址 -->
   <view class='section-address'>
     <!-- 有地址 -->
-    <template is='template-address-list' data='{{address_list:address_list}}'></template>
+    <template is='template-address-list' data='{{address_list:address_list}}' wx:if="{{!showList}}"></template>
     <!-- 无地址 -->
-    <view class='address'>
+    <view class='address' wx:else bindtap="addAddress">
       您还未添加地址 点击添加
       <view class='zan-arrow'></view>
     </view>
@@ -24,18 +24,18 @@
 
   <!-- 买家备注 -->
   <view class='section-textarea'>
-    <textarea placeholder='买家备注' placeholder-class='placeholder'></textarea>
+    <textarea placeholder='买家备注' placeholder-class='placeholder' bindinput="input"></textarea>
   </view>
 
   <!-- 底部 -->
   <view class='section-footer'>
     <view class='text'>
-      <view>合计：5件</view>
+      <view>合计：1件</view>
       <view>总价：
         <text>2000爪币</text>
       </view>
     </view>
-    <view class='btn'>
+    <view class='btn' bindtap="pay">
       立即支付
     </view>
   </view>

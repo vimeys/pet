@@ -29,7 +29,7 @@ Page({
     //死数据
     getPetList() {
         let user = util.storage('userInfo')
-        util.promiseSync(util.url.url.petNameList, {user_id: 1}).then(json => {
+        util.promiseSync(util.url.url.petNameList, {user_id: app.user.id}).then(json => {
             this.setData({
                 pet: json.data
             })

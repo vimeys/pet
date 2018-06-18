@@ -1,5 +1,6 @@
 // pages/me/address-list/address-list.js
 const totalUtil = require("../../../utils/totalUtil.js");
+var app=getApp();
 Page({
 
   /**
@@ -18,7 +19,7 @@ Page({
     var data_address = that.data.address_list[index]
     console.log(data_address.id);
 
-    totalUtil.promiseSync(totalUtil.url.url.edit_address_list, { address_id: data_address.id, selected: 1, user_id: that.data.userInfo.id}).then((json) => {
+    totalUtil.promiseSync(totalUtil.url.url.edit_address_list, { address_id: data_address.id, selected: 1, user_id:app.user.id}).then((json) => {
       console.log(json.data)
       if (json.status == 1) {
         console.log('提交成功')
@@ -99,13 +100,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this
+    var that = this;
     // that.setData({
     //   userInfo: wx.getStorageSync('userInfo')
     // })
     // that.address_list_show(that,that.data.userInfo.id)
-      //TODO id死数据
-    that.address_list_show(that,9)
+      let user=totalUtil.storage('userInfo');
+    that.address_list_show(that,user.id)
   },
 
   /**

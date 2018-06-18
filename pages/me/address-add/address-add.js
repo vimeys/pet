@@ -13,11 +13,11 @@ Page({
     province_index:0,
     province_id: '',
     // 市
-    city:[],
+    city:[{name:'请选择'}],
     city_index: 0,
     city_id: '',
     // 区
-    area:[],
+    area:[{name:'请选择'}],
     area_index: 0,
     area_id: '',
     submit: 'add'
@@ -36,12 +36,10 @@ Page({
     
     var province_id = that.data.province_id
     var city_id=''
-    console.log(province_id)
 
     // 发送请求 并且携带参数（用户选择的省）
     totalUtil.promiseSync(totalUtil.url.url.getRegion, { pid: province_id}).then((json) => {
       // 接收数据：json.data
-      console.log(json.data)
       city_id = json.data[0].id
       // 赋值，根据省返回数据（市），然后赋值到页面
       that.setData({
@@ -49,12 +47,10 @@ Page({
         city_id: json.data[0].id
       })
       totalUtil.promiseSync(totalUtil.url.url.getRegion, { pid: city_id }).then((json) => {
-        console.log(json.data)
         that.setData({
           area: json.data,
           area_id: json.data[0].id
         })
-        console.log(that.data.province_id, '--', that.data.city_id, '--', that.data.area_id)
       })
     })
 
@@ -69,14 +65,11 @@ Page({
     })
 
     var city_id = that.data.city_id
-    console.log(city_id)
     totalUtil.promiseSync(totalUtil.url.url.getRegion, { pid: city_id }).then((json) => {
-      console.log(json.data)
       that.setData({
         area: json.data,
         area_id: json.data[0].id
       })
-      console.log(that.data.province_id, '--', that.data.city_id, '--', that.data.area_id)
     })
   },
   bind_address_area: function (e) {
@@ -102,13 +95,12 @@ Page({
     form_data.area_id = that.data.area_id
     console.log(form_data)
     for (var i in form_data) {
-      console.log(that.empty(form_data[i]))
       if (!that.empty(form_data[i]) == false) {
         form_submit = false
       }
     }
-    console.log(that.data.userInfo.id)
-    console.log(form_submit)
+    // console.log(that.data.userInfo.id)
+    // console.log(form_submit)
     if (form_submit == true) {
       if(that.data.submit=='add'){
         totalUtil.promiseSync(totalUtil.url.url.add_address, {
@@ -122,10 +114,16 @@ Page({
           selected: 1,//默认就是默认地址
         }).then((json) => {
           if (json.status == 1) {
-            console.log('提交成功')
-            wx.navigateTo({
-              url: '/pages/me/address-list/address-list',
-            })
+              wx.showToast({
+                title: '添加成功',
+                  icon:'success',
+                  success:()=>{
+                    setTimeout(function () {
+                        wx.navigateBack({delta:1})
+                    },1000)
+                  }
+
+              })
           } else if (json.status == 2) {
             console.log('提交失败')
           }
@@ -140,15 +138,25 @@ Page({
           address: form_data.address_info,
           mobile: form_data.mobile,
           consignee: form_data.consignee,
-          address_id: that.data.data_address.id,
+          id: that.data.data_address.id,
           selected: that.data.data_address.selected
         }).then((json) => {
           if (json.status == 1) {
             console.log('提交成功')
             
-            wx.navigateTo({
-              url: '/pages/me/address-list/address-list',
-            })
+            // wx.navigateTo({
+            //   url: '/pages/me/address-list/address-list',
+            // })
+              wx.showToast({
+                  title: '修改成功',
+                  icon:'success',
+                  success:()=>{
+                      setTimeout(function () {
+                          wx.navigateBack({delta:1})
+                      },1000)
+                  }
+
+              })
           } else if (json.status == 2) {
             console.log('提交失败')
           }
@@ -188,7 +196,7 @@ Page({
       }
     })
     totalUtil.promiseSync(totalUtil.url.url.getRegion, {}).then((json) => {
-      console.log(json.data)
+      // console.log(json.data)
       that.setData({
         province: json.data
       })

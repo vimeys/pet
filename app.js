@@ -41,6 +41,7 @@ App({
     ]
   ],
   filePath: '',//图片视频的路径前缀
+    user:'',//全局用户信息
   onLaunch: function () {
 
     util.promiseSync(util.url.url.filePath, {}).then((json) => {
@@ -62,6 +63,7 @@ App({
           console.log(json);
           if (json.status == 1) {
             wx.setStorageSync('userInfo', json.data);
+            this.user=json.data
           } else {
             util.showLoading(json.status)
             setTimeout(() => {

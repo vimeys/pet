@@ -1,5 +1,6 @@
 // pages/activity/index/index.js
 var app = getApp()
+import  utils from  '../../../utils/totalUtil'
 Page({
 
   /**
@@ -36,7 +37,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      this.setData({
+          filePath:app.filePath
+      })
+      utils.promiseSync(utils.url.url.activeList,{}).then(json=>{
+        if(json.status==1){
+          let time=new Date().getTime()/1000
+            json.data.forEach((item)=>{
+              item.a_url='../activity-content/activity-content'
+                item.start_time=item.start_time.substring(0,10)
+                item.end_time=item.end_time.substring(0,10);
+                if(item.end_time_str<time){
+                  item.activity_new=false
+                }else{
+                    item.activity_new=true
+                }
+            })
+            this.setData({
+              data:json.data
+            })
+        }
+      })
   },
 
   /**

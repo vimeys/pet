@@ -14,18 +14,20 @@ Page({
             '/images/test/index-banner.png',
             '/images/test/hsq-320.jpg',
         ],
-        // 是否显示面板指示点
-        indicatorDots: false,
-        // 是否自动轮播
-        autoplay: true,
-        // 间隔时长
-        interval: 3000,
-        // 滚动时间
-        duration: 500,
-        // 是否采用衔接滑动
-        circular: true,
-        // 分页器初始化index
-        swiperCurrent: 0,
+
+        active:1,//选中导航
+        images_arr:'',//热门图片数据
+        indicatorDots: false,// 是否显示面板指示点
+
+        autoplay: true,// 是否自动轮播
+
+        interval: 3000,// 间隔时长
+
+        duration: 500, // 滚动时间
+
+        circular: true,// 是否采用衔接滑动
+
+        swiperCurrent: 0,// 分页器初始化index
         scroll: [{
             title: '这里是名字',
             url: '/images/test/index-banner.png'
@@ -80,7 +82,28 @@ Page({
             swiperCurrent: e.detail.current
         })
     },
-    // 点赞
+    // 选择导航
+    chooseNav(e){
+      let id=e.currentTarget.dataset.id;
+      switch (id){
+          case '1':
+              this.setData({
+                  active:1
+              })
+              break
+          case '2':
+              this.setData({
+                  active:2
+              })
+              break
+          case '3':
+              this.setData({
+                  active:3
+              })
+              break
+      }
+    },
+    // 动态点赞
     bind_love(e) {
         // this.setData({
         //     love:!this.data.love
@@ -231,7 +254,9 @@ Page({
     // 获取话题
     hotTalk() {
         util.promiseSync(util.url.url.hotTalk, {}).then((json) => {
-            this.setData({})
+            this.setData({
+                scroll:json.data
+            })
         })
     },
 
@@ -254,7 +279,7 @@ Page({
     bannerList(data,page_size) {
         let that = this
         let petData = data
-        this.i=0
+        // this.i=0
         petData.forEach(function (item, index) {
             bannerList(item, index, that)
         })
@@ -302,13 +327,23 @@ Page({
         app.globalData.edit = this.data.petData[this.data.index].bg[this.data.indextt].img_url
     },
 
-    // 获取更多
+    // 获取动态更多
     getMore() {
         let user = util.storage('userInfo')
         let page = this.data.page;
         page++
         this.petList(userInfo.id,page,3)
     },
+
+    //获取热门图片
+    gethotImage(){
+        totalUtil.promiseSync(util.url.url.index_hot, { page: 1, pageSize: 10 }).then((json) => {
+            this.setData({
+                images_arr: json.data
+            })
+        })
+    },
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -361,6 +396,4 @@ Page({
             path: '/pages/index/comment/comment'
         }
     }
-
-
 })
