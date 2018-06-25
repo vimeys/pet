@@ -27,21 +27,20 @@
     </view>
     <!-- 关键词 -->
     <view class='word'>
-      <block wx:for="{{word}}" wx:key="{{item}}">
-        <view>
-          <text class='zan-ellipsis'>{{item}}</text>
+      <block wx:for="{{topWord}}" wx:key="{{item}}">
+        <view bindtap="tapSearch" data-index="{{index}}">
+          <text class='zan-ellipsis'>{{item.title}}</text>
         </view>
       </block>
     </view>
-
   </view>
 
-  <view class='hr-20 '></view>
+  <view class='hr-20'></view>
 
   <!-- 话题-列表-->
   <view class='section-list'>
     <view class='section--title'>全部话题</view>
-    <template is='template-comment-cells'  data='{{talkList:talkList,filePath:filePath}}'></template>
+    <template is='template-hotTalk'  data='{{talkList:talkList,filePath:filePath}}'></template>
     <!--<template is='template-comment-cells' data='{{media:"img-wrap-2"}}'></template>-->
     <!--<template is='template-comment-cells' data='{{media:"video-wrap"}}'></template>-->
     <template is='template-list-more'></template>

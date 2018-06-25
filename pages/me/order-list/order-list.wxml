@@ -3,16 +3,16 @@
 <view class='container'>
   <!-- 导航 -->
   <view class='section-nav'>
-    <view class='item active'>
+    <view class="item {{active==0?'active':''}}" data-id="0" bindtap="click">
       全部
     </view>
-    <view class='item'>
+    <view class="item {{active==1?'active':''}}" data-id="1" bindtap="click">
       待发货
     </view>
-    <view class='item'>
+    <view class=" item {{active==2?'active':''}}"data-id="2" bindtap="click">
       已收货
     </view>
-    <view class='item'>
+    <view class="item {{active==3?'active':''}}" data-id="3" bindtap="click">
       已完成
     </view>
   </view>
@@ -21,144 +21,118 @@
   <view class='section-cells'>
 
     <!-- 订单 -->
-    <view class='cells'>
-      <!-- 订单头部 -->
-      <view class='cells-header'>
-        <view class='zan-cell'>
-          <view class='zan-cell__bd'>
-            订单号：416516135516161
-          </view>
-          <view class='zan-cell__ft'>
-            待收货
-          </view>
+<block wx:for="{{orderList}}" wx:key ='item'>
+  <!--已完成-->
+  <view wx:if="{{item.status==3}}" class='cells'>
+    <!-- 订单头部 -->
+    <view class='cells-header'>
+      <view class='zan-cell'>
+        <view class='zan-cell__bd'>
+          订单号：{{item.order_sn}}
         </view>
-      </view>
-      <!-- 订单主体 -->
-      <template is='template-pet-order'></template>
-      <!-- 订单信息 -->
-      <view class='info'>
-        <view class='zan-cell'>
-          <view class='zan-cell__bd'>
-            数量
-          </view>
-          <view class='zan-cell__ft'>
-            ｘ4
-          </view>
-        </view>
-        <view class='zan-cell'>
-          <view class='zan-cell__bd'>
-            合计
-          </view>
-          <view class='zan-cell__ft'>
-            200爪币
-          </view>
-        </view>
-      </view>
-      <!-- 尾部 -->
-      <view class='cell-footer'>
-        <view class='time'>
-          下单时间2018.3.24 40:40:12
-        </view>
-        <view class='btn-wrap'>
-          <view class='btn'>
-            确认收货
-          </view>
+        <view class='zan-cell__ft'>
+          已完成
         </view>
       </view>
     </view>
+    <!-- 订单主体 -->
+    <template is='template-pet-order' data="{{goods:item.goods}}"></template>
 
+    <view class='cell-footer'>
+      <view class='time'>
+        <text class="text">物流单：{{item.logistics_sn}}</text>
+        <text>
+          下单时间：{{item.create_time}}
+        </text>
 
-    <view class='cells'>
-      <!-- 订单头部 -->
-      <view class='cells-header'>
-        <view class='zan-cell'>
-          <view class='zan-cell__bd'>
-            订单号：416516135516161
-          </view>
-          <view class='zan-cell__ft'>
-            待收货
-          </view>
-        </view>
       </view>
-      <!-- 订单主体 -->
-      <template is='template-pet-order'></template>
-      <!-- 订单信息 -->
-      <view class='info'>
-        <view class='zan-cell'>
-          <view class='zan-cell__bd'>
-            数量
-          </view>
-          <view class='zan-cell__ft'>
-            ｘ4
-          </view>
+
+    </view>
+  </view>
+  <!--//带收货-->
+  <view wx:if="{{item.status==2}}" class='cells'>
+    <!-- 订单头部 -->
+    <view class='cells-header'>
+      <view class='zan-cell'>
+        <view class='zan-cell__bd'>
+          订单号：{{item.order_sn}}
         </view>
-        <view class='zan-cell'>
-          <view class='zan-cell__bd'>
-            合计
-          </view>
-          <view class='zan-cell__ft'>
-            200爪币
-          </view>
-        </view>
-      </view>
-      <!-- 尾部 -->
-      <view class='cell-footer'>
-        <view class='time'>
-          下单时间2018.3.24 40:40:12
-        </view>
-        <view class='btn-wrap'>
-          <view class='btn'>
-            确认收货
-          </view>
+        <view class='zan-cell__ft'>
+          待收货
         </view>
       </view>
     </view>
-    <view class='cells'>
-      <!-- 订单头部 -->
-      <view class='cells-header'>
-        <view class='zan-cell'>
-          <view class='zan-cell__bd'>
-            订单号：416516135516161
-          </view>
-          <view class='zan-cell__ft'>
-            待收货
-          </view>
-        </view>
+    <!-- 订单主体 -->
+    <template is='template-pet-order' data="{{goods:item.goods}}"></template>
+
+    <!-- 尾部 -->
+    <view class='cell-footer'>
+      <view class='time'>
+        <text class="text">物流单：{{item.logistics_sn}}</text>
+        <text>
+          下单时间：{{item.create_time}}
+        </text>
+
       </view>
-      <!-- 订单主体 -->
-      <template is='template-pet-order'></template>
-      <!-- 订单信息 -->
-      <view class='info'>
-        <view class='zan-cell'>
-          <view class='zan-cell__bd'>
-            数量
-          </view>
-          <view class='zan-cell__ft'>
-            ｘ4
-          </view>
-        </view>
-        <view class='zan-cell'>
-          <view class='zan-cell__bd'>
-            合计
-          </view>
-          <view class='zan-cell__ft'>
-            200爪币
-          </view>
-        </view>
-      </view>
-      <!-- 尾部 -->
-      <view class='cell-footer'>
-        <view class='time'>
-          下单时间2018.3.24 40:40:12
-        </view>
-        <view class='btn-wrap'>
-          <view class='btn'>
-            确认收货
-          </view>
+      <view class='btn-wrap'>
+        <view class='btn' bindtap="orderConfirm" data-id="{{item.order_sn}}">
+          确认收货
         </view>
       </view>
     </view>
+  </view>
+  <!--代发货-->
+  <view wx:if="{{item.status==1}}" class='cells'>
+    <!-- 订单头部 -->
+    <view class='cells-header'>
+      <view class='zan-cell'>
+        <view class='zan-cell__bd'>
+          订单号：{{item.order_sn}}
+        </view>
+        <view class='zan-cell__ft'>
+          待收货
+        </view>
+      </view>
+    </view>
+    <!-- 订单主体 -->
+    <template is='template-pet-order' data="{{goods:item.goods}}"></template>
+    <!-- 订单信息 -->
+    <!--<view class='info'>-->
+    <!--<view class='zan-cell'>-->
+    <!--<view class='zan-cell__bd'>-->
+    <!--数量-->
+    <!--</view>-->
+    <!--<view class='zan-cell__ft'>-->
+    <!--ｘ4-->
+    <!--</view>-->
+    <!--</view>-->
+    <!--<view class='zan-cell'>-->
+    <!--<view class='zan-cell__bd'>-->
+    <!--合计-->
+    <!--</view>-->
+    <!--<view class='zan-cell__ft'>-->
+    <!--200爪币-->
+    <!--</view>-->
+    <!--</view>-->
+    <!--</view>-->
+    <!-- 尾部 -->
+    <view class='cell-footer'>
+      <view class='time'>
+        <text class="text"></text>
+        <text>
+          下单时间：{{item.update_time}}
+        </text>
+      </view>
+      <!--<view class='btn-wrap'>-->
+      <!--<view class='btn'>-->
+      <!--确认收货-->
+      <!--</view>-->
+      <!--</view>-->
+    </view>
+  </view>
+</block>
 
-    <template is="template-list-more"></template>
+
+    <!--<template is="template-list-more"></template>-->
   </view>
 </view>

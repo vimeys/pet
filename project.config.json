@@ -32,7 +32,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 22,
 			"list": [
 				{
 					"id": 0,
@@ -54,44 +54,20 @@
 				},
 				{
 					"id": -1,
-					"name": "订单管理",
-					"pathName": "pages/me/order-lsit/order-lsit",
-					"query": ""
-				},
-				{
-					"id": -1,
 					"name": "宠物卡",
 					"pathName": "pages/me/pet-card/pet-card",
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "测试-页面导航",
-					"pathName": "pages/test-nav/test-nav",
-					"query": ""
-				},
-				{
-					"id": 6,
+					"id": 5,
 					"name": "涂鸦记录",
 					"pathName": "pages/index/history/history",
-					"query": ""
-				},
-				{
-					"id": 7,
-					"name": "话题",
-					"pathName": "pages/index/gambit-list/gambit-list",
 					"query": ""
 				},
 				{
 					"id": -1,
 					"name": "话题详情",
 					"pathName": "pages/index/gambit-content/gambit-content",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "发布管理",
-					"pathName": "pages/me/publish/publish",
 					"query": ""
 				},
 				{
@@ -150,18 +126,6 @@
 				},
 				{
 					"id": -1,
-					"name": "首页-关注",
-					"pathName": "pages/index/index-attention/index-attention",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "商品详情",
-					"pathName": "pages/store/goods-content/goods-content",
-					"query": ""
-				},
-				{
-					"id": -1,
 					"name": "生成宠物卡",
 					"pathName": "pages/me/pet-card-add/pet-card-add",
 					"query": ""
@@ -174,32 +138,38 @@
 				},
 				{
 					"id": -1,
-					"name": "商品详情",
-					"pathName": "pages/store/goods-content/goods-content",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "商品详情",
-					"pathName": "pages/index/upload/upload",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "首页",
-					"pathName": "pages/index/gambit-list/gambit-list",
-					"query": ""
-				},
-				{
-					"id": -1,
 					"name": "发布页面",
 					"pathName": "pages/index/upload/upload",
 					"query": ""
 				},
 				{
 					"id": -1,
-					"name": "商品页面",
+					"name": "活动页",
+					"pathName": "pages/me/order-list/order-list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "商品列表",
 					"pathName": "pages/store/goodsList/goodsList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "评论详情",
+					"pathName": "pages/index/comment/comment",
+					"query": ""
+				},
+				{
+					"id": 22,
+					"name": "话题详情",
+					"pathName": "pages/index/gambit-content/gambit-content",
+					"query": "id=49"
+				},
+				{
+					"id": -1,
+					"name": "话题列表",
+					"pathName": "pages/index/gambit-list/gambit-list",
 					"query": ""
 				}
 			]

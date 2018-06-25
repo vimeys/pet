@@ -18,7 +18,8 @@
       </view>
     </view>
     <view class='right' bindtap="hrefMessage">
-      <image class='img' src='/images/icon/me-index-banner-right.png' mode='widthFix'></image>
+      <image wx:if="{{isRead}}" class='img' src='/images/icon/me-index-banner-right.png' mode='widthFix'></image>
+      <image wx:else class='img' src='/images/icon/me-index-banner-right.png' mode='widthFix'></image>
       <text class='text'>消息</text>
     </view>
 
@@ -164,7 +165,7 @@
       <view class="zan-cell__bd">收货地址</view>
       <view class="zan-cell__ft"></view>
     </navigator>
-    <navigator url='' class="zan-cell zan-cell--access">
+    <navigator url='../pet-card/pet-card' class="zan-cell zan-cell--access">
       <view class="zan-cell__hd">
         <image src='/images/icon/me-index-petinfo-sterilization1.png' mode='widthFix'></image>
       </view>

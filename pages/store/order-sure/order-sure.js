@@ -16,22 +16,25 @@ Page({
      */
     onLoad: function (options) {
         this.id = options.id
-        this.add=[]
-        utils.promiseSync(utils.url.url.get_address_list,{user_id:app.user.id}).then(json=>{
-            if(json.data.length>=1){
-                json.data.forEach( (item)=> {
-                    console.log(item);
-                    if(item.selected==1){
-                        this.add[0]=item
-                    }
-                })
-                this.setData({
-                    address_list:this.add,
-                    showList:true
-                })
-                this.confirm=true
-            }
+        this.setData({
+            goods:wx.getStorageSync('goodsDetail')
         })
+        // this.add=[]
+        // utils.promiseSync(utils.url.url.get_address_list,{user_id:app.user.id}).then(json=>{
+        //     if(json.data.length>=1){
+        //         json.data.forEach( (item)=> {
+        //             console.log(item);
+        //             if(item.selected==1){
+        //                 this.add[0]=item
+        //             }
+        //         })
+        //         this.setData({
+        //             address_list:this.add,
+        //             showList:true
+        //         })
+        //         this.confirm=true
+        //     }
+        // })
     },
 
     input(e){
@@ -44,6 +47,22 @@ Page({
     pay(){
       utils.promiseSync(utils.url.url.goodsConfirm,{user_id:app.user.id,goods_id:this.id,num:1,remake:this.data.value}).then(json=>{
           console.log(json);
+          if(json.status==1){
+              wx.showModal({
+                title: '提示',
+                content: '兑换成功',
+                  showCancel:false,
+                success: res=>{
+                  if (res.confirm) {
+                        wx.navigateBack({delta:1})
+                  }
+                }
+              })
+          }else{
+              wx.showToast({
+                title: json.data.msg
+              })
+          }
       })
     },
     addAddress(){
@@ -62,7 +81,22 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        this.add=[]
+        utils.promiseSync(utils.url.url.get_address_list,{user_id:app.user.id}).then(json=>{
+            if(json.data.length>=1){
+                json.data.forEach( (item)=> {
+                    console.log(item);
+                    if(item.selected==1){
+                        this.add[0]=item
+                    }
+                })
+                this.setData({
+                    address_list:this.add,
+                    showList:true
+                })
+                this.confirm=true
+            }
+        })
     },
 
     /**

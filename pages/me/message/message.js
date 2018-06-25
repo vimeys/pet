@@ -15,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.getList()
   },
 
   /**
@@ -25,7 +25,8 @@ Page({
   
   },
     getList(){
-      util.promiseSync(url.url.getMessageList,{user_id:1}).then(json=>{
+
+      util.promiseSync(util.url.url.getMessageList,{user_id:app.user.id}).then(json=>{
         if(json.status==1){}
           this.setData({
               Data:json.data

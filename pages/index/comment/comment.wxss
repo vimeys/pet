@@ -1,5 +1,6 @@
 /* pages/index/comment/comment.wxss */
 /* @import '../gambit-content/gambit-content.wxss' */
+@import "../gambit-content/gambit-content.wxss";
 .publish-info .zan-cell__ft .btn{
   display: none;
 }

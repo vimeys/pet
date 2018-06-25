@@ -85,3 +85,16 @@
 .section-activity .activity .item.new .time .zan-cell__bd {
   background: #fe4e4e;
 }
+
+.test-fix{
+  position: fixed;
+  bottom: 50rpx;
+  right: 50rpx;
+  background: #fff;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 150rpx;
+
+}

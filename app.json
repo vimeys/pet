@@ -29,7 +29,7 @@
     "pages/me/pet-card/pet-card",
     "pages/me/order-list/order-list",
     "pages/me/index/index",
-
+    "pages/index/comment/comment",
     "pages/activity/activity-content/activity-content",
     "pages/activity/index/index"
   ],

@@ -7,6 +7,9 @@ Page({
         petData: [],//宠物动态列表
         index: 0,
         indextt: 0,
+        more_text:'查看更多',
+        more_text2:'查看更多',
+        more_text3:'查看更多',
         // 轮播
         imgUrls: [
             '/images/test/index-banner.png',
@@ -130,7 +133,7 @@ Page({
 
     // 动态
     // bind_news: util.bind_news,
-    //   选择地图
+    //   选择底图
     bind_news(e) {
         console.log(e);
         let index = e.currentTarget.dataset.index;
@@ -150,7 +153,7 @@ Page({
             url: "../upload/upload"
         })
     },
-//关注事件
+   //关注事件
     bind_attention(e) {
         let id = e.currentTarget.dataset.id;
         let index = e.currentTarget.dataset.index;
@@ -173,18 +176,15 @@ Page({
 
     // 登录
     bindGetUserInfo: function (e) {
+        console.log(e.detail.rawData);
         this.setData({
             popup_userinfo: false,
         })
-        var UserInfo = e.detail.userInfo
+        var UserInfo = JSON.parse(e.detail.rawData)
         util.promiseSync(util.url.url.saveUserInfo, {
             nickname: UserInfo.nickName,
             avatar_url: UserInfo.avatarUrl,
-            gender: UserInfo.gender,
-            city: UserInfo.city,
-            province: UserInfo.province,
-            country: UserInfo.country,
-            languange: UserInfo.languange
+            id:app.user.id
         })
         console.log(this.data.UserInfo)
     },
@@ -198,16 +198,16 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
-
-        console.log(app.filePath);
+        this.page1=1;
+        this.page2=1;
+        this.page3=1;
         let userInfo = util.storage('userInfo');
         app.userInfo = userInfo
         this.setData({
             filePath: app.filePath,
-
         })
-
+        this.getHotWord()
+        this.i=0;//初始化数据
         var that = this
         // 初始化加载写真集
         that.setData({
@@ -243,7 +243,7 @@ Page({
         this.petList(userInfo.id,1,3)
     },
 
-    // 轮播
+    // 首页动画轮播
     banner() {
         util.promiseSync(util.url.url.indexBanner, {}).then((json) => {
             this.setData({
@@ -267,16 +267,16 @@ Page({
             json.data.forEach(function (item, index) {
                 item.index = 0
             });
-            this.bannerList(json.data,page_size)
-            // that.setData({
-            //     petData: json.data
-            // });
+            this.statuImgaeList(json.data,page_size)
+            that.setData({
+                petData: json.data
+            });
 
         })
     },
 
     // 获取轮播图片
-    bannerList(data,page_size) {
+    statuImgaeList(data,page_size) {
         let that = this
         let petData = data
         // this.i=0
@@ -286,8 +286,6 @@ Page({
 
         function bannerList(item, index, self) {
             let arr = []
-
-            console.log(arr);
             // let that1=that
             //死数据
             util.promiseSync(util.url.url.petBannerList, {bg_id: 1}).then(json1 => {
@@ -298,12 +296,11 @@ Page({
                 item.bannerList = arr;
                 petData[index] = item;
                 that.i++
-                console.log(that.i);
                 if(that.i>=10){
                     that.setData({
                         petData:[...that.data.petData,...petData]
                     })
-                    this.i=0
+                    that.i=0
                 }
                 // let newPetData=[...that.data.petData,...petData]
                 // if(that.data.petData.length==0){
@@ -331,10 +328,12 @@ Page({
     getMore() {
         let user = util.storage('userInfo')
         let page = this.data.page;
-        page++
-        this.petList(userInfo.id,page,3)
+        this.page++
+        this.petList(app.userInfo.id,page,3)
     },
+    getMore2(){
 
+    },
     //获取热门图片
     gethotImage(){
         totalUtil.promiseSync(util.url.url.index_hot, { page: 1, pageSize: 10 }).then((json) => {
@@ -343,6 +342,18 @@ Page({
             })
         })
     },
+
+    // 热门话题文字
+    getHotWord(){
+        util.promiseSync(util.url.url.topWord,{}).then(json=>{
+            if(json.status==1){
+                this.setData({
+                    topWord:json.data
+                })
+            }
+        })
+    },
+
 
     /**
      * 生命周期函数--监听页面初次渲染完成

@@ -3,7 +3,39 @@
 <view class='container page-padding-bottom'>
   <!-- 话题详情 -->
   <view class='section-content'>
-    <template is="template-comment-cells" data='{{media:""}}'></template>
+    <!--<template is="template-comment-cells" data='{{media:""}}'></template>-->
+    <view class='section-content'>
+      <!-- 发布信息-->
+      <view class='publish-info zan-cell'>
+        <view class='zan-cell__hd'>
+          <image src='{{test_img_hsq}}{{item.avatar_url}}' mode='aspectFill'></image>
+        </view>
+        <view class='zan-cell__bd'>
+          <view class='name'>{{Data.user_info.nickname}}没数据</view>
+          <view class='time'>{{Data.create_time}}</view>
+        </view>
+      </view>
+      <!-- 话题文字 -->
+      <view class='text-wrap'>
+        <text>{{Data.content}}</text>
+      </view>
+      <!-- 话题图片 -->
+      <view class='img-wrap'>
+        <image src='{{filePath}}{{item}}' mode='widthFix' wx:for="{{img_url}}" wx:key="item"></image>
+      </view>
+
+      <!-- 关注、评论 -->
+      <view class='footer-icon-2'>
+        <view>
+          <image src='/images/icon/index-gambit-content-attention.png' mode='widthFix'></image>
+          <text>{{Data.like_num}}关注</text>
+        </view>
+        <view>
+          <image src='/images/icon/index-gambit-content-message_1.png' mode='widthFix'></image>
+          <text>{{Data.comment_num}}评论</text>
+        </view>
+      </view>
+    </view>
   </view>
 
   <!-- 分割线 -->
@@ -15,8 +47,8 @@
     <!-- 评论-列表 -->
     <view class='comment'>
       <template is="template-comment-cells" data='{{media:"",reply:"1"}}'></template>
-      <template is="template-comment-cells" data='{{media:"",reply:"1"}}'></template>
-      <template is="template-comment-cells" data='{{media:"",reply:"1"}}'></template>
+      <!--<template is="template-comment-cells" data='{{media:"",reply:"1"}}'></template>-->
+      <!--<template is="template-comment-cells" data='{{media:"",reply:"1"}}'></template>-->
     </view>
 
   </view>

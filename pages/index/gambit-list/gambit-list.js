@@ -10,6 +10,7 @@ Page({
   data: {
     test_img_hsq_320: app.test_img_hsq_320,
     filePath: '',//图片前缀,
+      topWord:[],
     scroll: [{
       title: '这里是名字',
       url: '/images/test/index-banner.png'
@@ -60,6 +61,7 @@ Page({
     })
     let user=util.storage('userInfo')
     this.getHotTalkList(user.id,1)
+      this.getHotWord()
     // this.listenFocus = util.listenFocus(this);
     // this.listenBlur = util.listenBlur(this);
     // console.log(app.filePath);
@@ -68,11 +70,31 @@ Page({
     //   filePath: app.filePath
     // })
   },
-
-
-
+    // 获取热门话题关键词
+    getHotWord(){
+      util.promiseSync(util.url.url.topWord,{}).then(json=>{
+          if(json.status==1){
+            this.setData({
+                topWord:json.data
+            })
+          }
+      })
+    },
+    // 点击关键词搜索
+    tapSearch(e){
+        let index=e.currentTarget.dataset.index;
+        let text=this.data.topWord[index].title
+        util.promiseSync(util.url.url.searchHot,{title:text,page:1}).then(json=>{
+            if(json.status==1){
+                this.setData({
+                    talkList:json.data
+                })
+            }
+        })
+    },
+    // 获取热门话题
     getHotTalkList(id,size){
-      util.promiseSync(util.url.url.hotTalk,{user:id,page:size}).then(json=>{
+      util.promiseSync(util.url.url.hotTalk,{user_id:id,page:size,pageSize:10}).then(json=>{
         if(json.status==1){
           this.setData({
               talkList:json.data
@@ -83,7 +105,7 @@ Page({
 
     // 获取话题详情
     topicDetail(e){
-      let id=e.currentTarget.detail.id;
+      let id=e.currentTarget.dataset.id;
       wx.navigateTo({
         url: '../gambit-content/gambit-content?id='+id
       })
@@ -94,7 +116,7 @@ Page({
         let id=e.currentTarget.dataset.id;
         let index=e.currentTarget.dataset.index;
         let talkList=this.data.talkList
-        util.promiseSync(util.url.url.follow,{user_id:app.userInfo.id,list_sort_id:id}).then(json=>{
+        util.promiseSync(util.url.url.follow,{user_id:app.user.id,list_sort_id:id}).then(json=>{
             if(talkList[index].follow==1){
                 talkList[index].follow=0
                 this.setData({
@@ -114,17 +136,18 @@ Page({
 
         let index = e.currentTarget.dataset.index;
         let id = e.currentTarget.dataset.id;
-        let talkList=this.data.talkList
-        util.promiseSync(util.url.url.follow,{user_id:app.userInfo.id,list_sort_id:id}).then(json=>{
+        console.log(id);
+        let talkList=this.data.talkList;
+        util.promiseSync(util.url.url.like,{user_id:app.user.id,list_sort_id:id }).then(json=>{
             if(talkList[index].like==1){
                 talkList[index].like=0
-                talkList[index].likes--
+                talkList[index].list_sort.likes--
                 this.setData({
                     talkList
                 })
             }else{
                 talkList[index].like=1
-                talkList[index].likes++
+                talkList[index].list_sort.likes++
                 this.setData({
                     talkList
                 })

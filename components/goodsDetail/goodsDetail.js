@@ -15,6 +15,10 @@ Component({
       goodsList:{
           type:Array,
           value:[1,2,3]
+      },
+      filePath:{
+          type:String,
+          value:'123'
       }
   },
 

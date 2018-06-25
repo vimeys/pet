@@ -218,6 +218,9 @@ Page({
             if(json.status==1){
                 wx.hideLoading();
                 util.success('上传成功')
+                setTimeout(function () {
+                    wx.navigateBack({delta:1})
+                })
             }
         })
 

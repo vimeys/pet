@@ -15,7 +15,7 @@
     <!-- 活动列表 -->
     <view class='activity'>
       <block wx:for="{{data}}" wx:key="item123" >
-        <navigator url='{{item.a_url}}' class='item {{item.activity_new?"new":""}}'>
+        <navigator url='{{item.a_url}}?id={{item.id}}' class='item {{item.activity_new?"new":""}}'>
           <!-- 图片 -->
           <image src='{{filePath}}{{item.img.url}}' mode='aspectFill'></image>
           <view class='text'>
@@ -29,7 +29,7 @@
                 NEW
               </view>
               <view class='zan-cell__bd'>
-                活动日期：<text>{{item.star_time}}</text>至<text>{{item.end_time}}</text>
+                活动日期：<text>{{item.start_time}}</text>至<text>{{item.end_time}}</text>
               </view>
             </view>
           </view>
@@ -39,3 +39,4 @@
     </view>
   </view>
 </view>
+<view class="test-fix" bindtap="goShop">商城</view>

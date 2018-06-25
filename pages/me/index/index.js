@@ -8,6 +8,7 @@ Page({
    */
   data: {
     test_img_url:app.test_img_url,
+      isRead:false,
       petList:[] //宠物列表
   },
 
@@ -83,6 +84,19 @@ Page({
    */
   onShow: function () {
       this.getPetList()
+      console.log(123);
+      console.log(app);
+      util.promiseSync(util.url.url.isHasMes,{user_id:app.user.id}).then(json=>{
+          if(json.data==0){
+              this.setData({
+                  isRead:false
+              })
+          }else{
+              this.setData({
+                  isRead:true
+              })
+          }
+      })
   },
 
   /**

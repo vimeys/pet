@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+      more_text:'查看更多',
     activity: [{
       a_url: "",
       img_url: "/images/test/hsq.jpeg",
@@ -59,7 +60,11 @@ Page({
         }
       })
   },
-
+    goShop(){
+      wx.navigateTo({
+        url: '../../store/goodsList/goodsList'
+      })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -11,6 +11,6 @@
     <text>  24  :  12  :  45   开始抢兑</text>
 
 </view>
-<goodsCard disable="{{disable}}" active="{{active}}"  goodsList="{{goodsList}}" bindgoDetail="goDetail">
+<goodsCard disable="{{disable}}" active="{{active}}"  goodsList="{{goodsList}}" filePath="{{filePath}}"bindgoDetail="goDetail">
 
 </goodsCard>

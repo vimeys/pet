@@ -43,8 +43,16 @@
   height: 65rpx;
   line-height: 65rpx;
   font-size: 26rpx;
+  margin-bottom: 20rpx;
   color: #888;
   text-align: right;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.section-cells .cell-footer .time .text{
+  line-height: 85rpx;
+  /*height: 65rpx;*/
 }
 .section-cells .cell-footer .btn-wrap{
   text-align: right;

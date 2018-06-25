@@ -7,7 +7,7 @@
     <swiper indicator-dots="ture" autoplay="ture" interval="3000" duration="1000" circular="ture">
       <block wx:for="{{swiper_img}}" wx:key='{{item}}'>
         <swiper-item>
-          <image src="{{item}}" class="slide-image" mode='aspectFill' />
+          <image src="{{filePath}}{{item.url}}" class="slide-image" mode='aspectFill' />
         </swiper-item>
       </block>
     </swiper>
@@ -23,8 +23,8 @@
       {{detail.name}}啊色块大家爱上拉克丝几点啦看似简单拉克的减肥啦开始来看大家是否收到了复健科打算尽快了解
     </view>
     <view class='zan-cell'>
-      <view class='zan-cell__bd'>{{detail.price}}300爪币</view>
-      <view class='zan-cell__ft'>已兑200件</view>
+      <view class='zan-cell__bd'>{{detail.price}}爪币</view>
+      <view class='zan-cell__ft'>已兑{{detail.sales}}件</view>
     </view>
   </view>
   <!-- 分割线 -->

@@ -1,5 +1,6 @@
 // pages/store/goodsList/goodsList.js
 import  util from "../../../utils/totalUtil"
+var app=getApp();
 Page({
 
     /**
@@ -7,14 +8,19 @@ Page({
      */
     data: {
         disable: true,
-        active: 1
+        active: 1,
+        filePath:''
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        this.getList(0)
+        this.setData({
+            filePath:app.filePath
+        })
+
+        this.getList(1)
     },
     //选择商品导航
     chooseNav(e) {
@@ -23,18 +29,19 @@ Page({
             this.setData({
                 active:1
             })
-            this.getList(0)
+            this.getList(1)
         }else{
             this.setData({
                 active:2
             })
-            this.getList(1)
+            this.getList(0)
         }
     },
     // 获取商品列表
     getList(id){
           util.promiseSync(util.url.url.goodsList,{limit:id}).then(json=>{
               if(json.status==1){
+
                   this.setData({
                       goodsList:json.data
                   })

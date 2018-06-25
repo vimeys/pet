@@ -1,5 +1,6 @@
 // pages/index/comment/comment.js
 var app=getApp()
+import util from '../../../utils/totalUtil'
 Page({
 
   /**
@@ -15,8 +16,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let id=options.id;
+    this.getList(id)
   },
+
+
+    // 获取列表
+    getList(id){
+        util.promiseSync(util.url.url.commentList,{comment_id:id,page:this.page,pageSize:this.pageSize}).then(json=>{
+            console.log(json);
+        })
+    },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

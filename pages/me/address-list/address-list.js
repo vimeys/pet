@@ -101,9 +101,9 @@ Page({
    */
   onShow: function () {
     var that = this;
-    // that.setData({
-    //   userInfo: wx.getStorageSync('userInfo')
-    // })
+    that.setData({
+      userInfo: wx.getStorageSync('userInfo')
+    })
     // that.address_list_show(that,that.data.userInfo.id)
       let user=totalUtil.storage('userInfo');
     that.address_list_show(that,user.id)

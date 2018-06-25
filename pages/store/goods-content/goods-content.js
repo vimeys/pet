@@ -27,13 +27,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      this.setData({
+          filePath:app.filePath
+      })
     // console.log(this.data.swiper_img)
       this.id=options.id;
       //TODO 死数据
-      utils.promiseSync(utils.url.url.goodsDetail,{goods_id:5}).then(json=>{
+      utils.promiseSync(utils.url.url.goodsDetail,{goods_id:this.id}).then(json=>{
           console.log(json);
           if(json.status==1){
               wxParse.wxParse('content','html',json.data.details,this,5)
+              if(json.data.more!=null){
+                  this.setData({
+                      swiper_img:json.data.more.photos
+                  })
+              }
               this.setData({
                   detail:json.data
               })
@@ -45,13 +53,18 @@ Page({
 
       //TODO 加大了数据
       let money=app.user.money+2222;
-        console.log(this.id);
+        // console.log(this.id);
         if(money<this.data.detail.price){
             wx.showToast({
               title: '爪币不足',
                 icon:"none"
             })
       }else{
+            wx.setStorageSync('goodsDetail', {
+                goodsImage:`${this.data.filePath}${this.data.detail.goods_img.url}`,
+                name:this.data.detail.name,
+                price:this.data.detail.price
+            });
           wx.navigateTo({
             url: '../order-sure/order-sure?id='+this.id
           })

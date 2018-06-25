@@ -29,17 +29,22 @@ url.chartletItem  =Url+'graffiti/getGraffitiList';//获取单个贴图列表
 // 话题
 url.hotTalk       =Url+'index/topicList';//热门话题列表
 url.topicDetail   =Url+'index/topicInfo';//话题详情
-url.topicComment  =Url+'index/topicComments';
+url.topicComment  =Url+'index/commentsList';//获取话题评论
+url.topWord       =Url+'index/hotTopicList'//获取关键词
+url.searchHot     =Url+'index/getHotTopicSearch';//搜索热门话题
+url.commentList   =Url+'index/CommentsReply';//获取回复图片
+
 
 //商品列表页面
 url.goodsList     =Url+'goods/getGoodsList';//获取商品列表
 url.goodsDetail   =Url+'goods/getGoodsDetails';//获取商品详情
 url.goodsConfirm  =Url+"goods/addOrder";//订单提交
-
-
+url.orderList     =Url+'goods/getOrderList';//订单列表
+url.orderConfirm  =Url+'goods/orderConfirm';//订单确认收货
 
 // 活动
 url.activeList    =Url+'Activity/getActivityList';//活动列表
+url.activeDetail  =Url+'activity/getActivityDetails';//活动详情
 
 //生成宠物卡
 url.addPetId      =Url+'pet_info/add';//添加宠物卡
@@ -47,7 +52,8 @@ url.addPetId      =Url+'pet_info/add';//添加宠物卡
 //我的
 url.goldList      =Url+"user/getBill";//宠物金币流水列表
 url.getMessageList=Url+"user/getMessageList";//消息列表
-url.userPetList       =Url+'user/getPetList';//宠物列表
+url.userPetList   =Url+'user/getPetList';//宠物列表
+url.isHasMes      =Url+"user/countUnreadMessage";//是否有已读消息
 //end
 
 

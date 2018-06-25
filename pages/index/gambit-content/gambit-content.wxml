@@ -9,28 +9,28 @@
         <image src='{{test_img_hsq}}{{item.avatar_url}}' mode='aspectFill'></image>
       </view>
       <view class='zan-cell__bd'>
-        <view class='name'>{{Data.nickname}}这里是宠物名字</view>
-        <view class='time'>{{Data.create_time}}2018-04-28 99：66：66</view>
+        <view class='name'>{{Data.user_info.nickname}}没数据</view>
+        <view class='time'>{{Data.create_time}}</view>
       </view>
     </view>
     <!-- 话题文字 -->
     <view class='text-wrap'>
-      <text>{{Data.content}}购买狗狗需要注意什么问题到手机法拉盛肯德基疯狂打卡时间反馈了解到附近开了拉升的减肥？</text>
+      <text>{{Data.content}}</text>
     </view>
     <!-- 话题图片 -->
     <view class='img-wrap'>
-      <image src='{{item}}' mode='widthFix' wx:for="{{img_url}}" wx:key="item"></image>
+      <image src='{{filePath}}{{item.url}}' mode='widthFix' wx:for="{{image_url}}" wx:key="item"></image>
     </view>
 
     <!-- 关注、评论 -->
     <view class='footer-icon-2'>
       <view>
         <image src='/images/icon/index-gambit-content-attention.png' mode='widthFix'></image>
-        <text>54645关注</text>
+        <text>{{Data.like_num}}关注</text>
       </view>
       <view>
         <image src='/images/icon/index-gambit-content-message_1.png' mode='widthFix'></image>
-        <text>54645评论</text>
+        <text>{{Data.comment_num}}评论</text>
       </view>
     </view>
   </view>
@@ -57,8 +57,8 @@
             <image src='{{test_img_hsq}}{{item.avatar_url}}' mode='aspectFill'></image>
           </view>
           <view class='zan-cell__bd'>
-            <view class='name'>{{item.user.nickname}}这里是宠物名字</view>
-            <view class='time'>{{item.create_time}}2018-04-28 99：66：66</view>
+            <view class='name'>{{item.user.nickname}}</view>
+            <view class='time'>{{item.create_time}}</view>
           </view>
         </view>
         <template is="comment-list" data="{{item:item}}"></template>
@@ -70,8 +70,17 @@
 
   <!-- 回复 -->
   <view class='section-reply'>
-    <input placeholder='请说点什么吧~' cursor-spacing='60' adjust-position='ture' placeholder-class='placeholder' bindchange='bind_input_val'></input>
-    <view class='btn' bindtap='form_submit'>回复</view>
+    <input placeholder='请说点什么吧~'
+           value="{{comment_val}}"
+           cursor-spacing='60'
+           adjust-position='ture'
+           placeholder-class='placeholder'
+           bindchange='bind_input_val'>
+    </input>
+    <view class='btn'
+          bindtap='form_submit'>
+      回复
+    </view>
   </view>
 
 </view>
