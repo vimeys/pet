@@ -46,9 +46,9 @@
             <image class="upload__img" src="{{item}}" mode="aspectFill" />
           </view>
         </block>
-        <view class="upload__file">
-          <image class="upload__img" src="{{test_img_hsq}}" mode="aspectFill" />
-        </view>
+        <!--<view class="upload__file">-->
+          <!--&lt;!&ndash;<image class="upload__img" src="{{test_img_hsq}}" mode="aspectFill" />&ndash;&gt;-->
+        <!--</view>-->
         <view class="upload__input-box">
           <image src='/images/icon/index-upload-add.png' bindtap="chooseImage_news"></image>
           <!-- <view class="upload__input" bindtap="chooseImage"></view>  -->

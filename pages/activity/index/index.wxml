@@ -35,8 +35,7 @@
           </view>
         </navigator>
       </block>
-      <template is="template-list-more"></template>
+      <template is="template-list-more" data="{{more_text}}"></template>
     </view>
   </view>
 </view>
-<view class="test-fix" bindtap="goShop">商城</view>

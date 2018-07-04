@@ -4,14 +4,18 @@
 <view  wx:if="{{!combine}}">
     <view class="container1"
           id="container"
-          bindtouchstart="touchStart"
-          bindtouchend="touchEnd"
-          bindtouchmove="touchMove"
+          catch:touchstart="touchStart"
+          catch:touchend="touchEnd"
+          catch:touchmove="touchMove"
           style="height:{{height}}rpx" >
         <image class="bg" src="{{bgPic}}"
-               mode="widthFix"
-               style="height:{{height}}rpx">
+               mode="aspectFill"
+               style="width: 750rpx; height: 750rpx" >
         </image>
+        <!--<image class="bg" src="{{bgPic}}"-->
+               <!--mode="widthFix"-->
+               <!--style="height:{{height}}rpx" >-->
+        <!--</image>-->
         <icon type="cancel"
               class="cancel"
               id="cancel"
@@ -72,7 +76,7 @@
         </view>
     </view>
     <!--<button bind:tap="prevPic">预览</button>-->
-    <!--<button bind:tap="goCopper">剪切</button>-->
+    <button bind:tap="goCopper">剪切</button>
     <!--<button bind:tap="combinePic">确定</button>-->
     <!--<button bind:tap="save">保存</button>-->
     <view bind:tap="updata" class="upLoad">发布</view>

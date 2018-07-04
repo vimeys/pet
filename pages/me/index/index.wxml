@@ -31,7 +31,7 @@
     <swiper class='swiper' duration="100" previous-margin="20rpx" next-margin="20rpx" circular="true">
 
        <block wx:for="{{petList}}" wx:key="item">
-        <swiper-item  wx:if="{{item.sex==1}}" class='swiper-item man'>
+        <swiper-item bindtap="goPetCard" wx:if="{{item.sex==1}}" class='swiper-item man'>
           <view class='swiper-content'>
             <image class='bg-img' src='/images/me-index-swiper-bg.png' mode='widthFix'></image>
             <view class='swiper-content-in'>
@@ -62,7 +62,7 @@
                 </view>
                 <view>
                   <image src='/images/icon/me-index-petinfo-sterilization2.png' mode='widthFix'></image>
-                  <text>{{item.is_sterilization?'已绝育':'未绝育'}}</text>
+                  <text>{{item.is_sterilization==0?'已绝育':'未绝育'}}</text>
                 </view>
 
               </view>
@@ -76,7 +76,7 @@
             </view>
           </view>
         </swiper-item>
-        <swiper-item  wx:else class='swiper-item woman'>
+        <swiper-item bindtap="goPetCard" wx:else class='swiper-item woman'>
           <view class='swiper-content'>
             <image class='bg-img' src='/images/me-index-swiper-bg.png' mode='widthFix'></image>
             <view class='swiper-content-in'>
@@ -158,6 +158,13 @@
       <view class="zan-cell__bd" >兑换订单</view>
       <view class="zan-cell__ft"></view>
     </navigator>
+      <navigator url='../../store/goodsList/goodsList' class="zan-cell zan-cell--access">
+          <view class="zan-cell__hd">
+              <image src='/images/icon/me-index-petinfo-sterilization1.png' mode='widthFix'></image>
+          </view>
+          <view class="zan-cell__bd">兑换商场</view>
+          <view class="zan-cell__ft"></view>
+      </navigator>
     <navigator url='../address-list/address-list' class="zan-cell zan-cell--access">
       <view class="zan-cell__hd">
         <image src='/images/icon/me-index-cells-address.png' mode='widthFix'></image>
@@ -165,21 +172,106 @@
       <view class="zan-cell__bd">收货地址</view>
       <view class="zan-cell__ft"></view>
     </navigator>
-    <navigator url='../pet-card/pet-card' class="zan-cell zan-cell--access">
-      <view class="zan-cell__hd">
-        <image src='/images/icon/me-index-petinfo-sterilization1.png' mode='widthFix'></image>
-      </view>
-      <view class="zan-cell__bd">宠物卡</view>
-      <view class="zan-cell__ft"></view>
-    </navigator>
-    <navigator url='' class="zan-cell zan-cell--access">
-      <view class="zan-cell__hd">
-        <image src='/images/icon/me-index-cells-manage.png' mode='widthFix'></image>
-      </view>
-      <view class="zan-cell__bd">发布管理</view>
-      <view class="zan-cell__ft"></view>
-    </navigator>
+
+    <!--<navigator url='' class="zan-cell zan-cell&#45;&#45;access">-->
+      <!--<view class="zan-cell__hd">-->
+      <!--<image src='/images/icon/me-index-cells-manage.png' mode='widthFix'></image>-->
+      <!--</view>-->
+      <!--<view class="zan-cell__bd">发布管理</view>-->
+      <!--<view class="zan-cell__ft"></view>-->
+      <!--</navigator>-->
+  </view>
+  <!--动态管理-->
+  <view class="state-manage">
+    <block wx:for="{{issus}}">
+        <view wx:if="{{item.model_type=='BgModel'}}">
+            <view class="state-title"><image src="../../../images/icon/list-more.png" mode="widthFix"></image> {{item.create_time}}</view>
+            <view class="state-content">
+                <view class="state-border"></view>
+                <view>
+                    <view class="state-images {{item.bg.length==1?'':'more'}}">
+                        <block wx:for="{{item.bg}}" wx:for-item="item2">
+                            <!--<image mode="widthFix" src="../../../images/test/hsq.jpeg"></image>-->
+                            <image mode="widthFix" src="{{imageFile+item2.image_url}}"></image>
+                        </block>
+                    </view>
+                    <view class="state-btns">
+                        <view class="btn">
+                            <image class='item-footer-icon' src='/images/icon/index-news-footer1-1.png' mode='widthFix'></image>
+                            <text>{{item.likes}}点赞</text>
+                        </view>
+                        <view class="btn" bindtap="del" data-id="{{item.id}}" data-index="{{index}}">
+                            <image class='item-footer-icon' src='/images/icon/index-news-del.png' mode='widthFix'></image>
+                            <text>删除</text>
+                        </view>
+                        <view class="btn">
+                            <switch checked="{{item.is_edit==1}}" bindchange="isEdit" color="#FEE632" data-id="{{item.id}}" />
+                            编辑
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--视频-->
+        <view wx:elif="{{item.model_type==VideoModel}}">
+            <view class="state-title"><image src="../../../images/icon/list-more.png" mode="widthFix"></image> {{item.create_time}}</view>
+            <view class="state-content">
+                <view class="state-border"></view>
+                <view>
+                    <view class="state-video">
+                        <video src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"></video>
+                        <view class="state-btns">
+                            <view class="btn">
+                                <image class='item-footer-icon' src='/images/icon/index-news-footer1-1.png' mode='widthFix'></image>
+                                <text>{{item.likes}}点赞</text>
+                            </view>
+                            <view class="btn" bindtap="del" data-id="{{item.id}}" data-index="{{index}}">
+                                <image class='item-footer-icon' src='/images/icon/index-news-del.png' mode='widthFix'></image>
+                                <text>删除</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <!--话题-->
+        <view wx:else="{{item.model_type==TopicModel}}">
+            <view class="state-title"><image src="../../../images/icon/list-more.png" mode="widthFix"></image> {{item.create_time}}</view>
+            <view class="state-content">
+                <view class="state-border"></view>
+                <view>
+                    <view class="state-video">
+                        <view>
+                            <view class="hotWord">{{item.content}}</view>
+                            <view class="state-images {{item.topic.more.photos.length==1?'':'more'}}">
+                                <block wx:for="{{item.topic.more.photos}}" wx:for-item="item2">
+                                    <!--<image mode="widthFix" src="../../../images/test/hsq.jpeg"></image>-->
+                                    <image mode="widthFix" src="{{imageFile+item2.url}}"></image>
+                                </block>
+                            </view>
+                        </view>
+
+                        <view class="state-btns">
+                            <view class="btn">
+                                <image class='item-footer-icon' src='/images/icon/index-news-footer1-1.png' mode='widthFix'></image>
+                                <text>{{item.edits}}点赞</text>
+                            </view>
+                            <view class="btn" bindtap="del" data-id="{{item.id}}" data-index="{{index}}">
+                                <image class='item-footer-icon' src='/images/icon/index-news-del.png' mode='widthFix'></image>
+                                <text>删除</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+
+
+
   </view>
 
-  <input class='test-input'></input>
+
+
 </view>

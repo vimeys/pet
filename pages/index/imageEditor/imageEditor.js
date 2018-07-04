@@ -148,89 +148,90 @@ Page({
         }
     },
     touchMove(e){
-        console.log(123);
+        console.log(234);
         var current_x=e.touches[0].clientX;
         var current_y=e.touches[0].clientY;
-        var moved_x=current_x-this.start_x;
-        var moved_y=current_y-this.start_y;
-        if(this.touch_target=="hat"){
-            this.setData({
-                hatCenterX:this.data.hatCenterX+moved_x,
-                hatCenterY:this.data.hatCenterY+moved_y,
-                cancelCenterX:this.data.cancelCenterX+moved_x,
-                cancelCenterY:this.data.cancelCenterY+moved_y,
-                handleCenterX:this.data.handleCenterX+moved_x,
-                handleCenterY:this.data.handleCenterY+moved_y
-            })
-            this.hat_center_x=this.data.hatCenterX;
-            this.hat_center_y=this.data.hatCenterY;
-            this.cancel_center_x=this.data.cancelCenterX;
-            this.cancel_center_y=this.data.cancelCenterY;
-            this.handle_center_x=this.data.handleCenterX;
-            this.handle_center_y=this.data.handleCenterY;
-            this.scale=this.data.scale;
-            this.rotate=this.data.rotate;
-            let arr=this.data.drawArray;
-            arr[this.data.imageId].XYZ.scale=this.scale
-            arr[this.data.imageId].XYZ.rotate=this.rotate
-            arr[this.data.imageId].XYZ.hat_center_x=this.hat_center_x
-            arr[this.data.imageId].XYZ.hat_center_y=this.hat_center_y
-            this.setData({
-                drawArray:arr
-            })
-        };
-        if(this.touch_target=="handle"){
-            this.setData({
-                handleCenterX:this.data.handleCenterX+moved_x,
-                handleCenterY:this.data.handleCenterY+moved_y,
-                cancelCenterX:2*this.data.hatCenterX-this.data.handleCenterX,
-                cancelCenterY:2*this.data.hatCenterY-this.data.handleCenterY
-            });
-            let diff_x_before=this.handle_center_x-this.hat_center_x;
-            let diff_y_before=this.handle_center_y-this.hat_center_y;
-            let diff_x_after=this.data.handleCenterX-this.hat_center_x;
-            let diff_y_after=this.data.handleCenterY-this.hat_center_y;
-            let distance_before=Math.sqrt(diff_x_before*diff_x_before+diff_y_before*diff_y_before);
-            let distance_after=Math.sqrt(diff_x_after*diff_x_after+diff_y_after*diff_y_after);
-            let angle_before=Math.atan2(diff_y_before,diff_x_before)/Math.PI*180;
-            let angle_after=Math.atan2(diff_y_after,diff_x_after)/Math.PI*180;
-            this.setData({
-                scale:distance_after/distance_before*this.scale,
-                rotate:angle_after-angle_before+this.rotate,
-            })
+        var moved_x=Math.round(current_x-this.start_x);
 
-            this.hat_center_x=this.data.hatCenterX;
-            this.hat_center_y=this.data.hatCenterY;
-            this.cancel_center_x=this.data.cancelCenterX;
-            this.cancel_center_y=this.data.cancelCenterY;
-            this.handle_center_x=this.data.handleCenterX;
-            this.handle_center_y=this.data.handleCenterY;
-            this.scale=this.data.scale;
-            this.rotate=this.data.rotate;
-            let arr=this.data.drawArray;
-            arr[this.data.imageId].XYZ.scale=this.scale
-            arr[this.data.imageId].XYZ.rotate=this.rotate
-            arr[this.data.imageId].XYZ.hat_center_x=this.hat_center_x
-            arr[this.data.imageId].XYZ.hat_center_y=this.hat_center_y
-            this.setData({
-                drawArray:arr
-            })
-        }
+        var moved_y=Math.round(current_y-this.start_y);
+        console.log(moved_x, moved_y);
+        // if(this.touch_target=="hat"){
+                this.setData({
+                    hatCenterX:this.data.hatCenterX+moved_x,
+                    hatCenterY:this.data.hatCenterY+moved_y,
+                    cancelCenterX:this.data.cancelCenterX+moved_x,
+                    cancelCenterY:this.data.cancelCenterY+moved_y,
+                    handleCenterX:this.data.handleCenterX+moved_x,
+                    handleCenterY:this.data.handleCenterY+moved_y
+                })
+            // this.hat_center_x=this.data.hatCenterX;
+            // this.hat_center_y=this.data.hatCenterY;
+            // this.cancel_center_x=this.data.cancelCenterX;
+            // this.cancel_center_y=this.data.cancelCenterY;
+            // this.handle_center_x=this.data.handleCenterX;
+            // this.handle_center_y=this.data.handleCenterY;
+            // this.scale=this.data.scale;
+            // this.rotate=this.data.rotate;
+            // let arr=this.data.drawArray;
+            // arr[this.data.imageId].XYZ.scale=this.scale
+            // arr[this.data.imageId].XYZ.rotate=this.rotate
+            // arr[this.data.imageId].XYZ.hat_center_x=this.hat_center_x
+            // arr[this.data.imageId].XYZ.hat_center_y=this.hat_center_y
+            // this.setData({
+            //     drawArray:arr
+            // })
+        // };
+        // if(this.touch_target=="handle"){
+        //     this.setData({
+        //         handleCenterX:this.data.handleCenterX+moved_x,
+        //         handleCenterY:this.data.handleCenterY+moved_y,
+        //         cancelCenterX:2*this.data.hatCenterX-this.data.handleCenterX,
+        //         cancelCenterY:2*this.data.hatCenterY-this.data.handleCenterY
+        //     });
+        //     let diff_x_before=this.handle_center_x-this.hat_center_x;
+        //     let diff_y_before=this.handle_center_y-this.hat_center_y;
+        //     let diff_x_after=this.data.handleCenterX-this.hat_center_x;
+        //     let diff_y_after=this.data.handleCenterY-this.hat_center_y;
+        //     let distance_before=Math.sqrt(diff_x_before*diff_x_before+diff_y_before*diff_y_before);
+        //     let distance_after=Math.sqrt(diff_x_after*diff_x_after+diff_y_after*diff_y_after);
+        //     let angle_before=Math.atan2(diff_y_before,diff_x_before)/Math.PI*180;
+        //     let angle_after=Math.atan2(diff_y_after,diff_x_after)/Math.PI*180;
+        //     this.setData({
+        //         scale:distance_after/distance_before*this.scale,
+        //         rotate:angle_after-angle_before+this.rotate,
+        //     })
+        //
+        //     // this.hat_center_x=this.data.hatCenterX;
+        //     // this.hat_center_y=this.data.hatCenterY;
+        //     // this.cancel_center_x=this.data.cancelCenterX;
+        //     // this.cancel_center_y=this.data.cancelCenterY;
+        //     // this.handle_center_x=this.data.handleCenterX;
+        //     // this.handle_center_y=this.data.handleCenterY;
+        //     // this.scale=this.data.scale;
+        //     // this.rotate=this.data.rotate;
+        //     // let arr=this.data.drawArray;
+        //     // arr[this.data.imageId].XYZ.scale=this.scale
+        //     // arr[this.data.imageId].XYZ.rotate=this.rotate
+        //     // arr[this.data.imageId].XYZ.hat_center_x=this.hat_center_x
+        //     // arr[this.data.imageId].XYZ.hat_center_y=this.hat_center_y
+        //     // this.setData({
+        //     //     drawArray:arr
+        //     // })
+        // }
         this.start_x=current_x;
         this.start_y=current_y;
     },
     touchEnd(e){
         this.touch_target="";
+        this.hat_center_x=this.data.hatCenterX;
+        this.hat_center_y=this.data.hatCenterY;
+        this.cancel_center_x=this.data.cancelCenterX;
+        this.cancel_center_y=this.data.cancelCenterY;
+        this.handle_center_x=this.data.handleCenterX;
+        this.handle_center_y=this.data.handleCenterY;
+        console.log('借宿');
     },
-    touchMove(){
-        let timer=null;
-        return function () {
-            clearInterval(timer)
-            timer=setTimeout(function () {
-                console.log(123);
-            },1000)
-        }
-    },
+
     chooseImg(e){
         this.setData({
             currentHatId:e.target.dataset.hatId,

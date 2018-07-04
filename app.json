@@ -1,7 +1,10 @@
 {
   "pages": [
+        "pages/wx-cropper/index",
+    "pages/index/index-hot/index-hot",
         "pages/index/index/index",
     "pages/index/upload/upload",
+    "pages/index/stateDetail/stateDetail",
       "pages/index/scrawl/scrawl",
     "pages/index/imageEditor/imageEditor",
     "pages/store/goodsList/goodsList",
@@ -15,7 +18,6 @@
     "pages/me/address-add/address-add",
     "pages/store/goods-content/goods-content",
     "pages/store/goodsSearch/goodsSearch",
-    "pages/index/index-hot/index-hot",
     "pages/index/index-attention/index-attention",
     "pages/me/money/money",
     "pages/me/message/message",

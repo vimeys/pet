@@ -9,11 +9,14 @@ url.upfile        =Url+'file/upload';//上传图片视频保存接口
 url.login         =Url+'user/login';//获取登陆
 url.addBg         =Url+'Graffiti/bgAdd';//上传背景
 url.addttBg       =Url+'Graffiti/GraffitiAdd';//上传贴图
+url.addVideo      =Url+'Graffiti/videoAdd';//发布视频
+
 // 首页
 url.indexBanner   =Url+'index/bannerList';//首页轮播
 url.petRankList   =Url+'index/petRankingList';//宠物首页动态列表
 url.petList       =Url+'index/getPetDynamic';//宠物动态列表
-url.petBannerList =Url+'/graffiti/getGraffitiList';  //获取贴图轮播
+url.petBannerList =Url+'graffiti/getGraffitiList';  //获取贴图轮播
+url.stateDetail   =Url+'graffiti/getListSortDetails';//获取动态单个详情
 url.follow        =Url+'follow/add';//点击是否关注
 url.like          =Url+'like/add';//点击是否点赞
 url.followList    =Url+'index/getFollowPetDynamic';//用户的关注列表
@@ -29,7 +32,7 @@ url.chartletItem  =Url+'graffiti/getGraffitiList';//获取单个贴图列表
 // 话题
 url.hotTalk       =Url+'index/topicList';//热门话题列表
 url.topicDetail   =Url+'index/topicInfo';//话题详情
-url.topicComment  =Url+'index/commentsList';//获取话题评论
+url.topicComment  =Url+'index/commentsList';//获取动态话题评论
 url.topWord       =Url+'index/hotTopicList'//获取关键词
 url.searchHot     =Url+'index/getHotTopicSearch';//搜索热门话题
 url.commentList   =Url+'index/CommentsReply';//获取回复图片
@@ -54,6 +57,9 @@ url.goldList      =Url+"user/getBill";//宠物金币流水列表
 url.getMessageList=Url+"user/getMessageList";//消息列表
 url.userPetList   =Url+'user/getPetList';//宠物列表
 url.isHasMes      =Url+"user/countUnreadMessage";//是否有已读消息
+url.stateManage   =Url+'User/dynamicManagement';//获取发布管理
+url.delissus      =Url+'user/dynamicDelete';//删除当前修改
+url.changeissus   =Url+'user/editState'//修改当前
 //end
 
 

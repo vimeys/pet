@@ -14,5 +14,35 @@
     </navigator>
   </viem>
   <!-- bindscrolltolower="loadImages" -->
-
+  <!--<view class="hot" wx:if="{{active==2}}">-->
+  <view class="hot">
+    <scroll-view scroll-y="true" bindscrolltolower="loadImages">
+      <view class='waterfall-box'>
+        <view class="item">
+          <view class='img-wrap' wx:for="{{col1}}" wx:key="id">
+            <image src="{{img_url+item.bg.img_url}}" mode='widthFix'></image>
+            <view class='love'>
+              <image src='/images/icon/index-news-footer3-1.png' mode='widthFix'></image>
+              <text>{{item.likes}}</text>
+              <text>赞</text>
+            </view>
+          </view>
+        </view>
+        <view class="item">
+          <view class='img-wrap' wx:for="{{col2}}" wx:key="id">
+            <image src="{{img_url+item.bg.img_url}}" mode='widthFix'></image>
+            <view class='love'>
+              <image src='/images/icon/index-news-footer3-1.png' mode='widthFix'></image>
+              <text>{{item.likes}}</text>
+              <text>赞</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <template is='template-list-more' data='{{more_text:more_text,disabled:disabled}}'></template>
+    <view style="display:none">
+      <image wx:for="{{images_arr}}" wx:key="id" id="{{item.id}}" src="{{img_url+item.graffiti.img_url}}" bindload="onImageLoad"></image>
+    </view>
+  </view>
 </view>

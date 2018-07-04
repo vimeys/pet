@@ -116,7 +116,7 @@
       <view class='waterfall-box'>
         <view class="item">
           <view class='img-wrap' wx:for="{{col1}}" wx:key="id">
-            <image src="{{img_url+item.graffiti.img_url}}" mode='widthFix'></image>
+            <image src="{{filePath+item.graffiti.img_url}}" mode='widthFix'></image>
             <view class='love'>
               <image src='/images/icon/index-news-footer3-1.png' mode='widthFix'></image>
               <text>{{item.likes}}</text>
@@ -126,7 +126,7 @@
         </view>
         <view class="item">
           <view class='img-wrap' wx:for="{{col2}}" wx:key="id">
-            <image src="{{img_url+item.graffiti.img_url}}" mode='widthFix'></image>
+            <image src="{{filePath+item.graffiti.img_url}}" mode='widthFix'></image>
             <view class='love'>
               <image src='/images/icon/index-news-footer3-1.png' mode='widthFix'></image>
               <text>{{item.likes}}</text>
@@ -136,9 +136,9 @@
         </view>
       </view>
     </scroll-view>
-    <template is='template-list-more' data='{{more_text:more_text,disabled:disabled}}'></template>
+    <template is='template-list-more2' data='{{more_text2:more_text2,disabled:disabled}}'></template>
     <view style="display:none">
-      <image wx:for="{{images_arr}}" wx:key="id" id="{{item.id}}" src="{{img_url+item.graffiti.img_url}}" bindload="onImageLoad"></image>
+      <image wx:for="{{images_arr}}" wx:key="id" id="{{item.id}}" src="{{filePath+item.graffiti.img_url}}" bindload="onImageLoad"></image>
     </view>
   </view>
 
@@ -158,6 +158,7 @@
     </template>
   </view>
 </view>
+
 
 
   <!-- 上传 -->

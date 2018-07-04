@@ -93,8 +93,18 @@ Page({
                                     app: 'petapi',
                                     filetype: 'video'
                                 },
-                                success: res => {
-
+                                success: res1 => {
+                                    console.log(res1);
+                                    if(res1.statusCode==200){
+                                        util.promiseSync(util.url.url.addVideo,{user_id:app.user.id,pet_id:that.data.pet[that.data.index].id,img_id:JSON.parse(res1.data).data.id}).then(json=>{
+                                                if(json.status==1){
+                                                    util.showSuccess('发布成功');
+                                                    setTimeout(function () {
+                                                        wx.navigateBack({delta:1})
+                                                    },1000)
+                                                }
+                                        })
+                                    }
                                 }
                             })
                         }
@@ -217,7 +227,7 @@ Page({
         util.promiseSync(util.url.url.upHotTalk,{user_id:user.id,title:'',content:this.value,img:this.filePath}).then((json)=>{
             if(json.status==1){
                 wx.hideLoading();
-                util.success('上传成功')
+                util.showSuccess('上传成功')
                 setTimeout(function () {
                     wx.navigateBack({delta:1})
                 })

@@ -59,8 +59,8 @@ Page({
     this.setData({
         filePath:app.filePath
     })
-    let user=util.storage('userInfo')
-    this.getHotTalkList(user.id,1)
+
+
       this.getHotWord()
     // this.listenFocus = util.listenFocus(this);
     // this.listenBlur = util.listenBlur(this);
@@ -172,7 +172,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+      let user=util.storage('userInfo')
+      this.getHotTalkList(user.id,1)
   },
 
   /**

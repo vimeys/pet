@@ -1,20 +1,41 @@
 // pages/me/pet-card/pet-card.js
+import util from "../../../utils/totalUtil";
+var app=getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+      petList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+      this.setData({
+          imageFile:app.filePath
+      })
   },
+    getPetList(){
+        console.log("执行我的页面");
 
+        let user=util.storage("userInfo");
+        //TODO 死数据
+        util.promiseSync(util.url.url.userPetList,{user_id:user.id}).then(json=>{
+            if(json.status==1){
+                let date=Date.parse(new Date())
+                json.data.forEach(function (item,index) {
+                    item.numDay=Math.floor(Math.abs((new Date(item.buy_time.replace(/-/g, '/')).getTime()-Date.parse(new Date())))/86400000)
+                    console.log(item.numDay);
+                })
+                this.setData({
+                    petList:json.data
+                })
+            }
+        })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -26,7 +47,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+      this.getPetList()
   },
 
   /**

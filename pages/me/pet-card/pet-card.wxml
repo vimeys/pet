@@ -1,12 +1,35 @@
 <!--pages/me/pet-card/pet-card.wxml-->
 <view class='container'>
-  <view class='section-content'>
+
+  <view class="pet-list" wx:if="{{petList}}">
+    <block wx:for="{{petList}}">
+      <view class="pet-li">
+        <view class="pet-card">
+          <view class="pet-news">
+            <view>{{item.name}}<text class="age">{{item.age}}</text></view>
+            <view><image class="pet-icon" src="/images/icon/me-index-petinfo-sterilization2.png" mode="widthFix"></image>{{item.is_sterilization==0?'已绝育':'未绝育'}}</view>
+            <view><image class="pet-icon" src="/images/icon/me-index-petinfo-birthday.png" mode="widthFix"></image>{{item.birthday}}</view>
+            <view><image class="pet-icon"src="/images/icon/me-index-petinfo-money.png" mode="widthFix"></image>{{item}}</view>
+          </view>
+          <view class='img-wrap-000'>
+            <view class='img-wrap-255'>
+              <image src='{{imageFile}}{{item.pet_img}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
+              <image wx:if="{{item.sex==0}}" src='/images/icon/me-index-petinfo-sex1.png' class='sex-img' mode='widthFix'></image>
+              <image wx:else src='/images/icon/me-index-petinfo-sex2.png' class='sex-img' mode='widthFix'></image>
+            </view>
+          </view>
+        </view>
+        <view class="content zan-ellipsis--l2">
+          {{item.describe}}
+        </view>
+      </view>
+    </block>
+
+  </view>
+  <view wx:else class='section-content'>
     <image src='/images/me-pat-card.png' mode='widthFix'></image>
     <view>
       <text>注册我的宠物卡</text><image src='/images/icon/me-pat-card-right.png' mode='widthFix'></image>
     </view>
-  </view>
-  <view>
-
   </view>
 </view>

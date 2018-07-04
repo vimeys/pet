@@ -1,4 +1,5 @@
 /* pages/me/pet-card/pet-card.wxss */
+@import "../index/index.wxss";
 .container::before {
    background-color: #eaeaea; 
 }
@@ -26,4 +27,93 @@
 .section-content view image{
   width: 23rpx;
   margin-left: 15rpx;
+}
+
+.pet-icon{
+  width: 25rpx;
+  display: inline-block;
+    margin-right: 10rpx;
+}
+ .img-wrap-000 {
+  position: relative;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.15);
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+}
+
+ .img-wrap-255 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: 50%;
+}
+
+ .img-wrap-255 .header-img {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+ .img-wrap-255 .sex-img {
+  position: absolute;
+  bottom: -8rpx;
+  right: -8rpx;
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+ .pet-li{
+     width:710rpx;
+     height: 380rpx;
+     box-shadow: 0px 0px 5px rgba(227,227,227,1);
+     margin: 10rpx auto;
+     border-radius: 20rpx;
+     box-sizing: border-box;
+     padding: 30rpx 40rpx;
+ }
+ .pet-card{
+     display: flex;
+     flex-direction: row;
+     padding-bottom: 30rpx;
+     margin-bottom: 30rpx;
+     border-bottom: 1px solid #eee;
+ }
+ .pet-news{
+
+ }
+.pet-news view:first-child{
+    font-size: 30rpx;
+    font-weight: bold;
+}
+.pet-news view{
+    height: 50rpx;
+    line-height: 50rpx;
+}
+.pet-news view text{
+    font-weight: normal;
+    font-size: 28rpx;
+    display: inline-block;
+    margin-left: 20rpx;
+}
+.content{
+    line-height: 40rpx;
+    height: 80rpx;
+    text-align: left;
+    width: 100%;
+
+    font-size: 26rpx;
+
 }

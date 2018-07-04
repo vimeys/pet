@@ -177,92 +177,92 @@
 <!-- *********************************动态********************************** -->
 <template name="template-news-item">
   <view class='template-news-item'>
-    <block wx:for="{{petData}}">
-      <!-- 发布信息 -->
-      <view class='publish-info zan-cell'>
-        <view class='zan-cell__hd'>
-          <!--<image src='/images/test/hsq-header.jpg' mode='aspectFill'></image>-->
-          <image src='{{item.pet_info.pet_img}}' mode='aspectFill'></image>
-        </view>
-        <view class='zan-cell__bd'>
-          <view class='name'>{{item.pet_info.name}}</view>
-          <view class='time'>{{item.create_time}}</view>
-        </view>
-        <view class='zan-cell__ft'>
-          <view class='btn  {{item.follow==1?"active":""}}' bindtap='bind_attention' data-id="{{item.id}}" data-index="{{index}}">
-            <text>√ 已关注</text>
-            <text>+ 关注</text>
-          </view>
+  <block wx:for="{{petData}}">
+    <!-- 发布信息 -->
+    <view class='publish-info zan-cell'>
+      <view class='zan-cell__hd'>
+        <!--<image src='/images/test/hsq-header.jpg' mode='aspectFill'></image>-->
+        <image src='{{item.pet_info.pet_img}}' mode='aspectFill'></image>
+      </view>
+      <view class='zan-cell__bd'>
+        <view class='name'>{{item.pet_info.name}}</view>
+        <view class='time'>{{item.create_time}}</view>
+      </view>
+      <view class='zan-cell__ft'>
+        <view class='btn  {{item.follow==1?"active":""}}' bindtap='bind_attention' data-id="{{item.id}}" data-index="{{index}}">
+          <text>√ 已关注</text>
+          <text>+ 关注</text>
         </view>
       </view>
-      <!-- 图片 -->
-      <view class='item-content' wx:if='{{item.bg.length}}'>
-        <image src='{{item.bg[item.index].img_url}}' mode='aspectFill'></image>
-        <text></text>
-        <!-- 贴图 -->
-        <swiper indicator-dots="false" autoplay="true" interval="5000  " duration="2500" circular="true">
-          <block wx:for="{{item.bannerList}}" wx:for-item="bItem">
-            <swiper-item>
-              <image src="{{filePath}}{{bItem.image}}" class="slide-image" mode='widthFix' />
-            </swiper-item>
-          </block>
-        </swiper>
-        <view class='img-list'>
-          <view class='img-list-item {{news_active==index?"active":""}}'
-                wx:for="{{item.bg}}"
-                wx:for-index='idx'
-                wx:for-item="item2"
-                bindtap='bind_news'
-                data-indext='{{idx}}'
-                data-index="{{index}}">
-            <image src='{{item2.img_url}}' mode='aspectFill'></image>
-          </view>
-        </view>
-        <!-- 涂鸦 -->
-        <cover-view class='btn-scrawl' catchtap="editHref" wx:if="{{item.is_edit==1}}">
-          <cover-image class="c-image" src='/images/icon/index-news-scrawl.png' mode='widthFix'></cover-image>
-          <cover-view class="c-text">涂鸦</cover-view>
-        </cover-view>
-      </view>
-      <!-- 视频 -->
-      <view class='item-content' wx:else>
-        <view class='video-wrap'>
-          <video controls initial-time="1" poster src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"></video>
+    </view>
+    <!-- 图片 -->
+    <view class='item-content' wx:if='{{item.bg.length}}'>
+      <image src='{{item.bg[item.index].img_url}}' mode='aspectFill'></image>
+      <text></text>
+      <!-- 贴图 -->
+      <swiper indicator-dots="false" autoplay="true" interval="5000  " duration="2500" circular="true">
+        <block wx:for="{{item.bannerList}}" wx:for-item="bItem">
+          <swiper-item>
+            <image src="{{filePath}}{{bItem.image}}" class="slide-image" mode='widthFix' />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class='img-list'>
+        <view class='img-list-item {{news_active==index?"active":""}}'
+              wx:for="{{item.bg}}"
+              wx:for-index='idx'
+              wx:for-item="item2"
+              bindtap='bind_news'
+              data-indext='{{idx}}'
+              data-index="{{index}}">
+          <image src='{{item2.img_url}}' mode='aspectFill'></image>
         </view>
       </view>
-      <view class='item-footer'>
-        <view wx:if='{{item.bg.length}}'>
-          <image class='item-footer-icon' src='/images/icon/index-news-footer1.png' mode='widthFix'></image>
-          <text>{{item.edits}}涂鸦</text>
-        </view>
-        <view bindtap="" data-id="{{item.id}}" data-index="{{index}}">
-          <image class='item-footer-icon' src='/images/icon/index-news-footer2.png' mode='widthFix'></image>
-          <text>{{item.comments}}评论</text>
-        </view>
-        <view bindtap='bind_love' data-index="{{index}}" data-id="{{item.id}}">
-          <image src='{{item.like==1?"/images/icon/index-news-footer3-1.png":"/images/icon/index-news-footer3-0.png"}}' mode='widthFix'></image>
-          <text>{{item.likes}}赞</text>
-        </view>
-        <view class="item-footer-relative">
-          <image class='item-footer-icon' src='/images/icon/index-news-footer4.png' mode='widthFix'></image>
-          <text>分享</text>
-          <button open-type="share" bindtap="share" data-id="1"></button>
-        </view>
+      <!-- 涂鸦 -->
+      <cover-view class='btn-scrawl' catchtap="editHref" wx:if="{{item.is_edit==1}}">
+        <cover-image class="c-image" src='/images/icon/index-news-scrawl.png' mode='widthFix'></cover-image>
+        <cover-view class="c-text">涂鸦</cover-view>
+      </cover-view>
+    </view>
+    <!-- 视频 -->
+    <view class='item-content' wx:else>
+      <view class='video-wrap'>
+        <video controls initial-time="1" poster src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"></video>
       </view>
-    </block>
+    </view>
+    <view class='item-footer'>
+      <view wx:if='{{item.bg.length}}'>
+        <image class='item-footer-icon' src='/images/icon/index-news-footer1.png' mode='widthFix'></image>
+        <text>{{item.edits}}涂鸦</text>
+      </view>
+      <view bindtap="hrefDetail" data-id="{{item.id}}" data-index="{{index}}">
+        <image class='item-footer-icon' src='/images/icon/index-news-footer2.png' mode='widthFix'></image>
+        <text>{{item.comments}}评论</text>
+      </view>
+      <view bindtap='bind_love' data-index="{{index}}" data-id="{{item.id}}">
+        <image src='{{item.like==1?"/images/icon/index-news-footer3-1.png":"/images/icon/index-news-footer3-0.png"}}' mode='widthFix'></image>
+        <text>{{item.likes}}赞</text>
+      </view>
+      <view class="item-footer-relative">
+        <image class='item-footer-icon' src='/images/icon/index-news-footer4.png' mode='widthFix'></image>
+        <text>分享</text>
+        <button open-type="share" bindtap="share" data-id="1"></button>
+      </view>
+    </view>
+  </block>
 
-    <!-- 删除、编辑 -->
-    <!-- <view class='footer-icon-2' wx:if='{{del_edit=="ture"}}'>
-      <view>
-        <image src='/images/icon/index-news-del.png' mode='widthFix'></image>
-        <text>删除</text>
-      </view>
-      <view>
-        <image src='/images/icon/index-news-edit.png' mode='widthFix'></image>
-        <text>编辑</text>
-      </view>
-    </view> -->
-  </view>
+  <!-- 删除、编辑 -->
+  <!-- <view class='footer-icon-2' wx:if='{{del_edit=="ture"}}'>
+    <view>
+      <image src='/images/icon/index-news-del.png' mode='widthFix'></image>
+      <text>删除</text>
+    </view>
+    <view>
+      <image src='/images/icon/index-news-edit.png' mode='widthFix'></image>
+      <text>编辑</text>
+    </view>
+  </view> -->
+</view>
 </template>
 
 <!-- ***************************宠物订单主体  page：订单管理页，订单确认页************************* -->

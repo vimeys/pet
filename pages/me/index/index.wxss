@@ -288,3 +288,78 @@
 .test-input {
   color: #fdcb06;
 }
+
+
+/*//发布管理*/
+.state-manage{
+  margin-bottom: 30rpx;
+}
+.state-title{
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+  font-size: 30rpx;
+  /*height: 32rpx;*/
+  line-height: 32rpx;
+}
+.state-title image{
+  width: 31rpx;
+  display: inline-block;
+  /*margin-top: 10rpx;*/
+  /*margin-bottom: 10rpx;*/
+}
+.state-content{
+  display: flex;
+  flex-direction: row;
+}
+.state-content .state-border{
+  margin-right: 15rpx;
+  margin-left: 15rpx;
+  border-left: 1px solid red;
+}
+.state-images{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.state-images image{
+  width: 680rpx;
+  border-radius: 20rpx ;
+}
+.more image{
+  width: 210rpx;
+  border-radius: 10rpx;
+  margin-left: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.state-btns{
+  border-bottom: 1px solid red;
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: row;
+  height: 60rpx;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 30rpx;
+}
+.state-btns image{
+  width: 32rpx;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.btn{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.state-video video{
+  width: 680rpx;
+}
+.hotWord{
+  font-size: 28rpx;
+  line-height: 36rpx;
+  margin: 10rpx ;
+}
+.wx-switch-input{width:64rpx !important;height:32rpx !important;}
+.wx-switch-input::before{width:64rpx !important;height: 32rpx !important;}
+.wx-switch-input::after{width: 28rpx !important;height: 28rpx !important;}

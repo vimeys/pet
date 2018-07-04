@@ -10,6 +10,7 @@ Page({
     col1: [],
     col2: [],
     page: 1,
+      // filePath:app.filepath,
     more_text: app.more_star_text
   },
 
@@ -38,7 +39,7 @@ Page({
     console.log(page)
     totalUtil.promiseSync(totalUtil.url.url.index_hot, { page: page, pageSize: 10 }).then((json) => {
       let images = this.data.images_arr;
-      if (json.data.lenght < 2) {
+      if (json.data.length < 2) {
         // 加载完毕
         console.log(0)
         that.setData({

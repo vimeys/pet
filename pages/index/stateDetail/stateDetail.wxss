@@ -1,0 +1,3 @@
+/* pages/index/stateDetail/stateDetail.wxss */
+@import "../../../template/list.wxss";
+@import "../comment/comment.wxss";

@@ -7,9 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+      test:[1,1,3,3],
     test_img_url:app.test_img_url,
       isRead:false,
-      petList:[] //宠物列表
+      petList:[], //宠物列表
+      issus:[]//动态列表
   },
 
     //去订单详情页面
@@ -48,11 +50,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      console.log(app.globalData);
+
+
       this.setData({
           imageFile:app.filePath
       })
   },
+    goPetCard(){
+      wx.navigateTo({
+        url: '../pet-card/pet-card'
+      })
+    },
     //获取宠物列表
   getPetList(){
       console.log("执行我的页面");
@@ -72,6 +80,56 @@ Page({
         }
       })
   },
+
+    // 获取发布列表
+    getissusList(){
+            this.issusList()
+    },
+
+    issusList(page=1,page_size=10){
+        console.log(app.user);
+        util.promiseSync(util.url.url.stateManage,{user_id:app.user.id,page:page,pageSize:page_size}).then(json=>{
+            this.setData({
+                issus:json.data
+            })
+        })
+    },
+
+    //删除按钮
+    del(e){
+        let id=e.currentTarget.dataset.id;
+        let index =e.currentTarget.dataset.index
+        util.promiseSync(util.url.url.delissus,{list_sort_id:id}).then(json=>{
+            if(json.status==1){
+                wx.showToast({
+                  title: '删除成功'
+                })
+                let issus=this.data.issus
+                issus.splice(index,1)
+                this.setData({
+                    issus:issus
+                })
+            }else{
+                wx.showToast({
+                    title:'删除失败'
+                })
+            }
+        })
+    },
+    // 是否可以编辑
+    isEdit(e){
+          let id=e.currentTarget.dataset.id;
+        console.log(e.detail.value);
+        let is_edit=e.detail.value
+        if(is_edit){
+            var is_editNum=1
+        }else{
+            var is_editNum=0
+        }
+        util.promiseSync(util.url.url.changeissus,{list_sort_id:id,is_edit:is_editNum}).then(json=>{
+            console.log(json);
+        })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -97,7 +155,9 @@ Page({
               })
           }
       })
+      this.getissusList()
   },
+
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -58,6 +58,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+
         this.setData({
             filePath: app.filePath
         })
@@ -104,7 +105,6 @@ Page({
         })
         //TODO
         // 死数据
-
     },
 
     // 跳转话题回复详情

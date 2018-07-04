@@ -1,11 +1,17 @@
 // pages/index/index.js
 const util = require("../../../utils/totalUtil.js");
 var app = getApp();
+let col1H = 0;
+let col2H = 0;
+let i = 0;
 Page({
     data: {
         filePath: '',//图片前缀,
         petData: [],//宠物动态列表
         index: 0,
+        col1: [],
+        commentList:[],//关注列表
+        col2: [],
         indextt: 0,
         more_text:'查看更多',
         more_text2:'查看更多',
@@ -98,11 +104,23 @@ Page({
               this.setData({
                   active:2
               })
+              wx.getSystemInfo({
+                  success: (res) => {
+                      util.promiseSync(util.url.url.index_hot, { page: 1, pageSize: 10 }).then((json) => {
+                          this.setData({
+                              images_arr: json.data
+                          })
+                      })
+                      //加载首组图片
+                  }
+              })
               break
           case '3':
               this.setData({
                   active:3
               })
+
+              this.getfollowList(app.user.id);
               break
       }
     },
@@ -241,6 +259,7 @@ Page({
         this.banner();
         this.hotTalk();
         this.petList(userInfo.id,1,3)
+        this.getfollowList(userInfo.id,1,3)
     },
 
     // 首页动画轮播
@@ -272,6 +291,58 @@ Page({
                 petData: json.data
             });
 
+        })
+    },
+
+    // 获取关注列表
+    getfollowList(id, page = 1, page_size = 10) {
+        let that = this;
+        util.promiseSync(util.url.url.followList, {user_id: id, page: page, pageSize: page_size}).then(json => {
+            let data = json.data
+            if (json.status == 1) {
+                // Promise.all(
+                //     data.forEach((item, index) => {
+                //         // if (item.model_type == 'BgModel') {
+                //         //     return new Promise(resolve => {
+                //         //         let petData = data
+                //         //         let arr = []
+                //         //         //死数据
+                //         //         util.promiseSync(util.url.url.petBannerList, {bg_id: 1}).then(json1 => {
+                //         //             json1.data.forEach((item1, index) => {
+                //         //                 arr.push({image: item1.graffiti.img_url, id: item1.graffiti.id})
+                //         //             })
+                //         //             petData.bannerList = arr;
+                //         //
+                //         //         })
+                //         //     })
+                //         // }
+                //     })
+                // ).then(json=>{
+                //     console.log(json);
+                // })
+            }
+        })
+    },
+
+    // 关注获取动态
+    bannerLIst(data, index,page_size, that) {
+        let petData = data
+        // this.i=0
+        let arr = []
+        // let that1=that
+        //死数据
+        util.promiseSync(util.url.url.petBannerList, {bg_id: 1}).then(json1 => {
+            // let petData = self.data.petData
+            json1.data.forEach((item1, index) => {
+                arr.push({image: item1.graffiti.img_url, id: item1.graffiti.id})
+            })
+            petData.bannerList = arr;
+            // petData[index] = item;
+            // console.log(petData);
+            // that.setData({
+            //     commentList: [...that.data.commentList, ...petData]
+            // })
+            return petData
         })
     },
 
@@ -315,7 +386,7 @@ Page({
             })
         }
     },
-
+    // 去涂鸦页面
     editHref() {
         // console.log(this.data.petData[this.data.index].bg[this.data.indextt].img_url);
         wx.navigateTo({
@@ -331,17 +402,8 @@ Page({
         this.page++
         this.petList(app.userInfo.id,page,3)
     },
-    getMore2(){
 
-    },
-    //获取热门图片
-    gethotImage(){
-        totalUtil.promiseSync(util.url.url.index_hot, { page: 1, pageSize: 10 }).then((json) => {
-            this.setData({
-                images_arr: json.data
-            })
-        })
-    },
+
 
     // 热门话题文字
     getHotWord(){
@@ -351,6 +413,72 @@ Page({
                     topWord:json.data
                 })
             }
+        })
+    },
+
+    // 去动态详情页面
+    hrefDetail(e){
+        let id=e.currentTarget.dataset.id;
+        let index =e.currentTarget.dataset.index;
+        wx.navigateTo({
+          url: '../stateDetail/stateDetail?id='+id
+        })
+    },
+
+    // 加载热门图方法
+    onImageLoad: function (e) {
+        let imageId = e.currentTarget.id;
+        let images_arr = this.data.images_arr;
+        let imageObj = null;
+        console.log(images_arr)
+        for (let i = 0; i < images_arr.length; i++) {
+            let img = images_arr[i];
+            if (img.id == imageId) {
+                imageObj = img;
+                break;
+            }
+        }
+        let col1 = this.data.col1;
+        let col2 = this.data.col2;
+        if (i % 2) {
+            col2.push(imageObj);
+            i++
+        } else {
+            col1.push(imageObj);
+            i++
+        }
+        let data = {
+            col1: col1,
+            col2: col2
+        };
+        console.log(data)
+        this.setData(data);
+    },
+    // 热门分页
+    getMore2: function () {
+        var that = this
+        let page = this.data.page;
+        page++
+        console.log(page)
+        util.promiseSync(util.url.url.index_hot, { page: page, pageSize: 10 }).then((json) => {
+            let images = this.data.images_arr;
+            if (json.data.length < 2) {
+                // 加载完毕
+                console.log(0)
+                that.setData({
+                    more_text: app.more_end_text,
+                    disabled:true
+                })
+            }else{
+                console.log(1)
+                images = images.concat(json.data)
+                that.setData({
+                    images_arr: images,
+                    page: page
+                })
+                console.log(that.data.images_arr)
+            }
+
         })
     },
 

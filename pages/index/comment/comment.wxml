@@ -1,3 +1,4 @@
+<!--动态详情-->
 <!--pages/index/gambit-content/gambit-content.wxml-->
 <import src="/template/list.wxml"/>
 <view class='container page-padding-bottom'>
