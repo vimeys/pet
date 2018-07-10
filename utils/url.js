@@ -29,6 +29,8 @@ url.upHotTalk     =Url+'Graffiti/addTopic';//上传话题详情
 //涂鸦
 url.chartletList  =Url+'graffiti/getChartletList';//获取贴图集
 url.chartletItem  =Url+'graffiti/getGraffitiList';//获取单个贴图列表
+url.getCode       =Url+'activity/getCodeImg';//获取二维码
+url.getChartletList=Url+'graffiti/getChartletList';//获取贴图列表
 // 话题
 url.hotTalk       =Url+'index/topicList';//热门话题列表
 url.topicDetail   =Url+'index/topicInfo';//话题详情

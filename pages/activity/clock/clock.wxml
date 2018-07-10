@@ -1,0 +1,25 @@
+<!--pages/activity/clock/clock.wxml-->
+<view class="card">
+    <image  class='card-bg' src="/images/actvie-bg.png"></image>
+    <view class="card-content">
+        <image  class="card-header-image" src="/images/actvie-bg.png" mode="aspectFill"></image>
+        <image class="logo" src="/images/actvie-bg.png"></image>
+        <view class="card-news">
+            <image src="/images/me-pat-card.png"></image>
+            <view class="card-name">猛犬卡</view>
+        </view>
+    </view>
+</view>
+<scroll-view class='scroll' scroll-x="true">
+
+    <view class="clock-images">
+        <image src="/images/1.png"></image>
+        <view class="clock-model"></view>
+    </view>
+    <block wx:for="{{arr}}">
+        <view class="clock-images">
+            <image src="/images/1.png"></image>
+            <view class="clock-model"></view>
+        </view>
+    </block>
+</scroll-view>

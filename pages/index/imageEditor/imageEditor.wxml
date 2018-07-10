@@ -2,40 +2,64 @@
 <!--index.wxml-->
 
 <view  wx:if="{{!combine}}">
-    <view class="container1"
-          id="container"
-          catch:touchstart="touchStart"
-          catch:touchend="touchEnd"
-          catch:touchmove="touchMove"
-          style="height:{{height}}rpx" >
-        <image class="bg" src="{{bgPic}}"
-               mode="aspectFill"
-               style="width: 750rpx; height: 750rpx" >
-        </image>
+    <!--<view class="container1"-->
+          <!--id="container"-->
+          <!--catch:touchstart="touchStart"-->
+          <!--catch:touchend="touchEnd"-->
+          <!--catch:touchmove="touchMove"-->
+          <!--style="height:{{height}}rpx" >-->
         <!--<image class="bg" src="{{bgPic}}"-->
-               <!--mode="widthFix"-->
-               <!--style="height:{{height}}rpx" >-->
+               <!--mode="aspectFill"-->
+               <!--style="width: 750rpx; height: 750rpx" >-->
         <!--</image>-->
-        <icon type="cancel"
-              class="cancel"
-              id="cancel"
-              style="top:{{cancelCenterY-10+'px'}};left:{{cancelCenterX-10+'px'}}"
-              wx:if="{{chartlet}}">
-        </icon>
-        <icon type="waiting"
-              class="handle"
-              id="handle"
-              color="green"
-              style="top:{{handleCenterY-10+'px'}};left:{{handleCenterX-10+'px'}}"
-              wx:if="{{chartlet}}">
-        </icon>
-        <image class="hat"
-               id='hat'
-               src="../../../images/{{currentHatId}}.png"
-               style="top:{{hatCenterY-hatSize/2-2+'px'}};left:{{hatCenterX-hatSize/2-2+'px'}};transform:rotate({{rotate+'deg'}}) scale({{scale}})"
-               wx:if="{{chartlet}}">
-        </image>
-    </view>
+        <!--&lt;!&ndash;<image class="bg" src="{{bgPic}}"&ndash;&gt;-->
+               <!--&lt;!&ndash;mode="widthFix"&ndash;&gt;-->
+               <!--&lt;!&ndash;style="height:{{height}}rpx" >&ndash;&gt;-->
+        <!--&lt;!&ndash;</image>&ndash;&gt;-->
+        <!--<icon type="cancel"-->
+              <!--class="cancel"-->
+              <!--id="cancel"-->
+              <!--style="top:{{cancelCenterY-10+'px'}};left:{{cancelCenterX-10+'px'}}"-->
+              <!--wx:if="{{chartlet}}">-->
+        <!--</icon>-->
+        <!--<icon type="waiting"-->
+              <!--class="handle"-->
+              <!--id="handle"-->
+              <!--color="green"-->
+              <!--style="top:{{handleCenterY-10+'px'}};left:{{handleCenterX-10+'px'}}"-->
+              <!--wx:if="{{chartlet}}">-->
+        <!--</icon>-->
+        <!--<image class="hat"-->
+               <!--id='hat'-->
+               <!--src="../../../images/{{currentHatId}}.png"-->
+               <!--style="top:{{hatCenterY-hatSize/2-2+'px'}};left:{{hatCenterX-hatSize/2-2+'px'}};transform:rotate({{rotate+'deg'}}) scale({{scale}})"-->
+               <!--wx:if="{{chartlet}}">-->
+        <!--</image>-->
+    <!--</view>-->
+    <movable-area style="height: 750rpx; width: 750rpx; background:greenyellow;">
+        <image src="{{bgPic}}" style="height: 100%;width: 100%;"></image>
+        <movable-view wx:if="{{isChartImage}}" style="height: 50px; width: 50px; "
+                      x="{{hatCenterX}}"
+                      y="{{hatCenterY}}"
+                      bindchange="change"
+                      scale scale-min="0.5" scale-max="4" scale-value="{{scale}}"
+                      direction="all">
+            <view  style="width: 100%;height: 100%; position: relative; z-index: 2;transform:rotate({{rotate}}deg)">
+                <image catchtouchstart="touchStart"
+                       catchtouchend="touchEnd"
+                       catchtouchmove="touchMove"
+                       src="/images/star-good.png"
+                       id="handle"
+                       style="width:40rpx;height: 40rpx; position: absolute;bottom:-20rpx;right: -20rpx; z-index: 4;"></image>
+                <image src="{{filePath+currentChartImage}}"
+                       id="hat"
+
+                       style="width: 100%;height: 100%; z-index: 3;position: absolute;top:0;left: 0;">
+                </image>
+            </view>
+        </movable-view>
+    </movable-area>
+
     <view class="thumbnail-items">
         <block wx:for="{{bgPics}}" wx:key="key">
             <image src="{{item}}"
@@ -45,29 +69,20 @@
             </image>
         </block>
     </view>
+    <!--贴图集列表-->
     <view class="gather-list">
-        <!--<scroll-view scroll-x="true" class="scrollView">-->
-            <view class="gather-li active" bind:tap="showImageList">
-                <image src="../../../images/2.png"></image>
-                <text>桃心贴图</text>
-            </view>
+        <scroll-view scroll-x="true" class="gather-lis">
+            <block wx:for="{{chartletCover}}">
+                <view class="gather-li {{idx==index?'active':''}}" data-index="{{index}}" bind:tap="toggleChartList">
+                    <image src="{{filePath+item[0].img_url}}"></image>
+                    <text>{{item[0].cat_name}}</text>
+                </view>
+            </block>
             <view class="gather-li">
                 <image src="../../../images/2.png"></image>
                 <text>桃心贴图</text>
             </view>
-            <view class="gather-li">
-                <image src="../../../images/2.png"></image>
-                <text>桃心贴图</text>
-            </view>
-            <view class="gather-li">
-                <image src="../../../images/2.png"></image>
-                <text>桃心贴图</text>
-            </view>
-            <view class="gather-li">
-                <image src="../../../images/2.png"></image>
-                <text>桃心贴图</text>
-            </view>
-        <!--</scroll-view>-->
+        </scroll-view>
         <view class="prev-btn"
               bind:tap="prevPic">
             <image src="../../../images/1.png"
@@ -87,10 +102,10 @@
                  scroll-x="true"
                  wx:if="{{showImageList}}">
         <image class="imgList"
-               wx:for="...imgList"
+               wx:for="{{imgList}}"
                wx:key="{{index+1}}"
-               src="../../../images/{{index+1}}.png"
-               data-hat-id="{{index+1}}"
+               src="{{filePath+item.img_url}}"
+               data-hat-id="{{index}}"
                bind:tap="chooseImg">
         </image>
     </scroll-view>

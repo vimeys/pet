@@ -8,7 +8,9 @@ Page({
     data: {
         bgPics: [],//上传的图片集
         bgPic: null,//当前背景图片
-        chartlet:false,//控制贴图的显示
+        isChartImage:false,//控制贴图的显示
+        chartletList:[],
+        chartletCover:[],
         imgList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],//贴图的id
         currentHatId: 1,
         hatCenterX: wx.getSystemInfoSync().windowWidth / 2,
@@ -39,6 +41,7 @@ Page({
         }],
         drawsuccess:{},
         showImgList:false,
+        idx:0//显示贴图集的下标
     },
     onLoad(){
         this.bg=[];
@@ -49,12 +52,14 @@ Page({
             bgPics: app.globalData.bgPic,
             bgPic:app.globalData.bgPic[0]
         });
+        this.getChartletList()
         // 循环需要绘制的坐标
         let num=app.globalData.bgPic.length;//上传图片的数量
-        let drawArray=util.repeatArr(this.data.drawArray,num)
+        let drawArray=util.repeatArr(this.data.drawArray,num);
         drawArray=JSON.parse(JSON.stringify(drawArray));
         this.setData({
-            drawArray
+            drawArray,
+            filePath:app.filePath
         })
         this.getImgInfo()
         //  wx.getImageInfo({
@@ -104,6 +109,44 @@ Page({
                 }
             });
         }
+    },
+
+    //获取贴图列表
+    getChartletList(){
+        util.promiseSync(util.url.url.getChartletList,{}).then(json=>{
+            console.log(json);
+
+            if(json.status==1){
+                let arr=[]
+                let chartLet=[]
+                for(let  key in json.data){
+                    arr.push(json.data[key][0])
+                    chartLet.push(json.data[key])
+                }
+                let imgList='';//单个贴图集
+                imgList=util.firstObjValue(json.data)
+                this.setData({
+                    chartList:arr,//贴图封面
+                    chartletCover:chartLet,//整个贴图集
+                    imgList:imgList
+                })
+            }
+
+        })
+    },
+    // 切换贴图集
+    toggleChartList(e){
+        let index=e.currentTarget.dataset.index;
+        // let imageId=this.data.imageId
+        // let dArr=this.data.drawArray
+        // dArr[imageId].hasChartlet=true
+        let showImageList=true;
+        let imgList=this.data.chartletCover[index]
+        this.setData({
+            idx:index,
+            showImageList,
+            imgList:imgList
+        })
     },
     onReady(){
         this.hat_center_x=this.data.hatCenterX;
@@ -233,22 +276,14 @@ Page({
     },
 
     chooseImg(e){
+        let index=e.target.dataset.hatId;
         this.setData({
-            currentHatId:e.target.dataset.hatId,
-            chartlet:true,
+            currentChartImage:this.data.imgList[index].img_url,
+            isChartImage:true,
             showImageList:!this.data.showImageList,
         })
     },
-    // 弹出选择贴图
-    showImageList(){
-        let imageId=this.data.imageId
-        let dArr=this.data.drawArray
-        dArr[imageId].hasChartlet=true
-        this.setData({
-            showImageList:!this.data.showImageList,
-            drawArray:dArr
-        })
-    },
+
     // 去确认页面
     // combinePic(){
     //     app.globalData.scale=this.scale;

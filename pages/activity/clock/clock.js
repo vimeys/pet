@@ -1,11 +1,11 @@
-// pages/test-nav/test-nav.js
+// pages/activity/clock/clock.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+      arr:[1,2,2,3,3,4]
   },
 
   /**

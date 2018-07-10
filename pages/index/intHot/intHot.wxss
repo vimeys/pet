@@ -1,0 +1,22 @@
+/* pages/index/intHot/intHot.wxss */
+page{
+    background: #1C1C22;
+}
+canvas{
+    background: #fff;
+    border-radius: 20rpx;
+}
+.btn{
+    border-bottom: 1px solid #fff;
+    font-size: 30rpx;
+    padding: 10rpx;
+    width: 135rpx;
+    text-align: center;
+    color:#fff;
+    margin: 40rpx auto 20rpx;
+}
+.text{
+    color: #fff;
+    font-size: 30rpx;
+    text-align: center;
+}

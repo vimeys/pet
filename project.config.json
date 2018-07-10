@@ -32,7 +32,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 25,
+			"current": -1,
 			"list": [
 				{
 					"id": 0,
@@ -187,7 +187,8 @@
 				{
 					"id": -1,
 					"name": "新发布",
-					"pathName": "pages/index/upload/upload"
+					"pathName": "pages/index/upload/upload",
+					"query": ""
 				}
 			]
 		}

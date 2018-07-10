@@ -1,6 +1,0 @@
-<!--pages/test-transform1/test-transform1.wxml-->
-
-<view class='water'>
-  <image class='water1' src='/images/test/water1.png' mode='widthFix'></image>
-  <image class='water2' src='/images/test/water2.png' mode='widthFix'></image>
-</view>

@@ -1,0 +1,111 @@
+/* pages/activity/clock/clock.wxss */
+page{
+    background: #1C1C22;
+}
+.card{
+    width: 670rpx;
+    height: 960rpx;
+    border-radius: 20rpx;
+    margin: 0 auto;
+    margin-top: 20rpx;
+    position: relative;
+}
+.card-bg{
+    z-index: -1;
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card-content{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 2;
+}
+.card-header-image{
+    /*position: absolute;*/
+    width: 100%;
+    height: 450rpx;
+    border-radius: 20rpx;
+    z-index: 3;
+}
+.logo{
+    width: 146rpx;
+    height: 146rpx;
+    position: absolute;
+    top:377rpx;
+    left: 262rpx;
+    z-index: 4;
+}
+.card-news{
+    width: 230rpx;
+    height: 230rpx;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 50%;
+    background: #FAA61A;
+    box-sizing: border-box;
+    padding-top:10rpx;
+    margin-top: 100rpx;
+}
+.card-news image{
+    width: 210rpx;
+    height: 210rpx;
+    border-radius: 50%;
+    margin:  auto;
+    z-index:5;
+}
+.card-name{
+    width: 66rpx;
+    height: 150rpx;
+    font-size:40rpx;
+    text-align: center;
+    padding: 14rpx 10rpx;
+    position: absolute;
+    top:0;
+    right: -96rpx;
+    color:#FAA61A;
+    border: 1px solid #FAA61A;
+}
+.scroll{
+    width: 670rpx;
+    display: flex;
+    height: 120rpx;
+    margin: 30rpx auto;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    /*background: #fff;*/
+}
+.clock-images{
+    position: relative;
+    width: 120rpx;
+    height: 120rpx;
+    display: inline-block;
+    margin-left: 20rpx;
+    z-index: 1;
+}
+.clock-images image{
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 20rpx;
+    margin-left:20rpx;
+    z-index: 1;
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.clock-images view{
+    width: 120rpx;
+    height: 120rpx;
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 2;
+    background: rgba(0,0,0,.6);
+}

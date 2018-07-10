@@ -1,4 +1,4 @@
-// pages/test-transform1/test-transform1.js
+// pages/active/clock/clock.js
 Page({
 
   /**
