@@ -1,5 +1,4 @@
 
-<!--index.wxml-->
 
 <view  wx:if="{{!combine}}">
     <!--<view class="container1"-->
@@ -37,18 +36,18 @@
         <!--</image>-->
     <!--</view>-->
     <movable-area style="height: 750rpx; width: 750rpx; background:greenyellow;">
-        <image src="{{bgPic}}" style="height: 100%;width: 100%;"></image>
+        <image src="{{bgPic}}" style="height: 100%;width: 100%;" mode="aspectFill"></image>
         <movable-view wx:if="{{isChartImage}}" style="height: 50px; width: 50px; "
                       x="{{hatCenterX}}"
                       y="{{hatCenterY}}"
-                      bindchange="change"
+                      bindchange="move"
                       scale scale-min="0.5" scale-max="4" scale-value="{{scale}}"
                       direction="all">
-            <view  style="width: 100%;height: 100%; position: relative; z-index: 2;transform:rotate({{rotate}}deg)">
+            <view  style="width: 100%;height: 100%; position: relative; z-index: 2;border:1px solid #fff;#transform:rotate({{rotate}}deg)">
                 <image catchtouchstart="touchStart"
                        catchtouchend="touchEnd"
                        catchtouchmove="touchMove"
-                       src="/images/star-good.png"
+                       src="/images/big.png"
                        id="handle"
                        style="width:40rpx;height: 40rpx; position: absolute;bottom:-20rpx;right: -20rpx; z-index: 4;"></image>
                 <image src="{{filePath+currentChartImage}}"
@@ -56,19 +55,17 @@
 
                        style="width: 100%;height: 100%; z-index: 3;position: absolute;top:0;left: 0;">
                 </image>
+                <image catchtouchstart="touchStart"
+                       catchtouchend="touchEnd"
+                       catchtouchmove="touchMove"
+                       src="/images/close.png"
+                       id="cancel"
+                       style="width:40rpx;height: 40rpx; position: absolute;top:-20rpx;left: -20rpx; z-index: 4;"></image>
             </view>
         </movable-view>
     </movable-area>
 
-    <view class="thumbnail-items">
-        <block wx:for="{{bgPics}}" wx:key="key">
-            <image src="{{item}}"
-                   class="thumbnail"
-                   data-id="{{index}}"
-                   bindtap="chooseImage" >
-            </image>
-        </block>
-    </view>
+
     <!--贴图集列表-->
     <view class="gather-list">
         <scroll-view scroll-x="true" class="gather-lis">
@@ -94,7 +91,20 @@
     <button bind:tap="goCopper">剪切</button>
     <!--<button bind:tap="combinePic">确定</button>-->
     <!--<button bind:tap="save">保存</button>-->
-    <view bind:tap="updata" class="upLoad">发布</view>
+
+    <view class="btns">
+        <view class="thumbnail-items">
+            <block wx:for="{{bgPics}}" wx:key="key">
+                <image src="{{item}}"
+                       class="thumbnail {{imageId==index?'active':''}}"
+                       data-id="{{index}}"
+                       mode="aspectFill"
+                       bindtap="chooseBgImage" >
+                </image>
+            </block>
+        </view>
+        <view bind:tap="updata" class="upLoad">发布</view>
+    </view>
     <!--<button bind:tap="showImageList">选择贴图</button>-->
 
 
