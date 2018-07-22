@@ -7,10 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
+      user:"",
       test:[1,1,3,3],
     test_img_url:app.test_img_url,
       isRead:false,
-      petList:[], //宠物列表
+      petList:[{
+          sex:1,
+          name:'快去添加',
+          numDay:0,
+          birthday:'2018-6-6',
+          describe:'还没有宠物了,快去添加一个吧',
+          is_sterilization:1,
+          weight:10
+      }], //宠物列表
       issus:[]//动态列表
   },
 
@@ -50,10 +59,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
       this.setData({
-          imageFile:app.filePath
+          imageFile:app.filePath,
+          user:app.userInfo
       })
   },
     goPetCard(){

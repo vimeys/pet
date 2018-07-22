@@ -24,15 +24,29 @@ Page({
         hotTalkImage: [],
         obj:{}
     },
-    // 获取上午列表
-    //TODO
-    //死数据
+    // 获取宠物列表
+
     getPetList() {
         let user = util.storage('userInfo')
         util.promiseSync(util.url.url.petNameList, {user_id: app.user.id}).then(json => {
-            this.setData({
-                pet: json.data
-            })
+            if(json.data.length==0){
+                wx.showModal({
+                  title: '提示',
+                  content: '请先添加宠物',
+                  success: res=>{
+                    if (res.confirm) {
+                        wx.navigateTo({
+                          url: '../../me/pet-card-add/pet-card-add'
+                        })
+                    }
+                  }
+                })
+            }else{
+                this.setData({
+                    pet: json.data
+                })
+            }
+            
         })
     },
 
@@ -71,6 +85,7 @@ Page({
                             app.globalData.bgPic = res.tempFilePaths;//设置全局值
                             // app.globalData.petId = that.data.pet[that.data.index].cat_id;//c宠物id
                             app.globalData.is_edit = that.data.is_edit ? '1' : '0';//是否可以编辑
+                            app.globalData.pet_id=that.data.pet[that.data.index].id;//宠物id
                             wx.navigateTo({
                                 url: '../imageEditor/imageEditor',
                             })
@@ -84,6 +99,9 @@ Page({
                     wx.chooseVideo({
                         success: (res) => {
                             console.log(res);
+                            wx.showLoading({
+                              title: '发布中'
+                            })
                             wx.uploadFile({
                                 url: util.url.url.upfile,
                                 filePath: res.tempFilePath,
@@ -96,7 +114,9 @@ Page({
                                 success: res1 => {
                                     console.log(res1);
                                     if(res1.statusCode==200){
-                                        util.promiseSync(util.url.url.addVideo,{user_id:app.user.id,pet_id:that.data.pet[that.data.index].id,img_id:JSON.parse(res1.data).data.id}).then(json=>{
+                                        util.promiseSync(util.url.url.addVideo,{user_id:app.user.id,
+                                            pet_id:that.data.pet[that.data.index].id,
+                                            img_id:JSON.parse(res1.data).data.id}).then(json=>{
                                                 if(json.status==1){
                                                     util.showSuccess('发布成功');
                                                     setTimeout(function () {
@@ -137,7 +157,7 @@ Page({
     onLoad: function (options) {
         // console.log(util.url);
         console.log(util.storage('user'));
-        this.getPetList()
+        // this.getPetList()
         this.filePath=[]
     },
 
@@ -250,7 +270,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        this.getPetList()
     },
 
     /**

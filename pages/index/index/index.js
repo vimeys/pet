@@ -124,6 +124,16 @@ Page({
               break
       }
     },
+    //宠物排行
+    rank(){
+      util.promiseSync(util.url.url.rank,{page:1,pageSize:4}).then(json=>{
+          if(json.status==1){
+              this.setData({
+                  rank:json.data
+              })
+          }
+      })
+    },
     // 动态点赞
     bind_love(e) {
         // this.setData({
@@ -132,7 +142,7 @@ Page({
         let index = e.currentTarget.dataset.index;
         let id = e.currentTarget.dataset.id;
         let petData = this.data.petData
-        util.promiseSync(util.url.url.follow, {user_id: app.userInfo.id, list_sort_id: id}).then(json => {
+        util.promiseSync(util.url.url.like, {user_id: app.userInfo.id, list_sort_id: id}).then(json => {
             if (petData[index].like == 1) {
                 petData[index].like = 0
                 petData[index].likes--
@@ -157,6 +167,19 @@ Page({
         let index = e.currentTarget.dataset.index;
         let index2 = e.currentTarget.dataset.indext;
         console.log(index, index2);
+        util.promiseSync(util.url.url.petBannerList, {bg_id:this.data.petData[index].bg[index2].img_id}).then(json1 => {
+            // let petData = self.data.petData
+            let arr=[]
+            json1.data.forEach((item1, index) => {
+                arr.push({image: item1.hyaline.img_url, id: item1.hyaline.id})
+            })
+            let data=this.data.petData;
+            data[index].bannerList[index2]=  arr;
+            // petData[index] = item;
+            this.setData({
+                petData:data
+            })
+        })
         let petData = this.data.petData
         petData[index].index = index2
         this.setData({
@@ -216,14 +239,20 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.rank();
+        util.promiseSync(util.url.url.filePath, {}).then((json) => {
+            let filePath = json.data  //固定图片路径
+            this.setData({
+                filePath:json.data
+            })
+            // this.globalData = { bgPic: '../../../images/1.png' }
+        })
         this.page1=1;
         this.page2=1;
         this.page3=1;
         let userInfo = util.storage('userInfo');
         app.userInfo = userInfo
-        this.setData({
-            filePath: app.filePath,
-        })
+
         this.getHotWord()
         this.i=0;//初始化数据
         var that = this
@@ -286,7 +315,7 @@ Page({
             json.data.forEach(function (item, index) {
                 item.index = 0
             });
-            this.statuImgaeList(json.data,page_size)
+            this.statuImageList(json.data,page_size)
             that.setData({
                 petData: json.data
             });
@@ -347,7 +376,7 @@ Page({
     },
 
     // 获取轮播图片
-    statuImgaeList(data,page_size) {
+    statuImageList(data,page_size) {
         let that = this
         let petData = data
         // this.i=0
@@ -356,43 +385,54 @@ Page({
         })
 
         function bannerList(item, index, self) {
+            // debugger
             let arr = []
             // let that1=that
-            //死数据
-            util.promiseSync(util.url.url.petBannerList, {bg_id: 1}).then(json1 => {
-                // let petData = self.data.petData
-                json1.data.forEach((item1, index) => {
-                    arr.push({image: item1.graffiti.img_url, id: item1.graffiti.id})
-                })
-                item.bannerList = arr;
-                petData[index] = item;
-                that.i++
-                if(that.i>=10){
-                    that.setData({
-                        petData:[...that.data.petData,...petData]
+            //死数据item.bg[0].img_id
+            if(item.model_type=="BgModel"){
+                util.promiseSync(util.url.url.petBannerList, {bg_id:item.bg[0].img_id}).then(json1 => {
+                    // let petData = self.data.petData
+                    json1.data.forEach((item1, index) => {
+                         arr[index]=[]
+                        arr[index].push({image: item1.hyaline.img_url, id: item1.hyaline.id})
                     })
-                    that.i=0
-                }
-                // let newPetData=[...that.data.petData,...petData]
-                // if(that.data.petData.length==0){
-                //
-                // }else{
-                //     that.setData({
-                //         petData:[that.data.petData,
-                //         ]
-                //     })
-                // }
+                    item.bannerList = arr;
+                    petData[index] = item;
+                    that.i++
+                    if(that.i>=10){
+                        that.setData({
+                            petData:[...that.data.petData,...petData]
+                        })
+                        that.i=0
+                    }
+                    // let newPetData=[...that.data.petData,...petData]
+                    // if(that.data.petData.length==0){
+                    //
+                    // }else{
+                    //     that.setData({
+                    //         petData:[that.data.petData,
+                    //         ]
+                    //     })
+                    // }
 
-            })
+                })
+            }
+
         }
     },
     // 去涂鸦页面
-    editHref() {
+    editHref(e) {
         // console.log(this.data.petData[this.data.index].bg[this.data.indextt].img_url);
+        let id=e.currentTarget.dataset.id;
+        let index =e.currentTarget.dataset.index;
+        let img_id=this.data.petData[index].bg[this.data.indextt].img_id
+        app.globalData.edit = this.data.petData[index].bg[this.data.indextt].img_url;
+        app.globalData.petId=this.data.petData[index].pet_id;
+        wx.setStorageSync('petData', this.data.petData[index]);
+        wx.setStorageSync('bgIndex', this.data.indextt);
         wx.navigateTo({
-            url: `../scrawl/scrawl?id=${this.data.petData[this.data.index].id}`
+            url: `../scrawl/scrawl?id=${id}&img_id=${img_id}`
         })
-        app.globalData.edit = this.data.petData[this.data.index].bg[this.data.indextt].img_url
     },
 
     // 获取动态更多
@@ -487,7 +527,9 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-
+        this.setData({
+            filePath: app.filePath,
+        })
     },
 
     /**

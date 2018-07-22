@@ -6,6 +6,10 @@
   margin-left: -20rpx;
   margin-right: -20rpx;
 }
+.scroll{
+  height: 1244rpx;
+}
+
 
 .header-wrap .img-wrap-000 {
   position: relative;

@@ -5,10 +5,10 @@
   <!-- 活动基本信息 -->
   <view class='section-info'>
     <view class='title'>
-      {{Data.title}}---这是页面死数据
+      {{Data.title}}
     </view>
     <view class='time'>
-      <text>{{Data.create_time}}2018-05-02</text>
+      <text>{{Data.create_time}}</text>
       <!--<text>2018-05-02</text>-->
     </view>
     <view class='btn-wrap'>
@@ -30,7 +30,7 @@
 
   <!-- 签到 -->
   <view class='section-footer'>
-    <view class='btn-100' bindtap="signIn" wx:if="{{isSignIN}}">签到打卡</view>
+    <view class='btn-100' bindtap="signIn" wx:if="{{isSignIN}}" bindtap="Scan">签到打卡</view>
     <view class='btn-100 disable' wx:else>活动已过期</view>
   </view>
 </view>

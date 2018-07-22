@@ -1,5 +1,5 @@
 /* pages/index/history/history.wxss */
-
+@import "../../../template/list.wxss";
 .section-swiper {
   margin-left: -20rpx;
   margin-right: -20rpx;

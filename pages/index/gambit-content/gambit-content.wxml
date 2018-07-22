@@ -9,7 +9,7 @@
         <image src='{{test_img_hsq}}{{item.avatar_url}}' mode='aspectFill'></image>
       </view>
       <view class='zan-cell__bd'>
-        <view class='name'>{{Data.user_info.nickname}}没数据</view>
+        <view class='name'>{{Data.user_info.nickname}}</view>
         <view class='time'>{{Data.create_time}}</view>
       </view>
     </view>
@@ -19,7 +19,7 @@
     </view>
     <!-- 话题图片 -->
     <view class='img-wrap'>
-      <image src='{{filePath}}{{item.url}}' mode='widthFix' wx:for="{{image_url}}" wx:key="item"></image>
+      <image src='{{filePath}}{{item.url}}' mode='widthFix' wx:for="{{image_url}}" wx:key="item" bindtap="detail"></image>
     </view>
 
     <!-- 关注、评论 -->
@@ -54,7 +54,8 @@
       <block wx:for="{{commmentData}}" wx:for-item="item">
         <view class='publish-info zan-cell'>
           <view class='zan-cell__hd'>
-            <image src='{{test_img_hsq}}{{item.avatar_url}}' mode='aspectFill'></image>
+            <!--<image src='{{test_img_hsq}}{{item.avatar_url}}' mode='aspectFill'></image>-->
+            <image src='{{item.user.avatar_url}}' mode='aspectFill'></image>
           </view>
           <view class='zan-cell__bd'>
             <view class='name'>{{item.user.nickname}}</view>
@@ -63,11 +64,8 @@
         </view>
         <template is="comment-list" data="{{item:item}}"></template>
       </block>
-
     </view>
-
   </view>
-
   <!-- 回复 -->
   <view class='section-reply'>
     <input placeholder='请说点什么吧~'

@@ -10,16 +10,12 @@ Page({
       bgPic:'',
       imgList:[1,2,3,4,5,6,7,8,9,10],
       currentHatId:2,
-
-      hatCenterX:wx.getSystemInfoSync().windowWidth/2,
-      hatCenterY:150,
-      cancelCenterX:wx.getSystemInfoSync().windowWidth/2-50-2,
-      cancelCenterY:100,
-      handleCenterX:wx.getSystemInfoSync().windowWidth/2+50-2,
-      handleCenterY:200,
-
+      isChartImage:false,//是否显示贴图
+      hatCenterX:wx.getSystemInfoSync().windowWidth/2-50,
+      hatCenterY:100,
+      handleCenterX:wx.getSystemInfoSync().windowWidth/2,
+      handleCenterY:150,
       hatSize:100,
-
       scale:1,
       rotate:0,
       width:0,
@@ -27,8 +23,7 @@ Page({
       chartlet:true,
       top: -1000,//canvas的定位top
       left: -1000,//canvas的定位left
-      // width:750,//canvas的宽
-      // height:1000
+      showImageList:false,//贴图集是否显示
   },
 
   /**
@@ -37,9 +32,13 @@ Page({
   onLoad: function (options) {
       console.log(app);
       this.arr=[]
-      this.sun=1
+      this.sun=1;
+      this.getChartletList();
+      this.id=options.id;
+      this.img_id=options.img_id;
       this.setData({
-          bgPic: app.globalData.edit
+          bgPic: app.globalData.edit,
+          filePath:app.filePath
       })
        wx.getImageInfo({
            src:app.globalData.edit,
@@ -66,34 +65,78 @@ Page({
         });
   },
 
+
+//获取贴图列表
+    getChartletList(){
+        util.promiseSync(util.url.url.getChartletList,{}).then(json=>{
+            if(json.status==1){
+                let arr=[]
+                let chartLet=[]
+                for(let  key in json.data){
+                    arr.push(json.data[key][0])
+                    chartLet.push(json.data[key])
+                }
+                let imgList='';//单个贴图集
+                imgList=util.firstObjValue(json.data)
+                this.setData({
+                    chartList:arr,//贴图封面
+                    chartletCover:chartLet,//整个贴图集
+                    imgList:imgList
+                })
+            }
+
+        })
+    },
+    // 切换贴图集
+    toggleChartList(e){
+        let index=e.currentTarget.dataset.index;
+        // let imageId=this.data.imageId
+        // let dArr=this.data.drawArray
+        // dArr[imageId].hasChartlet=true
+        let showImageList=true;
+        this.gatherIndex=index
+        let imgList=this.data.chartletCover[index]
+        this.setData({
+            idx:index,
+            showImageList,
+            imgList:imgList
+        })
+    },
+    // 选择子贴图
+    chooseImg(e){
+        let src=app.filePath+e.target.dataset.hatId;//
+        this.setData({
+            currentChartImage:src,
+            isChartImage:true,
+            showImageList:!this.data.showImageList,
+        })
+    },
     onReady(){
         this.hat_center_x=this.data.hatCenterX;
         this.hat_center_y=this.data.hatCenterY;
-        this.cancel_center_x=this.data.cancelCenterX;
-        this.cancel_center_y=this.data.cancelCenterY;
         this.handle_center_x=this.data.handleCenterX;
         this.handle_center_y=this.data.handleCenterY;
 
         this.scale=this.data.scale;
         this.rotate=this.data.rotate;
 
-        this.touch_target="";
         this.start_x=0;
         this.start_y=0;
     },
-    touchStart(e){
-        if(e.target.id=="hat"){
-            this.touch_target="hat";
-        }else if(e.target.id=="handle"){
-            this.touch_target="handle"
-        }else{
-            this.touch_target=""
-        };
 
-        if(this.touch_target!=""){
+    
+    // 可移动区域滑动
+    move(e){
+      this.setData({
+          hatCenterX:e.detail.x,
+          hatCenterY:e.detail.y
+    })
+
+    },
+    touchStart(e){
+
             this.start_x=e.touches[0].clientX;
             this.start_y=e.touches[0].clientY;
-        }
     },
     touchEnd(e){
         this.hat_center_x=this.data.hatCenterX;
@@ -112,39 +155,46 @@ Page({
         var current_y=e.touches[0].clientY;
         var moved_x=current_x-this.start_x;
         var moved_y=current_y-this.start_y;
-        if(this.touch_target=="hat"){
+        this.setData({
+            handleCenterX:this.data.handleCenterX+moved_x,
+            handleCenterY:this.data.handleCenterY+moved_y,
+        });
+        let diff_x_before=this.handle_center_x-this.hat_center_x;
+        let diff_y_before=this.handle_center_y-this.hat_center_y;
+        let diff_x_after=this.data.handleCenterX-this.hat_center_x;
+        let diff_y_after=this.data.handleCenterY-this.hat_center_y;
+
+        let distance_before=Math.sqrt(diff_x_before*diff_x_before+diff_y_before*diff_y_before);
+        let distance_after=Math.sqrt(diff_x_after*diff_x_after+diff_y_after*diff_y_after);
+        let angle_before=Math.atan2(diff_y_before,diff_x_before)/Math.PI*180;
+        let angle_after=Math.atan2(diff_y_after,diff_x_after)/Math.PI*180;
+
+
+        if(distance_after/distance_before*this.scale>4){
             this.setData({
-                hatCenterX:this.data.hatCenterX+moved_x,
-                hatCenterY:this.data.hatCenterY+moved_y,
-                cancelCenterX:this.data.cancelCenterX+moved_x,
-                cancelCenterY:this.data.cancelCenterY+moved_y,
-                handleCenterX:this.data.handleCenterX+moved_x,
-                handleCenterY:this.data.handleCenterY+moved_y
+                scale:4,
+                rotate:angle_after-angle_before+this.rotate
             })
-        };
-        if(this.touch_target=="handle"){
-            this.setData({
-                handleCenterX:this.data.handleCenterX+moved_x,
-                handleCenterY:this.data.handleCenterY+moved_y,
-                cancelCenterX:2*this.data.hatCenterX-this.data.handleCenterX,
-                cancelCenterY:2*this.data.hatCenterY-this.data.handleCenterY
-            });
-            let diff_x_before=this.handle_center_x-this.hat_center_x;
-            let diff_y_before=this.handle_center_y-this.hat_center_y;
-            let diff_x_after=this.data.handleCenterX-this.hat_center_x;
-            let diff_y_after=this.data.handleCenterY-this.hat_center_y;
-            let distance_before=Math.sqrt(diff_x_before*diff_x_before+diff_y_before*diff_y_before);
-            let distance_after=Math.sqrt(diff_x_after*diff_x_after+diff_y_after*diff_y_after);
-            let angle_before=Math.atan2(diff_y_before,diff_x_before)/Math.PI*180;
-            let angle_after=Math.atan2(diff_y_after,diff_x_after)/Math.PI*180;
+        }else{
             this.setData({
                 scale:distance_after/distance_before*this.scale,
                 rotate:angle_after-angle_before+this.rotate,
             })
         }
+
         this.start_x=current_x;
         this.start_y=current_y;
     },
+    touchEnd(){
+        this.hat_center_x=this.data.hatCenterX;
+        this.hat_center_y=this.data.hatCenterY;
+        this.handle_center_x=this.data.handleCenterX;
+        this.handle_center_y=this.data.handleCenterY;
+        // }
+        this.scale=this.data.scale;
+        this.rotate=this.data.rotate;
+    },
+
     draw() {
         let scale = this.scale;
         let rotate = this.rotate;
@@ -153,18 +203,16 @@ Page({
         let currentHatId = this.data.currentHatId;
         const pc = wx.createCanvasContext('myCanvas');
         const windowWidth = wx.getSystemInfoSync().windowWidth;
-
         const hat_size = 100 * scale;
-
-
         pc.clearRect(0, 0, windowWidth, 300);
-        pc.drawImage(this.data.bgPic, 0, 0, this.data.width/2-15, this.data.height/2-15);
-        pc.translate(hat_center_x,hat_center_y);
+        console.log(123);
+        pc.drawImage(app.filePath+this.data.bgPic, 0, 0, 375, 375);
+        pc.translate(this.data.hatCenterX,this.data.hatCenterY);
         pc.rotate(rotate * Math.PI / 180);
-        pc.drawImage("../../../images/" + currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
+        if(this.data.currentChartImage){
+            pc.drawImage(this.data.currentChartImage, -hat_size / 2, -hat_size / 2, hat_size/2, hat_size/2);
+        }
         pc.draw();
-
-
     },
     draw1() {
         let scale = this.scale;
@@ -179,10 +227,10 @@ Page({
 
 
         pc.clearRect(0, 0, windowWidth, 300);
-        pc.drawImage(this.data.bgPic, 0, 0, this.data.width/2-15, this.data.height/2-15);
-        pc.translate(hat_center_x,hat_center_y);
+        pc.drawImage(app.filePath+this.data.bgPic,  0, 0, 375, 375);
+        pc.translate(this.data.hatCenterX,this.data.hatCenterY);
         pc.rotate(rotate * Math.PI / 180);
-        pc.drawImage("../../../images/" + currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
+        pc.drawImage(this.data.currentChartImage, -hat_size / 2, -hat_size / 2, hat_size, hat_size);
         pc.draw(false,()=>{
             wx.canvasToTempFilePath({
                 // x: windowWidth / 2 - 150,
@@ -203,7 +251,8 @@ Page({
                         name: 'file',
                         success:res1=>{
                             console.log(res1);
-                            this.arr[0]=[res1]
+                            console.log(res1.data);
+                            this.arr[0]=[JSON.parse(res1.data).data.id]
                             this.sun=2
                             this.draw2()
                         }
@@ -228,15 +277,11 @@ Page({
 
         pc.clearRect(0, 0, windowWidth, 300);
         // pc.drawImage(this.data.bgPic, 0, 0, this.data.width/2, this.data.height/2);
-        pc.translate(hat_center_x,hat_center_y);
+        pc.translate(this.data.hatCenterX,this.data.hatCenterY);
         pc.rotate(rotate * Math.PI / 180);
-        pc.drawImage("../../../images/" + currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
+        pc.drawImage(this.data.currentChartImage, -hat_size / 2, -hat_size / 2, hat_size, hat_size);
         pc.draw(false,()=>{
             wx.canvasToTempFilePath({
-                // x: windowWidth / 2 - 150,
-                // y: 0,
-                // height: 300,
-                // width: 300,
                 canvasId: 'myCanvas',
                 success: (res) => {
                     console.log(res.tempFilePath);
@@ -250,8 +295,28 @@ Page({
                         },
                         name: 'file',
                         success:res1=>{
-                            this.arr[1]=[res1]
+                            let petData=wx.getStorageSync('petData');
+                            let bgIndex=wx.getStorageSync('bgIndex')
+                            this.arr[1]=[JSON.parse(res1.data).data.id]
                             console.log(this.arr);
+                            let obj={}
+                            obj.user_id=petData.user_id;
+                            obj.edit_id= app.user.id
+                            obj.pet_id=petData.pet_id
+                            obj.list_sort_id=this.id;
+                            obj.graffiti_id=this.arr[0]
+                            obj.hyaline_id=this.arr[1]
+                            obj.bg_id=[petData.bg[bgIndex].img_id];
+                            // for(let i=0;i<this.bg.length;i++){
+                            //    obj.bg_id=this.bg[i];
+                            //     obj.graffiti_id=this.ttBg[i];
+                            //    obj.hyaline_id=this.kBg[i];
+                            // }
+                            util.promiseSync(util.url.url.addttBg,obj).then((json)=>{
+                                if(json.status==1){
+                                    util.showSuccess('发布成功');
+                                }
+                            })
                             // console.log(arr);
                             // sun=2
                             // this.draw2(sun,arr)
@@ -274,18 +339,11 @@ Page({
         // });
         this.draw()
         const windowHeight = wx.getSystemInfoSync().windowHeight;
-        let top=windowHeight-this.data.height/2
-        if(top>0){
             this.setData({
-                top:top/2,
+                top:100,
                 left:0
             })
-        }else{
-            this.setData({
-                top:0,
-                left:0
-            })
-        }
+
     },
     prevPicHide(){
         this.setData({
@@ -324,8 +382,15 @@ Page({
     },
     // 发布
     upload(){
+        if(this.data.isChartImage){
+            this.up()
+        }else {
+            wx.showToast({
+              title: '你还没有编辑贴图',
+                icon:'none'
+            })
+        }
 
-        this.up()
     },
     up(sun,arr){
 
@@ -338,10 +403,15 @@ Page({
 
       }
     },
+    close(){
+      this.setData({
+          isChartImage:false
+      })
+    },
     // 跳转log
     hrefLog(){
       wx.navigateTo({
-        url: ''
+        url: '../history/history?id='+this.id+'&img_id='+this.img_id
       })
     }
 })

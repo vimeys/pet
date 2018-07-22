@@ -26,7 +26,7 @@
       </view>
       <image class='hr-img' src='/images/icon/me-money-banner-hr.png' mode='widthFix'></image>
     </view>
-    <view class='btn'>
+    <view class='btn' bindtap="goShop">
       兑换商品
     </view>
   </view>

@@ -37,13 +37,13 @@
     <!--</view>-->
     <movable-area style="height: 750rpx; width: 750rpx; background:greenyellow;">
         <image src="{{bgPic}}" style="height: 100%;width: 100%;" mode="aspectFill"></image>
-        <movable-view wx:if="{{isChartImage}}" style="height: 50px; width: 50px; "
+        <movable-view wx:if="{{isChartImage}}" style="height: 100rpx; width: 100rpx; "
                       x="{{hatCenterX}}"
                       y="{{hatCenterY}}"
                       bindchange="move"
-                      scale scale-min="0.5" scale-max="4" scale-value="{{scale}}"
+                      scale scale-min="0.5" scale-max="4" scale-value="{{drawArray[imageId].XYZ.scale}}"
                       direction="all">
-            <view  style="width: 100%;height: 100%; position: relative; z-index: 2;border:1px solid #fff;#transform:rotate({{rotate}}deg)">
+            <view  style="width: 100%;height: 100%; position: relative; z-index: 2;border:1px solid #fff;transform:rotate({{drawArray[imageId].XYZ.rotate}}deg)">
                 <image catchtouchstart="touchStart"
                        catchtouchend="touchEnd"
                        catchtouchmove="touchMove"
@@ -52,12 +52,9 @@
                        style="width:40rpx;height: 40rpx; position: absolute;bottom:-20rpx;right: -20rpx; z-index: 4;"></image>
                 <image src="{{filePath+currentChartImage}}"
                        id="hat"
-
                        style="width: 100%;height: 100%; z-index: 3;position: absolute;top:0;left: 0;">
                 </image>
-                <image catchtouchstart="touchStart"
-                       catchtouchend="touchEnd"
-                       catchtouchmove="touchMove"
+                <image bindtap="close"
                        src="/images/close.png"
                        id="cancel"
                        style="width:40rpx;height: 40rpx; position: absolute;top:-20rpx;left: -20rpx; z-index: 4;"></image>
@@ -65,8 +62,8 @@
         </movable-view>
     </movable-area>
 
-
-    <!--贴图集列表-->
+    <button bind:tap="goCopper">剪切</button>
+    <!--父贴图集列表-->
     <view class="gather-list">
         <scroll-view scroll-x="true" class="gather-lis">
             <block wx:for="{{chartletCover}}">
@@ -75,10 +72,7 @@
                     <text>{{item[0].cat_name}}</text>
                 </view>
             </block>
-            <view class="gather-li">
-                <image src="../../../images/2.png"></image>
-                <text>桃心贴图</text>
-            </view>
+
         </scroll-view>
         <view class="prev-btn"
               bind:tap="prevPic">
@@ -87,8 +81,19 @@
             </image>预览
         </view>
     </view>
+    <scroll-view class="scrollView"
+                 scroll-x="true"
+                 wx:if="{{showImageList}}">
+        <image class="imgList"
+               wx:for="{{imgList}}"
+               wx:key="{{index+1}}"
+               src="{{filePath+item.img_url}}"
+               data-hat-id="{{index}}"
+               bind:tap="chooseImg">
+        </image>
+    </scroll-view>
     <!--<button bind:tap="prevPic">预览</button>-->
-    <button bind:tap="goCopper">剪切</button>
+    <!--<button bind:tap="goCopper">剪切</button>-->
     <!--<button bind:tap="combinePic">确定</button>-->
     <!--<button bind:tap="save">保存</button>-->
 
@@ -107,23 +112,13 @@
     </view>
     <!--<button bind:tap="showImageList">选择贴图</button>-->
 
+    <!--子贴图列表-->
 
-    <scroll-view class="scrollView"
-                 scroll-x="true"
-                 wx:if="{{showImageList}}">
-        <image class="imgList"
-               wx:for="{{imgList}}"
-               wx:key="{{index+1}}"
-               src="{{filePath+item.img_url}}"
-               data-hat-id="{{index}}"
-               bind:tap="chooseImg">
-        </image>
-    </scroll-view>
 </view>
 <canvas class="myCanvas"
         bindtap="prevPicHide"
         canvas-id="myCanvas"
-        style="height:{{height}}rpx;width:{{width}}rpx;position: fixed;top:{{top}}px;left:{{left}}px "/>
+        style="height:750rpx;width:750rpx;position: fixed;top:{{top}}px;left:{{left}}px "/>
 <!--<cover-view class="prev"><cover-image src="{{prev-image}}" mode="widthFix"></cover-image></cover-view>-->
 
 

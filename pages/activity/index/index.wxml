@@ -3,7 +3,7 @@
 <view class='container'>
   <!-- banner -->
   <view class='section-banner'>
-    <image src='{{test_img_url}}' mode='aspectFill'></image>
+    <image src='/images/test/hsq.jpeg' mode='aspectFill'></image>
   </view>
 
   <!-- 活动列表 -->

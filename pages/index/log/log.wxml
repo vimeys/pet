@@ -1,0 +1,11 @@
+<!--pages/index/log/log.wxml-->
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" previous-margin="30rpx" next-margin="30rpx" circular="{{circular}}" bindchange='bind_current'>
+    <block wx:for="{{imgUrls}}">
+        <swiper-item>
+            <image src="{{filePath+item.img_url}}" class="slide-image" mode='aspectFill' />
+        </swiper-item>
+    </block>
+</swiper>
+<view>
+
+</view>

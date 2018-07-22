@@ -22,7 +22,7 @@
         </view>
         <!-- 图片 -->
         <view class='item-content' wx:if="{{petData.model_type==='BgModel'}}">
-            <image src='{{petData.details[petData.index].img.img_url}}' mode='aspectFill'></image>
+            <image src='{{filePath+petData.details[petData.index].img.img_url}}' mode='aspectFill'></image>
             <text></text>
             <!-- 贴图 -->
             <swiper indicator-dots="false" autoplay="true" interval="5000  " duration="2500" circular="true">
@@ -32,19 +32,20 @@
                     </swiper-item>
                 </block>
             </swiper>
+            <!--缩略图-->
             <view class='img-list'>
                 <view class='img-list-item {{news_active==index?"active":""}}'
-                      wx:for="{{petData.details.img.img_url}}"
+                      wx:for="{{petData.details}}"
                       wx:for-index='idx'
                       wx:for-item="item2"
                       bindtap='bind_news'
                       data-index='{{idx}}'
                       >
-                    <image src='{{item2.img_url}}' mode='aspectFill'></image>
+                    <image src='{{filePath+item2.img.img_url}}' mode='aspectFill'></image>
                 </view>
             </view>
             <!-- 涂鸦 -->
-            <cover-view class='btn-scrawl' catchtap="editHref" wx:if="{{petData.is_edit==1}}">
+            <cover-view class='btn-scrawl' catchtap="editHref" wx:if="{{petData.is_edit==1}}" data-id="{{petData.id}}"  data-pet-id="{{petData.pet_id}}" data-img-user="{{petData.user_id}}">
                 <cover-image class="c-image" src='/images/icon/index-news-scrawl.png' mode='widthFix'></cover-image>
                 <cover-view class="c-text">涂鸦</cover-view>
             </cover-view>

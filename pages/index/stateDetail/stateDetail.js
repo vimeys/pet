@@ -28,15 +28,15 @@ Page({
       })
         let that=this;
       util.promiseSync(util.url.url.stateDetail,{list_sort_id:id,user_id:app.user.id}).then((json)=>{
-          
+
           if(json.status==1){
-              
+
               json.data.index=0
               this.getBannerList(json.data.details[0].img_id,json)
           }
           this.getCommentLit(json.data.id)
       })
-        
+
     },
     // 获取轮播图片
     getBannerList(id,json){
@@ -46,7 +46,9 @@ Page({
         util.promiseSync(util.url.url.petBannerList, {bg_id:1 }).then(json1 => {
             // let petData = self.data.petData
             json1.data.forEach((item1, index) => {
-                arr.push({image: item1.graffiti.img_url, id: item1.graffiti.id})
+                if(item1.hyaline){
+                    arr.push({image: item1.hyaline.img_url, id: item1.hyaline.id})
+                }
             })
             json.data.bannerList = arr;
             that.setData({
@@ -57,23 +59,37 @@ Page({
     },
     //获取动态回复列表
     getCommentLit(id){
-      //ToDO 死数据  
+      //ToDO 死数据
         util.promiseSync(util.url.url.topicComment, {list_sort_id: 93,page:this.page,pageSize:10}).then(json => {
             if (json.status == 1) {
                 this.setData({
                     commmentData: json.data
                 })
             }
-        }) 
+        })
     },
     // 选择背景图片
     bind_news(e){
         let index = e.currentTarget.dataset.index;
         let petData = this.data.petData
         petData.index = index
-        this.getBannerList(this.data.petData.details[index].img_id)
+        // this.getBannerList(this.data.petData.details[index].img_id)
+        util.promiseSync(util.url.url.petBannerList, {bg_id:1 }).then(json1 => {
+            // let petData = self.data.petData
+            json1.data.forEach((item1, index) => {
+                if(item1.hyaline){
+                    arr.push({image: item1.hyaline.img_url, id: item1.hyaline.id})
+                }
+            })
+            json.data.bannerList = arr;
+            that.setData({
+                petData:json.data
+            })
+            wx.hideLoading()
+        })
         this.setData({
             petData,
+            indextt:index
             // indextt: index2
         })
     },
@@ -122,6 +138,16 @@ Page({
     // 去编辑页面
     editHref() {
         // console.log(this.data.petData[this.data.index].bg[this.data.indextt].img_url);
+        let id=e.currentTarget.dataset.id;
+        let index =e.currentTarget.dataset.index;
+        let img_id=this.data.petData.bg[this.data.indextt].img_id
+        app.globalData.edit = this.data.petData[index].bg[this.data.indextt].img_url;
+        app.globalData.petId=this.data.petData[index].pet_id;
+        wx.setStorageSync('petData', this.data.petData);
+        wx.setStorageSync('bgIndex', this.data.indextt);
+        wx.navigateTo({
+            url: `../scrawl/scrawl?id=${id}&img_id=${img_id}`
+        })
         wx.navigateTo({
             url: `../scrawl/scrawl?id=${this.data.petData[this.data.index].id}`
         })
@@ -131,48 +157,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

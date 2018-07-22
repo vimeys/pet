@@ -16,7 +16,7 @@
         手机号码：
       </view>
       <view class='zan-cell__bd'>
-        <input name='mobile' placeholder='请输入收货人电话' placeholder-class='placeholder' value='{{data_address.mobile}}'></input>
+        <input name='mobile' type="number" placeholder='请输入收货人电话' placeholder-class='placeholder' value='{{data_address.mobile}}' bindblur="blur"></input>
       </view>
     </view>
 

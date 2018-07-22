@@ -30,7 +30,7 @@ Page({
       title: '这里是名字',
       url: '/images/test/index-banner.png'
     }],
-
+      showSearch:true,//是否显示放大镜
     // 关键词
     word: [
       '我曹',
@@ -45,12 +45,12 @@ Page({
   //   listenFocus: util.listenFocus,
   //   listenBlur: util.listenBlur,
   // },
-  listenFocus: function () {
-    utils.listenFocus(this)
-  },
-  listenBlur: function () {
-    utils.listenBlur(this)
-  },
+  // listenFocus: function () {
+  //   utils.listenFocus(this)
+  // },
+  // listenBlur: function () {
+  //   utils.listenBlur(this)
+  // },
 
   /**
    * 生命周期函数--监听页面加载
@@ -159,6 +159,30 @@ Page({
       let id=e.currentTarget.dataset.id;
         wx.navigateTo({
           url: '../gambit-content/gambit-content?id='+id
+        })
+    },
+    // 监听获取输入框焦点
+    listenFocus(){
+        utils.listenFocus(this)
+    },
+    // 搜索
+    listenBlur(e){
+      utils.listenBlur(this)
+        let value=e.detail.value;
+        util.promiseSync(util.url.url.searchHot,{title:value,page:1,pageSize:4}).then(json=>{
+            if(json.status==1){
+                if(json.data.length>0){
+                    this.setData({
+                        talkList:json.data
+                    })
+                }else{
+                    wx.showToast({
+                      title: '暂无相关话题',
+                        icon:'none'
+                    })
+                }
+
+            }
         })
     },
   /**

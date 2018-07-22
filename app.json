@@ -11,6 +11,7 @@
       "pages/index/scrawl/scrawl",
     "pages/store/goodsList/goodsList",
     "pages/index/imageCut/imageCut",
+    "pages/index/log/log",
     "pages/me/pet-card-add/pet-card-add",
     "pages/me/address-add/address-add",
     "pages/store/goods-content/goods-content",

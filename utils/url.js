@@ -20,6 +20,8 @@ url.stateDetail   =Url+'graffiti/getListSortDetails';//获取动态单个详情
 url.follow        =Url+'follow/add';//点击是否关注
 url.like          =Url+'like/add';//点击是否点赞
 url.followList    =Url+'index/getFollowPetDynamic';//用户的关注列表
+url.rank          =Url+'index/petRankingList';//宠物排行榜
+url.likeBg        =Url+'like/bg';//单张图片点赞
 
 //上传页面
 url.petNameList   =Url+'pet_info/getUserPetLIst';//宠物列表
@@ -50,6 +52,9 @@ url.orderConfirm  =Url+'goods/orderConfirm';//订单确认收货
 // 活动
 url.activeList    =Url+'Activity/getActivityList';//活动列表
 url.activeDetail  =Url+'activity/getActivityDetails';//活动详情
+url.activeCardList=Url+'card_activity/getUserCardList';//活动卡牌列表及用户卡片信息
+url.activeCardLucky=Url+'card_activity/cardLuckDraw';//单张抽奖
+url.activeCardMerge=Url+'/card_activity/mergeCard';//合唱卡片
 
 //生成宠物卡
 url.addPetId      =Url+'pet_info/add';//添加宠物卡

@@ -8,7 +8,7 @@
   </view>
 
   <!-- 搜索 -->
-  <template is="template-search"></template>
+  <template is="template-search" data="{{animate}}"></template>
 
   <!-- 热门话题 -->
   <view class='section-hot'>

@@ -2,28 +2,33 @@
 <view class='container'>
 
   <!-- 图片 -->
-  <view class='section-swiper'>
-    <image class='img' src='{{test_img_hsq}}'></image>
-    <view class='left'>
-      <image src='/images/icon/index-history-left.png' mode='widthFix'></image>
-    </view>
-    <view class='right'>
-      <image src='/images/icon/index-history-right.png' mode='widthFix'></image>
+  <view class="template-news-item">
+    <view class='item-content'>
+      <image src='{{filePath+bg_img}}' mode='aspectFill'></image>
+      <!-- 贴图 -->
+      <swiper indicator-dots="false" autoplay="true" interval="5000  " duration="2500" circular="true">
+        <block wx:for="{{Data}}" wx:for-item="item">
+          <swiper-item>
+            <image src="{{filePath}}{{item.bg.img_url}}" class="slide-image" mode='widthFix'  data-id="{{item.bg.id}}"/>
+          </swiper-item>
+        </block>
+      </swiper>
     </view>
   </view>
 
+
   <!-- 按钮 -->
   <view class='section-btn'>
-    <view class='btn'>
+    <view class='btn' bindtap="addLike">
       <image src='/images/icon/index-history-love.png' mode='widthFix'></image>
       <text>点赞</text>
     </view>
-    <view class='btn'>
+    <view class='btn' bindtap="save">
       <text>保存到手机</text>
     </view>
-    <view class='btn'>
+    <view class='btn' bindtap="share">
       <image src='/images/icon/index-history-share.png' mode='widthFix'></image>
-      <text>点赞</text>
+      <text>分享</text>
     </view>
   </view>
 

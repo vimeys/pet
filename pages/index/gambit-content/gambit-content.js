@@ -22,37 +22,53 @@ Page({
         })
     },
     form_submit: function () {
-        var that = this
-        util.promiseSync(util.url.url.add_comment, {
-            user_id: that.data.userInfo.id,
-            parent_id: 0,
-            to_user_id: 10,//暂无，死数据
-            content: that.data.comment_val,
-            list_sort_id: this.data.Data.list_sort.id,//暂无，死数据
-        }).then((json) => {
-            if (json.status == 1) {
-                this.setData({
-                    comment_val:''
-                })
-                wx.showToast({
-                  title: '评论成功',
-                    icon:'none'
-                })
-                this.page=1
-                util.promiseSync(util.url.url.topicComment, {list_sort_id: this.data.Data.list_sort_id,page:this.page,pageSize:10}).then(json => {
+        var that = this;
+        if(that.data.comment_val){
+            if(that.data.comment_val.toString().trim()){
+                util.promiseSync(util.url.url.add_comment, {
+                    user_id: that.data.userInfo.id,
+                    parent_id: 0,
+                    to_user_id: 10,//暂无，死数据
+                    content: that.data.comment_val,
+                    list_sort_id: this.data.Data.list_sort_id,
+                }).then((json) => {
                     if (json.status == 1) {
                         this.setData({
-                            commmentData: json.data
+                            comment_val:''
+                        })
+                        wx.showToast({
+                            title: '评论成功',
+                            icon:'none'
+                        })
+                        this.page=1
+                        util.promiseSync(util.url.url.topicComment, {list_sort_id: this.data.Data.list_sort_id,page:this.page,pageSize:10}).then(json => {
+                            if (json.status == 1) {
+                                this.setData({
+                                    commmentData: json.data
+                                })
+                            }
+                        })
+                    }else{
+                        wx.showToast({
+                            title: '评论失败',
+                            icon:'none'
                         })
                     }
                 })
-            }else{
+            }else {
                 wx.showToast({
-                  title: '评论失败',
+                    title: '请输入内容',
                     icon:'none'
                 })
             }
-        })
+        }else {
+            wx.showToast({
+                title: '请输入内容',
+                icon:'none'
+            })
+        }
+
+
     },
     /**
      * 生命周期函数--监听页面加载
@@ -82,7 +98,15 @@ Page({
     onReady: function () {
 
     },
-
+    detail(e){
+        let arr = [];
+        this.data.image_url.forEach((item)=> {
+            arr.push(this.data.filePath + item.url)
+        });
+        wx.previewImage({
+            urls: arr
+        })
+    },
     // 获取详情及评论
     getData(id) {
         util.promiseSync(util.url.url.topicDetail, {topic_id: id}).then(json => {

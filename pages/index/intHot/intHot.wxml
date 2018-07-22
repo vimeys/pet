@@ -1,5 +1,5 @@
 <canvas class="myCanvas"
         canvas-id="myCanvas"
-        style="width:690rpx;height:1030rpx; margin:10rpx auto 0; background: #fff"/>
+        style="width:690rpx;height:1030rpx; margin:10rpx auto 0; background: #fff;overflow:hidden"/>
 <view class="btn" bindtap="save">保存图片</view>
 <view class="text">保存网红卡到手机，分享好友，获取爪币</view>

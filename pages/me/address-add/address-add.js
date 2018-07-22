@@ -168,8 +168,18 @@ Page({
 
 
   },
+    // 输入手机号码验证
+    blur(e){
+      let value=e.detail.value;
+        let reg=/^1[3,4,5,6,7,8,9]\d{9}$/g;
 
-
+        if(!reg.test(value)){
+            wx.showToast({
+              title: '请输入正确手机号',
+              icon:'none'
+            })
+        }
+    },
 
   /**
    * 生命周期函数--监听页面加载
@@ -197,6 +207,7 @@ Page({
     })
     totalUtil.promiseSync(totalUtil.url.url.getRegion, {}).then((json) => {
       // console.log(json.data)
+        json.data.unshift({id: 0, name: "选择省份", level: 0, pid: 0})
       that.setData({
         province: json.data
       })

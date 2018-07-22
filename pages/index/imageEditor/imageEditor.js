@@ -6,6 +6,7 @@ let upUrl='http://172.200.1.14:1080/public/petapi/file/getFilePath/';
 var timer=null
 Page({
     data: {
+        isEdit:'',
         bgPics: [],//上传的图片集
         bgPic: null,//当前背景图片
         isChartImage:false,//控制贴图的显示
@@ -15,8 +16,6 @@ Page({
         currentHatId: 1,
         hatCenterX: wx.getSystemInfoSync().windowWidth / 2-50,
         hatCenterY: 100,
-        // cancelCenterX: wx.getSystemInfoSync().windowWidth / 2 - 50 - 2,
-        // cancelCenterY: 100,
         handleCenterX: wx.getSystemInfoSync().windowWidth / 2,
         handleCenterY: 150,
         hatSize: 100,//大小
@@ -27,18 +26,20 @@ Page({
         width:750,//canvas的宽
         height:750,//canvas的高
         imageId:0,//第几张图片的id
+        chartImageId:0,//第几套贴图集
         drawArray:[{
             hasChartlet:false,//是否有贴图
             chartletSrc:1,//贴图的链接
             XYZ:{
                 scale:1,//比例
-                rotate:'',//旋转角度
-                hat_center_x:'',//地图中心位置X
-                hat_center_y:'',//地图中心位置Y
+                rotate:0,//旋转角度
+                hat_center_x:wx.getSystemInfoSync().windowWidth / 2-50,//地图中心位置X
+                hat_center_y:150,//地图中心位置Y
                 width:'',//图片的宽度
                 height:''//图片的高度
             }
         }],
+        hasEdit:[],//是否有编辑图
         drawsuccess:{},
         showImgList:false,
         idx:0//显示贴图集的下标
@@ -50,7 +51,8 @@ Page({
         this.user=util.storage('user');
         this.setData({
             bgPics: app.globalData.bgPic,
-            bgPic:app.globalData.bgPic[0]
+            bgPic:app.globalData.bgPic[0],
+            isEdit:app.globalData.is_edit
         });
         this.getChartletList()
         // 循环需要绘制的坐标
@@ -97,15 +99,32 @@ Page({
             wx.getImageInfo({
                 src:app.globalData.bgPic[i],
                 success:(res)=>{
-                    let width,height;
+                    let width,height,offsetx,offsety;
                     width=res.width;
-                    let scale;
-                    scale=width/750;
-                    array[i].XYZ.width=Math.trunc(res.width/scale);
-                    array[i].XYZ.height=Math.trunc(res.height/scale);
-                    that.setData({
-                        drawArray:array
-                    })
+                    height=res.height;
+                    if(width>height){
+                        let scale;
+                        scale=height/750;
+                        offsetx=width-750/2
+                        array[i].XYZ.width=Math.trunc(res.width/scale);
+                        array[i].XYZ.height=Math.trunc(res.height/scale);
+                        array[i].XYZ.x=(Math.trunc(res.width/scale)-750)/4;
+                        array[i].XYZ.y=0;
+                        that.setData({
+                            drawArray:array
+                        })
+                    }else{
+                        let scale;
+                        scale=width/750;
+                        array[i].XYZ.width=Math.trunc(res.width/scale);
+                        array[i].XYZ.height=Math.trunc(res.height/scale);
+                        array[i].XYZ.y=(Math.trunc(res.height/scale)-750)/4;
+                        array[i].XYZ.x=0;
+                        that.setData({
+                            drawArray:array
+                        })
+                    }
+
                 }
             });
         }
@@ -131,7 +150,6 @@ Page({
                     imgList:imgList
                 })
             }
-
         })
     },
     // 切换贴图集
@@ -144,9 +162,38 @@ Page({
         this.gatherIndex=index
         let imgList=this.data.chartletCover[index]
         this.setData({
+            chartImageId:index,
             idx:index,
             showImageList,
             imgList:imgList
+        })
+    },
+    // 选择子贴图
+    chooseImg(e){
+        let index=e.target.dataset.hatId;
+        let arr=this.data.drawArray
+        arr[this.data.imageId].chartletSrc=this.data.filePath+this.data.chartletCover[this.data.chartImageId][index].img_url;
+        arr[this.data.imageId].hasChartlet=true;
+        let arr2=this.data.hasEdit
+        arr2.push(true)
+        this.setData({
+            hasEdit:arr2,
+            drawArray:arr,
+            chartletIndex:index,
+            currentChartImage:this.data.imgList[index].img_url,
+            isChartImage:true,
+            showImageList:!this.data.showImageList,
+        })
+    },
+    // 关闭贴图
+    close(){
+        let arr=this.data.drawArray;
+        let arr2=this.data.hasEdit
+        arr2.pop()
+        arr[this.data.imageId].hasChartlet=false;
+        this.setData({
+            drawArray:arr,
+            hasEdit:arr2
         })
     },
     onReady(){
@@ -188,7 +235,6 @@ Page({
             hatCenterY:e.detail.y,
             drawArray:arr
         })
-
     },
     touchStart(e){
         this.start_x=e.touches[0].clientX;
@@ -197,8 +243,9 @@ Page({
     touchMove(e){
         var current_x=e.touches[0].clientX;
         var current_y=e.touches[0].clientY;
-        var moved_x=Math.round(current_x-this.start_x);
-        var moved_y=Math.round(current_y-this.start_y);
+        // console.log(current_x, current_y);
+        var moved_x=current_x-this.start_x;
+        var moved_y=current_y-this.start_y;
         this.setData({
             handleCenterX:this.data.handleCenterX+moved_x,
             handleCenterY:this.data.handleCenterY+moved_y,
@@ -211,25 +258,27 @@ Page({
         let distance_after=Math.sqrt(diff_x_after*diff_x_after+diff_y_after*diff_y_after);
         let angle_before=Math.atan2(diff_y_before,diff_x_before)/Math.PI*180;
         let angle_after=Math.atan2(diff_y_after,diff_x_after)/Math.PI*180;
+        // console.log(angle_before, angle_after);
         let arr=this.data.drawArray;
-
-        if(distance_after/distance_before*this.scale>4){
+        arr[this.data.imageId].XYZ.hat_center_x=this.data.hatCenterX;
+        arr[this.data.imageId].XYZ.hat_center_y=this.data.hatCenterY;
+        if(distance_after/distance_before*this.data.drawArray[this.data.imageId].XYZ.scale>4){
             arr[this.data.imageId].XYZ.scale=4;
-            arr[this.data.imageId].XYZ.rotate=angle_after-angle_before+this.rotate;
-
-
+            arr[this.data.imageId].XYZ.rotate=angle_after-angle_before+this.data.drawArray[this.data.imageId].XYZ.rotate;
+            console.log(angle_after - angle_before + this.data.drawArray[this.data.imageId].XYZ.rotate);
             this.setData({
                 drawArray:arr
             })
         }else{
-            arr[this.data.imageId].XYZ.scale=distance_after/distance_before*this.scale;
-            arr[this.data.imageId].XYZ.rotate=angle_after-angle_before+this.rotate;
+            arr[this.data.imageId].XYZ.scale=distance_after/distance_before*this.data.drawArray[this.data.imageId].XYZ.scale;
+            arr[this.data.imageId].XYZ.rotate=angle_after-angle_before+this.data.drawArray[this.data.imageId].XYZ.rotate;
+            console.log(angle_after - angle_before + this.data.drawArray[this.data.imageId].XYZ.rotate);
             this.setData({
                 drawArray:arr
             })
         }
-        this.start_x=current_x;
-        this.start_y=current_y;
+        // this.start_x=current_x;
+        // this.start_y=current_y;
     },
     touchEnd(e){
         this.touch_target="";
@@ -237,31 +286,23 @@ Page({
         this.hat_center_y=this.data.hatCenterY;
         this.handle_center_x=this.data.handleCenterX;
         this.handle_center_y=this.data.handleCenterY;
-        this.scale=this.data.scale;
-        this.rotate=this.data.rotate;
-    },
-    // 选择贴图
-    chooseImg(e){
-        let index=e.target.dataset.hatId;
-        let arr=this.data.drawArray
-        arr[this.data.imageId].chartletSrc=this.data.filePath+this.data.chartletCover[this.data.imageId][index].img_url;
-        this.setData({
-            currentChartImage:this.data.imgList[index].img_url,
-            isChartImage:true,
-            showImageList:!this.data.showImageList,
-        })
+        // this.scale=this.data.scale;
+        // this.rotate=this.data.rotate;
     },
 
 
     // 选择编辑图片
     chooseBgImage(e){
         let id=e.currentTarget.dataset.id;
-        let height=this.data.drawArray[id].XYZ.height
+        // let height=this.data.drawArray[id].XYZ.height
+        let array=this.data.drawArray
+        // array[id].hasChartlet=true
         this.setData({
             bgPic:this.data.bgPics[id],
             imageId:id,
+            isChartImage:false,
             chartlet:false,
-            height:height
+            drawArray:array
         });
         this.scale=this.starObj.scale;
         this.rotate=this.starObj.rotate;
@@ -300,28 +341,14 @@ Page({
             url: '../imageCut/imageCut?imageSrc='+this.data.bgPics[this.data.imageId]
         })
     },
-    // 保存到手机世界
-    // save(){
-    //     this.draw()
-    //     wx.canvasToTempFilePath({
-    //         canvasId:'myCanvas',
-    //         success:(res)=>{
-    //             wx.saveImageToPhotosAlbum({
-    //                 filePath:res.tempFilePath,
-    //                 success:()=>{
-    //
-    //                 }
-    //             })
-    //         }
-    //     })
-    // },
     // 绘制贴图
     draw() {
         let array=this.data.drawArray
-        app.globalData.scale=this.scale;
-        app.globalData.rotate = this.rotate;
-        app.globalData.hat_center_x = this.hat_center_x;
-        app.globalData.hat_center_y = this.hat_center_y;
+        let self=this.data.drawArray[this.data.imageId].XYZ
+        app.globalData.scale=self.scale;
+        app.globalData.rotate = self.rotate;
+        app.globalData.hat_center_x = self.hat_center_x;
+        app.globalData.hat_center_y = self.hat_center_y;
         app.globalData.currentHatId = this.data.currentHatId;
         let scale = app.globalData.scale;
         let rotate = app.globalData.rotate;
@@ -331,30 +358,18 @@ Page({
         const pc = wx.createCanvasContext('myCanvas');
         const windowWidth = wx.getSystemInfoSync().windowWidth;
         const windowHeight =wx.getSystemInfoSync().windowHeight;
-        const hat_size = 100 * scale;
+        const hat_size = 50 * scale;
         pc.clearRect(0, 0, windowWidth, 300);
-        pc.drawImage(this.data.bgPic,0,0,array[this.data.imageId].XYZ.width/2-15,array[this.data.imageId].XYZ.height/2-15);
+        pc.drawImage(this.data.bgPic,-array[this.data.imageId].XYZ.x,-array[this.data.imageId].XYZ.y,array[this.data.imageId].XYZ.width/2,array[this.data.imageId].XYZ.height/2);
         pc.translate(hat_center_x,hat_center_y);
         pc.rotate(rotate * Math.PI / 180);
         if(array[this.data.imageId].hasChartlet){
             pc.drawImage(this.data.drawArray[this.data.imageId].chartletSrc, -hat_size / 2, -hat_size / 2, hat_size, hat_size);
         }
         pc.draw();
-
-        let top=windowHeight-array[this.data.imageId].XYZ.width;
-        if(top>0){
-            this.setData({
-                width:array[this.data.imageId].XYZ.width,
-                height:array[this.data.imageId].XYZ.height,
-                top:top
-            })
-        }else{
-            this.setData({
-                width:array[this.data.imageId].XYZ.width,
-                height:array[this.data.imageId].XYZ.height,
-                top:0
-            })
-        }
+        this.setData({
+            top:100
+        })
 
     },
     // 带背景贴图绘制及上传
@@ -370,15 +385,14 @@ Page({
         let rotate = drawArray1[i].XYZ.rotate;
         let hat_center_x = drawArray1[i].XYZ.hat_center_x;
         let hat_center_y = drawArray1[i].XYZ.hat_center_y;
-        let currentHatId = drawArray1[i].chartletSrc;
         const pc = wx.createCanvasContext('myCanvas');
         const windowWidth = wx.getSystemInfoSync().windowWidth;
-        const hat_size = 100 * scale;
+        const hat_size = 50 * scale;
         pc.clearRect(0, 0, windowWidth, 300);
-        pc.drawImage(this.data.bgPics[i], 0, 0, drawArray1[i].XYZ.width / 2, drawArray1[i].XYZ.height / 2);
+        pc.drawImage(this.data.bgPics[i], -drawArray1[i].XYZ.x,-drawArray1[i].XYZ.y, drawArray1[i].XYZ.width / 2, drawArray1[i].XYZ.height / 2);
         pc.translate(hat_center_x, hat_center_y);
         pc.rotate(rotate * Math.PI / 180);
-        pc.drawImage("../../../images/" + currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
+        pc.drawImage(drawArray1[i].chartletSrc, -hat_size / 2, -hat_size / 2, hat_size, hat_size);
         drawArray1[i].hasChartlet ? pc.draw(false, () => {
             wx.canvasToTempFilePath({
                 canvasId: 'myCanvas',
@@ -393,7 +407,7 @@ Page({
                         },
                         name: 'file',
                         success: resBg => {
-                            this.ttBg.push(resBg.data)
+                            this.ttBg.push(JSON.parse(resBg.data).data.id)
                             success++;
                         },
                         fail(res) {
@@ -467,7 +481,7 @@ Page({
         if(drawArray1[i].hasChartlet){
             pc.translate(hat_center_x,hat_center_y);
             pc.rotate(rotate * Math.PI / 180);
-            pc.drawImage("../../../images/" + currentHatId + ".png", -hat_size / 2, -hat_size / 2, hat_size, hat_size);
+            pc.drawImage(drawArray1[i].chartletSrc, -hat_size / 2, -hat_size / 2, hat_size, hat_size);
             // pc.draw()
         }
         drawArray1[i].hasChartlet?pc.draw(false,()=>{
@@ -484,7 +498,7 @@ Page({
                         },
                         name: 'file',
                         success:resBg=>{
-                            this.kBg.push(resBg.data)
+                            this.kBg.push(JSON.parse(resBg.data).data.id)
                             success++;
                         },
                         fail(res){
@@ -511,8 +525,6 @@ Page({
 
             })
         }):test2(that);
-        
-        
         // 没有背景添加空值接口
             function test2(that) {
             success++
@@ -565,8 +577,11 @@ Page({
                     that.setData({
                             drawsuccess:{}
                         })
-                    that.addBg()
-                    that.drawUp(that.data.drawArray,that.data.drawsuccess)
+                    // if(that.data.hasEdit){
+                    //     that.drawUp(that.data.drawArray,that.data.drawsuccess)
+                    // }else{
+                        that.addBg()
+                    // }
                 }else{
                     data.i=i;
                     data.success=success;
@@ -579,34 +594,45 @@ Page({
 
     // 上传背景集合
     addBg(){
+        //todo 死数据
             let obj={}
-            obj.pet_id=1
-            obj.user_id=7
-            obj.is_edit=1
-            obj.img_id=this.bg
-        console.log(this.bg);
+            obj.pet_id=app.globalData.pet_id;
+            obj.user_id=app.user.id;
+            obj.is_edit=this.data.isEdit
+            obj.img_id=this.bg;
+        // console.log(this.bg);
         util.promiseSync(util.url.url.addBg,obj).then((json)=>{
+            if(json.status==1){
+                this.list_sort_id=json.data.list_sort_id;
+                if(this.data.hasEdit.length!=0){
+                    this.drawUp(this.data.drawArray,this.data.drawsuccess)
+                }else{
+                    util.showSuccess('发布成功');
+                    setTimeout(function () {
+                        wx.navigateBack({delta:2})
+                    },1000)
+                }
+            }
         })
     },
-
-
     //上传合成图片
     addttBg(){
         let obj={}
-        let useId=7
-        let editId= 7
-        obj.pet_id=1
-        obj.graffiti_id=[]
-        obj.hyaline_id=[]
-        obj.bg_id=[];
-        for(let i=0;i<this.bg.length;i++){
-           obj.bg_id=this.bg[i];
-            obj.img_id=this.ttBg[i];
-           obj.hyaline_id=this.kBg[i];
-        }
+        obj.user_id=app.user.id
+        obj.edit_id= app.user.id
+        obj.pet_id=app.globalData.pet_id
+        obj.list_sort_id=this.list_sort_id;
+        obj.graffiti_id=this.ttBg
+        obj.hyaline_id=this.kBg
+        obj.bg_id=this.bg;
+        // for(let i=0;i<this.bg.length;i++){
+        //    obj.bg_id=this.bg[i];
+        //     obj.graffiti_id=this.ttBg[i];
+        //    obj.hyaline_id=this.kBg[i];
+        // }
         util.promiseSync(util.url.url.addttBg,obj).then((json)=>{
             if(json.status==1){
-                util.showSuccess('发布成功')
+                util.showSuccess('发布成功');
                 setTimeout(function () {
                     wx.navigateBack({delta:2})
                 },1000)

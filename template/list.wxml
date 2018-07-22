@@ -118,7 +118,7 @@
       <!-- 评论文字 -->
       <view class='text-wrap'>
         <!-- 评论 -->
-        <view>{{item.content}}我曹，这狗了不得！我曹，这狗了不得！我曹，这狗了不得！！</view>
+        <view>{{item.content}}</view>
         <!-- 回复 -->
       </view>
 
@@ -182,7 +182,7 @@
     <view class='publish-info zan-cell'>
       <view class='zan-cell__hd'>
         <!--<image src='/images/test/hsq-header.jpg' mode='aspectFill'></image>-->
-        <image src='{{item.pet_info.pet_img}}' mode='aspectFill'></image>
+        <image src='{{filePath+item.pet_info.pet_img}}' mode='aspectFill'></image>
       </view>
       <view class='zan-cell__bd'>
         <view class='name'>{{item.pet_info.name}}</view>
@@ -197,11 +197,11 @@
     </view>
     <!-- 图片 -->
     <view class='item-content' wx:if='{{item.bg.length}}'>
-      <image src='{{item.bg[item.index].img_url}}' mode='aspectFill'></image>
+      <image src='{{filePath+item.bg[item.index].img_url}}' mode='aspectFill'></image>
       <text></text>
       <!-- 贴图 -->
       <swiper indicator-dots="false" autoplay="true" interval="5000  " duration="2500" circular="true">
-        <block wx:for="{{item.bannerList}}" wx:for-item="bItem">
+        <block wx:for="{{item.bannerList[item.index]}}" wx:for-item="bItem">
           <swiper-item>
             <image src="{{filePath}}{{bItem.image}}" class="slide-image" mode='widthFix' />
           </swiper-item>
@@ -215,11 +215,11 @@
               bindtap='bind_news'
               data-indext='{{idx}}'
               data-index="{{index}}">
-          <image src='{{item2.img_url}}' mode='aspectFill'></image>
+          <image src='{{filePath+item2.img_url}}' mode='aspectFill'></image>
         </view>
       </view>
       <!-- 涂鸦 -->
-      <cover-view class='btn-scrawl' catchtap="editHref" wx:if="{{item.is_edit==1}}">
+      <cover-view class='btn-scrawl' catchtap="editHref" wx:if="{{item.is_edit==1}}" data-id="{{item.id}}" data-index="{{index}}" data-pet-id="{{item.pet_id}}" data-img-user="{{item.user_id}}">
         <cover-image class="c-image" src='/images/icon/index-news-scrawl.png' mode='widthFix'></cover-image>
         <cover-view class="c-text">涂鸦</cover-view>
       </cover-view>
@@ -227,7 +227,8 @@
     <!-- 视频 -->
     <view class='item-content' wx:else>
       <view class='video-wrap'>
-        <video controls initial-time="1" poster src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"></video>
+        <!--<video controls initial-time="1" poster src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"></video>-->
+        <video controls initial-time="1" poster src="{{filePath+item.video.img_url}}"></video>
       </view>
     </view>
     <view class='item-footer'>
@@ -272,7 +273,7 @@
     <view class='body'>
       <view class='name zan-ellipsis--l2'>
           {{goods.name}}
-        这里是商品名称这里是商品名称这里是商品名称这里是商品名称这里是商品名称这里是商品名称
+
       </view>
       <view class='size'>
         <!--规格：63元/斤-->
@@ -294,7 +295,7 @@
         <view class='body'>
             <view class='name zan-ellipsis--l2'>
                 {{goods.name}}
-                这里是商品名称这里是商品名称这里是商品名称这里是商品名称这里是商品名称这里是商品名称
+
             </view>
             <view class='size'>
                 <!--规格：63元/斤-->
@@ -384,7 +385,7 @@
   <view class="template-search-wrap">
     <form>
       <view class="search-input-wrapper">
-        <image src="/images/icon/search.png" class="{{animate}}" mode='widthFix'></image>
+        <image src="/images/icon/search.png" class="{{animate}}" mode='widthFix' ></image>
         <input type="text" placeholder='请输入您想要的话题' placeholder-class='search-placeholder' bindfocus='listenFocus' bindblur='listenBlur' />
       </view>
     </form>
@@ -415,16 +416,16 @@
   <view class='reply'>
     <!--<text>微信昵称1</text>回复-->
     <!--<text>微信昵称4</text>-->
-    我觉得这条狗很优秀，{{item.content}}
+    {{item.content}}
   </view>
   <view class='footer-icon-2'>
     <view bindtap='bind_love' data-index="{{index}}" data-id="{{item.id}}">
       <image src='/images/icon/index-gambit-content-love.png' mode='widthFix'></image>
-      <text class='num'>5464{{item.like_num}}</text>
+      <text class='num'>{{item.like_num}}</text>
     </view>
     <view bindtap="hrefComment" data-id="{{item.id}}">
       <image src='/images/icon/index-gambit-content-message_0.png' mode='widthFix'></image>
-      <text class='num'>546{{item.comment_num}}</text>
+      <text class='num'>{{item.comment_num}}</text>
     </view>
   </view>
 </template>

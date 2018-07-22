@@ -327,6 +327,7 @@
 }
 .more image{
   width: 210rpx;
+  height: 210rpx;
   border-radius: 10rpx;
   margin-left: 10rpx;
   margin-bottom: 20rpx;
