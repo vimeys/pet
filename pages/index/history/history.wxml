@@ -9,7 +9,7 @@
       <swiper indicator-dots="false" autoplay="true" interval="5000  " duration="2500" circular="true">
         <block wx:for="{{Data}}" wx:for-item="item">
           <swiper-item>
-            <image src="{{filePath}}{{item.bg.img_url}}" class="slide-image" mode='widthFix'  data-id="{{item.bg.id}}"/>
+            <image src="{{filePath}}{{item.hyaline.img_url}}" class="slide-image" mode='widthFix'  data-id="{{item.bg.id}}"/>
           </swiper-item>
         </block>
       </swiper>

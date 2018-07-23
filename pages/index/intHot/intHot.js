@@ -43,13 +43,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  this.getCodeImgae()
+      let pet=util.storage('petData')
+    this.getCodeImage();
 
+    this.getPetData(pet.pet_id)
   },
 
     // 获取二维码
     //TOdo
-    getCodeImgae(){
+    getCodeImage(){
       util.promiseSync(util.url.url.getCode,{graffiti_id:1,push_id:2}).then(json=>{
           console.log(json);
           if(json.status==1){
@@ -60,9 +62,18 @@ Page({
           }
       })
     },
-    //获取宠物信息信息
-    getPet(){
-      util.promiseSync()
+
+    //获取宠物信息
+    getPetData(petId){
+      let petData=util.storage('petData');
+      util.promiseSync(util.url.url.petData,{pet_id:petData.pet_id}).then(json=>{
+          if(json.status==1){
+              this.setData({
+                  pet:json.data
+              })
+          }
+          this.draw()
+      })
     },
 
   //绘制网红卡

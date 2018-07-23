@@ -20,7 +20,9 @@ Page({
           is_sterilization:1,
           weight:10
       }], //宠物列表
-      issus:[]//动态列表
+      issus:[],//动态列表
+      more:true//是否还有更多
+
   },
 
     //去订单详情页面
@@ -59,6 +61,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      this.page=1;
       this.setData({
           imageFile:app.filePath,
           user:app.userInfo
@@ -74,7 +77,6 @@ Page({
       console.log("执行我的页面");
 
       let user=util.storage("userInfo");
-      //TODO 死数据
       util.promiseSync(util.url.url.userPetList,{user_id:user.id}).then(json=>{
         if(json.status==1){
           let date=Date.parse(new Date())
@@ -94,14 +96,33 @@ Page({
             this.issusList()
     },
 
-    issusList(page=1,page_size=10){
+    issusList(page=1,page_size=4){
         console.log(app.user);
         util.promiseSync(util.url.url.stateManage,{user_id:app.user.id,page:page,pageSize:page_size}).then(json=>{
-            this.setData({
-                issus:json.data
-            })
+
+            let issus=this.data.issus
+            if(this.data.more){
+                json.data.forEach((item)=>{
+                    issus.push(item)
+                })
+                if(json.data.length<page_size){
+                    this.setData({
+                        more:false
+                    })
+                }
+                this.setData({
+                    issus
+                })
+            }else{
+                wx.showToast({
+                  title: '没有更多数据',
+                })
+            }
+
         })
     },
+
+
 
     //删除按钮
     del(e){
@@ -150,8 +171,6 @@ Page({
    */
   onShow: function () {
       this.getPetList()
-      console.log(123);
-      console.log(app);
       util.promiseSync(util.url.url.isHasMes,{user_id:app.user.id}).then(json=>{
           if(json.data==0){
               this.setData({
@@ -192,7 +211,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+        this.page++
+      this.issusList(this.page,2)
   },
 
   /**

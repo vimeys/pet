@@ -82,7 +82,12 @@ Page({
         UserInfo: [],
         news_chartlet_list: app.news_chartlet_list,
         test_img_url: app.test_img_url,
-        page: 1
+        statusPage: 1,//动态page
+        imagePage:1,//热门图片page
+        follow:1,//关注page,
+        imageMore:true,//是否还有更多热门图片
+        statusMore:true,//是否还有更多动态
+        followMore:true,//是否还有跟多关注列表
     },
 
     // 轮播分页器
@@ -106,10 +111,12 @@ Page({
               })
               wx.getSystemInfo({
                   success: (res) => {
-                      util.promiseSync(util.url.url.index_hot, { page: 1, pageSize: 10 }).then((json) => {
+                      wx.showLoading('加载中...')
+                      util.promiseSync(util.url.url.index_hot, { page: 1, pageSize: 10 }).then((json) => {//获取热门图片
                           this.setData({
                               images_arr: json.data
                           })
+                          wx.hideLoading()
                       })
                       //加载首组图片
                   }
@@ -315,13 +322,67 @@ Page({
             json.data.forEach(function (item, index) {
                 item.index = 0
             });
-            this.statuImageList(json.data,page_size)
+            this.statuImageList(json.data,page_size)//获取轮播
             that.setData({
                 petData: json.data
             });
 
         })
     },
+    // 获取轮播图片
+    statuImageList(data,page_size) {
+        let that = this
+        let petData = data
+        petData.forEach(function (item, index) {
+            bannerList(item, index, that)//item指的是没一个动态
+        })
+
+        function bannerList(item, index, self) {
+            // debugger
+            let arr = []
+            // let that1=that
+            //死数据item.bg[0].img_id
+            if(item.model_type=="BgModel"){
+                util.promiseSync(util.url.url.petBannerList, {bg_id:item.bg[0].img_id}).then(json1 => {
+                    // let petData = self.data.petData
+                    json1.data.forEach((item1, index) => {//item1是当前动态的第一个贴图的轮播图片
+                        arr[index]=[];
+                        arr[index].push({image: item1.hyaline.img_url, id: item1.hyaline.id})
+                    })
+                    item.bannerList = arr;
+                    petData[index] = item;
+                    that.i++
+                    if(that.i>=10){
+                        that.setData({
+                            petData:[...that.data.petData,...petData]
+                        })
+                        that.i=0
+                    }
+                    // let newPetData=[...that.data.petData,...petData]
+                    // if(that.data.petData.length==0){
+                    //
+                    // }else{
+                    //     that.setData({
+                    //         petData:[that.data.petData,
+                    //         ]
+                    //     })
+                    // }
+
+                })
+            }
+
+        }
+    },
+    // 获取动态动态
+    getMore() {
+        let user = util.storage('userInfo')
+        let page = this.data.statusPage;
+        page++
+        this.petList(app.userInfo.id,page,3)
+    },
+
+
+
 
     // 获取关注列表
     getfollowList(id, page = 1, page_size = 10) {
@@ -356,9 +417,7 @@ Page({
     // 关注获取动态
     bannerLIst(data, index,page_size, that) {
         let petData = data
-        // this.i=0
         let arr = []
-        // let that1=that
         //死数据
         util.promiseSync(util.url.url.petBannerList, {bg_id: 1}).then(json1 => {
             // let petData = self.data.petData
@@ -375,51 +434,7 @@ Page({
         })
     },
 
-    // 获取轮播图片
-    statuImageList(data,page_size) {
-        let that = this
-        let petData = data
-        // this.i=0
-        petData.forEach(function (item, index) {
-            bannerList(item, index, that)
-        })
 
-        function bannerList(item, index, self) {
-            // debugger
-            let arr = []
-            // let that1=that
-            //死数据item.bg[0].img_id
-            if(item.model_type=="BgModel"){
-                util.promiseSync(util.url.url.petBannerList, {bg_id:item.bg[0].img_id}).then(json1 => {
-                    // let petData = self.data.petData
-                    json1.data.forEach((item1, index) => {
-                         arr[index]=[]
-                        arr[index].push({image: item1.hyaline.img_url, id: item1.hyaline.id})
-                    })
-                    item.bannerList = arr;
-                    petData[index] = item;
-                    that.i++
-                    if(that.i>=10){
-                        that.setData({
-                            petData:[...that.data.petData,...petData]
-                        })
-                        that.i=0
-                    }
-                    // let newPetData=[...that.data.petData,...petData]
-                    // if(that.data.petData.length==0){
-                    //
-                    // }else{
-                    //     that.setData({
-                    //         petData:[that.data.petData,
-                    //         ]
-                    //     })
-                    // }
-
-                })
-            }
-
-        }
-    },
     // 去涂鸦页面
     editHref(e) {
         // console.log(this.data.petData[this.data.index].bg[this.data.indextt].img_url);
@@ -435,13 +450,6 @@ Page({
         })
     },
 
-    // 获取动态更多
-    getMore() {
-        let user = util.storage('userInfo')
-        let page = this.data.page;
-        this.page++
-        this.petList(app.userInfo.id,page,3)
-    },
 
 
 
@@ -494,31 +502,37 @@ Page({
         console.log(data)
         this.setData(data);
     },
-    // 热门分页
+    // 获取更多热门图片
     getMore2: function () {
         var that = this
-        let page = this.data.page;
+        let page = this.data.imagePage;
         page++
         console.log(page)
         util.promiseSync(util.url.url.index_hot, { page: page, pageSize: 10 }).then((json) => {
             let images = this.data.images_arr;
-            if (json.data.length < 2) {
-                // 加载完毕
-                console.log(0)
-                that.setData({
-                    more_text: app.more_end_text,
-                    disabled:true
+            if(this.data.imageMore){//判断是否还有更多
+                json.data.forEach((item)=>{
+                    images.push(item)
                 })
-            }else{
-                console.log(1)
-                images = images.concat(json.data)
+                if(json.data.length<10){
+                    that.setData({
+                        imageMore:false
+                    })
+                }
                 that.setData({
                     images_arr: images,
                     page: page
                 })
-                console.log(that.data.images_arr)
+            }else{
+                wx.showToast({
+                     title: '没有啦',
+                    icon:'none'
+                })
+                that.setData({
+                    more_text: app.more_end_text,
+                    disabled:true
+                })
             }
-
         })
     },
 

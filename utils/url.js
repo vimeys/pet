@@ -27,12 +27,14 @@ url.likeBg        =Url+'like/bg';//单张图片点赞
 url.petNameList   =Url+'pet_info/getUserPetLIst';//宠物列表
 url.upHotTalk     =Url+'Graffiti/addTopic';//上传话题详情
 
-
 //涂鸦
 url.chartletList  =Url+'graffiti/getChartletList';//获取贴图集
 url.chartletItem  =Url+'graffiti/getGraffitiList';//获取单个贴图列表
 url.getCode       =Url+'activity/getCodeImg';//获取二维码
 url.getChartletList=Url+'graffiti/getChartletList';//获取贴图列表
+url.petData       =Url+'pet_info/petInfo';//获取单个宠物信息
+
+
 // 话题
 url.hotTalk       =Url+'index/topicList';//热门话题列表
 url.topicDetail   =Url+'index/topicInfo';//话题详情

@@ -19,6 +19,8 @@
     </view>
 </template>
 
+
+
 <!-- ***************************评论、话题列表**************************** -->
 <template name="template-comment-cells">
   <block wx:for="{{talkList}}">
@@ -176,7 +178,7 @@
 
 <!-- *********************************动态********************************** -->
 <template name="template-news-item">
-  <view class='template-news-item'>
+  <view class='template-news-item fade_in'>
   <block wx:for="{{petData}}">
     <!-- 发布信息 -->
     <view class='publish-info zan-cell'>

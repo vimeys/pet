@@ -180,15 +180,14 @@
   </view>
   <!--动态管理-->
   <view class="state-manage">
-    <block wx:for="{{issus}}">
-        <view wx:if="{{item.model_type=='BgModel'}}">
+    <block wx:for="{{issus}}" >
+        <view wx:if="{{item.model_type=='BgModel'}}" class="fade_in">
             <view class="state-title"><image src="../../../images/icon/list-more.png" mode="widthFix"></image> {{item.create_time}}</view>
             <view class="state-content">
                 <view class="state-border"></view>
                 <view style="flex:1;">
                     <view class="state-images {{item.bg.length==1?'':'more'}}">
                         <block wx:for="{{item.bg}}" wx:for-item="item2">
-                            <!--<image mode="widthFix" src="../../../images/test/hsq.jpeg"></image>-->
                             <image mode="aspectFill" src="{{imageFile+item2.img_url}}"></image>
                         </block>
                     </view>
@@ -210,13 +209,13 @@
             </view>
         </view>
         <!--视频-->
-        <view wx:elif="{{item.model_type==VideoModel}}" style="flex:1;">
+        <view wx:elif="{{item.model_type=='VideoModel'}}" style="flex:1;" class="fade_in">
             <view class="state-title"><image src="../../../images/icon/list-more.png" mode="widthFix"></image> {{item.create_time}}</view>
             <view class="state-content">
                 <view class="state-border"></view>
                 <view>
                     <view class="state-video" style="flex:1">
-                        <video src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"></video>
+                        <video src="{{filePath+item.video.img_url}}"></video>
                         <view class="state-btns">
                             <view class="btn">
                                 <image class='item-footer-icon' src='/images/icon/index-news-footer1-1.png' mode='widthFix'></image>
@@ -233,7 +232,7 @@
         </view>
 
         <!--话题-->
-        <view wx:else="{{item.model_type==TopicModel}}">
+        <view wx:else="{{item.model_type=='TopicModel'}}" class="fade_in">
             <view class="state-title"><image src="../../../images/icon/list-more.png" mode="widthFix"></image> {{item.create_time}}</view>
             <view class="state-content">
                 <view class="state-border"></view>
@@ -244,7 +243,7 @@
                             <view class="state-images {{item.topic.more.photos.length==1?'':'more'}}">
                                 <block wx:for="{{item.topic.more.photos}}" wx:for-item="item2">
                                     <!--<image mode="widthFix" src="../../../images/test/hsq.jpeg"></image>-->
-                                    <image mode="widthFix" src="{{imageFile+item2.url}}"></image>
+                                    <image mode="aspectFill" src="{{imageFile+item2.url}}"></image>
                                 </block>
                             </view>
                         </view>

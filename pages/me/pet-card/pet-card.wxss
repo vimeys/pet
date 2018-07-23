@@ -83,6 +83,7 @@
      border-radius: 20rpx;
      box-sizing: border-box;
      padding: 30rpx 40rpx;
+
  }
  .pet-card{
      display: flex;
@@ -116,4 +117,10 @@
 
     font-size: 26rpx;
 
+}
+.ft26{
+    font-size: 26rpx;
+}
+.age{
+    font-size: 26rpx;
 }

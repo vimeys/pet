@@ -12,7 +12,8 @@ Page({
         test_img_hsq1: app.test_img_hsq1,
         img_url: [
         ],
-        commentData: []
+        commentData: [],
+        more:true,//是否还有更多评论
     },
 
     bind_input_val: function (e) {
@@ -112,13 +113,13 @@ Page({
         util.promiseSync(util.url.url.topicDetail, {topic_id: id}).then(json => {
             if (json.status == 1) {
                 let image_url = this.data.img_url;
-                console.log(json.data.more.photos);
+                // console.log(json.data.more.photos);
                 image_url = [...image_url, ...json.data.more.photos],
                     this.setData({
                         image_url: image_url,
                         Data: json.data
                     })
-                util.promiseSync(util.url.url.topicComment, {list_sort_id: json.data.list_sort_id,page:this.page,pageSize:10}).then(json => {
+                util.promiseSync(util.url.url.topicComment, {list_sort_id: json.data.list_sort_id,page:this.page,pageSize:6}).then(json => {
                     if (json.status == 1) {
                         this.setData({
                             commmentData: json.data
@@ -171,22 +172,25 @@ Page({
      */
     onReachBottom: function () {
         this.page++;
-        util.promiseSync(util.url.url.topicComment, {list_sort_id: this.data.Data.list_sort_id,page:this.page,pageSize:10}).then(json => {
+        util.promiseSync(util.url.url.topicComment, {list_sort_id: this.data.Data.list_sort_id,page:this.page,pageSize:4}).then(json => {
             if (json.status == 1) {
-                if(json.data.length==0){
+                if(this.data.more){
+                    let list =this.data.commmentData;
+                    list=[...list,...json.data]
+                    if(json.data.length<4){
+                        this.setData({
+                            more:false
+                        })
+                    }
+                    this.setData({
+                        commmentData: list
+                    })
+                }else{
                     wx.showToast({
                         title:'没有更多数据',
                         icon:'none'
                     })
-                }else{
-                    let list =this.data.commmentData;
-                    list=[...list,...json.data]
-                    console.log(list);
-                    this.setData({
-                        commmentData: list
-                    })
                 }
-
             }
         })
     },

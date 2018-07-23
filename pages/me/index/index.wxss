@@ -314,7 +314,7 @@
 .state-content .state-border{
   margin-right: 15rpx;
   margin-left: 15rpx;
-  border-left: 1px solid red;
+  border-left: 1px solid #EAEAEA;
 }
 .state-images{
   display: flex;
@@ -323,6 +323,7 @@
 }
 .state-images image{
   width: 680rpx;
+  height: 680rpx;
   border-radius: 20rpx ;
 }
 .more image{
@@ -334,7 +335,7 @@
 }
 
 .state-btns{
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid #EAEAEA;
   margin-left: 30rpx;
   display: flex;
   flex-direction: row;
@@ -355,6 +356,7 @@
 }
 .state-video video{
   width: 680rpx;
+  height: 410rpx;
 }
 .hotWord{
   font-size: 28rpx;
