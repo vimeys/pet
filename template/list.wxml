@@ -104,10 +104,10 @@
       <!-- 发布信息 -->
       <view class='publish-info zan-cell'>
         <view class='zan-cell__hd'>
-          <image src='/images/test/hsq-header.jpg{{item.user_info.avatar_url}}' mode='aspectFill'></image>
+          <image src='{{item.user_info.avatar_url}}' mode='aspectFill'></image>
         </view>
         <view class='zan-cell__bd'>
-          <view class='name'>{{item.nickname}}</view>
+          <view class='name'>{{item.user_info.nickname}}</view>
           <view class='time'>{{item.create_time}}</view>
         </view>
         <view class='zan-cell__ft'>
@@ -142,7 +142,7 @@
         <view bindtap='bind_love' data-index="{{index}}" data-id="{{item.list_sort_id}}">
           <image src="{{item.like==0?'/images/icon/index-gambit-content-love.png':'/images/icon/index-history-love.png'}}"
                  mode='widthFix'
-                 >
+          >
 
           </image>
           <text class='num'>{{item.list_sort.likes}}</text>
@@ -423,11 +423,31 @@
   <view class='footer-icon-2'>
     <view bindtap='bind_love' data-index="{{index}}" data-id="{{item.id}}">
       <image src='/images/icon/index-gambit-content-love.png' mode='widthFix'></image>
-      <text class='num'>{{item.like_num}}</text>
+      <text class='num'>{{item.likes}}</text>
     </view>
     <view bindtap="hrefComment" data-id="{{item.id}}">
       <image src='/images/icon/index-gambit-content-message_0.png' mode='widthFix'></image>
-      <text class='num'>{{item.comment_num}}</text>
+      <text class='num'>{{item.replys}}</text>
+    </view>
+  </view>
+</template>
+
+<template name="toast">
+  <view class="vloading4carotaCover" hidden='{{hiddenT}}'>
+    <view class="vloading4carota">
+      <view class="vBk vImg4carota"></view>
+      <view class="vInfo4carota">
+        <view class="vFont4carota">
+          <view class="vFontAnimate4carota">
+            <view class="vfont vfont1">奋</view>
+            <view class="vfont vfont2">力</view>
+            <view class="vfont vfont3">加</view>
+            <view class="vfont vfont4">载</view>
+            <view class="vfont vfont5">中</view>
+          </view>
+          <view class="vBk vIcon4carota"></view>
+        </view>
+      </view>
     </view>
   </view>
 </template>

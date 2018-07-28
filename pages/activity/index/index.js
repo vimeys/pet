@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+      hiddenT:false,
       more_text:'查看更多',
     activity: [{
       a_url: "",
@@ -39,27 +40,52 @@ Page({
    */
   onLoad: function (options) {
       this.setData({
-          filePath:app.filePath
+          filePath: app.filePath
       })
-      utils.promiseSync(utils.url.url.activeList,{}).then(json=>{
-        if(json.status==1){
-          let time=new Date().getTime()/1000
-            json.data.forEach((item)=>{
-              item.a_url='../activity-content/activity-content'
-                item.start_time=item.start_time.substring(0,10)
-                item.end_time=item.end_time.substring(0,10);
-                if(item.end_time_str<time){
-                  item.activity_new=false
-                }else{
-                    item.activity_new=true
-                }
-            })
-            this.setData({
-              data:json.data
-            })
-        }
+      this.page=1
+      utils.promiseSync(utils.url.url.activeList, {page:1,pageSize:4}).then(json => {
+          if (json.status == 1) {
+              let time = new Date().getTime() / 1000
+              json.data.forEach((item) => {
+                  item.a_url = '../activity-content/activity-content'
+                  item.start_time = item.start_time.substring(0, 10)
+                  item.end_time = item.end_time.substring(0, 10);
+                  if (item.end_time_str < time) {
+                      item.activity_new = false
+                  } else {
+                      item.activity_new = true
+                  }
+              })
+              this.setData({
+                  data: json.data,
+                  hiddenT:true
+              })
+
+          }
       })
   },
+    // 获取更多
+    getMore(){
+      this.page++
+        utils.promiseSync(utils.url.url.activeList, {page:this.page,pageSize:4}).then(json => {
+            if (json.status == 1) {
+                let time = new Date().getTime() / 1000
+                json.data.forEach((item) => {
+                    item.a_url = '../activity-content/activity-content'
+                    item.start_time = item.start_time.substring(0, 10)
+                    item.end_time = item.end_time.substring(0, 10);
+                    if (item.end_time_str < time) {
+                        item.activity_new = false
+                    } else {
+                        item.activity_new = true
+                    }
+                });
+                this.setData({
+                    data:[...this.data.data,...json.data]
+                })
+            }
+        })
+    },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

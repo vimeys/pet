@@ -18,8 +18,8 @@
       </view>
     </view>
     <view class='right' bindtap="hrefMessage">
-      <image wx:if="{{isRead}}" class='img' src='/images/icon/me-index-banner-right.png' mode='widthFix'></image>
-      <image wx:else class='img' src='/images/icon/me-index-banner-right.png' mode='widthFix'></image>
+      <image wx:if="{{!isRead}}" class='img' src='/images/msg.png' mode='widthFix'></image>
+      <image wx:else class='img' src='/images/megPoint.png' mode='widthFix'></image>
       <text class='text'>消息</text>
     </view>
 
@@ -37,7 +37,7 @@
             <view class='swiper-content-in'>
               <view class='img-wrap-000'>
                 <view class='img-wrap-255'>
-                  <image src='{{imageFile}}{{item.pet_img}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
+                  <image src='{{item.pet_img}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
                   <image src='/images/icon/me-index-petinfo-sex1.png' class='sex-img' mode='widthFix'></image>
                 </view>
               </view>
@@ -50,7 +50,7 @@
                 <view>
                   <image src='/images/icon/me-index-petinfo-money.png' mode='widthFix'></image>
                   <!--<image  src='{{imageFile}}{{item.pet_img}}' mode='widthFix'></image>-->
-                  <text>身价：213爪币</text>
+                  <text>身价：{{item.cost}}爪币</text>
                 </view>
                 <view>
                   <image src='/images/icon/me-index-petinfo-weight.png' mode='widthFix'></image>
@@ -81,7 +81,7 @@
             <view class='swiper-content-in'>
               <view class='img-wrap-000'>
                 <view class='img-wrap-255'>
-                  <image src='{{imageFile}}{{item.pet_img}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
+                  <image src='{{item.pet_img}}' mode='aspectFill' class='header-img' mode='aspectFill'></image>
                   <image src='/images/icon/me-index-petinfo-sex1.png' class='sex-img' mode='widthFix'></image>
                 </view>
               </view>
@@ -93,7 +93,7 @@
               <view class='info'>
                 <view>
                   <image src='/images/icon/me-index-petinfo-money.png' mode='widthFix'></image>
-                  <text>身价：213爪币</text>
+                  <text>身价：{{item.cost}}爪币</text>
                 </view>
                 <view>
                   <image src='/images/icon/me-index-petinfo-weight.png' mode='widthFix'></image>
@@ -215,7 +215,7 @@
                 <view class="state-border"></view>
                 <view>
                     <view class="state-video" style="flex:1">
-                        <video src="{{filePath+item.video.img_url}}"></video>
+                        <video src="{{imageFile+item.video.img_url}}"></video>
                         <view class="state-btns">
                             <view class="btn">
                                 <image class='item-footer-icon' src='/images/icon/index-news-footer1-1.png' mode='widthFix'></image>
@@ -271,3 +271,4 @@
 
 
 </view>
+<template is="toast" data="{{hiddenT}}"></template>

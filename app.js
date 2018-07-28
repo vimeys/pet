@@ -4,7 +4,6 @@ App({
   // 加载更多
   more_star_text:'查看更多...',
   more_end_text:'已全部加载',
-  globalData: { bgPic: '../../../images/1.png' },
   // 测试图片
   test_img_url: '/images/test/index-banner.png',
   test_img_url2: '/images/test/img.png',
@@ -46,14 +45,14 @@ App({
 
     util.promiseSync(util.url.url.filePath, {}).then((json) => {
       this.filePath = json.data  //固定图片路径
-      this.globalData = { bgPic: '../../../images/1.png' }
+      // this.globalData = { bgPic: '../../../images/1.png' }
     })
     wx.setStorageSync('user', { uid: 7, petId: 1 });
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
 
-    wx.setStorageSync('logs', logs)
+    // wx.setStorageSync('logs', logs)
 
     // 登录
     wx.login({
@@ -94,7 +93,7 @@ App({
       }
     })
   },
-  globalData: {
+    globalData: {
     userInfo: null
   }
 })

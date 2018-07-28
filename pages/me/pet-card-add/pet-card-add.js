@@ -11,7 +11,8 @@ Page({
         index: 0,
         test_header_img: "/images/test/hsq-header_300.jpg",
         userInfo: [],
-        imageUrl:''
+        imageUrl:'http://chuantu.biz/t6/348/1532585591x-1566688485.jpg',
+        header_img:'/images/define.jpg'
     },
     // 选择分类
     bind_pet_classify: function (e) {
@@ -156,7 +157,7 @@ Page({
             }
         })
         that.setData({
-            header_img: that.data.test_header_img,
+            // header_img: that.data.test_header_img,
             end_date: date_new,
             birthday_date: date_new,
             gohome_date: date_new

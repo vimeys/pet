@@ -104,16 +104,16 @@
             爱宠概述
           </view>
           <view class='zan-cell__bd'>
-            <textarea name='describe' placeholder='请用一句话概述爱宠' placeholder-class='placeholder'></textarea>
+            <textarea name='describe' style="height: 76rpx; padding-top: 10rpx" placeholder='请用一句话概述爱宠' placeholder-class='placeholder'></textarea>
           </view>
         </view>
       </view>
     <!--</scroll-view>-->
 
-    <cover-view class='section-footer'>
-      <cover-view formType='submit' class='btn-100'>
+    <view class='section-footer'>
+      <button formType='submit' class='btn-100'>
         生成我的宠物卡
-      </cover-view>
-    </cover-view>
+      </button>
+    </view>
   </form>
 </view>

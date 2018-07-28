@@ -29,7 +29,7 @@ Page({
                 util.promiseSync(util.url.url.add_comment, {
                     user_id: that.data.userInfo.id,
                     parent_id: 0,
-                    to_user_id: 10,//暂无，死数据
+                    to_user_id: this.data.Data.user_id,//暂无，死数据
                     content: that.data.comment_val,
                     list_sort_id: this.data.Data.list_sort_id,
                 }).then((json) => {
@@ -45,7 +45,7 @@ Page({
                         util.promiseSync(util.url.url.topicComment, {list_sort_id: this.data.Data.list_sort_id,page:this.page,pageSize:10}).then(json => {
                             if (json.status == 1) {
                                 this.setData({
-                                    commmentData: json.data
+                                    commentData: json.data
                                 })
                             }
                         })
@@ -99,6 +99,7 @@ Page({
     onReady: function () {
 
     },
+    //点击查看图片详情
     detail(e){
         let arr = [];
         this.data.image_url.forEach((item)=> {
@@ -122,13 +123,12 @@ Page({
                 util.promiseSync(util.url.url.topicComment, {list_sort_id: json.data.list_sort_id,page:this.page,pageSize:6}).then(json => {
                     if (json.status == 1) {
                         this.setData({
-                            commmentData: json.data
+                            commentData: json.data
                         })
                     }
                 })
             }
         })
-        //TODO
         // 死数据
     },
 
@@ -137,6 +137,31 @@ Page({
         let comment_id=e.currentTarget.dataset.id;
         wx.navigateTo({
           url: '../comment/comment?id='+comment_id
+        })
+    },
+
+    // 评论点赞
+    bind_love(e){
+        let id=e.currentTarget.dataset.id;
+        let index=e.currentTarget.dataset.index;
+        util.promiseSync(util.url.url.commentLike,{comment_id:id,user_id: app.user.id}).then(json=>{
+            if(json.msg=='点赞成功'){
+
+            }else if(json.msg=='取消成功'){
+                let data=this.data.commentData
+                data[index].likes--
+                this.setData({
+                    commentData:data
+                })
+            }
+        })
+    },
+
+    // 去评论详情页面
+    hrefComment(){
+        let id=e.currentTarget.dataset.id;
+        wx.navigateTo({
+          url: '../comment/comment?id'+id
         })
     },
     /**
@@ -175,7 +200,7 @@ Page({
         util.promiseSync(util.url.url.topicComment, {list_sort_id: this.data.Data.list_sort_id,page:this.page,pageSize:4}).then(json => {
             if (json.status == 1) {
                 if(this.data.more){
-                    let list =this.data.commmentData;
+                    let list =this.data.commentData;
                     list=[...list,...json.data]
                     if(json.data.length<4){
                         this.setData({
@@ -183,7 +208,7 @@ Page({
                         })
                     }
                     this.setData({
-                        commmentData: list
+                        commentData: list
                     })
                 }else{
                     wx.showToast({

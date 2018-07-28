@@ -21,7 +21,8 @@ Page({
       this.setData({
           bg_img:app.globalData.edit,
           filePath:app.filePath,
-          id:id
+          id:id,
+          img_id
       })
       util.promiseSync(util.url.url.petBannerList,{bg_id:img_id}).then(json=>{
           if(json.status==1){
@@ -33,7 +34,7 @@ Page({
   },
     // 点赞
     addLike(){
-        util.promiseSync(util.url.url.like,{user_id:app.user.id,list_sort_id:this.data.id}).then(json=>{
+        util.promiseSync(util.url.url.likeBg,{user_id:app.user.id,bg_id:this.data.img_id}).then(json=>{
             if(json.status==1){
                 wx.showToast({
                   title: '点赞成功',

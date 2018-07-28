@@ -1,8 +1,9 @@
 {
   "pages": [
         "pages/index/index/index",
-    "pages/index/imageEditor/imageEditor",
+        "pages/activity/conversion/conversion",
         "pages/activity/clock/clock",
+    "pages/index/imageEditor/imageEditor",
     "pages/index/intHot/intHot",
         "pages/wx-cropper/index",
     "pages/index/index-hot/index-hot",

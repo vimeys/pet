@@ -72,9 +72,6 @@ button{
 }
 .gather-lis{
     width: 642rpx;
-    /*width: 100%;*/
-    /*position: absolute;*/
-    /*bottom: 5px;*/
     white-space: nowrap;
     background: #fff;
     display: flex;
@@ -88,10 +85,6 @@ button{
     text-align: center;
     box-sizing: border-box;
     padding-top:10rpx;
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
 }
 .gather-li image{
     opacity: .8;
@@ -145,7 +138,7 @@ button{
 }
 
 .thumbnail-items{
-    width: 625rpx;
+    width: 554rpx;
     height: 98rpx;
     display: flex;
     align-items: center;
@@ -154,17 +147,26 @@ button{
 }
 .thumbnail-items image{
     width: 80rpx;
-    margin: 0 16rpx;
+    margin: 0 8rpx;
     height: 80rpx;
     border: 1px solid #fff;
 }
 .thumbnail-items .active{
     border: 1px solid #FEE632;
 }
+.btn-copper{
+    height: 98 rpx;
+    width: 98rpx;
+    line-height:98rpx;
+    font-size: 28rpx;
+    color: #FEE632;
+    text-align: center;
+    background: #222;
+}
 
 .upLoad {
     height: 98 rpx;
-    width: 125rpx;
+    width: 98rpx;
     line-height:98rpx;
     font-size: 28rpx;
     color: #222;

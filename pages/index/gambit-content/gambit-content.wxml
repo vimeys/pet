@@ -6,7 +6,7 @@
     <!-- 发布信息-->
     <view class='publish-info zan-cell'>
       <view class='zan-cell__hd'>
-        <image src='{{test_img_hsq}}{{item.avatar_url}}' mode='aspectFill'></image>
+        <image src='{{Data.user_info.avatar_url}}' mode='aspectFill'></image>
       </view>
       <view class='zan-cell__bd'>
         <view class='name'>{{Data.user_info.nickname}}</view>
@@ -26,11 +26,11 @@
     <view class='footer-icon-2'>
       <view>
         <image src='/images/icon/index-gambit-content-attention.png' mode='widthFix'></image>
-        <text>{{Data.like_num}}关注</text>
+        <text>{{Data.list_sort.follows}}关注</text>
       </view>
       <view>
         <image src='/images/icon/index-gambit-content-message_1.png' mode='widthFix'></image>
-        <text>{{Data.comment_num}}评论</text>
+        <text>{{Data.list_sort.comments}}评论</text>
       </view>
     </view>
   </view>
@@ -51,7 +51,7 @@
       <!--<template is="template-comment-cells" data='{{media:""}}'></template>-->
       <!--<template is="template-comment-cells" data='{{media:""}}'></template>-->
       <!--<template is="template-comment-cells" data='{{media:""}}'></template>-->
-      <block wx:for="{{commmentData}}" wx:for-item="item">
+      <block wx:for="{{commentData}}" wx:for-item="item">
         <view class='publish-info zan-cell'>
           <view class='zan-cell__hd'>
             <!--<image src='{{test_img_hsq}}{{item.avatar_url}}' mode='aspectFill'></image>-->
@@ -62,7 +62,7 @@
             <view class='time'>{{item.create_time}}</view>
           </view>
         </view>
-        <template is="comment-list" data="{{item:item}}"></template>
+        <template is="comment-list" data="{{item:item,index:index}}"></template>
       </block>
     </view>
   </view>
@@ -73,7 +73,7 @@
            cursor-spacing='60'
            adjust-position='ture'
            placeholder-class='placeholder'
-           bindchange='bind_input_val'>
+           bindinput='bind_input_val'>
     </input>
     <view class='btn'
           bindtap='form_submit'>

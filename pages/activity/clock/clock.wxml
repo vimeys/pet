@@ -1,25 +1,36 @@
 <!--pages/activity/clock/clock.wxml-->
-<view class="card">
-    <image  class='card-bg' src="/images/actvie-bg.png"></image>
-    <view class="card-content">
-        <image  class="card-header-image" src="/images/actvie-bg.png" mode="aspectFill"></image>
-        <image class="logo" src="/images/actvie-bg.png"></image>
-        <view class="card-news">
-            <image src="/images/me-pat-card.png"></image>
-            <view class="card-name">猛犬卡</view>
+<view class="box">
+    <!--<view class="card {{animate?'animateTotal':''}} move">-->
+    <view class="card {{animate?'animateTotal':''}} {{move?'move':''}} ">
+        <image  class='card-bg' src="/images/actvie-bg.png"></image>
+        <view class="card-content">
+            <image  class="card-header-image" src="/images/card.png" mode="aspectFill"></image>
+            <image class="logo" src="/images/close.png"></image>
+            <view class="card-news">
+                <!--<image src="/images/me-pat-card.png"></image>-->
+                <image src="{{card.image}}"></image>
+                <view class="card-name">{{card.cardName}}</view>
+            </view>
+            <view class="card-detail">
+                匠心为猫犬
+            </view>
+            <view class="lucky-btns">
+                <view  class='button' wx:if="{{isLucky}}" bindtap="lucky">立即抽奖</view>
+                <view class="text" wx:else>想要获猛犬卡请立即西南交大凯德广场华明庭院1101号扫码获取</view>
+            </view>
         </view>
     </view>
 </view>
-<scroll-view class='scroll' scroll-x="true">
 
-    <view class="clock-images">
-        <image src="/images/1.png"></image>
+<scroll-view class='scroll' scroll-x="true">
+    <view class="clock-images" bindtap="mergeCard">
+        <image src="/images/eight.png"></image>
         <view class="clock-model"></view>
     </view>
     <block wx:for="{{arr}}">
         <view class="clock-images">
-            <image src="/images/1.png"></image>
-            <view class="clock-model"></view>
+            <image src="/images/me-pat-card.png"></image>
+            <view wx:if="{{item.has}}" class="clock-model"></view>
         </view>
     </block>
 </scroll-view>

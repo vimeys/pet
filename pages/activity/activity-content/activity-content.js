@@ -34,8 +34,11 @@ Page({
             if(json.status==1){
                 wxParse.wxParse('content','html',json.data.details,this,5)
                 let time=new Date().getTime();
-                let endTime= Date.parse(new Date(json.data.end_time))||0;
-                let startTime= Date.parse(new Date(json.data.start_time))||0;
+                let end_time=json.data.end_time.replace(/-/g,'/');
+                let start_time=json.data.start_time.replace(/-/g,'/');
+                console.log(json.data.end_time);
+                let endTime= Date.parse(new Date(json.data.end_time))||Date.parse(new Date(end_time))||0;
+                let startTime= Date.parse(new Date(json.data.start_time))||Date.parse(new Date(start_time))||0;
                 console.log(time);
                 console.log(endTime, startTime);
                 if(time<endTime){

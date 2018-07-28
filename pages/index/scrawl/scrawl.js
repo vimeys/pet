@@ -24,6 +24,11 @@ Page({
       top: -1000,//canvas的定位top
       left: -1000,//canvas的定位left
       showImageList:false,//贴图集是否显示
+      typeSave:true,
+      animation:false,
+      friction:200,
+      damping:200,
+      scale1:false
   },
 
   /**
@@ -36,31 +41,49 @@ Page({
       this.getChartletList();
       this.id=options.id;
       this.img_id=options.img_id;
+      console.log(13 + app.globalData.edit);
       this.setData({
           bgPic: app.globalData.edit,
           filePath:app.filePath
       })
+      let that=this;
        wx.getImageInfo({
-           src:app.globalData.edit,
+           src:app.filePath+app.globalData.edit,
            success:(res)=>{
-             let width,height;
+               this.setData({
+                   src:res.path
+               })
+             let width,height,x,y;
+             let windowWidth=wx.getSystemInfoSync().windowWidth;
              width=res.width;
-             height=res.height
-               let scale
-               // if(width>height){
-                scale=width/750;
-                 app.globalData.width=Math.trunc(res.width/scale)
-                 app.globalData.height=Math.trunc(res.height/scale);
-                 this.setData({
-                     width:app.globalData.width,
-                     height:app.globalData.height
-                 })
-             // }else{
-             //    scale=height/750;
-             //       app.globalData.width=Math.trunc(res.width/scale)
-             //       app.globalData.height=Math.trunc(res.height/scale);
-             //   }
-
+             height=res.height;
+               console.log(width, height);
+               if(width>height){//比较是否长款比例
+                   let scale;
+                   scale=height/(windowWidth*2);
+                   width=Math.trunc(res.width/scale);
+                   height=Math.trunc(res.height/scale);
+                   x=(Math.trunc(res.width/scale)-windowWidth*2)/4;
+                   y=0;
+                   that.setData({
+                       width,
+                       height,
+                       x,y
+                   })
+               }else{
+                   let scale;
+                   scale=width/(windowWidth*2);
+                   width=Math.trunc(res.width/scale);
+                   height=Math.trunc(res.height/scale);
+                   y=(Math.trunc(res.height/scale)-windowWidth*2)/4;
+                   x=0;
+                   that.setData({
+                       width,
+                       height,
+                       x,
+                       y
+                   })
+               }
            }
         });
   },
@@ -84,15 +107,11 @@ Page({
                     imgList:imgList
                 })
             }
-
         })
     },
     // 切换贴图集
     toggleChartList(e){
         let index=e.currentTarget.dataset.index;
-        // let imageId=this.data.imageId
-        // let dArr=this.data.drawArray
-        // dArr[imageId].hasChartlet=true
         let showImageList=true;
         this.gatherIndex=index
         let imgList=this.data.chartletCover[index]
@@ -105,8 +124,17 @@ Page({
     // 选择子贴图
     chooseImg(e){
         let src=app.filePath+e.target.dataset.hatId;//
+        let that=this
+         wx.getImageInfo({
+             src:app.filePath+e.target.dataset.hatId,
+             success(res){
+                 that.setData({
+                     currentChartImage:res.path
+                 })
+             }
+         })
         this.setData({
-            currentChartImage:src,
+            currentChartImage1:src,
             isChartImage:true,
             showImageList:!this.data.showImageList,
         })
@@ -134,21 +162,8 @@ Page({
 
     },
     touchStart(e){
-
             this.start_x=e.touches[0].clientX;
             this.start_y=e.touches[0].clientY;
-    },
-    touchEnd(e){
-        this.hat_center_x=this.data.hatCenterX;
-        this.hat_center_y=this.data.hatCenterY;
-        this.cancel_center_x=this.data.cancelCenterX;
-        this.cancel_center_y=this.data.cancelCenterY;
-        this.handle_center_x=this.data.handleCenterX;
-        this.handle_center_y=this.data.handleCenterY;
-        // }
-        this.touch_target="";
-        this.scale=this.data.scale;
-        this.rotate=this.data.rotate;
     },
     touchMove(e){
         var current_x=e.touches[0].clientX;
@@ -204,13 +219,18 @@ Page({
         const pc = wx.createCanvasContext('myCanvas');
         const windowWidth = wx.getSystemInfoSync().windowWidth;
         const hat_size = 100 * scale;
-        pc.clearRect(0, 0, windowWidth, 300);
-        console.log(123);
-        pc.drawImage(app.filePath+this.data.bgPic, 0, 0, 375, 375);
+        pc.clearRect(0, 0, windowWidth, windowWidth);
+        console.log(123,app.filePath+this.data.bgPic);
+        console.log(this.data.x, this.data.y);
+        let src=app.filePath+this.data.bgPic
+        // pc.drawImage(app.filePath+this.data.bgPic, -this.data.x, -this.data.y, windowWidth, windowWidth);
+        pc.drawImage(this.data.src, -this.data.x, -this.data.y, this.data.width/2, this.data.height/2);
         pc.translate(this.data.hatCenterX,this.data.hatCenterY);
         pc.rotate(rotate * Math.PI / 180);
+        console.log(-hat_size / 4, -hat_size / 4);
+        console.log(-hat_size /2, -hat_size /2 );
         if(this.data.currentChartImage){
-            pc.drawImage(this.data.currentChartImage, -hat_size / 2, -hat_size / 2, hat_size/2, hat_size/2);
+            pc.drawImage(this.data.currentChartImage, 0, 0, hat_size/2, hat_size/2);
         }
         pc.draw();
     },
@@ -227,10 +247,10 @@ Page({
 
 
         pc.clearRect(0, 0, windowWidth, 300);
-        pc.drawImage(app.filePath+this.data.bgPic,  0, 0, 375, 375);
+        pc.drawImage(app.filePath+this.data.bgPic,   -this.data.x, -this.data.y, this.data.width/2, -this.data.height/2);
         pc.translate(this.data.hatCenterX,this.data.hatCenterY);
         pc.rotate(rotate * Math.PI / 180);
-        pc.drawImage(this.data.currentChartImage, -hat_size / 2, -hat_size / 2, hat_size, hat_size);
+        pc.drawImage(this.data.currentChartImage, -hat_size / 2, -hat_size / 2, hat_size/2, hat_size/2);
         pc.draw(false,()=>{
             wx.canvasToTempFilePath({
                 // x: windowWidth / 2 - 150,
@@ -279,7 +299,7 @@ Page({
         // pc.drawImage(this.data.bgPic, 0, 0, this.data.width/2, this.data.height/2);
         pc.translate(this.data.hatCenterX,this.data.hatCenterY);
         pc.rotate(rotate * Math.PI / 180);
-        pc.drawImage(this.data.currentChartImage, -hat_size / 2, -hat_size / 2, hat_size, hat_size);
+        pc.drawImage(this.data.currentChartImage, -hat_size / 2, -hat_size / 2, hat_size/2, hat_size/2);
         pc.draw(false,()=>{
             wx.canvasToTempFilePath({
                 canvasId: 'myCanvas',
@@ -353,6 +373,7 @@ Page({
     },
     //保存
     save(){
+
         this.draw1()
         const windowWidth = wx.getSystemInfoSync().windowWidth;
         wx.canvasToTempFilePath({
@@ -382,14 +403,26 @@ Page({
     },
     // 发布
     upload(){
-        if(this.data.isChartImage){
-            this.up()
-        }else {
-            wx.showToast({
-              title: '你还没有编辑贴图',
-                icon:'none'
+
+        if(this.data.typeSave){
+            this.setData({
+                typeSave:false
             })
+            if(this.data.isChartImage){
+                this.up()
+            }else {
+                wx.showToast({
+                    title: '你还没有编辑贴图',
+                    icon:'none'
+                })
+            }
+            setTimeout(()=>{
+                this.setData({
+                    typeSave:true
+                })
+            },10000)
         }
+
 
     },
     up(sun,arr){

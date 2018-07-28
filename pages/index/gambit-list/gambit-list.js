@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+      hiddenT:false,
     test_img_hsq_320: app.test_img_hsq_320,
     filePath: '',//图片前缀,
       topWord:[],
@@ -40,6 +41,7 @@ Page({
       '哎哟卧槽，这年轻人',
       '我曹这年轻人',
     ],
+      more_text:'查看更多'
   },
   // method: {
   //   listenFocus: util.listenFocus,
@@ -60,7 +62,7 @@ Page({
         filePath:app.filePath
     })
 
-
+    this.getHot()
       this.getHotWord()
     // this.listenFocus = util.listenFocus(this);
     // this.listenBlur = util.listenBlur(this);
@@ -80,15 +82,30 @@ Page({
           }
       })
     },
+    getHot(){
+      util.promiseSync(util.url.url.hotTalkLIst,{}).then(json=>{
+          this.setData({
+              hot:json.data
+          })
+      })
+    },
     // 点击关键词搜索
     tapSearch(e){
         let index=e.currentTarget.dataset.index;
-        let text=this.data.topWord[index].title
-        util.promiseSync(util.url.url.searchHot,{title:text,page:1}).then(json=>{
+        let text=this.data.topWord[index].content
+        util.promiseSync(util.url.url.searchHot,{content:text,page:1}).then(json=>{
             if(json.status==1){
-                this.setData({
-                    talkList:json.data
-                })
+                if(json.data.length){
+                    this.setData({
+                        talkList:json.data
+                    })
+                }else{
+                    wx.showToast({
+                      title: '相关话题已删除',
+                        icon:'none'
+                    })
+                }
+
             }
         })
     },
@@ -97,6 +114,7 @@ Page({
       util.promiseSync(util.url.url.hotTalk,{user_id:id,page:size,pageSize:10}).then(json=>{
         if(json.status==1){
           this.setData({
+              hiddenT:true,
               talkList:json.data
           })
         }
@@ -169,7 +187,7 @@ Page({
     listenBlur(e){
       utils.listenBlur(this)
         let value=e.detail.value;
-        util.promiseSync(util.url.url.searchHot,{title:value,page:1,pageSize:4}).then(json=>{
+        util.promiseSync(util.url.url.searchHot,{content:value,page:1,pageSize:4}).then(json=>{
             if(json.status==1){
                 if(json.data.length>0){
                     this.setData({
@@ -197,35 +215,8 @@ Page({
    */
   onShow: function () {
       let user=util.storage('userInfo')
+      app.user=user
       this.getHotTalkList(user.id,1)
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
   },
 
   /**

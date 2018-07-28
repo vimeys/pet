@@ -323,7 +323,7 @@
 }
 .state-images image{
   width: 680rpx;
-  height: 680rpx;
+  height: 460rpx;
   border-radius: 20rpx ;
 }
 .more image{

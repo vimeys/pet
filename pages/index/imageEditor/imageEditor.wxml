@@ -1,40 +1,6 @@
 
 
 <view  wx:if="{{!combine}}">
-    <!--<view class="container1"-->
-          <!--id="container"-->
-          <!--catch:touchstart="touchStart"-->
-          <!--catch:touchend="touchEnd"-->
-          <!--catch:touchmove="touchMove"-->
-          <!--style="height:{{height}}rpx" >-->
-        <!--<image class="bg" src="{{bgPic}}"-->
-               <!--mode="aspectFill"-->
-               <!--style="width: 750rpx; height: 750rpx" >-->
-        <!--</image>-->
-        <!--&lt;!&ndash;<image class="bg" src="{{bgPic}}"&ndash;&gt;-->
-               <!--&lt;!&ndash;mode="widthFix"&ndash;&gt;-->
-               <!--&lt;!&ndash;style="height:{{height}}rpx" >&ndash;&gt;-->
-        <!--&lt;!&ndash;</image>&ndash;&gt;-->
-        <!--<icon type="cancel"-->
-              <!--class="cancel"-->
-              <!--id="cancel"-->
-              <!--style="top:{{cancelCenterY-10+'px'}};left:{{cancelCenterX-10+'px'}}"-->
-              <!--wx:if="{{chartlet}}">-->
-        <!--</icon>-->
-        <!--<icon type="waiting"-->
-              <!--class="handle"-->
-              <!--id="handle"-->
-              <!--color="green"-->
-              <!--style="top:{{handleCenterY-10+'px'}};left:{{handleCenterX-10+'px'}}"-->
-              <!--wx:if="{{chartlet}}">-->
-        <!--</icon>-->
-        <!--<image class="hat"-->
-               <!--id='hat'-->
-               <!--src="../../../images/{{currentHatId}}.png"-->
-               <!--style="top:{{hatCenterY-hatSize/2-2+'px'}};left:{{hatCenterX-hatSize/2-2+'px'}};transform:rotate({{rotate+'deg'}}) scale({{scale}})"-->
-               <!--wx:if="{{chartlet}}">-->
-        <!--</image>-->
-    <!--</view>-->
     <movable-area style="height: 750rpx; width: 750rpx; background:greenyellow;">
         <image src="{{bgPic}}" style="height: 100%;width: 100%;" mode="aspectFill"></image>
         <movable-view wx:if="{{isChartImage}}" style="height: 100rpx; width: 100rpx; "
@@ -62,7 +28,7 @@
         </movable-view>
     </movable-area>
 
-    <button bind:tap="goCopper">剪切</button>
+
     <!--父贴图集列表-->
     <view class="gather-list">
         <scroll-view scroll-x="true" class="gather-lis">
@@ -76,7 +42,7 @@
         </scroll-view>
         <view class="prev-btn"
               bind:tap="prevPic">
-            <image src="../../../images/1.png"
+            <image src="../../../images/icon/index-news-footer1.png"
                    class="prev-btn-image">
             </image>预览
         </view>
@@ -92,10 +58,7 @@
                bind:tap="chooseImg">
         </image>
     </scroll-view>
-    <!--<button bind:tap="prevPic">预览</button>-->
-    <!--<button bind:tap="goCopper">剪切</button>-->
-    <!--<button bind:tap="combinePic">确定</button>-->
-    <!--<button bind:tap="save">保存</button>-->
+
 
     <view class="btns">
         <view class="thumbnail-items">
@@ -108,17 +71,15 @@
                 </image>
             </block>
         </view>
+        <view class="btn-copper" bind:tap="goCopper">剪切</view>
         <view bind:tap="updata" class="upLoad">发布</view>
     </view>
-    <!--<button bind:tap="showImageList">选择贴图</button>-->
 
-    <!--子贴图列表-->
 
 </view>
 <canvas class="myCanvas"
         bindtap="prevPicHide"
         canvas-id="myCanvas"
         style="height:750rpx;width:750rpx;position: fixed;top:{{top}}px;left:{{left}}px "/>
-<!--<cover-view class="prev"><cover-image src="{{prev-image}}" mode="widthFix"></cover-image></cover-view>-->
 
 

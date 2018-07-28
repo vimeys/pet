@@ -136,7 +136,7 @@
   width: 100%;
   height: 100%;
   z-index: 3;
-  background: rgba(0, 0, 0, 0.2);
+  /* background: rgba(0, 0, 0, 0.2); */
 }
 
 .template-news-item  swiper .wx-swiper-dot {
@@ -460,4 +460,200 @@
   background: #F33F3F;
   margin: 0;
   padding: 0;
+}
+
+
+/*加载toast*/
+.vBk {
+  background-attachment: scroll;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: transparent;
+}
+.vloading4carotaCover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.vloading4carota {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  border-radius: 20rpx;
+  padding: 20rpx 30rpx 30rpx;
+  background: #fff;
+}
+
+.vloading4carota .vImg4carota {
+  margin: 0 auto;
+  width: 200rpx;
+  height: 120rpx;
+  animation: vImgAnimate 1.5s infinite linear;
+  -webkit-animation: vImgAnimate 1.5s infinite linear;
+}
+
+.vloading4carota .vFont4carota {
+  position: relative;
+  margin: 0 auto;
+  width: 180rpx;
+  font-size: 24rpx;
+  color: #936217;
+  padding-right: 50rpx;
+  box-sizing:border-box;
+}
+
+.vloading4carota .vIcon4carota {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+  -webkit-transform: translate(0, -50%);
+  width: 50rpx;
+  height: 20rpx;
+  animation: vIconAnimate .5s infinite linear alternate;
+  -webkit-animation: vIconAnimate .5s infinite linear alternate;
+}
+
+.vFontAnimate4carota .vfont {
+  display: table-cell;
+}
+
+.vFontAnimate4carota .vfont1 {
+  animation: vfontAnimate1 2s infinite linear;
+  -webkit-animation: vfontAnimate 2s infinite linear;
+}
+
+.vFontAnimate4carota .vfont2 {
+  animation: vfontAnimate2 2s infinite .2s linear;
+  -webkit-animation: vfontAnimate 2s infinite .2s linear;
+}
+
+.vFontAnimate4carota .vfont3 {
+  animation: vfontAnimate 2s infinite .6s linear;
+  -webkit-animation: vfontAnimate 2s infinite .6s linear;
+}
+
+.vFontAnimate4carota .vfont4 {
+  animation: vfontAnimate 2s infinite 1s linear;
+  -webkit-animation: vfontAnimate 2s infinite 1s linear;
+}
+
+.vFontAnimate4carota .vfont5 {
+  animation: vfontAnimate 2s infinite 1.4s linear;
+  -webkit-animation: vfontAnimate 2s infinite 1.4s linear;
+}
+.vInfo4carota{
+  box-sizing:border-box;
+}
+@keyframes vfontAnimate {
+  0% {
+    transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0, -15%);
+    -webkit-transform: translate(0, -15%);
+  }
+  75% {
+    transform: translate(0, 15%);
+    -webkit-transform: translate(0, 15%);
+  }
+  100% {
+    transform: translate(0, 0%);
+    -webkit-transform: translate(0, 0%);
+  }
+}
+@keyframes vfontAnimate {
+  0% {
+    transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0, -15%);
+    -webkit-transform: translate(0, -15%);
+  }
+  75% {
+    transform: translate(0, 15%);
+    -webkit-transform: translate(0, 15%);
+  }
+  100% {
+    transform: translate(0, 0%);
+    -webkit-transform: translate(0, 0%);
+  }
+}
+
+
+@keyframes vIconAnimate {
+  0% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_point_1.png);
+  }
+  50% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_point_2.png);
+  }
+  100% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_point_3.png);
+  }
+}
+@-webkit-keyframes vIconAnimate {
+  0% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_point_1.png);
+  }
+  50% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_point_2.png);
+  }
+  100% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_point_3.png);
+  }
+}
+
+@keyframes vImgAnimate {
+  0% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_turnip_1.png);
+  }
+  25% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_turnip_2.png);
+  }
+  50% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_turnip_3.png);
+  }
+  75% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_turnip_4.png);
+  }
+  100% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_turnip_5.png);
+  }
+}
+@-webkit-keyframes vImgAnimate {
+  0% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_turnip_1.png);
+  }
+  25% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_turnip_2.png);
+  }
+  50% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_turnip_3.png);
+  }
+  75% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_turnip_4.png);
+  }
+  100% {
+    background-image: url(http://test.csmen.cc/img/ic_loading_turnip_5.png);
+  }
+}
+.item .name,.item .price,.item .num,.item .type{
+  font-size:24rpx !important;
+}
+.item .orig-price{
+  font-size:22rpx !important;
+}
+.item .name{
+  font-weight:bold;
 }

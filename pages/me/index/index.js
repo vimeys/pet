@@ -7,21 +7,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-      user:"",
-      test:[1,1,3,3],
-    test_img_url:app.test_img_url,
-      isRead:false,
-      petList:[{
-          sex:1,
-          name:'快去添加',
-          numDay:0,
-          birthday:'2018-6-6',
-          describe:'还没有宠物了,快去添加一个吧',
-          is_sterilization:1,
-          weight:10
+      hiddenT:false,
+      user: "",
+      test: [1, 1, 3, 3],
+      test_img_url: app.test_img_url,
+      isRead: false,
+      petList: [{
+          sex: 1,
+          name: '快去添加',
+          numDay: 0,
+          birthday: '2018-6-6',
+          describe: '还没有宠物了,快去添加一个吧',
+          is_sterilization: 1,
+          weight: 10,
       }], //宠物列表
-      issus:[],//动态列表
-      more:true//是否还有更多
+      issus: [],//动态列表
+      more: true//是否还有更多
 
   },
 
@@ -79,14 +80,21 @@ Page({
       let user=util.storage("userInfo");
       util.promiseSync(util.url.url.userPetList,{user_id:user.id}).then(json=>{
         if(json.status==1){
-          let date=Date.parse(new Date())
-          json.data.forEach(function (item,index) {
-              item.numDay=Math.floor(Math.abs((new Date(item.buy_time.replace(/-/g, '/')).getTime()-Date.parse(new Date())))/86400000)
-              console.log(item.numDay);
-          })
-            this.setData({
-                petList:json.data
-            })
+            if(json.data.length){
+                let date=Date.parse(new Date())
+                json.data.forEach(function (item,index) {
+                    item.numDay=Math.floor(Math.abs((new Date(item.buy_time.replace(/-/g, '/')).getTime()-Date.parse(new Date())))/86400000);
+                    if(item.pet_img.indexOf('http')==-1){
+                        item.pet_img=app.filePath+item.pet_img
+                    }
+
+                    console.log(item.numDay);
+                })
+                this.setData({
+                    petList:json.data
+                })
+            }
+
         }
       })
   },
@@ -111,11 +119,13 @@ Page({
                     })
                 }
                 this.setData({
-                    issus
+                    issus,
+                    hiddenT:true
                 })
             }else{
                 wx.showToast({
-                  title: '没有更多数据',
+                    title: '没有啦',
+                    icon: 'none'
                 })
             }
 
@@ -172,7 +182,7 @@ Page({
   onShow: function () {
       this.getPetList()
       util.promiseSync(util.url.url.isHasMes,{user_id:app.user.id}).then(json=>{
-          if(json.data==0){
+          if(json.data.count==0){
               this.setData({
                   isRead:false
               })
@@ -190,7 +200,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+        this.setData({
+            more:true
+        })
   },
 
   /**

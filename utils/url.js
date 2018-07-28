@@ -1,4 +1,5 @@
-const Url ='http://106.15.184.105/public/petapi/';
+// const Url ='http://106.15.184.105/public/petapi/';
+const Url ='http://leshala.com/public/petapi/';
 // const Url = 'http://172.200.1.14:1080/public/petapi/';
 const url={};
 
@@ -41,7 +42,10 @@ url.topicDetail   =Url+'index/topicInfo';//话题详情
 url.topicComment  =Url+'index/commentsList';//获取动态话题评论
 url.topWord       =Url+'index/hotTopicList'//获取关键词
 url.searchHot     =Url+'index/getHotTopicSearch';//搜索热门话题
-url.commentList   =Url+'index/CommentsReply';//获取回复图片
+url.commentList   =Url+'index/CommentsReply';//获取回复列表
+url.hotTalkLIst   =Url+'index/hotTopic';
+url.commentLike   =Url+'like/commentLike';//评论点赞
+
 
 
 //商品列表页面
@@ -56,8 +60,9 @@ url.activeList    =Url+'Activity/getActivityList';//活动列表
 url.activeDetail  =Url+'activity/getActivityDetails';//活动详情
 url.activeCardList=Url+'card_activity/getUserCardList';//活动卡牌列表及用户卡片信息
 url.activeCardLucky=Url+'card_activity/cardLuckDraw';//单张抽奖
-url.activeCardMerge=Url+'/card_activity/mergeCard';//合唱卡片
-
+url.activeCardMerge=Url+'/card_activity/mergeCard';//合成卡片
+url.activeCardMergeLucky=Url+'card_activity/mergeCardLuckDraw'//合成的卡片抽奖
+// url.active
 //生成宠物卡
 url.addPetId      =Url+'pet_info/add';//添加宠物卡
 
@@ -83,7 +88,6 @@ url.get_address_list = Url + 'user/getAddressList';//获取用户地址列表
 url.edit_address_list = Url + 'user/updateAddress';//编辑地址
 url.delete_address_list = Url + 'user/deleteAddress';//删除地址
 //end
-
 
 
 

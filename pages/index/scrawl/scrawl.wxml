@@ -46,8 +46,8 @@
         <!--</movable-view>-->
     <!--</movable-area>-->
 
-    <movable-area style="height: 750rpx; width: 750rpx; background:greenyellow;" out-of-bounds="{{true}}">
-        <image src="{{filePath+bgPic}}" style="height: 100%;width: 100%;" mode="aspectFill"></image>
+    <movable-area style="height: 750rpx; width: 750rpx; background:white;" out-of-bounds="{{true}}" damping="{{damping}}" animation="{{animation}}" friction="{{friction}}" scale="{{scale1}}">
+        <image src="{{src}}" style="height: 100%;width: 100%;" mode="aspectFill"></image>
         <movable-view wx:if="{{isChartImage}}" style="height: 100rpx; width: 100rpx; "
                       x="{{hatCenterX}}"
                       y="{{hatCenterY}}"
@@ -61,7 +61,7 @@
                        src="/images/big.png"
                        id="handle"
                        style="width:40rpx;height: 40rpx; position: absolute;bottom:-20rpx;right: -20rpx; z-index: 4;"></image>
-                <image src="{{currentChartImage}}"
+                <image src="{{currentChartImage1}}"
                        id="hat"
                        style="width: 100%;height: 100%; z-index: 3;position: absolute;top:0;left: 0;">
                 </image>
@@ -74,33 +74,9 @@
     </movable-area>
 
     <view class="hr-2"></view>
-    <!--<view class="gather-list">-->
-        <!--<scroll-view scroll-x="true">-->
-            <!--<view class="gather-li active">-->
-                <!--<image src="../../../images/2.png"></image>-->
-                <!--<text>桃心贴图</text>-->
-            <!--</view>-->
-            <!--<view class="gather-li">-->
-                <!--<image src="../../../images/2.png"></image>-->
-                <!--<text>桃心贴图</text>-->
-            <!--</view>-->
-            <!--<view class="gather-li">-->
-                <!--<image src="../../../images/2.png"></image>-->
-                <!--<text>桃心贴图</text>-->
-            <!--</view>-->
-            <!--<view class="gather-li">-->
-                <!--<image src="../../../images/2.png"></image>-->
-                <!--<text>桃心贴图</text>-->
-            <!--</view>-->
-            <!--<view class="gather-li">-->
-                <!--<image src="../../../images/2.png"></image>-->
-                <!--<text>桃心贴图</text>-->
-            <!--</view>-->
-        <!--</scroll-view>-->
 
 
-        <!--<view class="prev-btn" bind:tap="prevPic"><image src="../../../images/1.png" class="prev-btn-image"></image>预览</view>-->
-    <!--</view>-->
+
     <view class="gather-list">
         <scroll-view scroll-x="true" class="gather-lis">
             <block wx:for="{{chartletCover}}">

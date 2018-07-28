@@ -22,7 +22,6 @@ Page({
         console.log("执行我的页面");
 
         let user=util.storage("userInfo");
-        //TODO 死数据
         util.promiseSync(util.url.url.userPetList,{user_id:user.id}).then(json=>{
             if(json.status==1){
                 let date=Date.parse(new Date())
@@ -34,6 +33,11 @@ Page({
                     petList:json.data
                 })
             }
+        })
+    },
+    href(){
+        wx.navigateTo({
+          url: '../pet-card-add/pet-card-add'
         })
     },
   /**

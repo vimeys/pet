@@ -1,5 +1,6 @@
 // pages/me/money/money.js
 import  util from '../../../utils/totalUtil'
+var app=getApp()
 Page({
 
   /**
@@ -7,7 +8,7 @@ Page({
    */
   data: {
   tab:0,
-      Data:''
+      Data:[]
   },
 // 选项卡
   bind_tab:function(e){
@@ -20,7 +21,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getGoldList()
+    this.getGoldList();
+    this.page=1
+    this.setData({
+        user:app.user
+    })
   },
     // 去商城
     goShop(){
@@ -28,18 +33,17 @@ Page({
         url: '../../store/goodsList/goodsList'
       })
     },
-//TODO  死数据
-   getGoldList(){
-       util.promiseSync(util.url.url.goldList,{user_id:1}).then((json)=>{
+   getGoldList(page=1,pageSize=10){
+       util.promiseSync(util.url.url.goldList,{user_id:app.user.id}).then((json)=>{
           if(json.status==1){
             json.data.forEach((item)=>{
                 item.time=util.formatTime2(item.create_time)
             })
              this.setData({
-                 Data:json.data
+                 Data:[...this.data.Data,...json.data]
              })
           }else{
-
+              console.log(json.data);
           }
        })
    },
@@ -82,7 +86,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+      this.page++
+        this.getGoldList(this.page,10)
   },
 
   /**

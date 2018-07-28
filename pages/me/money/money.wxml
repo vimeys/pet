@@ -5,7 +5,7 @@
       <!-- money -->
       <view class='money-wrap'>
         <view class='money'>
-          <text class='num'>55454</text>
+          <text class='num'>{{user.money}}</text>
           <view class='hr'></view>
           <text class='title'>当前爪币</text>
         </view>

@@ -18,12 +18,9 @@ function formatTime2(date) {
     var year = data.getFullYear();
     var month = data.getMonth() + 1;
     var day = data.getDate();
-
     var hour = data.getHours();
     var minute = data.getMinutes();
     var second = data.getSeconds();
-
-
     return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 const  formatYear=function(date){
@@ -72,8 +69,6 @@ const showLoading = text=> wx.showLoading({
 
 
 
-
-
 //默认取对象的第一个
 const firstObjValue=data=>{
     for(var key in data){
@@ -81,14 +76,6 @@ const firstObjValue=data=>{
     }
 }
 
-//公共添加图片链接
-const pushHttp=(arr,httpStr,attr,imgName)=>{
-    for(let key in arr){
-        console.log(arr[key][attr]);
-        arr[key][attr]=httpStr+JSON.parse(arr[key][attr])[imgName]
-    }
-    console.log(arr);
-}
 
 
 // ajax请求封装同步
@@ -100,7 +87,6 @@ function promiseSync(url,data) {
             dataType:'json',
             method:'POST',
             success:function(res){// 请求链接成功后执行过程
-                // console.log(res);
                 var json=res.data;
                 if(res.statusCode==200){
                     resolve(json)
@@ -118,54 +104,13 @@ function promiseSync(url,data) {
 
 // 异步加载
 
-function promise(url,data) {
-    return new Promise(function (resolve,reject) {
-        wx.showLoading({
-          title: '加载中...'
-        })
-        wx.request({
-            url:url,
-            data:data,
-            method:'POST',
-            success:function(res){// 请求链接成功后执行过程
-                wx.hideLoading();
-                var json=res.data;
-                if(json.code==200){
-                    resolve(json)
-                }else{
-                    console.log("总请求失败,请检查接口信息");
-                }
-                // if(json.status==1){// 当请求数据成功后执行
-                //     resolve(json)
-                // }else if(json.status==0){
-                //     // console.log(res);
-                //     wx.login({
-                //         success(res){
-                //             wx.request({
-                //                 url:"",
-                //                 data:{code:res.code},
-                //                 success:res=>{
-                //                     resolve(json)
-                //                 }
-                //             })
-                //         }
-                //     })
-                //     resolve(json)
-                // }
-            },
-            fail:function(res){  // 请求链接失败后执行
-                console.log(res);
-                reject(res.data)
-            }
-        })
-    })
-}
+
 // 获取同步缓存数据
 const storage=name=>{
-
     let sto=wx.getStorageSync(name);
     return sto
 }
+
 //循环数组中的值
 const repeatArr= (arr,num)=>{
     let length=arr.length
@@ -187,8 +132,6 @@ module.exports = {
     showModel ,
     firstObjValue,
     showLoading,
-    pushHttp,
-    promise,
     promiseSync,
     storage,
     repeatArr,

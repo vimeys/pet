@@ -41,11 +41,11 @@
       </view>
 
       <view class='scroll'>
-        <block wx:for="{{scroll}}" wx:key="{{item}}">
-          <navigtaor url=""></navigtaor>
+        <block wx:for="{{hot}}" wx:key="{{item}}">
+          <!--<navigtaor url=""></navigtaor>-->
           <view>
-            <image src='{{filePath+item.url}}' mode='aspectFill'></image>
-            <text class='zan-ellipsis'>{{item.title}}</text>
+            <image src='{{item.img_url}}' mode='aspectFill'></image>
+            <text class='zan-ellipsis'>{{item.content}}</text>
           </view>
         </block>
       </view>
@@ -53,7 +53,7 @@
       <view class='word'>
         <block wx:for="{{topWord}}" wx:key="{{item}}">
           <view>
-            <text class='zan-ellipsis'>{{item.title}}</text>
+            <text class='zan-ellipsis'>{{item.content}}</text>
           </view>
         </block>
       </view>
@@ -145,17 +145,185 @@
   <!--关注-->
 <view class="fllow" wx:if="{{active==3}}">
   <view class='section-list'>
-    <template is='template-comment-cells'
-              data='{{media:"img-wrap-1",btn_attention:btn_attention}}'></template>
-    <template is='template-comment-cells'
-              data='{{media:"img-wrap-2"}}'></template>
-    <template is='template-comment-cells'
-              data='{{media:"video-wrap"}}'></template>
-    <template is='template-news-item'
-              data='{{media:"img",news:news,news_img:news_img,news_active:news_active,love:love,news_chartlet:news_chartlet}}'></template>
-    <template is='template-news-item'
-              data='{{media:"video",del_edit:"ture"}}'>
-    </template>
+    <!--<template is='template-comment-cells'-->
+              <!--data='{{media:"img-wrap-1",btn_attention:btn_attention}}'></template>-->
+    <!--<template is='template-comment-cells'-->
+              <!--data='{{media:"img-wrap-2"}}'></template>-->
+    <!--<template is='template-comment-cells'-->
+              <!--data='{{media:"video-wrap"}}'></template>-->
+    <!--<template is='template-news-item'-->
+              <!--data='{{media:"img",news:news,news_img:news_img,news_active:news_active,love:love,news_chartlet:news_chartlet}}'></template>-->
+    <!--<template is='template-news-item'-->
+              <!--data='{{media:"video",del_edit:"ture"}}'>-->
+    <!--</template>-->
+      <block wx:for="{{followData}}">
+
+          <!--图片-->
+          <view wx:if="{{item.model_type=='BgModel'}}" class='template-news-item fade_in'>
+                  <!-- 发布信息 -->
+                  <view class='publish-info zan-cell'>
+                      <view class='zan-cell__hd'>
+                          <!--<image src='/images/test/hsq-header.jpg' mode='aspectFill'></image>-->
+                          <image src='{{filePath+item.pet_info.pet_img}}' mode='aspectFill'></image>
+                      </view>
+                      <view class='zan-cell__bd'>
+                          <view class='name'>{{item.pet_info.name}}</view>
+                          <view class='time'>{{item.create_time}}</view>
+                      </view>
+                      <view class='zan-cell__ft'>
+                          <view class='btn  {{item.follow==1?"active":""}}' bindtap='bind_attention' data-id="{{item.id}}" data-index="{{index}}">
+                              <text>√ 已关注</text>
+                              <text>+ 关注</text>
+                          </view>
+                      </view>
+                  </view>
+                  <!-- 图片 -->
+                  <view class='item-content' wx:if='{{item.bg.length}}'>
+                      <image src='{{filePath+item.bg[item.index].img_url}}' mode='aspectFill'></image>
+                      <text></text>
+                      <!-- 贴图 -->
+                      <swiper indicator-dots="false" autoplay="true" interval="5000  " duration="2500" circular="true">
+                          <block wx:for="{{item.bg[0].graffiti}}" wx:for-item="bItem">
+                              <swiper-item>
+                                  <image src="{{filePath}}{{bItem.hyaline.img_url}}" class="slide-image" mode='widthFix' />
+                              </swiper-item>
+                          </block>
+                      </swiper>
+                      <view class='img-list'>
+                          <view class='img-list-item {{news_active==index?"active":""}}'
+                                wx:for="{{item.bg}}"
+                                wx:for-index='idx'
+                                wx:for-item="item2"
+                                bindtap='bind_news'
+                                data-indext='{{idx}}'
+                                data-index="{{index}}">
+                              <image src='{{filePath+item2.img_url}}' mode='aspectFill'></image>
+                          </view>
+                      </view>
+                      <!-- 涂鸦 -->
+                      <cover-view class='btn-scrawl' catchtap="editHref" wx:if="{{item.is_edit==1}}" data-id="{{item.id}}" data-index="{{index}}" data-pet-id="{{item.pet_id}}" data-img-user="{{item.user_id}}">
+                          <cover-image class="c-image" src='/images/icon/index-news-scrawl.png' mode='widthFix'></cover-image>
+                          <cover-view class="c-text">涂鸦</cover-view>
+                      </cover-view>
+                  </view>
+
+                  <view class='item-footer'>
+                      <view wx:if='{{item.bg.length}}'>
+                          <image class='item-footer-icon' src='/images/icon/index-news-footer1.png' mode='widthFix'></image>
+                          <text>{{item.edits}}涂鸦</text>
+                      </view>
+                      <view bindtap="hrefDetail" data-id="{{item.id}}" data-index="{{index}}">
+                          <image class='item-footer-icon' src='/images/icon/index-news-footer2.png' mode='widthFix'></image>
+                          <text>{{item.comments}}评论</text>
+                      </view>
+                      <view bindtap='bind_love_follow' data-index="{{index}}" data-id="{{item.id}}">
+                          <image src='{{item.like==1?"/images/icon/index-news-footer3-1.png":"/images/icon/index-news-footer3-0.png"}}' mode='widthFix'></image>
+                          <text>{{item.likes}}赞</text>
+                      </view>
+                      <view class="item-footer-relative">
+                          <image class='item-footer-icon' src='/images/icon/index-news-footer4.png' mode='widthFix'></image>
+                          <text>分享</text>
+                          <button open-type="share" bindtap="share" data-id="1"></button>
+                      </view>
+                  </view>
+          </view>
+
+          <!--视频-->
+          <view wx:elif="{{item.model_type=='VideoModel'}}" class='template-news-item fade_in'>
+                  <!-- 发布信息 -->
+                  <view class='publish-info zan-cell'>
+                      <view class='zan-cell__hd'>
+                          <!--<image src='/images/test/hsq-header.jpg' mode='aspectFill'></image>-->
+                          <image src='{{filePath+item.pet_info.pet_img}}' mode='aspectFill'></image>
+                      </view>
+                      <view class='zan-cell__bd'>
+                          <view class='name'>{{item.pet_info.name}}</view>
+                          <view class='time'>{{item.create_time}}</view>
+                      </view>
+                      <view class='zan-cell__ft'>
+                          <view class='btn  {{item.follow==1?"active":""}}' bindtap='bind_attention' data-id="{{item.id}}" data-index="{{index}}">
+                              <text>√ 已关注</text>
+                              <text>+ 关注</text>
+                          </view>
+                      </view>
+                  </view>
+                  <!-- 视频 -->
+                  <view class='item-content'>
+                      <view class='video-wrap'>
+                          <video controls initial-time="1" poster src="{{filePath+item.video.img_url}}"></video>
+                      </view>
+                  </view>
+                  <view class='item-footer'>
+                      <view wx:if='{{item.bg.length}}'>
+                          <image class='item-footer-icon' src='/images/icon/index-news-footer1.png' mode='widthFix'></image>
+                          <text>{{item.edits}}涂鸦</text>
+                      </view>
+                      <view bindtap="hrefDetail" data-id="{{item.id}}" data-index="{{index}}">
+                          <image class='item-footer-icon' src='/images/icon/index-news-footer2.png' mode='widthFix'></image>
+                          <text>{{item.comments}}评论</text>
+                      </view>
+                      <view bindtap='bind_love_follow' data-index="{{index}}" data-id="{{item.id}}">
+                          <image src='{{item.like==1?"/images/icon/index-news-footer3-1.png":"/images/icon/index-news-footer3-0.png"}}' mode='widthFix'></image>
+                          <text>{{item.likes}}赞</text>
+                      </view>
+                      <view class="item-footer-relative">
+                          <image class='item-footer-icon' src='/images/icon/index-news-footer4.png' mode='widthFix'></image>
+                          <text>分享</text>
+                          <button open-type="share" bindtap="share" data-id="1"></button>
+                      </view>
+                  </view>
+          </view>
+          <!--话题-->
+          <view wx:else="{{item.model_type=='TopicModel'}}" class='template-comment-cells'>
+              <!-- 发布信息 -->
+              <view class='publish-info zan-cell'>
+                  <view class='zan-cell__hd'>
+                      <image src='{{item.user_info.avatar_url}}' mode='aspectFill'></image>
+                  </view>
+                  <view class='zan-cell__bd'>
+                      <view class='name'>{{item.user_info.nickname}}</view>
+                      <view class='time'>{{item.create_time}}</view>
+                  </view>
+                  <view class='zan-cell__ft'>
+                      <view class='btn {{item.follow==1?"active":""?"active":""}}' bindtap='bind_attention_follow' bindtap='bind_attention' data-id="{{item.topic.list_sort_id}}" data-index="{{index}}">
+                          <text>√ 已关注</text>
+                          <text>+ 关注</text>
+                      </view>
+                  </view>
+              </view>
+              <!-- 评论文字 -->
+              <view class='text-wrap'>
+                  <!-- 评论 -->
+                  <view>{{item.topic.content}}</view>
+                  <!-- 回复 -->
+              </view>
+
+              <view class='img-wrap-1' wx:if='{{item.topic.more.photos.length==1}}' bindtap="topicDetail" data-id="{{item.topic.id}}">
+                  <image src='{{filePath}}{{item.topic.more.photos[0].url}}' mode='aspectFill'></image>
+              </view>
+              <view class='img-wrap-2' wx:if='{{item.topic.more.photos.length>=2}}' bindtap="topicDetail" data-id="{{item.topic.id}}">
+                  <image src='{{filePath}}{{item.topic.more.photos[0].url}}' mode='aspectFill'></image>
+                  <image src='{{filePath}}{{item.topic.more.photos[1].url}}' mode='aspectFill'></image>
+              </view>
+              <!-- 点赞、回复 -->
+              <view class='footer-icon-2'>
+                  <view bindtap='bind_love_follow' data-index="{{index}}" data-id="{{item.topic.list_sort_id}}">
+                      <image src="{{item.like==0?'/images/icon/index-gambit-content-love.png':'/images/icon/index-history-love.png'}}"
+                             mode='widthFix'
+                      >
+                      </image>
+                      <text class='num'>{{item.likes}}</text>
+                  </view>
+                  <view bindtap="hrefComment" data-id="{{item.topic.id}}">
+                      <image src='/images/icon/index-gambit-content-message_0.png' mode='widthFix'></image>
+                      <text class='num'>{{item.comments}}</text>
+                  </view>
+              </view>
+          </view>
+      </block>
+
+      <template is='template-list-more3' data='{{more_text3:more_text3,disabled:disabled}}'></template>
+
   </view>
 </view>
 
@@ -170,5 +338,6 @@
 
   <!--弹出授权提示-->
   <template is='template-popup-userinfo' data='{{popup_userinfo:popup_userinfo}}'></template>
+    <template is="toast" data="{{hiddenT}}"></template>
 
 </view>

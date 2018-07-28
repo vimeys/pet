@@ -32,7 +32,6 @@ Page({
       })
     // console.log(this.data.swiper_img)
       this.id=options.id;
-      //TODO 死数据
       utils.promiseSync(utils.url.url.goodsDetail,{goods_id:this.id}).then(json=>{
           console.log(json);
           if(json.status==1){
@@ -51,8 +50,7 @@ Page({
 
     confirm(){
 
-      //TODO 加大了数据
-      let money=app.user.money+2222;
+      let money=app.user.money;
         // console.log(this.id);
         if(money<this.data.detail.price){
             wx.showToast({

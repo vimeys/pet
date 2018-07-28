@@ -17,11 +17,11 @@
     </view>
 
     <view class='scroll'>
-      <block wx:for="{{scroll}}" wx:key="{{item}}">
+      <block wx:for="{{hot}}" wx:key="{{item}}">
         <navigtaor url=""></navigtaor>
         <view>
-          <image src='{{filePath+item.url}}' mode='aspectFill'></image>
-          <text class='zan-ellipsis'>{{item.title}}</text>
+          <image src='{{item.img_url}}' mode='aspectFill'></image>
+          <text class='zan-ellipsis'>{{item.content}}</text>
         </view>
       </block>
     </view>
@@ -29,7 +29,7 @@
     <view class='word'>
       <block wx:for="{{topWord}}" wx:key="{{item}}">
         <view bindtap="tapSearch" data-index="{{index}}">
-          <text class='zan-ellipsis'>{{item.title}}</text>
+          <text class='zan-ellipsis'>{{item.content}}</text>
         </view>
       </block>
     </view>
@@ -43,6 +43,7 @@
     <template is='template-hotTalk'  data='{{talkList:talkList,filePath:filePath}}'></template>
     <!--<template is='template-comment-cells' data='{{media:"img-wrap-2"}}'></template>-->
     <!--<template is='template-comment-cells' data='{{media:"video-wrap"}}'></template>-->
-    <template is='template-list-more'></template>
+    <template is='template-list-more' data="{{more_text:more_text,disabled:disabled}}"></template>
   </view>
 </view>
+<template is="toast" data="{{hiddenT}}"></template>
