@@ -146,7 +146,11 @@ Page({
         let index=e.currentTarget.dataset.index;
         util.promiseSync(util.url.url.commentLike,{comment_id:id,user_id: app.user.id}).then(json=>{
             if(json.msg=='点赞成功'){
-
+                let data=this.data.commentData
+                data[index].likes++
+                this.setData({
+                    commentData:data
+                })
             }else if(json.msg=='取消成功'){
                 let data=this.data.commentData
                 data[index].likes--

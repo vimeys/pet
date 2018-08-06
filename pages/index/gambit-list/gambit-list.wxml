@@ -18,8 +18,7 @@
 
     <view class='scroll'>
       <block wx:for="{{hot}}" wx:key="{{item}}">
-        <navigtaor url=""></navigtaor>
-        <view>
+        <view bindtap="href" data-id="{{item.id}}">
           <image src='{{item.img_url}}' mode='aspectFill'></image>
           <text class='zan-ellipsis'>{{item.content}}</text>
         </view>
@@ -28,7 +27,7 @@
     <!-- 关键词 -->
     <view class='word'>
       <block wx:for="{{topWord}}" wx:key="{{item}}">
-        <view bindtap="tapSearch" data-index="{{index}}">
+        <view bindtap="tapSearch" data-index="{{index}}" data-id="{{item.id}}">
           <text class='zan-ellipsis'>{{item.content}}</text>
         </view>
       </block>

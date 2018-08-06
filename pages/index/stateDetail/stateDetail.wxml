@@ -22,10 +22,10 @@
         </view>
         <!-- 图片 -->
         <view class='item-content' wx:if="{{petData.model_type==='BgModel'}}">
-            <image src='{{filePath+petData.details[petData.index].img.img_url}}' mode='aspectFill'></image>
+            <image src='{{filePath+petData.bg[petData.index].img.img_url}}' mode='aspectFill'></image>
             <text></text>
             <!-- 贴图 -->
-            <swiper indicator-dots="false" autoplay="true" interval="5000  " duration="2500" circular="true">
+            <swiper  indicator-dots="false" autoplay="true" interval="5000  " duration="2500" circular="true">
                 <block wx:for="{{petData.bannerList}}" wx:for-item="bItem">
                     <swiper-item>
                         <image src="{{filePath}}{{bItem.image}}" class="slide-image" mode='widthFix' />
@@ -35,7 +35,7 @@
             <!--缩略图-->
             <view class='img-list'>
                 <view class='img-list-item {{news_active==index?"active":""}}'
-                      wx:for="{{petData.details}}"
+                      wx:for="{{petData.bg}}"
                       wx:for-index='idx'
                       wx:for-item="item2"
                       bindtap='bind_news'
@@ -53,7 +53,7 @@
         <!-- 视频 -->
         <view class='item-content' wx:else >
             <view class='video-wrap'>
-                <video controls initial-time="1" poster src="{{filePath+petData.details.img.img_url}}"></video>
+                <video controls initial-time="1" poster src="{{filePath+petData.bg.img.img_url}}"></video>
             </view>
         </view>
         <view class='item-footer'>
@@ -65,7 +65,7 @@
                 <image class='item-footer-icon' src='/images/icon/index-news-footer2.png' mode='widthFix'></image>
                 <text>{{petData.comments}}评论</text>
             </view>
-            <view bindtap='bind_love' data-index="{{index}}" data-id="{{petData.id}}">
+            <view bindtap='bind_love2' data-index="{{index}}" data-id="{{petData.id}}">
                 <image src='{{petData.like==1?"/images/icon/index-news-footer3-1.png":"/images/icon/index-news-footer3-0.png"}}' mode='widthFix'></image>
                 <text>{{petData.likes}}赞</text>
             </view>
@@ -103,11 +103,9 @@
                         <view class='time'>{{item.create_time}}</view>
                     </view>
                 </view>
-                <template is="comment-list" data="{{item:item}}"></template>
+                <template is="comment-list" data="{{item:item,index:index}}"></template>
             </block>
-
         </view>
-
     </view>
 
     <view class='section-reply {{input?"active":""}}'>

@@ -1,6 +1,7 @@
 // pages/store/goodsList/goodsList.js
 import  util from "../../../utils/totalUtil"
 var app=getApp();
+var setTime
 Page({
 
     /**
@@ -26,25 +27,50 @@ Page({
     chooseNav(e) {
         let id=e.currentTarget.dataset.id;
         if(id==1){
+
             this.setData({
-                active:1
+                active:1,
+                disable:true
             })
             this.getList(1)
         }else{
             this.setData({
-                active:2
+                active:2,
+                disable:false
             })
             this.getList(0)
         }
     },
     // 获取商品列表
     getList(id){
-          util.promiseSync(util.url.url.goodsList,{limit:id}).then(json=>{
-              if(json.status==1){
 
+          util.promiseSync(util.url.url.goodsList,{limit:id}).then(json=>{
+
+              if(json.status==1){
                   this.setData({
                       goodsList:json.data
-                  })
+                  });
+                  let that=this;
+                  if(id==1){
+                      let m=that.data.goodsList[0].start_time.slice(5)
+                      m=m.replace('-','月');
+                      m=m.replace(/ /g,'日  ');
+                      this.setData({
+                          time:m
+                      })
+                      console.log(m);
+                      setTime=setInterval(function () {
+                            let time= Date.parse(new Date())
+                            let start=that.data.goodsList[0].start_time.replace('-','/')
+                            start= new Date(start)
+                            if(time>start){
+                                that.setData({
+                                    disable:false
+                                })
+                            }
+                        },1000)
+
+                  }
               }
           })
     },
@@ -75,7 +101,7 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-
+        clearInterval(setTime)
     }
     ,
 

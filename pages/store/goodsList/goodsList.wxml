@@ -7,8 +7,8 @@
 
 <!--<input type="text" placeholder="请输入您想要的商品" class="goods-search"/>-->
 <view class="begin-time" wx:if="{{active==1}}">
-    <text>12月25日</text>
-    <text>  24  :  12  :  45   开始抢兑</text>
+    <text>{{time}}</text>
+    <text>    开始抢兑</text>
 </view>
 <goodsCard disable="{{disable}}" active="{{active}}"  goodsList="{{goodsList}}" filePath="{{filePath}}"bindgoDetail="goDetail">
 

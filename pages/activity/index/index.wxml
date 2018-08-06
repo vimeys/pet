@@ -1,6 +1,6 @@
 <!--pages/activity/index/index.wxml-->
 <import src="/template/list.wxml" />
-<view class='container'>
+<view class='container' >
   <!-- banner -->
   <view class='section-banner'>
     <image src='/images/test/hsq.jpeg' mode='aspectFill'></image>

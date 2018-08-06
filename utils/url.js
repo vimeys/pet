@@ -1,5 +1,5 @@
 // const Url ='http://106.15.184.105/public/petapi/';
-const Url ='http://leshala.com/public/petapi/';
+const Url ='https://leshala.com/public/petapi/';
 // const Url = 'http://172.200.1.14:1080/public/petapi/';
 const url={};
 
@@ -58,10 +58,13 @@ url.orderConfirm  =Url+'goods/orderConfirm';//订单确认收货
 // 活动
 url.activeList    =Url+'Activity/getActivityList';//活动列表
 url.activeDetail  =Url+'activity/getActivityDetails';//活动详情
+url.getCard       =Url+'card_activity/cardScavenging'
 url.activeCardList=Url+'card_activity/getUserCardList';//活动卡牌列表及用户卡片信息
 url.activeCardLucky=Url+'card_activity/cardLuckDraw';//单张抽奖
 url.activeCardMerge=Url+'/card_activity/mergeCard';//合成卡片
 url.activeCardMergeLucky=Url+'card_activity/mergeCardLuckDraw'//合成的卡片抽奖
+url.dui           =Url+'card_activity/convertibilityCode';//商家兑换
+url.confirmDui    =Url+'card_activity/confirmConvertibility'//商家确认对凰
 // url.active
 //生成宠物卡
 url.addPetId      =Url+'pet_info/add';//添加宠物卡

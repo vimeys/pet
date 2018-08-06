@@ -177,7 +177,7 @@
 
 /* 爪币流水 */
 .section-tab .tab-bd-details .zan-cell .zan-cell__hd{
-  width: 235rpx
+  width: 340rpx
 }
 .section-tab .tab-bd-details .zan-cell .zan-cell__bd{
   font-size: 24rpx;

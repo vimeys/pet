@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.1.1",
-	"appid": "wxc9e46f64f7ea96e2",
+	"appid": "wx28c2ae7c59d6f38a",
 	"projectname": "%E5%AE%A0%E7%89%A9%E8%B4%B4%E5%9B%BE%E6%96%B0",
 	"condition": {
 		"search": {
@@ -32,7 +32,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 30,
 			"list": [
 				{
 					"id": 0,
@@ -213,6 +213,12 @@
 					"name": "生成宠物",
 					"pathName": "pages/me/pet-card-add/pet-card-add",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "活动伤情",
+					"pathName": "pages/activity/clock/clock",
+					"query": "Scene=8ce6b72df02b3a2e0c01cd297f56a7f2"
 				}
 			]
 		}

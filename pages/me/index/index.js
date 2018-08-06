@@ -136,24 +136,33 @@ Page({
 
     //删除按钮
     del(e){
-        let id=e.currentTarget.dataset.id;
-        let index =e.currentTarget.dataset.index
-        util.promiseSync(util.url.url.delissus,{list_sort_id:id}).then(json=>{
-            if(json.status==1){
-                wx.showToast({
-                  title: '删除成功'
-                })
-                let issus=this.data.issus
-                issus.splice(index,1)
-                this.setData({
-                    issus:issus
-                })
-            }else{
-                wx.showToast({
-                    title:'删除失败'
-                })
-            }
-        })
+      wx.showModal({
+        title: '提醒',
+        content: '是否确认删除',
+        success: res=>{
+          if (res.confirm) {
+              let id=e.currentTarget.dataset.id;
+              let index =e.currentTarget.dataset.index
+              util.promiseSync(util.url.url.delissus,{list_sort_id:id}).then(json=>{
+                  if(json.status==1){
+                      wx.showToast({
+                          title: '删除成功'
+                      })
+                      let issus=this.data.issus
+                      issus.splice(index,1)
+                      this.setData({
+                          issus:issus
+                      })
+                  }else{
+                      wx.showToast({
+                          title:'删除失败'
+                      })
+                  }
+              })
+          }
+        }
+      })
+
     },
     // 是否可以编辑
     isEdit(e){

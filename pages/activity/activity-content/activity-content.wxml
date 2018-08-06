@@ -17,7 +17,7 @@
 
       </view> -->
 
-      <view class='text'>
+      <view class='text' >
         活动日期：<text>{{Data.start_time}}</text>至<text>{{Data.end_time}}</text>
       </view>
     </view>
@@ -30,7 +30,11 @@
 
   <!-- 签到 -->
   <view class='section-footer'>
-    <view class='btn-100' bindtap="signIn" wx:if="{{isSignIN}}" bindtap="Scan">签到打卡</view>
+    <view wx:if="{{isSignIN}}" class="btns">
+      <view class='btn-100 w50' bindtap="signIn"  bindtap="Scan">签到打卡</view>
+      <view class='btn-100 w50' bindtap="signIn"  bindtap="href">我的卡片</view>
+    </view>
+
     <view class='btn-100 disable' wx:else>活动已过期</view>
   </view>
 </view>

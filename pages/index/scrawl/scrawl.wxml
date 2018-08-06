@@ -1,31 +1,48 @@
 <!--涂鸦-->
 <view  wx:if="{{!combine}}" >
-    <!--<view class="container1"-->
-          <!--id="container"-->
-          <!--catch:touchstart="touchStart"-->
-          <!--catch:touchend="touchEnd"-->
-          <!--catch:touchmove="touchMove"-->
-           <!--style="height:{{height}}rpx" >-->
-        <!--<image class="bg" src="{{bgPic}}" mode="widthFix" style="height:{{height}}rpx"></image>-->
-        <!--<icon type="cancel" class="cancel" id="cancel"-->
-              <!--style="top:{{cancelCenterY-10+'px'}};left:{{cancelCenterX-10+'px'}}" wx:if="{{chartlet}}"></icon>-->
-        <!--<icon type="waiting" class="handle" id="handle" color="green"-->
-              <!--style="top:{{handleCenterY-10+'px'}};left:{{handleCenterX-10+'px'}}" wx:if="{{chartlet}}"></icon>-->
-        <!--<image class="hat" id='hat' src="../../../images/{{currentHatId}}.png"-->
-               <!--style="top:{{hatCenterY-hatSize/2-2+'px'}};left:{{hatCenterX-hatSize/2-2+'px'}};transform:rotate({{rotate+'deg'}}) scale({{scale}})"-->
-               <!--wx:if="{{chartlet}}"></image>-->
-    <!--</view>-->
-    <!---->
-    <!--<image src="{{filePath+bgPic}}" style="height: 100%;width: 100%;" mode="aspectFill"></image>-->
-    <!--<movable-area style="height: 750rpx; width: 750rpx;">-->
-        <!--&lt;!&ndash;<image src="{{filePath+bgPic}}" style="height: 100%;width: 100%;" mode="aspectFill"></image>&ndash;&gt;-->
-        <!--&lt;!&ndash;<image src="{{filePath+bgPic}}" style="height: 100%;width: 100%;" mode="aspectFill"></image>&ndash;&gt;-->
-        <!--&lt;!&ndash;<image src="/images/close.png" style="height: 100%;width: 100%;" mode="aspectFill"></image>&ndash;&gt;-->
+    <view class="container1"
+          id="container"
+          catch:touchstart="touchStart"
+          catch:touchend="touchEnd"
+          catch:touchmove="touchMove"
+          bindtap="close"
+           style="height:750rpx;width: 750rpx" >
+        <image class="bg" src="{{src}}" mode="aspectFill" style="height: 750rpx" ></image>
+            <block wx:for="{{image_list}}">
+                <image wx:if="{{isChartImage}}"
+                       src="/images/close.png"
+                       class="cancel"
+                       id="cancel"
+                       data-index="{{index}}"
+                       style="top:{{item.cancelCenterY-10+'px'}};left:{{item.cancelCenterX-10+'px'}};width: 40rpx;height: 40rpx;"
+                ></image>
+                <image wx:if="{{isChartImage}}"
+                       src="/images/big.png"
+                        class="handle"
+                       id="handle"
+                       data-index="{{index}}"
+                       style="top:{{item.handleCenterY-10+'px'}};left:{{item.handleCenterX-10+'px'}};width: 40rpx;height: 40rpx;">
+                </image>
+                <image class="hat" id='hat' src="{{item.currentChartImage}}"
+                       style="top:{{item.hatCenterY-item.hatSize/2-2+'px'}};left:{{item.hatCenterX-item.hatSize/2-2+'px'}};transform:rotate({{item.rotate+'deg'}}) scale({{item.scale}})"
+                       data-index="{{index}}"
+                       wx:if="{{isChartImage}}"></image>
+                <!--<image class="hat" id='hat' src="{{item.currentChartImage}}"-->
+                       <!--style="top:{{hatCenterY-hatSize/2-2+'px'}};left:{{hatCenterX-hatSize/2-2+'px'}};transform:rotate({{rotate+'deg'}}) scale({{scale}})"-->
+                       <!--data-index="{{index}}"-->
+                       <!--wx:if="{{isChartImage}}"></image>-->
+            </block>
+
+
+    </view>
+
+
+    <!--<movable-area style="height: 750rpx; width: 750rpx; background:white;" out-of-bounds="{{true}}" damping="{{damping}}" animation="{{animation}}" friction="{{friction}}" scale="{{scale1}}">-->
+        <!--<image src="{{src}}" style="height: 100%;width: 100%;" mode="aspectFill"></image>-->
         <!--<movable-view wx:if="{{isChartImage}}" style="height: 100rpx; width: 100rpx; "-->
-                      <!--x="{{hatCenterX}}"-->
-                      <!--y="{{hatCenterY}}"-->
+
                       <!--bindchange="move"-->
-                      <!--scale scale-min="0.5" scale-max="4" scale-value="scale}}"-->
+                      <!--scale scale-min="0.5" scale-max="4" scale-value="{{scale}}"-->
                       <!--direction="all">-->
             <!--<view  style="width: 100%;height: 100%; position: relative; z-index: 2;border:1px solid #fff;transform:rotate({{rotate}}deg)">-->
                 <!--<image catchtouchstart="touchStart"-->
@@ -34,7 +51,7 @@
                        <!--src="/images/big.png"-->
                        <!--id="handle"-->
                        <!--style="width:40rpx;height: 40rpx; position: absolute;bottom:-20rpx;right: -20rpx; z-index: 4;"></image>-->
-                <!--<image src="{{filePath+currentChartImage}}"-->
+                <!--<image src="{{currentChartImage1}}"-->
                        <!--id="hat"-->
                        <!--style="width: 100%;height: 100%; z-index: 3;position: absolute;top:0;left: 0;">-->
                 <!--</image>-->
@@ -45,33 +62,6 @@
             <!--</view>-->
         <!--</movable-view>-->
     <!--</movable-area>-->
-
-    <movable-area style="height: 750rpx; width: 750rpx; background:white;" out-of-bounds="{{true}}" damping="{{damping}}" animation="{{animation}}" friction="{{friction}}" scale="{{scale1}}">
-        <image src="{{src}}" style="height: 100%;width: 100%;" mode="aspectFill"></image>
-        <movable-view wx:if="{{isChartImage}}" style="height: 100rpx; width: 100rpx; "
-                      x="{{hatCenterX}}"
-                      y="{{hatCenterY}}"
-                      bindchange="move"
-                      scale scale-min="0.5" scale-max="4" scale-value="{{scale}}"
-                      direction="all">
-            <view  style="width: 100%;height: 100%; position: relative; z-index: 2;border:1px solid #fff;transform:rotate({{rotate}}deg)">
-                <image catchtouchstart="touchStart"
-                       catchtouchend="touchEnd"
-                       catchtouchmove="touchMove"
-                       src="/images/big.png"
-                       id="handle"
-                       style="width:40rpx;height: 40rpx; position: absolute;bottom:-20rpx;right: -20rpx; z-index: 4;"></image>
-                <image src="{{currentChartImage1}}"
-                       id="hat"
-                       style="width: 100%;height: 100%; z-index: 3;position: absolute;top:0;left: 0;">
-                </image>
-                <image bindtap="close"
-                       src="/images/close.png"
-                       id="cancel"
-                       style="width:40rpx;height: 40rpx; position: absolute;top:-20rpx;left: -20rpx; z-index: 4;"></image>
-            </view>
-        </movable-view>
-    </movable-area>
 
     <view class="hr-2"></view>
 

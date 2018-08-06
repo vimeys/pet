@@ -1,5 +1,7 @@
 <import src='/template/list.wxml' />
+
 <view class='container'>
+
   <!-- 导航 -->
   <viem class='section-nav'>
     <!--<navigator url='' class='item active'>-->
@@ -40,7 +42,7 @@
         热门话题
       </view>
 
-      <view class='scroll'>
+      <view class='scroll' bindtap="hrefTop">
         <block wx:for="{{hot}}" wx:key="{{item}}">
           <!--<navigtaor url=""></navigtaor>-->
           <view>
@@ -50,7 +52,7 @@
         </block>
       </view>
       <!-- 关键词 -->
-      <view class='word'>
+      <view class='word' bindtap="hrefTop">
         <block wx:for="{{topWord}}" wx:key="{{item}}">
           <view>
             <text class='zan-ellipsis'>{{item.content}}</text>
@@ -101,7 +103,7 @@
         动态
       </view>
       <!--<status petData="{{petData}}"></status>-->
-      <view class='news'>
+      <view class='news' hidden="{{active!=1}}">
         <template is='template-news-item' data='{{filePath:filePath,petData:petData}}'></template>
         <!--<template is='template-news-item' data='{{media:"video"}}'></template>-->
         <template is='template-list-more' data='{{more_text:more_text,disabled:disabled}}'></template>
@@ -111,13 +113,13 @@
 
 
   <!--热门-->
-  <view class="hot" wx:if="{{active==2}}">
+  <view class="hot" hidden="{{active!=2}}">
     <scroll-view scroll-y="true" bindscrolltolower="loadImages">
       <view class='waterfall-box'>
         <view class="item">
           <view class='img-wrap' wx:for="{{col1}}" wx:key="id">
             <image src="{{filePath+item.img.img_url}}" mode='widthFix'></image>
-            <view class='love fade_in'>
+            <view class='love'>
               <image src='/images/icon/index-news-footer3-1.png' mode='widthFix'></image>
               <text>{{item.likes}}</text>
               <text>赞</text>
@@ -127,7 +129,7 @@
         <view class="item">
           <view class='img-wrap' wx:for="{{col2}}" wx:key="id">
             <image src="{{filePath+item.img.img_url}}" mode='widthFix'></image>
-            <view class='love fade_in'>
+            <view class='love'>
               <image src='/images/icon/index-news-footer3-1.png' mode='widthFix'></image>
               <text>{{item.likes}}</text>
               <text>赞</text>
@@ -143,7 +145,7 @@
   </view>
 
   <!--关注-->
-<view class="fllow" wx:if="{{active==3}}">
+<view class="fllow" hidden="{{active!=3}}">
   <view class='section-list'>
     <!--<template is='template-comment-cells'-->
               <!--data='{{media:"img-wrap-1",btn_attention:btn_attention}}'></template>-->
@@ -159,7 +161,7 @@
       <block wx:for="{{followData}}">
 
           <!--图片-->
-          <view wx:if="{{item.model_type=='BgModel'}}" class='template-news-item fade_in'>
+          <view wx:if="{{item.model_type=='BgModel'}}" class='template-news-item'>
                   <!-- 发布信息 -->
                   <view class='publish-info zan-cell'>
                       <view class='zan-cell__hd'>
@@ -229,7 +231,7 @@
           </view>
 
           <!--视频-->
-          <view wx:elif="{{item.model_type=='VideoModel'}}" class='template-news-item fade_in'>
+          <view wx:elif="{{item.model_type=='VideoModel'}}" class='template-news-item'>
                   <!-- 发布信息 -->
                   <view class='publish-info zan-cell'>
                       <view class='zan-cell__hd'>

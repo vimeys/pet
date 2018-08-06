@@ -14,12 +14,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let id=options.id;
-    this.page=1
-    this.getDetail(id)
+      let id=options.id;
       this.setData({
-          filePath:app.filePath
+          id:id
       })
+    // this.page=1
+    // this.getDetail(id)
+    //   this.setData({
+    //       filePath:app.filePath
+    //   })
   },
     //
     getDetail(id){
@@ -34,7 +37,7 @@ Page({
 
               json.data.index=0
               if(json.data.model_type=='BgModel'){
-                  this.getBannerList(json.data.details[0].id,json)
+                  this.getBannerList(json.data.bg[0].id,json)
               }else{
                   this.setData({
                       petData:json.data
@@ -76,7 +79,7 @@ Page({
         })
     },
     // 点赞
-    bind_love(e){
+    bind_love2(e){
         let index = e.currentTarget.dataset.index;
         let id = e.currentTarget.dataset.id;
         let petData = this.data.petData
@@ -92,6 +95,25 @@ Page({
                 petData.likes++
                 this.setData({
                     petData
+                })
+            }
+        })
+    },
+    bind_love(e){
+        let id=e.currentTarget.dataset.id;
+        let index=e.currentTarget.dataset.index;
+        util.promiseSync(util.url.url.commentLike,{comment_id:id,user_id: app.user.id}).then(json=>{
+            if(json.msg=='点赞成功'){
+                let data=this.data.commentData
+                data[index].likes++
+                this.setData({
+                    commentData:data
+                })
+            }else if(json.msg=='取消成功'){
+                let data=this.data.commentData
+                data[index].likes--
+                this.setData({
+                    commentData:data
                 })
             }
         })
@@ -176,11 +198,11 @@ Page({
         // console.log(this.data.petData[this.data.index].bg[this.data.indextt].img_url);
         let id=e.currentTarget.dataset.id;
         // let index =e.currentTarget.dataset.index;
-        let img_id=this.data.petData.details[this.data.petData.index].id;
-        app.globalData.edit = this.data.petData.details[this.data.petData.index].img.img_url;//背景图片
+        let img_id=this.data.petData.bg[this.data.petData.index].id;
+        app.globalData.edit = this.data.petData.bg[this.data.petData.index].img.img_url;//背景图片
         app.globalData.petId=this.data.petData.pet_id;//宠物id
         wx.setStorageSync('petData', this.data.petData);
-        wx.setStorageSync('bgIndex', this.data.petData.indet);
+        wx.setStorageSync('bgIndex', this.data.petData.index);
         wx.navigateTo({
             url: `../scrawl/scrawl?id=${id}&img_id=${img_id}`
         });
@@ -218,8 +240,14 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function (e) {
 
+      let id=this.data.id;
+      this.page=1
+      this.getDetail(id)
+      this.setData({
+          filePath:app.filePath
+      })
   },
 
   /**

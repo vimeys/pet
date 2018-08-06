@@ -7,8 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-  tab:0,
-      Data:[]
+      tab: 0,
+      Data: [],
+      more:true
   },
 // 选项卡
   bind_tab:function(e){
@@ -33,15 +34,24 @@ Page({
         url: '../../store/goodsList/goodsList'
       })
     },
+    // 流水列表
    getGoldList(page=1,pageSize=10){
-       util.promiseSync(util.url.url.goldList,{user_id:app.user.id}).then((json)=>{
+       util.promiseSync(util.url.url.goldList,{user_id:app.user.id,page:page,pageSize:pageSize}).then((json)=>{
           if(json.status==1){
-            json.data.forEach((item)=>{
-                item.time=util.formatTime2(item.create_time)
-            })
-             this.setData({
-                 Data:[...this.data.Data,...json.data]
-             })
+              if(json.data.length==pageSize){
+                  json.data.forEach((item)=>{
+                      item.time=util.formatTime2(item.create_time)
+                  })
+                  this.setData({
+                      Data:[...this.data.Data,...json.data]
+                  })
+              }else{
+                  this.setData({
+                      more:false,
+                      Data:[...this.data.Data,...json.data]
+                  })
+              }
+
           }else{
               console.log(json.data);
           }
@@ -87,7 +97,16 @@ Page({
    */
   onReachBottom: function () {
       this.page++
-        this.getGoldList(this.page,10)
+      if(this.data.more){
+          this.getGoldList(this.page,10)
+      }else{
+          wx.showToast({
+            title: '没有啦',
+              icon:'none'
+
+          })
+      }
+
   },
 
   /**

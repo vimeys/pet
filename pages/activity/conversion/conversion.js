@@ -1,20 +1,44 @@
 // pages/activity/conversion/conversion.js
+var app=getApp();
+import  util from  '../../../utils/totalUtil'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+      app_user_id:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-  },
+    let code=options.Scene
+      this.setData({
+          code:code
+      })
+      util.promiseSync(util.url.url.dui,{app_user_id:app.user.id,unique_code:code}).then(json=>{
+        this.setData({
 
+        })
+      })
+  },
+    confirm(){
+      util.promiseSync(util.url.url.confirmDui,{app_user_id:app.user.id,unique_code:this.data.code}).then(json=>{
+          if(json.status==1){
+            wx.showModal({
+              title: '提示',
+              content: '兑换成功',
+              success: res=>{
+                if (res.confirm) {
+
+                }
+              }
+            })
+          }
+      })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

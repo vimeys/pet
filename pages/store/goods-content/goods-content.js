@@ -33,16 +33,23 @@ Page({
     // console.log(this.data.swiper_img)
       this.id=options.id;
       utils.promiseSync(utils.url.url.goodsDetail,{goods_id:this.id}).then(json=>{
-          console.log(json);
+          let that=this;
           if(json.status==1){
               wxParse.wxParse('content','html',json.data.details,this,5)
+              let m=json.data.start_time.slice(5)
+              m=m.replace('-','月');
+              m=m.replace(/ /g,'日  ');
+              this.setData({
+                  time:m
+              })
               if(json.data.more!=null){
                   this.setData({
                       swiper_img:json.data.more.photos
                   })
               }
               this.setData({
-                  detail:json.data
+                  detail:json.data,
+                  time:m
               })
           }
       })

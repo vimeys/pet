@@ -45,3 +45,14 @@ text-align: center
 .disable{
   background: #ccc;
 }
+
+.btns{
+  width: 100%;
+  display: flex;
+}
+.btns .w50{
+  flex: 1;
+}
+.btns .w50:first-child{
+  border-right: 1px solid #1a1a1a;
+}

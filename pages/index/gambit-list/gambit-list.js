@@ -8,41 +8,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-      hiddenT:false,
-    test_img_hsq_320: app.test_img_hsq_320,
-    filePath: '',//图片前缀,
-      topWord:[],
-    scroll: [{
-      title: '这里是名字',
-      url: '/images/test/index-banner.png'
-    }, {
-      title: '这里是名字这里是名字',
-      url: '/images/test/img.png'
-    }, {
-      title: '这里是名字',
-      url: '/images/test/index-banner.png'
-    }, {
-      title: '这里是名字',
-      url: '/images/test/index-banner.png'
-    }, {
-      title: '这里是名字',
-      url: '/images/test/index-banner.png'
-    }, {
-      title: '这里是名字',
-      url: '/images/test/index-banner.png'
-    }],
-      showSearch:true,//是否显示放大镜
-    // 关键词
-    word: [
-      '我曹',
-      '狗狗好动',
-      '狗狗特好动',
-      '中华田园犬',
-      '哎哟卧槽，这年轻人',
-      '我曹这年轻人',
-    ],
-      more_text:'查看更多'
-  },
+        hiddenT: false,
+        test_img_hsq_320: app.test_img_hsq_320,
+        filePath: '',//图片前缀,
+        topWord: [],
+        scroll: [],
+        more: true,//是否还有更多
+        showSearch: true,//是否显示放大镜
+        word: [],// 关键词
+      disabled:false,
+        more_text: '查看更多'
+    },
   // method: {
   //   listenFocus: util.listenFocus,
   //   listenBlur: util.listenBlur,
@@ -61,7 +37,7 @@ Page({
     this.setData({
         filePath:app.filePath
     })
-
+    this.page=1
     this.getHot()
       this.getHotWord()
     // this.listenFocus = util.listenFocus(this);
@@ -89,35 +65,65 @@ Page({
           })
       })
     },
-    // 点击关键词搜索
-    tapSearch(e){
-        let index=e.currentTarget.dataset.index;
-        let text=this.data.topWord[index].content
-        util.promiseSync(util.url.url.searchHot,{content:text,page:1}).then(json=>{
-            if(json.status==1){
-                if(json.data.length){
-                    this.setData({
-                        talkList:json.data
-                    })
-                }else{
-                    wx.showToast({
-                      title: '相关话题已删除',
-                        icon:'none'
-                    })
-                }
-
-            }
+    href(e){
+        let id=e.currentTarget.dataset.id
+        wx.navigateTo({
+          url:  '../gambit-content/gambit-content?id='+id
         })
     },
+    // 点击关键词搜索
+    tapSearch(e){
+        let id=e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url:  '../gambit-content/gambit-content?id='+id
+        })
+    },
+        // let text=this.data.topWord[index].content
+        // util.promiseSync(util.url.url.searchHot,{content:text,page:1,pageSize:10}).then(json=>{
+        //     if(json.status==1){
+        //         if(json.data.length){
+        //             this.setData({
+        //                 talkList:json.data
+        //             })
+        //         }else{
+        //             wx.showToast({
+        //               title: '相关话题已删除',
+        //                 icon:'none'
+        //             })
+        //         }
+        //
+        //     }
+        // })
     // 获取热门话题
     getHotTalkList(id,size){
-      util.promiseSync(util.url.url.hotTalk,{user_id:id,page:size,pageSize:10}).then(json=>{
-        if(json.status==1){
-          this.setData({
-              hiddenT:true,
-              talkList:json.data
-          })
-        }
+      util.promiseSync(util.url.url.hotTalk,{user_id:id,page:size,pageSize:3}).then(json=>{
+          if (this.data.more) {
+              if (json.data.length == 3) {
+                  if (size == 1) {
+                      this.setData({
+                          hiddenT: true,
+                          talkList: json.data
+                      })
+                  } else {
+                      this.setData({
+                          talkList: [...this.data.talkList, ...json.data]
+                      })
+                  }
+              } else {
+                  this.setData({
+                      more: false
+                  })
+                  this.setData({
+                      more_text: '没有啦',
+                      disabled: true
+                  })
+              }
+          } else {
+              wx.showToast({
+                  title: '没有啦',
+                  icon: 'none'
+              })
+          }
       })
     },
 
@@ -203,12 +209,12 @@ Page({
             }
         })
     },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
+    // 获取更多
+    getMore(){
+         this.page++
+        let user=util.storage('userInfo');
+        this.getHotTalkList(user.id,this.page)
+    },
 
   /**
    * 生命周期函数--监听页面显示

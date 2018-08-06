@@ -34,7 +34,11 @@ Page({
     ],
     test_img_url: app.test_img_url,
   },
-
+    href(){
+        wx.navigateTo({
+            url: '../clock/clock?Scene=8ce6b72df02b3a2e0c01cd297f56a7f2'
+        })
+    },
   /**
    * 生命周期函数--监听页面加载
    */

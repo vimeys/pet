@@ -34,8 +34,10 @@ Component({
    */
   methods: {
       goDetail(e){
-            let id=e.currentTarget.dataset.id
-          this.triggerEvent('goDetail',{id:id})
+          if(!this.properties.disable){
+              let id=e.currentTarget.dataset.id
+              this.triggerEvent('goDetail',{id:id})
+          }
       }
   }
 })

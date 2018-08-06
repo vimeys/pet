@@ -1,1 +1,12 @@
 /* pages/activity/conversion/conversion.wxss */
+.btn{
+    width: 500rpx;
+    margin: 0 auto;
+    border-radius: 10rpx;
+    text-align: center;
+    height: 80rpx;
+    line-height: 80rpx;
+    background: #ffc900;
+    color:#fff;
+    margin-top: 200rpx;
+}

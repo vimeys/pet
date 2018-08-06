@@ -92,6 +92,9 @@ Page({
       let petData=util.storage('petData');
       util.promiseSync(util.url.url.petData,{pet_id:petData.pet_id}).then(json=>{
           if(json.status==1){
+              if(json.data.name.length>4){
+                  json.data.name=`${json.data.name.slice(0,2)}...`
+              }
               this.setData({
                   pet:json.data
               })
@@ -120,7 +123,6 @@ Page({
   draw(){
         wx.hideLoading()
           const windowWidth = wx.getSystemInfoSync().windowWidth;
-      // const windowHeight =wx.getSystemInfoSync().windowHeight;
       const cts=wx.createCanvasContext('myCanvas')
       console.log(app.filePath + app.globalData.edit);
       console.log(this.data.codeImage);
@@ -129,13 +131,18 @@ Page({
       cts.fillRect(0, windowWidth-15, 1000, 1000)
       cts.drawImage('/images/test/seal.png',windowWidth-160,windowWidth-120,118,116)//绘制王洪章
       cts.drawImage(this.data.codeImage,22,windowWidth+25,110,110);//绘制二维码
-      cts.drawImage('/images/icon/me-index-petinfo-sex1.png',windowWidth-185,windowWidth,12,12)//绘制性别
+      if(this.data.pet.sex==0){
+          cts.drawImage('/images/icon/me-index-petinfo-sex1.png',windowWidth-185,windowWidth,12,12)//绘制性别
+      }else{
+          cts.drawImage('/images/icon/me-index-petinfo-sex2.png',windowWidth-185,windowWidth,12,12)//绘制性别
+      }
+
       cts.drawImage('/images/icon/me-index-petinfo-birthday.png',windowWidth-155,windowWidth+35,12,12)//绘制生日
       cts.drawImage('/images/icon/me-index-petinfo-weight.png',windowWidth-155,windowWidth+60,12,12)//绘制体重
       cts.drawImage('/images/icon/me-index-petinfo-sterilization2.png',windowWidth-155,windowWidth+85,12,12)//绘制是否已绝育
       cts.setFillStyle('black');
       cts.setFontSize(20)
-      cts.fillText(this.data.pet.name, windowWidth-245, windowWidth+15)
+      cts.fillText(this.data.pet.name, windowWidth-265, windowWidth+15)
       cts.setFontSize(12)
       cts.fillText(`生日：${this.data.pet.birthday}`,windowWidth-140,windowWidth+45)
       cts.fillText(`体重：${this.data.pet.weight}kg`,windowWidth-140,windowWidth+70)
@@ -143,7 +150,7 @@ Page({
       cts.fillText('这是一段话不能太长哦',windowWidth-240,windowWidth+120)
       cts.setFillStyle("#FF0101")
       cts.setFontSize(18)
-      cts.fillText(`身价：600爪币`,windowWidth-160,windowWidth+15)
+      cts.fillText(`身价：${this.data.pet.cost}爪币`,windowWidth-160,windowWidth+15)
 
       cts.draw()
   },

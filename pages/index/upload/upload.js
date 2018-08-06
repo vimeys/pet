@@ -250,7 +250,7 @@ Page({
                 util.showSuccess('上传成功')
                 setTimeout(function () {
                     wx.navigateBack({delta:1})
-                })
+                },1500)
             }
         })
 

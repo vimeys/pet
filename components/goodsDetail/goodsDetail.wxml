@@ -12,7 +12,7 @@
                 <view class="goods-nums">
                     <view class="goods-num">{{item.price}}</view>
                     <!--<view class="goods-num-image" src="../../../images/1.png"></view>-->
-                    <image class="goods-num-image" src="../../images/1.png"></image>
+                    <image class="goods-num-image" src="../../images/icon/money.png"></image>
                     <view class="goods-num-people">已兑{{item.sales}}件</view>
                 </view>
                 <view class="goods-btn {{disable?'disable':''}}"

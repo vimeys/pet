@@ -28,8 +28,8 @@ Page({
         images_arr:'',//热门图片数据
         indicatorDots: false,// 是否显示面板指示点
         autoplay: true,// 是否自动轮播=
-        interval: 3000,// 间隔时长
-        duration: 500, // 滚动时间
+        interval: 5000,// 间隔时长
+        duration: 300, // 滚动时间
         circular: true,// 是否采用衔接滑动
         swiperCurrent: 0,// 分页器初始化index
         // 关键词
@@ -70,7 +70,6 @@ Page({
               this.setData({
                   active:2
               })
-              console.log(this.data.col1);
               let col1=this.data.col1;
               if(col1.length==0){
                   wx.getSystemInfo({
@@ -296,6 +295,9 @@ Page({
             json.data.forEach(function (item, index) {
                 item.index = 0
             });
+            this.setData({
+                hiddenT:true
+            })
             this.statuImageList(json.data,page_size)//获取轮播
 
         })
@@ -325,6 +327,7 @@ Page({
                             petData:[...that.data.petData,...petData],
                             hiddenT:true
                         })
+                        console.log(that.data.petData);
                         that.i=0
                     }
                 })
@@ -335,7 +338,7 @@ Page({
                         petData:[...that.data.petData,...petData],
                         hiddenT:true
                     })
-
+                    console.log(that.data.petData);
                     that.i=0
                 }
             }
@@ -345,14 +348,9 @@ Page({
     // 获取更多动态
     getMore() {
         let user = util.storage('userInfo')
-        let page = this.page1;
-        page++
+        let page = this.page1++;
         this.petList(app.user.id,page,3)
     },
-
-
-
-
     // 获取关注列表
     getfollowList(id, page = 1, page_size = 3) {
         let that = this;
@@ -500,8 +498,7 @@ Page({
     },
     // 关注获取更多
     getMore3(){
-          let page=this.page3;
-          page++
+          let page=this.page3++;
           this.getfollowList(app.user.id,page,2)
     },
 
@@ -537,8 +534,7 @@ Page({
     // 获取更多热门图片
     getMore2: function () {
         var that = this
-        let page = this.page2;
-        page++
+        let page = this.page2++;
         console.log(page)
         util.promiseSync(util.url.url.index_hot, { page: page, pageSize: 10 }).then((json) => {
             let images = this.data.images_arr;
@@ -623,13 +619,26 @@ Page({
             })
         }
     },
-
+    
+    // 去话题页面
+    hrefTop(){
+        wx.switchTab({
+          url: '/pages/index/gambit-list/gambit-list'
+        })  
+    },
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
         let restart=util.storage('restart')
-        this.petList(app.user.id,1,3)
+        if(app.user){
+            this.petList(app.user.id,1,3)
+        }else{
+            setTimeout(()=> {
+                this.petList(app.user.id,1,3)
+            },2000)
+        }
+
     },
 
     /**
@@ -641,6 +650,8 @@ Page({
             this.page3=1
         this.setData({
             active:1,
+            followMore:true,
+            statusMore:true,
             followData:[],
             col1:[],
             col2:[],

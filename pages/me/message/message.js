@@ -8,7 +8,8 @@ Page({
    */
   data: {
     test_img_hsq1: app.test_img_hsq1,
-      Data:""
+      Data:"",
+      more:true
   },
 
   /**
@@ -24,13 +25,25 @@ Page({
   onReady: function () {
   
   },
-    getList(){
+    getList(page=1,pageSize=10){
 
-      util.promiseSync(util.url.url.getMessageList,{user_id:app.user.id}).then(json=>{
-        if(json.status==1){}
-          this.setData({
-              Data:json.data
-          })
+      util.promiseSync(util.url.url.getMessageList,{user_id:app.user.id,page:page,pageSize:pageSize}).then(json=>{
+        if(json.status==1){
+          if(json.data.length==pageSize){
+              this.setData({
+                  Data:[this.data.Data,...json.data]
+              })
+          }else{
+            this.setData({
+                Data:[this.data.Data,...json.data],
+                more:false
+            })
+          }
+
+        }else{
+            console.log(json.data);
+        }
+
       })
     },
   /**
@@ -65,7 +78,16 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+      this.page++
+      if(this.data.more){
+          this.getGoldList(this.page,10)
+      }else{
+          wx.showToast({
+              title: '没有啦',
+              icon:'none'
+
+          })
+      }
   },
 
   /**

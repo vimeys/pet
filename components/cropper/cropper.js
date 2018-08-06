@@ -180,83 +180,86 @@ Component({
       }
     },
     touchmove(e) {
-      let that = this;
-      console.log(e)
-      if (touch){ 
-        if (e.touches.length >= 2) {
-          // console.log('缩放')
-          let xMove = e.touches[1].x - e.touches[0].x;
-          let yMove = e.touches[1].y - e.touches[0].y;
-          let distance = Math.sqrt(xMove * xMove + yMove * yMove);
-          let distanceDiff = (distance - oldDistance);
-          //如果滑动距离大于0再进行缩放
-          if (Math.abs(distanceDiff)>=0){
-            scale = scale + 0.0004 * distanceDiff
-            if (scale > 2) {
-              scale = 2
-            }
-            if (scale < 1) {
-              scale = 1
-            }
-            that.scale()
-          }
-        } else {
-          // console.log('移动')
-          let xMove = (e.touches[0].x - oldX)*0.09;
-          let yMove = (e.touches[0].y - oldY)*0.09;
-          
-          
-          if (Math.abs(xMove) >= 1 && Math.abs(yMove) < 1) {
-            X = X + Math.round(xMove)
-            //禁止超出边框
-            if (X >= coordinate[0].x) {
-              X = coordinate[0].x
-            }
-            if (X <= -(imgW - coordinate[1].x)) {
-              X = -(imgW - coordinate[1].x)
-            }
-            that.move()
-              cutDta.x = Math.abs(W - cutW) / 2;
-              cutDta.y = Math.abs(H - cutW) / 2;
-          }
-          
-          if (Math.abs(xMove) < 1 && Math.abs(yMove) >= 1) {
-            Y = Y + Math.round(yMove)
-            //禁止超出边框
-            if (Y >= coordinate[0].y) {
-              Y = coordinate[0].y
-            }
-            if (Y <= -(imgH - coordinate[2].y)) {
-              Y = -(imgH - coordinate[2].y)
-            }
-            that.move()
-              cutDta.x = Math.abs(W - cutW) / 2;
-              cutDta.y = Math.abs(H - cutW) / 2;
-          }
-          
-          if (Math.abs(xMove) >= 1 && Math.abs(yMove) >= 1) {
-            X = X + Math.round(xMove)
-            Y = Y + Math.round(yMove)
-            //禁止超出边框
-            if (X >= coordinate[0].x) {
-              X = coordinate[0].x
-            }
-            if (X <= -(imgW - coordinate[1].x)) {
-              X = -(imgW - coordinate[1].x)
-            }
-            if (Y >= coordinate[0].y) {
-              Y = coordinate[0].y
-            }
-            if (Y <= -(imgH - coordinate[2].y)) {
-              Y = -(imgH - coordinate[2].y)
-            }
-            that.move()
+      let that=this;
+      fn(that,e)
 
-              cutDta.x = Math.abs(W - cutW) / 2;
-              cutDta.y = Math.abs(H - cutW) / 2;
-          }
-        }
-      }
+      // let that = this;
+      // console.log(e)
+      // if (touch){
+      //   if (e.touches.length >= 2) {
+      //     // console.log('缩放')
+      //     let xMove = e.touches[1].x - e.touches[0].x;
+      //     let yMove = e.touches[1].y - e.touches[0].y;
+      //     let distance = Math.sqrt(xMove * xMove + yMove * yMove);
+      //     let distanceDiff = (distance - oldDistance);
+      //     //如果滑动距离大于0再进行缩放
+      //     if (Math.abs(distanceDiff)>=0){
+      //       scale = scale + 0.0004 * distanceDiff
+      //       if (scale > 2) {
+      //         scale = 2
+      //       }
+      //       if (scale < 1) {
+      //         scale = 1
+      //       }
+      //       that.scale()
+      //     }
+      //   } else {
+      //     // console.log('移动')
+      //     let xMove = (e.touches[0].x - oldX)*0.09;
+      //     let yMove = (e.touches[0].y - oldY)*0.09;
+      //
+      //
+      //     if (Math.abs(xMove) >= 1 && Math.abs(yMove) < 1) {
+      //       X = X + Math.round(xMove)
+      //       //禁止超出边框
+      //       if (X >= coordinate[0].x) {
+      //         X = coordinate[0].x
+      //       }
+      //       if (X <= -(imgW - coordinate[1].x)) {
+      //         X = -(imgW - coordinate[1].x)
+      //       }
+      //       that.move()
+      //         cutDta.x = Math.abs(W - cutW) / 2;
+      //         cutDta.y = Math.abs(H - cutW) / 2;
+      //     }
+      //
+      //     if (Math.abs(xMove) < 1 && Math.abs(yMove) >= 1) {
+      //       Y = Y + Math.round(yMove)
+      //       //禁止超出边框
+      //       if (Y >= coordinate[0].y) {
+      //         Y = coordinate[0].y
+      //       }
+      //       if (Y <= -(imgH - coordinate[2].y)) {
+      //         Y = -(imgH - coordinate[2].y)
+      //       }
+      //       that.move()
+      //         cutDta.x = Math.abs(W - cutW) / 2;
+      //         cutDta.y = Math.abs(H - cutW) / 2;
+      //     }
+      //
+      //     if (Math.abs(xMove) >= 1 && Math.abs(yMove) >= 1) {
+      //       X = X + Math.round(xMove)
+      //       Y = Y + Math.round(yMove)
+      //       //禁止超出边框
+      //       if (X >= coordinate[0].x) {
+      //         X = coordinate[0].x
+      //       }
+      //       if (X <= -(imgW - coordinate[1].x)) {
+      //         X = -(imgW - coordinate[1].x)
+      //       }
+      //       if (Y >= coordinate[0].y) {
+      //         Y = coordinate[0].y
+      //       }
+      //       if (Y <= -(imgH - coordinate[2].y)) {
+      //         Y = -(imgH - coordinate[2].y)
+      //       }
+      //       that.move()
+      //
+      //         cutDta.x = Math.abs(W - cutW) / 2;
+      //         cutDta.y = Math.abs(H - cutW) / 2;
+      //     }
+      //   }
+      // }
     },
     touchend() {
       let that=this;
@@ -312,4 +315,104 @@ Component({
   }
 })
 
+var throttle = function (fn, delay, mustRun) {
+    var timer = null,
+        previous = null;
 
+    return function () {
+        var now = +new Date(),
+            context = this,
+            args = arguments;
+        if (!previous) previous = now;
+        var remaining = now - previous;
+        if (mustRun && remaining >= mustRun) {
+            fn.apply(context, args);
+            previous = now;
+        } else {
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                fn.apply(context, args);
+            }, delay);
+
+        }
+    }
+}
+var touchMove = function (that, e) {
+    console.log(e)
+    if (touch){
+        if (e.touches.length >= 2) {
+            // console.log('缩放')
+            let xMove = e.touches[1].x - e.touches[0].x;
+            let yMove = e.touches[1].y - e.touches[0].y;
+            let distance = Math.sqrt(xMove * xMove + yMove * yMove);
+            let distanceDiff = (distance - oldDistance);
+            //如果滑动距离大于0再进行缩放
+            if (Math.abs(distanceDiff)>=0){
+                scale = scale + 0.0004 * distanceDiff
+                if (scale > 2) {
+                    scale = 2
+                }
+                if (scale < 1) {
+                    scale = 1
+                }
+                that.scale()
+            }
+        } else {
+            // console.log('移动')
+            let xMove = (e.touches[0].x - oldX)*0.09;
+            let yMove = (e.touches[0].y - oldY)*0.09;
+
+
+            if (Math.abs(xMove) >= 1 && Math.abs(yMove) < 1) {
+                X = X + Math.round(xMove)
+                //禁止超出边框
+                if (X >= coordinate[0].x) {
+                    X = coordinate[0].x
+                }
+                if (X <= -(imgW - coordinate[1].x)) {
+                    X = -(imgW - coordinate[1].x)
+                }
+                that.move()
+                cutDta.x = Math.abs(W - cutW) / 2;
+                cutDta.y = Math.abs(H - cutW) / 2;
+            }
+
+            if (Math.abs(xMove) < 1 && Math.abs(yMove) >= 1) {
+                Y = Y + Math.round(yMove)
+                //禁止超出边框
+                if (Y >= coordinate[0].y) {
+                    Y = coordinate[0].y
+                }
+                if (Y <= -(imgH - coordinate[2].y)) {
+                    Y = -(imgH - coordinate[2].y)
+                }
+                that.move()
+                cutDta.x = Math.abs(W - cutW) / 2;
+                cutDta.y = Math.abs(H - cutW) / 2;
+            }
+
+            if (Math.abs(xMove) >= 1 && Math.abs(yMove) >= 1) {
+                X = X + Math.round(xMove)
+                Y = Y + Math.round(yMove)
+                //禁止超出边框
+                if (X >= coordinate[0].x) {
+                    X = coordinate[0].x
+                }
+                if (X <= -(imgW - coordinate[1].x)) {
+                    X = -(imgW - coordinate[1].x)
+                }
+                if (Y >= coordinate[0].y) {
+                    Y = coordinate[0].y
+                }
+                if (Y <= -(imgH - coordinate[2].y)) {
+                    Y = -(imgH - coordinate[2].y)
+                }
+                that.move()
+
+                cutDta.x = Math.abs(W - cutW) / 2;
+                cutDta.y = Math.abs(H - cutW) / 2;
+            }
+        }
+    }
+};
+const fn = throttle(touchMove, 20, 20);

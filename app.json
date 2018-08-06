@@ -3,6 +3,7 @@
         "pages/index/index/index",
         "pages/activity/conversion/conversion",
         "pages/activity/clock/clock",
+    "pages/test/test",
     "pages/index/imageEditor/imageEditor",
     "pages/index/intHot/intHot",
         "pages/wx-cropper/index",
@@ -37,7 +38,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "宠物贴图",
+    "navigationBarTitleText": "爪萌show",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

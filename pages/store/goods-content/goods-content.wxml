@@ -16,11 +16,11 @@
   <view class='section-info'>
 
     <view class='btn'>
-      <text class='day'>12月15日</text>
-      <text class='time'>24:12:45</text>开始抢兑
+      <text class='day'>{{time}}</text>
+      <text class='time'>开始抢兑</text>
     </view>
     <view class='name'>
-      {{detail.name}}啊色块大家爱上拉克丝几点啦看似简单拉克的减肥啦开始来看大家是否收到了复健科打算尽快了解
+      {{detail.name}}
     </view>
     <view class='zan-cell'>
       <view class='zan-cell__bd'>{{detail.price}}爪币</view>

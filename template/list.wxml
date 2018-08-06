@@ -125,18 +125,12 @@
       </view>
 
       <view class='img-wrap-1' wx:if='{{item.more.photos.length==1}}' bindtap="topicDetail" data-id="{{item.id}}">
-        <!--<image src='/images/test/hsq.jpeg' mode='aspectFill'></image>-->
         <image src='{{filePath}}{{item.more.photos[0].url}}' mode='aspectFill'></image>
       </view>
       <view class='img-wrap-2' wx:if='{{item.more.photos.length>=2}}' bindtap="topicDetail" data-id="{{item.id}}">
         <image src='{{filePath}}{{item.more.photos[0].url}}' mode='aspectFill'></image>
         <image src='{{filePath}}{{item.more.photos[1].url}}' mode='aspectFill'></image>
-        <!--<image src='/images/test/hsq.jpeg' mode='aspectFill'></image>-->
-        <!--<image src='/images/test/hsq.jpeg' mode='aspectFill'></image>-->
       </view>
-      <!--<view class='video-wrap' wx:if='{{media=="video-wrap"}}'>-->
-      <!--<video src='http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400'></video>-->
-      <!--</view>-->
       <!-- 点赞、回复 -->
       <view class='footer-icon-2'>
         <view bindtap='bind_love' data-index="{{index}}" data-id="{{item.list_sort_id}}">
@@ -177,11 +171,11 @@
 
 
 <!-- *********************************动态********************************** -->
-<template name="template-news-item">
-  <view class='template-news-item fade_in'>
+<template name="template-news-item" >
+  <view class='template-news-item'>
   <block wx:for="{{petData}}">
     <!-- 发布信息 -->
-    <view class='publish-info zan-cell'>
+    <view   class='publish-info zan-cell'>
       <view class='zan-cell__hd'>
         <!--<image src='/images/test/hsq-header.jpg' mode='aspectFill'></image>-->
         <image src='{{filePath+item.pet_info.pet_img}}' mode='aspectFill'></image>
@@ -202,7 +196,7 @@
       <image src='{{filePath+item.bg[item.index].img_url}}' mode='aspectFill'></image>
       <text></text>
       <!-- 贴图 -->
-      <swiper indicator-dots="false" autoplay="true" interval="5000  " duration="2500" circular="true">
+      <swiper bindtap="hrefDetail" data-id="{{item.id}}" data-index="{{index}}" indicator-dots="false" autoplay="true" interval="8000  " duration="1500" circular="true">
         <block wx:for="{{item.bannerList[item.index]}}" wx:for-item="bItem">
           <swiper-item>
             <image src="{{filePath}}{{bItem.image}}" class="slide-image" mode='widthFix' />
@@ -210,7 +204,7 @@
         </block>
       </swiper>
       <view class='img-list'>
-        <view class='img-list-item {{news_active==index?"active":""}}'
+        <view class="img-list-item {{0==index?'active':''}}"
               wx:for="{{item.bg}}"
               wx:for-index='idx'
               wx:for-item="item2"
@@ -229,7 +223,6 @@
     <!-- 视频 -->
     <view class='item-content' wx:else>
       <view class='video-wrap'>
-        <!--<video controls initial-time="1" poster src="http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400"></video>-->
         <video controls initial-time="1" poster src="{{filePath+item.video.img_url}}"></video>
       </view>
     </view>
@@ -254,17 +247,6 @@
     </view>
   </block>
 
-  <!-- 删除、编辑 -->
-  <!-- <view class='footer-icon-2' wx:if='{{del_edit=="ture"}}'>
-    <view>
-      <image src='/images/icon/index-news-del.png' mode='widthFix'></image>
-      <text>删除</text>
-    </view>
-    <view>
-      <image src='/images/icon/index-news-edit.png' mode='widthFix'></image>
-      <text>编辑</text>
-    </view>
-  </view> -->
 </view>
 </template>
 
@@ -418,17 +400,17 @@
   <view class='reply'>
     <!--<text>微信昵称1</text>回复-->
     <!--<text>微信昵称4</text>-->
-    {{item.content}}
+    {{item.content}}123
   </view>
   <view class='footer-icon-2'>
     <view bindtap='bind_love' data-index="{{index}}" data-id="{{item.id}}">
       <image src='/images/icon/index-gambit-content-love.png' mode='widthFix'></image>
-      <text class='num'>{{item.likes}}</text>
+      <text class='num'>{{item.likes}}123</text>
     </view>
-    <view bindtap="hrefComment" data-id="{{item.id}}">
-      <image src='/images/icon/index-gambit-content-message_0.png' mode='widthFix'></image>
-      <text class='num'>{{item.replys}}</text>
-    </view>
+    <!--<view bindtap="hrefComment" data-id="{{item.id}}">-->
+      <!--<image src='/images/icon/index-gambit-content-message_0.png' mode='widthFix'></image>-->
+      <!--<text class='num'>{{item.replys}}</text>-->
+    <!--</view>-->
   </view>
 </template>
 

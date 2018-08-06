@@ -66,7 +66,21 @@ Page({
         wx.scanCode({
             success: (res) => {
                 console.log(res)
+                if(res.errMsg=='scanCode:ok'){
+                    let abc='12l3j12l?id=sladfj'
+                    // let data=res.path.slice(res.path.indexOf('='))
+                    let data=abc.slice(abc.indexOf('='))
+                    wx.navigateTo({
+                      url: '../clock/clock?Scene='+data
+                    })
+                }
             }
+        })
+    },
+    href(){
+        wx.setStorageSync('active_id', this.data.Data.id);
+        wx.navigateTo({
+            url: '../clock/clock'
         })
     },
     /**

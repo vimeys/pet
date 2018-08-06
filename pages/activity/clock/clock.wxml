@@ -4,33 +4,51 @@
     <view class="card {{animate?'animateTotal':''}} {{move?'move':''}} ">
         <image  class='card-bg' src="/images/actvie-bg.png"></image>
         <view class="card-content">
-            <image  class="card-header-image" src="/images/card.png" mode="aspectFill"></image>
-            <image class="logo" src="/images/close.png"></image>
+            <image  class="card-header-image" src="{{filePath+data.banner[0].url}}" mode="aspectFill"></image>
+            <image class="logo" src="{{filePath+data.logo.url}}"></image>
             <view class="card-news">
                 <!--<image src="/images/me-pat-card.png"></image>-->
-                <image src="{{card.image}}"></image>
-                <view class="card-name">{{card.cardName}}</view>
+                <image src="{{filePath+data.head.url}}"></image>
+                <view class="card-name">{{data.describe}}</view>
             </view>
             <view class="card-detail">
-                匠心为猫犬
+                {{data.describe}}
             </view>
             <view class="lucky-btns">
-                <view  class='button' wx:if="{{isLucky}}" bindtap="lucky">立即抽奖</view>
-                <view class="text" wx:else>想要获猛犬卡请立即西南交大凯德广场华明庭院1101号扫码获取</view>
+                <view  class='button'  wx:if="{{isLucky}}" bindtap="lucky">立即抽奖</view>
+                <view class="text" wx:else>{{data.data.describe}}</view>
             </view>
         </view>
     </view>
 </view>
 
 <scroll-view class='scroll' scroll-x="true">
-    <view class="clock-images" bindtap="mergeCard">
-        <image src="/images/eight.png"></image>
-        <view class="clock-model"></view>
-    </view>
-    <block wx:for="{{arr}}">
-        <view class="clock-images">
-            <image src="/images/me-pat-card.png"></image>
-            <view wx:if="{{item.has}}" class="clock-model"></view>
+    <view style="display: inline-block" wx:if="{{ismerge}}">
+        <view class="clock-images" bindtap="mergeCard">
+            <image src="/images/eight.png"></image>
+            <!--<view class="clock-model"></view>-->
         </view>
+        <view style="color:#fff;text-align: center;font-size: 24rpx">
+            {{num}}卡合一
+        </view>
+    </view>
+
+    <block wx:for="{{Data}}">
+        <view style="display: inline-block" >
+            <view class="clock-images">
+                <image src="{{filePath+item.head.url}}" bindtap="choose" data-index="{{index}}"></image>
+                <view hidden="{{item.user_card}}" class="clock-model"></view>
+            </view>
+            <view style="color:#fff;text-align: center;font-size: 24rpx">{{item.describe}}</view>
+        </view>
+
     </block>
 </scroll-view>
+
+<view class="modul" hidden="{{modul}}">
+    <view class="modul-content">
+        <view class="modul-code"><image mode="widthFix" src="codeUrl"></image></view>
+        <view bindtap="save" class="btn">点击保存到手机，联系商家兑换</view>
+    </view>
+
+</view>

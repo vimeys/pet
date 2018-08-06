@@ -10,7 +10,7 @@
       待发货
     </view>
     <view class=" item {{active==2?'active':''}}"data-id="2" bindtap="click">
-      已收货
+      已发货
     </view>
     <view class="item {{active==3?'active':''}}" data-id="3" bindtap="click">
       已完成

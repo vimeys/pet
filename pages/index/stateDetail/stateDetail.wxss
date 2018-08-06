@@ -1,3 +1,45 @@
 /* pages/index/stateDetail/stateDetail.wxss */
 @import "../../../template/list.wxss";
-@import "../comment/comment.wxss";
+/*@import "../comment/comment.wxss";*/
+.section-reply input {
+    width: 580rpx;
+    height: 90rpx;
+    min-height: 0;
+    border-radius: 45rpx;
+    border: 1rpx solid #eaeaea;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+}
+.section-comment{
+    margin-bottom: 130rpx;
+}
+
+.section-reply {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    padding: 15rpx 20rpx;
+    border-top: 1rpx solid #eaeaea;
+    box-sizing: border-box;
+    height: 120rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    line-height: 70rpx;
+    font-size: 28rpx;
+}
+.section-reply .placeholder {
+    color: #888;
+}
+
+.section-reply .btn {
+    width: 120rpx;
+    height: 90rpx;
+    text-align: center;
+    line-height: 90rpx;
+    background: #fee632;
+    border-radius: 45rpx;
+}
